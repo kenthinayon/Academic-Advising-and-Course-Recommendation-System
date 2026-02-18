@@ -1,31 +1,38 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from "./Home";
-import AboutUs from "./AboutUs";
-import ContactUs from "./ContactUs";
 import Login from "./Login";
-import AdminDashboard from "./AdminDashboard";
-import Navbar from "./Navbar";
+import StudentPortal from "./StudentPortal";
+import Register from "./Register";
+import StudentBasicInformation from "./StudentBasicInformation";
+import StudentAcademicCredentials from "./StudentAcademicCredentials";
+import StudentAssessmentQuiz from "./StudentAssessmentQuiz";
+import StudentCourseRecommendation from "./StudentCourseRecommendation";
+import AdvisorDashboard from "./AdvisorDashboard";
+import AdvisorStudentDetail from "./AdvisorStudentDetail";
 
 export default function Routers() {
     return (
         <Router>
-            <Navbar />
-            <div className="page-content">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/aboutus" element={<AboutUs />} />
-                    <Route path="/contactus" element={<ContactUs />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/admin" element={<AdminDashboard />} />
-                </Routes>
-            </div>
+            <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+
+                <Route path="/advisor" element={<AdvisorDashboard />} />
+                <Route path="/advisor/students/:userId" element={<AdvisorStudentDetail />} />
+
+                <Route path="/student" element={<StudentPortal />} />
+                <Route path="/student/basic-information" element={<StudentBasicInformation />} />
+                <Route path="/student/academic-credentials" element={<StudentAcademicCredentials />} />
+                <Route path="/student/assessment-quiz" element={<StudentAssessmentQuiz />} />
+                <Route path="/student/course-recommendation" element={<StudentCourseRecommendation />} />
+                <Route path="*" element={<Login />} />
+            </Routes>
         </Router>
     );
 }
 
 if (document.getElementById('root')) {
-    ReactDOM.render(<Routers />, document.getElementById('root')); 
+    createRoot(document.getElementById('root')).render(<Routers />);
 }

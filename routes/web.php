@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', function () {
-    return view('welcome');
-})->where('any', '.*');
+// Render the SPA shell (React) for login only.
+Route::view('/login', 'welcome')->name('login');
 
-//sa Admin Login Route
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login', 'Auth\LoginController@login');
+// Optional: send everything else to login.
+Route::redirect('/', '/login');
+Route::view('/{any}', 'welcome')->where('any', '.*');

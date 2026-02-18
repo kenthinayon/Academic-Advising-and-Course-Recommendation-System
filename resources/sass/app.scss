@@ -8,8 +8,8 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-@import './home.scss';
-@import './aboutus.scss';
-@import './contactus.scss';
-@import './navbar.scss';
+
+// Feature styles (import partials without extension)
 @import './login.scss';
+@import 'student-portal';
+@import 'advisor';
