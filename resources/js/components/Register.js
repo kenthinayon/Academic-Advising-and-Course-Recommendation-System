@@ -14,12 +14,25 @@ export default function Register() {
         gender: "",
         high_school: "",
         contact_number: "",
+        role: "student",
     });
 
     const [error, setError] = useState(null);
 
     const onChange = (key) => (e) => {
-        setForm((f) => ({ ...f, [key]: e.target.value }));
+        const value = e.target.value;
+
+        // If switching to advisor, clear student-only fields.
+        if (key === "role" && value === "advisor") {
+            setForm((f) => ({
+                ...f,
+                role: value,
+                high_school: "",
+            }));
+            return;
+        }
+
+        setForm((f) => ({ ...f, [key]: value }));
     };
 
     const getCsrfToken = async () => {
@@ -33,8 +46,8 @@ export default function Register() {
         try {
             await getCsrfToken();
 
-            // Security: registration is student-only. Advisor/Admin accounts are created by an admin/seeder.
-            const payload = { ...form, role: "student" };
+            // Registration is limited to student/advisor roles only.
+            const payload = { ...form, role: form.role || "student" };
 
             const response = await axios.post("/api/register", payload, {
                 withCredentials: true,
@@ -46,7 +59,13 @@ export default function Register() {
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("userRole", user.role || "student");
 
-            navigate("/student");
+            const actualRole = user?.role || payload.role || "student";
+
+            if (actualRole === "advisor" || actualRole === "admin") {
+                navigate("/advisor");
+            } else {
+                navigate("/student");
+            }
         } catch (err) {
             setError(
                 err.response?.data?.message ||
@@ -78,6 +97,14 @@ export default function Register() {
 
                     <form onSubmit={handleSubmit} className="login-form" noValidate>
                         <div className="field">
+                            <label htmlFor="role">Register as</label>
+                            <select id="role" value={form.role} onChange={onChange("role")}>
+                                <option value="student">Student</option>
+                                <option value="advisor">Advisor</option>
+                            </select>
+                        </div>
+
+                        <div className="field">
                             <label htmlFor="name">Full Name</label>
                             <input id="name" value={form.name} onChange={onChange("name")} required />
                         </div>
@@ -101,10 +128,16 @@ export default function Register() {
                             </select>
                         </div>
 
-                        <div className="field">
-                            <label htmlFor="high_school">High School</label>
-                            <input id="high_school" value={form.high_school} onChange={onChange("high_school")} />
-                        </div>
+                        {form.role !== "advisor" && (
+                            <div className="field">
+                                <label htmlFor="high_school">High School</label>
+                                <input
+                                    id="high_school"
+                                    value={form.high_school}
+                                    onChange={onChange("high_school")}
+                                />
+                            </div>
+                        )}
 
                         <div className="field">
                             <label htmlFor="email">Email</label>

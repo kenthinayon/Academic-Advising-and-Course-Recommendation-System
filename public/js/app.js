@@ -80611,6 +80611,745 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/components/AdminDashboard.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/AdminDashboard.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AdminDashboard)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-B7RQU5TL.mjs");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var DEPARTMENTS = [{
+  name: "College of Accountancy",
+  programs: [{
+    code: "BSA",
+    name: "Accountancy",
+    description: "Professional accounting program focused on financial reporting, auditing, taxation, and accounting standards."
+  }, {
+    code: "BSAIS",
+    name: "Accounting Information System",
+    description: "Accounting + IT program focused on designing, implementing, and auditing computerized accounting systems."
+  }, {
+    code: "BSA-IA",
+    name: "Internal Auditing",
+    description: "Focuses on risk management, internal controls, compliance, and audit assurance within organizations."
+  }, {
+    code: "BSA-MA",
+    name: "Management Accounting",
+    description: "Emphasizes decision support, cost/management accounting, budgeting, performance analysis, and planning."
+  }]
+}, {
+  name: "College of Business Administration",
+  programs: [{
+    code: "BSBA-OM",
+    name: "Operations Management",
+    description: "Covers production/operations planning, quality management, supply chain, logistics, and process improvement."
+  }, {
+    code: "BSBA-FM",
+    name: "Financial Management",
+    description: "Focuses on corporate finance, investments, financial analysis, capital budgeting, and risk management."
+  }, {
+    code: "BSBA-MM",
+    name: "Marketing Management",
+    description: "Develops skills in consumer behavior, branding, sales, digital marketing, and market research."
+  }, {
+    code: "BSBA-HRM",
+    name: "Human Resource Management",
+    description: "Focuses on recruitment, employee development, labor relations, compensation, and organizational behavior."
+  }]
+}, {
+  name: "College of Computer Studies",
+  programs: [{
+    code: "BSCS",
+    name: "Computer Science",
+    description: "Strong foundation in algorithms, programming, software engineering, data structures, AI, and computing theory."
+  }, {
+    code: "BSIT",
+    name: "Information Technology",
+    description: "Focus on IT infrastructure, networking, databases, web/mobile development, system administration, and cybersecurity basics."
+  }, {
+    code: "BSIT-CA",
+    name: "IT with Computer Animation",
+    description: "Combines IT fundamentals with 2D/3D animation, motion graphics, and interactive media production."
+  }, {
+    code: "DIT",
+    name: "Diploma in Information Technology",
+    description: "A shorter-track program focused on practical computer applications, programming basics, and IT support skills."
+  }, {
+    code: "BLIS",
+    name: "Library and Information Science",
+    description: "Covers information organization, cataloging, archives, records management, and modern library systems."
+  }, {
+    code: "BSEMC",
+    name: "Entertainment and Multimedia Computing",
+    description: "Focuses on game development, multimedia systems, interactive design, and content production pipelines."
+  }]
+}, {
+  name: "College of Engineering and Technology",
+  programs: [{
+    code: "BSCE",
+    name: "Civil Engineering",
+    description: "Design and construction of infrastructure: structures, roads, bridges, water resources, and project management."
+  }, {
+    code: "BSIE",
+    name: "Industrial Engineering",
+    description: "Optimizes systems and processes using operations research, ergonomics, quality, and production planning."
+  }]
+}, {
+  name: "College of Nursing",
+  programs: [{
+    code: "BSN",
+    name: "Nursing",
+    description: "Prepares students for professional nursing practice: patient care, clinical skills, community health, and evidence-based practice."
+  }]
+}, {
+  name: "College of Teacher Education",
+  programs: [{
+    code: "BEEd",
+    name: "Elementary Education",
+    description: "Training for elementary teachers: pedagogy, curriculum design, classroom management, and teaching practice."
+  }, {
+    code: "BECEd",
+    name: "Early Childhood Education",
+    description: "Focuses on child development, early learning strategies, play-based instruction, and family/community engagement."
+  }, {
+    code: "BPEd",
+    name: "Physical Education",
+    description: "Covers fitness, sports coaching, movement education, health, and PE teaching methods."
+  }, {
+    code: "BSNEd",
+    name: "Special Needs Education",
+    description: "Prepares teachers to support diverse learners through inclusive education, interventions, and specialized strategies."
+  }]
+}, {
+  name: "College of Arts and Sciences",
+  programs: [{
+    code: "BAPSY",
+    name: "Psychology",
+    description: "Study of human behavior and mental processes, including psychological assessment, counseling basics, and research methods."
+  }, {
+    code: "BACOMM",
+    name: "Communication",
+    description: "Develops skills in media, journalism, public relations, strategic communication, and content production."
+  }, {
+    code: "BAENG",
+    name: "English",
+    description: "Focuses on language and literature, writing, linguistics, and professional communication skills."
+  }, {
+    code: "BSBIO",
+    name: "Biology",
+    description: "Covers life sciences, laboratory techniques, research, ecology, and foundational courses for health and science careers."
+  }]
+}];
+function pct(n) {
+  var x = Number(n);
+  if (!Number.isFinite(x)) return "0%";
+  return "".concat(x, "%");
+}
+function statusPill(status) {
+  var s = (status || "pending").toLowerCase();
+  if (s === "approved") return {
+    label: "Approved",
+    cls: "am-pill am-pill--good"
+  };
+  if (s === "rejected") return {
+    label: "Rejected",
+    cls: "am-pill am-pill--bad"
+  };
+  return {
+    label: "Pending",
+    cls: "am-pill"
+  };
+}
+function AdminDashboard() {
+  var _analytics$topRecomme;
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
+  var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return localStorage.getItem("authToken");
+  }, []);
+  var role = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return localStorage.getItem("userRole");
+  }, []);
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("overview"),
+    _useState2 = _slicedToArray(_useState, 2),
+    activeTab = _useState2[0],
+    setActiveTab = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    error = _useState6[0],
+    setError = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      totalStudents: 0,
+      completedAssessments: 0,
+      pendingReview: 0,
+      averageGpa: 0.0
+    }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    stats = _useState8[0],
+    setStats = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      completionRate: 0,
+      approvalRate: 0,
+      pendingReviews: 0,
+      topRecommendedPrograms: []
+    }),
+    _useState0 = _slicedToArray(_useState9, 2),
+    analytics = _useState0[0],
+    setAnalytics = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState10 = _slicedToArray(_useState1, 2),
+    studentQ = _useState10[0],
+    setStudentQ = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
+    _useState12 = _slicedToArray(_useState11, 2),
+    studentFilter = _useState12[0],
+    setStudentFilter = _useState12[1]; // all | pending | approved | rejected
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    studentsLoading = _useState14[0],
+    setStudentsLoading = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    students = _useState16[0],
+    setStudents = _useState16[1];
+  var headers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return {
+      Authorization: "Bearer ".concat(token),
+      Accept: "application/json"
+    };
+  }, [token]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    if (role !== "admin") {
+      // Non-admins shouldn't access this page.
+      navigate(role === "advisor" ? "/advisor" : "/student");
+    }
+  }, [navigate, role, token]);
+  var load = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var _yield$Promise$all, _yield$Promise$all2, s1, s2, _e$response, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            setLoading(true);
+            setError(null);
+            _context.p = 1;
+            _context.n = 2;
+            return Promise.all([axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/admin/stats", {
+              headers: headers,
+              withCredentials: true
+            }), axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/admin/analytics", {
+              headers: headers,
+              withCredentials: true
+            })]);
+          case 2:
+            _yield$Promise$all = _context.v;
+            _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
+            s1 = _yield$Promise$all2[0];
+            s2 = _yield$Promise$all2[1];
+            setStats(s1.data || stats);
+            setAnalytics(s2.data || analytics);
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            setError((_t === null || _t === void 0 || (_e$response = _t.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Failed to load admin dashboard.");
+          case 4:
+            _context.p = 4;
+            setLoading(false);
+            return _context.f(4);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3, 4, 5]]);
+    }));
+    return function load() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  var loadStudents = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var search,
+        _res$data,
+        res,
+        _e$response2,
+        _args2 = arguments,
+        _t2;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.p = _context2.n) {
+          case 0:
+            search = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : "";
+            setStudentsLoading(true);
+            setError(null);
+            _context2.p = 1;
+            _context2.n = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/advisor/students?q=".concat(encodeURIComponent(search)), {
+              headers: headers,
+              withCredentials: true
+            });
+          case 2:
+            res = _context2.v;
+            setStudents(((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.students) || []);
+            _context2.n = 4;
+            break;
+          case 3:
+            _context2.p = 3;
+            _t2 = _context2.v;
+            setError((_t2 === null || _t2 === void 0 || (_e$response2 = _t2.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Failed to load students.");
+          case 4:
+            _context2.p = 4;
+            setStudentsLoading(false);
+            return _context2.f(4);
+          case 5:
+            return _context2.a(2);
+        }
+      }, _callee2, null, [[1, 3, 4, 5]]);
+    }));
+    return function loadStudents() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  var filteredStudents = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var f = (studentFilter || "all").toLowerCase();
+    if (f === "all") return students;
+    return (students || []).filter(function (s) {
+      return (s.advisor_status || "pending").toLowerCase() === f;
+    });
+  }, [studentFilter, students]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "admin",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("header", {
+      className: "am-topbar",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "am-brand",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "am-logo",
+          "aria-hidden": "true",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-name",
+            children: "URIOS-ADVise"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-sub",
+            children: "Administrator Dashboard"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        type: "button",
+        className: "am-logout",
+        onClick: function onClick() {
+          localStorage.removeItem("authToken");
+          localStorage.removeItem("user");
+          localStorage.removeItem("userRole");
+          navigate("/login");
+        },
+        children: "Logout"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("main", {
+      className: "am-main",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "am-hero",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+          children: "Welcome, System Administrator!"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          children: "System overview and analytics"
+        })]
+      }), error ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "am-alert am-alert--error",
+        children: error
+      }) : null, loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "am-muted",
+        children: "Loading\u2026"
+      }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "am-stats",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-stat",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "am-stat-meta",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-stat-label",
+              children: "Total Students"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-stat-icon am-stat-icon--blue",
+              "aria-hidden": "true"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-stat-value",
+            children: stats.totalStudents
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-stat",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "am-stat-meta",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-stat-label",
+              children: "Completed Assessments"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-stat-icon am-stat-icon--green",
+              "aria-hidden": "true"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-stat-value am-stat-value--green",
+            children: stats.completedAssessments
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-stat",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "am-stat-meta",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-stat-label",
+              children: "Pending Review"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-stat-icon am-stat-icon--orange",
+              "aria-hidden": "true"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-stat-value am-stat-value--orange",
+            children: stats.pendingReview
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-stat",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "am-stat-meta",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-stat-label",
+              children: "Average GPA"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-stat-icon am-stat-icon--purple",
+              "aria-hidden": "true"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-stat-value am-stat-value--purple",
+            children: stats.averageGpa
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "am-tabs",
+        role: "tablist",
+        "aria-label": "Admin tabs",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          type: "button",
+          className: activeTab === "overview" ? "am-tab am-tab--active" : "am-tab",
+          onClick: function onClick() {
+            return setActiveTab("overview");
+          },
+          role: "tab",
+          "aria-selected": activeTab === "overview",
+          children: "Overview"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          type: "button",
+          className: activeTab === "students" ? "am-tab am-tab--active" : "am-tab",
+          onClick: function onClick() {
+            return setActiveTab("students");
+          },
+          role: "tab",
+          "aria-selected": activeTab === "students",
+          children: "Students"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          type: "button",
+          className: activeTab === "analytics" ? "am-tab am-tab--active" : "am-tab",
+          onClick: function onClick() {
+            return setActiveTab("analytics");
+          },
+          role: "tab",
+          "aria-selected": activeTab === "analytics",
+          children: "Analytics"
+        })]
+      }), activeTab === "overview" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+        className: "am-panel",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-panel-head",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            children: "Department Summary"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-muted",
+            children: "Click a department to view available courses"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "am-depts",
+          children: DEPARTMENTS.map(function (d) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("details", {
+              className: "am-dept",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("summary", {
+                className: "am-dept-summary",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "am-dept-left",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "am-dept-icon",
+                    "aria-hidden": "true"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "am-dept-name",
+                    children: d.name
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "am-dept-right",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                    className: "am-badge",
+                    children: [d.programs.length, " Programs"]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    className: "am-chevron",
+                    "aria-hidden": "true"
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "am-dept-body",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+                  className: "am-prog-list",
+                  children: d.programs.map(function (p) {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+                      className: "am-prog",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                        className: "am-prog-title",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                          children: p.code
+                        }), " \u2014 ", p.name]
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        className: "am-prog-desc",
+                        children: p.description
+                      })]
+                    }, "".concat(p.code, "-").concat(p.name));
+                  })
+                })
+              })]
+            }, d.name);
+          })
+        })]
+      }) : null, activeTab === "students" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+        className: "am-panel",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-panel-head",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            children: "Students"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-muted",
+            children: "View and filter students by review status"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-student-tools",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "am-search",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              value: studentQ,
+              placeholder: "Search students (name/email)\u2026",
+              onChange: function onChange(e) {
+                return setStudentQ(e.target.value);
+              },
+              onKeyDown: function onKeyDown(e) {
+                if (e.key === "Enter") loadStudents(studentQ);
+              }
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              type: "button",
+              className: "am-btn",
+              onClick: function onClick() {
+                return loadStudents(studentQ);
+              },
+              children: "Search"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-filters",
+            role: "tablist",
+            "aria-label": "Student filters",
+            children: [{
+              key: "all",
+              label: "All"
+            }, {
+              key: "pending",
+              label: "Pending"
+            }, {
+              key: "approved",
+              label: "Approved"
+            }, {
+              key: "rejected",
+              label: "Rejected"
+            }].map(function (x) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                type: "button",
+                className: studentFilter === x.key ? "am-filter am-filter--active" : "am-filter",
+                onClick: function onClick() {
+                  return setStudentFilter(x.key);
+                },
+                role: "tab",
+                "aria-selected": studentFilter === x.key,
+                children: x.label
+              }, x.key);
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            type: "button",
+            className: "am-btn am-btn--ghost",
+            onClick: function onClick() {
+              return loadStudents(studentQ);
+            },
+            children: "Refresh"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-student-head",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-muted",
+            children: "All Students"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-muted",
+            children: "Complete list of registered students"
+          })]
+        }), studentsLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "am-muted",
+          children: "Loading\u2026"
+        }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-student-list",
+          children: [filteredStudents.map(function (s) {
+            var pill = statusPill(s.advisor_status);
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "am-student-row",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "am-student-main",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "am-student-name",
+                  children: s.name
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "am-student-email",
+                  children: s.email
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "am-student-meta",
+                  children: [s.strand ? "".concat(s.strand, " \u2022 ") : "", s.gwa ? "GPA: ".concat(s.gwa) : "GPA: —"]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: pill.cls,
+                children: pill.label
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "am-student-actions",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                  type: "button",
+                  className: "am-btn am-btn--ghost",
+                  onClick: function onClick() {
+                    return navigate("/advisor/students/".concat(s.id));
+                  },
+                  children: "View"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                  type: "button",
+                  className: "am-btn",
+                  onClick: function onClick() {
+                    return navigate("/advisor/students/".concat(s.id));
+                  },
+                  children: "Details"
+                })]
+              })]
+            }, s.id);
+          }), !studentsLoading && !filteredStudents.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-muted",
+            children: "No students registered yet"
+          }) : null]
+        })]
+      }) : null, activeTab === "analytics" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+        className: "am-grid",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-panel",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-panel-head",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+              children: "System Metrics"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "am-metrics",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "am-metric",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "am-metric-label",
+                children: "Completion Rate"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "am-metric-value",
+                children: pct(analytics.completionRate)
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-divider"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "am-metric",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "am-metric-label",
+                children: "Approval Rate"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "am-metric-value",
+                children: pct(analytics.approvalRate)
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "am-divider"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "am-metric",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "am-metric-label",
+                children: "Pending Reviews"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "am-metric-value",
+                children: analytics.pendingReviews
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "am-panel",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-panel-head",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+              children: "Top Recommended Programs"
+            })
+          }), (_analytics$topRecomme = analytics.topRecommendedPrograms) !== null && _analytics$topRecomme !== void 0 && _analytics$topRecomme.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-top",
+            children: analytics.topRecommendedPrograms.map(function (r) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "am-top-row",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "am-top-name",
+                  children: r.name
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "am-top-count",
+                  children: r.count
+                })]
+              }, r.name);
+            })
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "am-muted",
+            children: "No recommendations yet."
+          })]
+        })]
+      }) : null]
+    })]
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/AdvisorDashboard.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/AdvisorDashboard.js ***!
@@ -81709,7 +82448,7 @@ function Login() {
   }();
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(e) {
-      var response, _response$data, token, user, actualRole, _err$response, _err$response2, _t2;
+      var response, _response$data, token, user, actualRole, _err$response, _err$response2, code, _err$response3, _actualRole, _err$response4, _t2;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
           case 0:
@@ -81722,7 +82461,8 @@ function Login() {
             _context2.n = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/login", {
               email: email,
-              password: password
+              password: password,
+              role: role
             }, {
               withCredentials: true,
               headers: {
@@ -81739,7 +82479,9 @@ function Login() {
             // Always trust the server role (not the UI tab) for routing/guards
             actualRole = (user === null || user === void 0 ? void 0 : user.role) || "student";
             localStorage.setItem("userRole", actualRole);
-            if (actualRole === "advisor" || actualRole === "admin") {
+            if (actualRole === "admin") {
+              navigate("/admin");
+            } else if (actualRole === "advisor") {
               navigate("/advisor");
             } else {
               navigate("/student");
@@ -81753,7 +82495,13 @@ function Login() {
             if (((_err$response = _t2.response) === null || _err$response === void 0 ? void 0 : _err$response.status) === 405) {
               setError("Server error: POST method not supported for login route. Contact your administrator.");
             } else {
-              setError(((_err$response2 = _t2.response) === null || _err$response2 === void 0 || (_err$response2 = _err$response2.data) === null || _err$response2 === void 0 ? void 0 : _err$response2.message) || "Login failed. Please check your credentials and try again.");
+              code = (_err$response2 = _t2.response) === null || _err$response2 === void 0 || (_err$response2 = _err$response2.data) === null || _err$response2 === void 0 ? void 0 : _err$response2.code;
+              if (code === "wrong_role") {
+                _actualRole = (_err$response3 = _t2.response) === null || _err$response3 === void 0 || (_err$response3 = _err$response3.data) === null || _err$response3 === void 0 ? void 0 : _err$response3.actualRole;
+                setError("Wrong role selected. This account is a ".concat(_actualRole, ". Please choose the ").concat(_actualRole, " tab and try again."));
+              } else {
+                setError(((_err$response4 = _t2.response) === null || _err$response4 === void 0 || (_err$response4 = _err$response4.data) === null || _err$response4 === void 0 ? void 0 : _err$response4.message) || "Login failed. Please check your credentials and try again.");
+              }
             }
           case 5:
             return _context2.a(2);
@@ -81876,7 +82624,7 @@ function Login() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
                 children: "Advisor:"
-              }), " advisor1@uriosadvise.local / ChangeMeNow!123"]
+              }), "kent.hinayon@urios.edu.ph / qwerty12345"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
                 children: "Admin:"
@@ -81949,7 +82697,8 @@ function Register() {
       age: "",
       gender: "",
       high_school: "",
-      contact_number: ""
+      contact_number: "",
+      role: "student"
     }),
     _useState2 = _slicedToArray(_useState, 2),
     form = _useState2[0],
@@ -81960,8 +82709,20 @@ function Register() {
     setError = _useState4[1];
   var onChange = function onChange(key) {
     return function (e) {
+      var value = e.target.value;
+
+      // If switching to advisor, clear student-only fields.
+      if (key === "role" && value === "advisor") {
+        setForm(function (f) {
+          return _objectSpread(_objectSpread({}, f), {}, {
+            role: value,
+            high_school: ""
+          });
+        });
+        return;
+      }
       setForm(function (f) {
-        return _objectSpread(_objectSpread({}, f), {}, _defineProperty({}, key, e.target.value));
+        return _objectSpread(_objectSpread({}, f), {}, _defineProperty({}, key, value));
       });
     };
   };
@@ -81985,7 +82746,7 @@ function Register() {
   }();
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(e) {
-      var payload, response, _response$data, token, user, _err$response, _err$response2, _t;
+      var payload, response, _response$data, token, user, actualRole, _err$response, _err$response2, _t;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
           case 0:
@@ -81995,9 +82756,9 @@ function Register() {
             _context2.n = 2;
             return getCsrfToken();
           case 2:
-            // Security: registration is student-only. Advisor/Admin accounts are created by an admin/seeder.
+            // Registration is limited to student/advisor roles only.
             payload = _objectSpread(_objectSpread({}, form), {}, {
-              role: "student"
+              role: form.role || "student"
             });
             _context2.n = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/register", payload, {
@@ -82012,7 +82773,12 @@ function Register() {
             localStorage.setItem("authToken", token);
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("userRole", user.role || "student");
-            navigate("/student");
+            actualRole = (user === null || user === void 0 ? void 0 : user.role) || payload.role || "student";
+            if (actualRole === "advisor" || actualRole === "admin") {
+              navigate("/advisor");
+            } else {
+              navigate("/student");
+            }
             _context2.n = 5;
             break;
           case 4:
@@ -82066,6 +82832,23 @@ function Register() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "field",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              htmlFor: "role",
+              children: "Register as"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+              id: "role",
+              value: form.role,
+              onChange: onChange("role"),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "student",
+                children: "Student"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: "advisor",
+                children: "Advisor"
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "field",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
               htmlFor: "name",
               children: "Full Name"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
@@ -82108,7 +82891,7 @@ function Register() {
                 children: "Prefer not to say"
               })]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }), form.role !== "advisor" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "field",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
               htmlFor: "high_school",
@@ -82215,7 +82998,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StudentCourseRecommendation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./StudentCourseRecommendation */ "./resources/js/components/StudentCourseRecommendation.js");
 /* harmony import */ var _AdvisorDashboard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AdvisorDashboard */ "./resources/js/components/AdvisorDashboard.js");
 /* harmony import */ var _AdvisorStudentDetail__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AdvisorStudentDetail */ "./resources/js/components/AdvisorStudentDetail.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _AdminDashboard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AdminDashboard */ "./resources/js/components/AdminDashboard.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -82230,44 +83015,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Routers() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.BrowserRouter, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Routes, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/login",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Login__WEBPACK_IMPORTED_MODULE_3__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Login__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/register",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Register__WEBPACK_IMPORTED_MODULE_5__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Register__WEBPACK_IMPORTED_MODULE_5__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/advisor",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_AdvisorDashboard__WEBPACK_IMPORTED_MODULE_10__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_AdvisorDashboard__WEBPACK_IMPORTED_MODULE_10__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/advisor/students/:userId",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_AdvisorStudentDetail__WEBPACK_IMPORTED_MODULE_11__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_AdvisorStudentDetail__WEBPACK_IMPORTED_MODULE_11__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        path: "/admin",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_AdminDashboard__WEBPACK_IMPORTED_MODULE_12__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/student",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_StudentPortal__WEBPACK_IMPORTED_MODULE_4__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_StudentPortal__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/student/basic-information",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_StudentBasicInformation__WEBPACK_IMPORTED_MODULE_6__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_StudentBasicInformation__WEBPACK_IMPORTED_MODULE_6__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/student/academic-credentials",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_StudentAcademicCredentials__WEBPACK_IMPORTED_MODULE_7__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_StudentAcademicCredentials__WEBPACK_IMPORTED_MODULE_7__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/student/assessment-quiz",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_StudentAssessmentQuiz__WEBPACK_IMPORTED_MODULE_8__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_StudentAssessmentQuiz__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "/student/course-recommendation",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_StudentCourseRecommendation__WEBPACK_IMPORTED_MODULE_9__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_StudentCourseRecommendation__WEBPACK_IMPORTED_MODULE_9__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
         path: "*",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Login__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Login__WEBPACK_IMPORTED_MODULE_3__["default"], {})
       })]
     })
   });
 }
 if (document.getElementById('root')) {
-  (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById('root')).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(Routers, {}));
+  (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById('root')).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(Routers, {}));
 }
 
 /***/ }),
@@ -84368,19 +85156,25 @@ function StudentPortal() {
     var step2 = Boolean(String((p === null || p === void 0 ? void 0 : p.shs_strand) || "").trim() && (p === null || p === void 0 ? void 0 : p.shs_general_average) != null && String((p === null || p === void 0 ? void 0 : p.career_goals) || "").trim() && hasAtLeastOneSubject && hasSkills && hasRatings);
     var step3 = Boolean(Array.isArray(p === null || p === void 0 ? void 0 : p.assessment_part1_selected) && p.assessment_part1_selected.length);
     var step4 = Boolean(Array.isArray(p === null || p === void 0 ? void 0 : p.recommended_top3) && p.recommended_top3.length);
-    var done = [step1, step2, step3, step4].filter(Boolean).length;
-    var total = 4;
-    var percent = Math.round(done / total * 100);
+
+    // Step 5: Advisor Approval
+    var advisorStatus = String((p === null || p === void 0 ? void 0 : p.advisor_status) || "pending").toLowerCase();
+    var step5 = advisorStatus === "approved";
+    var done = [step1, step2, step3, step4, step5].filter(Boolean).length;
+    var total = 5;
     var remaining = total - done;
+    var percent = Math.round(done / total * 100);
     return {
       step1: step1,
       step2: step2,
       step3: step3,
       step4: step4,
+      step5: step5,
       done: done,
       total: total,
       percent: percent,
-      remaining: remaining
+      remaining: remaining,
+      advisorStatus: advisorStatus
     };
   }, [user, profile]);
   var pillText = function pillText(isComplete) {
@@ -84475,7 +85269,7 @@ function StudentPortal() {
               children: "Your Progress"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "sp-progress-meta",
-              children: loading ? "Loading progress…" : "".concat(completion.percent, "% complete - ").concat(completion.remaining, " step").concat(completion.remaining === 1 ? "" : "s", " remaining")
+              children: loading ? "Loading progress…" : completion.step4 && !completion.step5 ? "".concat(completion.percent, "% complete - Waiting for advisor approval") : "".concat(completion.percent, "% complete - ").concat(completion.remaining, " step").concat(completion.remaining === 1 ? "" : "s", " remaining")
             })]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -84492,7 +85286,7 @@ function StudentPortal() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
             children: "Getting Started"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            children: "Recommendation Ready"
+            children: "Approved"
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
@@ -84587,6 +85381,29 @@ function StudentPortal() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
               className: pillClass(completion.step4),
               children: pillText(completion.step4)
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          type: "button",
+          className: "sp-card sp-card--button",
+          onClick: function onClick() {
+            return navigate("/student/course-recommendation");
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "sp-card-icon",
+            "aria-hidden": "true",
+            children: "\u2705"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "sp-card-body",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "sp-card-title",
+              children: ["Advisor Approval ", doneMark(completion.step5)]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "sp-card-sub",
+              children: completion.step5 ? "Approved by advisor" : "Waiting for advisor approval"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: pillClass(completion.step5),
+              children: completion.step5 ? "Approved" : "Waiting"
             })]
           })]
         })]

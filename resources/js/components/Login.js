@@ -29,7 +29,7 @@ export default function Login() {
             // Make login request to Laravel API
             const response = await axios.post(
                 "/api/login",
-                { email, password },
+                { email, password, role },
                 { withCredentials: true, headers: { Accept: "application/json" } }
             );
 
@@ -42,7 +42,9 @@ export default function Login() {
             const actualRole = user?.role || "student";
             localStorage.setItem("userRole", actualRole);
 
-            if (actualRole === "advisor" || actualRole === "admin") {
+            if (actualRole === "admin") {
+                navigate("/admin");
+            } else if (actualRole === "advisor") {
                 navigate("/advisor");
             } else {
                 navigate("/student");
@@ -52,9 +54,17 @@ export default function Login() {
             if (err.response?.status === 405) {
                 setError("Server error: POST method not supported for login route. Contact your administrator.");
             } else {
-                setError(
-                    err.response?.data?.message || "Login failed. Please check your credentials and try again."
-                );
+                const code = err.response?.data?.code;
+                if (code === "wrong_role") {
+                    const actualRole = err.response?.data?.actualRole;
+                    setError(
+                        `Wrong role selected. This account is a ${actualRole}. Please choose the ${actualRole} tab and try again.`
+                    );
+                } else {
+                    setError(
+                        err.response?.data?.message || "Login failed. Please check your credentials and try again."
+                    );
+                }
             }
         }
     };
@@ -146,7 +156,7 @@ export default function Login() {
                         <h3>Demo Credentials:</h3>
                         <ul>
                             <li>
-                                <strong>Advisor:</strong> advisor1@uriosadvise.local / ChangeMeNow!123
+                                <strong>Advisor:</strong>kent.hinayon@urios.edu.ph / qwerty12345
                             </li>
                             <li>
                                 <strong>Admin:</strong> admin@urios.edu / admin123

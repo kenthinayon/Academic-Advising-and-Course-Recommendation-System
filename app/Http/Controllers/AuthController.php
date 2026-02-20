@@ -23,8 +23,8 @@ class AuthController extends Controller
             'high_school' => ['nullable', 'string', 'max:255'],
             'contact_number' => ['nullable', 'string', 'max:32'],
 
-            // Role selection from UI (defaults to student)
-            'role' => ['nullable', 'in:student,advisor,admin'],
+            // Security: allow self-registration ONLY for student/advisor. Admin must be created manually.
+            'role' => ['nullable', 'in:student,advisor'],
         ]);
 
         $role = $validated['role'] ?? 'student';
@@ -60,6 +60,8 @@ class AuthController extends Controller
         $validated = $request->validate([
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            // Optional: when provided, enforce that the user is logging in under the correct role tab.
+            'role' => ['nullable', 'in:student,advisor,admin'],
         ]);
 
         $user = User::where('email', $validated['email'])->first();
@@ -67,6 +69,14 @@ class AuthController extends Controller
         if (!$user || !Hash::check($validated['password'], $user->password)) {
             return response()->json([
                 'message' => 'Invalid credentials.',
+            ], 422);
+        }
+
+        if (!empty($validated['role']) && $user->role !== $validated['role']) {
+            return response()->json([
+                'message' => 'Wrong role selected for this account.',
+                'code' => 'wrong_role',
+                'actualRole' => $user->role,
             ], 422);
         }
 

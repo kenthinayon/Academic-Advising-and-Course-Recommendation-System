@@ -11,6 +11,7 @@ import StudentAssessmentQuiz from "./StudentAssessmentQuiz";
 import StudentCourseRecommendation from "./StudentCourseRecommendation";
 import AdvisorDashboard from "./AdvisorDashboard";
 import AdvisorStudentDetail from "./AdvisorStudentDetail";
+import AdminDashboard from "./AdminDashboard";
 
 export default function Routers() {
     return (
@@ -21,6 +22,8 @@ export default function Routers() {
 
                 <Route path="/advisor" element={<AdvisorDashboard />} />
                 <Route path="/advisor/students/:userId" element={<AdvisorStudentDetail />} />
+
+                <Route path="/admin" element={<AdminDashboard />} />
 
                 <Route path="/student" element={<StudentPortal />} />
                 <Route path="/student/basic-information" element={<StudentBasicInformation />} />

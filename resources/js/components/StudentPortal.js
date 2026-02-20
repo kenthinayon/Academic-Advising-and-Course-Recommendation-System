@@ -92,20 +92,26 @@ export default function StudentPortal() {
 
         const step4 = Boolean(Array.isArray(p?.recommended_top3) && p.recommended_top3.length);
 
-        const done = [step1, step2, step3, step4].filter(Boolean).length;
-        const total = 4;
-        const percent = Math.round((done / total) * 100);
+        // Step 5: Advisor Approval
+        const advisorStatus = String(p?.advisor_status || "pending").toLowerCase();
+        const step5 = advisorStatus === "approved";
+
+        const done = [step1, step2, step3, step4, step5].filter(Boolean).length;
+        const total = 5;
         const remaining = total - done;
+        const percent = Math.round((done / total) * 100);
 
         return {
             step1,
             step2,
             step3,
             step4,
+            step5,
             done,
             total,
             percent,
             remaining,
+            advisorStatus,
         };
     }, [user, profile]);
 
@@ -168,11 +174,15 @@ export default function StudentPortal() {
                         <div>
                             <div className="sp-progress-title">Your Progress</div>
                             <div className="sp-progress-meta">
-                                {loading
-                                    ? "Loading progress…"
-                                    : `${completion.percent}% complete - ${completion.remaining} step${
-                                          completion.remaining === 1 ? "" : "s"
-                                      } remaining`}
+                                {loading ? (
+                                    "Loading progress…"
+                                ) : completion.step4 && !completion.step5 ? (
+                                    `${completion.percent}% complete - Waiting for advisor approval`
+                                ) : (
+                                    `${completion.percent}% complete - ${completion.remaining} step${
+                                        completion.remaining === 1 ? "" : "s"
+                                    } remaining`
+                                )}
                             </div>
                         </div>
                     </div>
@@ -181,7 +191,7 @@ export default function StudentPortal() {
                     </div>
                     <div className="sp-bar-labels">
                         <span>Getting Started</span>
-                        <span>Recommendation Ready</span>
+                        <span>Approved</span>
                     </div>
                 </section>
 
@@ -258,6 +268,29 @@ export default function StudentPortal() {
                             <div className="sp-card-sub">View your recommended programs</div>
                             <span className={pillClass(completion.step4)}>
                                 {pillText(completion.step4)}
+                            </span>
+                        </div>
+                    </button>
+
+                    <button
+                        type="button"
+                        className="sp-card sp-card--button"
+                        onClick={() => navigate("/student/course-recommendation")}
+                    >
+                        <div className="sp-card-icon" aria-hidden="true">
+                            ✅
+                        </div>
+                        <div className="sp-card-body">
+                            <div className="sp-card-title">
+                                Advisor Approval {doneMark(completion.step5)}
+                            </div>
+                            <div className="sp-card-sub">
+                                {completion.step5
+                                    ? "Approved by advisor"
+                                    : "Waiting for advisor approval"}
+                            </div>
+                            <span className={pillClass(completion.step5)}>
+                                {completion.step5 ? "Approved" : "Waiting"}
                             </span>
                         </div>
                     </button>

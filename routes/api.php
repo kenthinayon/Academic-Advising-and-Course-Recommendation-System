@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController; // Adjust to your controller
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\AdvisorController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/advisor/students', [AdvisorController::class, 'students']);
         Route::get('/advisor/students/{userId}', [AdvisorController::class, 'studentDetail']);
         Route::put('/advisor/students/{userId}/recommendation', [AdvisorController::class, 'updateRecommendation']);
+    });
+
+    // Admin dashboard endpoints
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin/stats', [AdminController::class, 'stats']);
+        Route::get('/admin/analytics', [AdminController::class, 'analytics']);
     });
 });
