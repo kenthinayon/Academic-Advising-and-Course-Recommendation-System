@@ -296,9 +296,7 @@ export default function AdminDashboard() {
         <div className="admin">
             <header className="am-topbar">
                 <div className="am-brand">
-                    <div className="am-logo" aria-hidden="true">
-                        <span />
-                    </div>
+                    <img className="am-logo" src="/images/logo.png" alt="URIOS-ADVise" />
                     <div>
                         <div className="am-name">URIOS-ADVise</div>
                         <div className="am-sub">Administrator Dashboard</div>
@@ -393,7 +391,7 @@ export default function AdminDashboard() {
                     <section className="am-panel">
                         <div className="am-panel-head">
                             <h2>Department Summary</h2>
-                            <div className="am-muted">Click a department to view available courses</div>
+                            
                         </div>
 
                         <div className="am-depts">
@@ -506,14 +504,14 @@ export default function AdminDashboard() {
                                             <button
                                                 type="button"
                                                 className="am-btn am-btn--ghost"
-                                                onClick={() => navigate(`/advisor/students/${s.id}`)}
+                                                onClick={() => navigate(`/admin/students/${s.id}`)}
                                             >
                                                 View
                                             </button>
                                             <button
                                                 type="button"
                                                 className="am-btn"
-                                                onClick={() => navigate(`/advisor/students/${s.id}`)}
+                                                onClick={() => navigate(`/admin/students/${s.id}`)}
                                             >
                                                 Details
                                             </button>

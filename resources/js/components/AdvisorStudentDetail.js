@@ -161,9 +161,7 @@ export default function AdvisorStudentDetail() {
         <div className="advisor">
             <header className="ad-topbar">
                 <div className="ad-brand">
-                    <div className="ad-logo" aria-hidden="true">
-                        <span />
-                    </div>
+                    <img className="ad-logo" src="/images/logo.png" alt="URIOS-ADVise" />
                     <div>
                         <div className="ad-name">URIOS-ADVise</div>
                         <div className="ad-sub">Student Review</div>
@@ -224,6 +222,20 @@ export default function AdvisorStudentDetail() {
                                         <div className="ad-k">General Average</div>
                                         <div className="ad-v">{profile?.shs_general_average ?? "—"}</div>
                                     </div>
+                                </div>
+
+                                <div style={{ marginTop: 14 }}>
+                                    <div className="ad-k">Skills &amp; Competencies</div>
+                                    <div className="ad-v">
+                                        {Array.isArray(profile?.skills) && profile.skills.length
+                                            ? profile.skills.join(", ")
+                                            : profile?.skills
+                                                ? String(profile.skills)
+                                                : "—"}
+                                    </div>
+
+                                    <div className="ad-k" style={{ marginTop: 10 }}>Career Interests</div>
+                                    <div className="ad-v">{profile?.career_goals ?? "—"}</div>
                                 </div>
 
                                 {Array.isArray(profile?.subject_grades) && profile.subject_grades.length ? (

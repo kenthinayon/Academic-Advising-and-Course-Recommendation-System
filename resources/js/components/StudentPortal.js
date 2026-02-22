@@ -99,7 +99,9 @@ export default function StudentPortal() {
         const done = [step1, step2, step3, step4, step5].filter(Boolean).length;
         const total = 5;
         const remaining = total - done;
-        const percent = Math.round((done / total) * 100);
+    // If student finished the recommendation step but is awaiting advisor approval,
+    // keep the progress from showing as fully complete.
+    const percent = step4 && !step5 ? Math.round((4 / total) * 100) : Math.round((done / total) * 100);
 
         return {
             step1,
@@ -114,6 +116,19 @@ export default function StudentPortal() {
             advisorStatus,
         };
     }, [user, profile]);
+
+    const progressMetaText = useMemo(() => {
+        if (loading) return "Loading progress…";
+
+        // Once Step 4 is completed, the primary state becomes advisor review.
+        if (completion.step4 && !completion.step5) {
+            return `${completion.percent}% complete - Waiting for advisor's approval`;
+        }
+
+        return `${completion.percent}% complete - ${completion.remaining} step${
+            completion.remaining === 1 ? "" : "s"
+        } remaining`;
+    }, [completion.percent, completion.remaining, completion.step4, completion.step5, loading]);
 
     const pillText = (isComplete) => (isComplete ? "Completed" : "Pending");
     const pillClass = (isComplete) =>
@@ -151,7 +166,11 @@ export default function StudentPortal() {
         <div className="student-portal">
             <header className="sp-topbar">
                 <div className="sp-brand">
-                    <div className="sp-cap" aria-hidden="true" />
+                    <img
+                        className="sp-logo"
+                        src="/images/logo.png"
+                        alt="URIOS-ADVise"
+                    />
                     <div>
                         <div className="sp-title">URIOS-ADVise</div>
                         <div className="sp-subtitle">Student Portal</div>
@@ -174,15 +193,7 @@ export default function StudentPortal() {
                         <div>
                             <div className="sp-progress-title">Your Progress</div>
                             <div className="sp-progress-meta">
-                                {loading ? (
-                                    "Loading progress…"
-                                ) : completion.step4 && !completion.step5 ? (
-                                    `${completion.percent}% complete - Waiting for advisor approval`
-                                ) : (
-                                    `${completion.percent}% complete - ${completion.remaining} step${
-                                        completion.remaining === 1 ? "" : "s"
-                                    } remaining`
-                                )}
+                                {progressMetaText}
                             </div>
                         </div>
                     </div>
@@ -191,7 +202,7 @@ export default function StudentPortal() {
                     </div>
                     <div className="sp-bar-labels">
                         <span>Getting Started</span>
-                        <span>Approved</span>
+                        <span>Finish Steps</span>
                     </div>
                 </section>
 
@@ -268,29 +279,6 @@ export default function StudentPortal() {
                             <div className="sp-card-sub">View your recommended programs</div>
                             <span className={pillClass(completion.step4)}>
                                 {pillText(completion.step4)}
-                            </span>
-                        </div>
-                    </button>
-
-                    <button
-                        type="button"
-                        className="sp-card sp-card--button"
-                        onClick={() => navigate("/student/course-recommendation")}
-                    >
-                        <div className="sp-card-icon" aria-hidden="true">
-                            ✅
-                        </div>
-                        <div className="sp-card-body">
-                            <div className="sp-card-title">
-                                Advisor Approval {doneMark(completion.step5)}
-                            </div>
-                            <div className="sp-card-sub">
-                                {completion.step5
-                                    ? "Approved by advisor"
-                                    : "Waiting for advisor approval"}
-                            </div>
-                            <span className={pillClass(completion.step5)}>
-                                {completion.step5 ? "Approved" : "Waiting"}
                             </span>
                         </div>
                     </button>

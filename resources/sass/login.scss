@@ -6,7 +6,7 @@
   justify-content: center;
   min-height: 100vh;
   background: #ffffff;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-sans);
   padding: 30px 20px;
   position: relative;
   overflow: hidden;
@@ -14,37 +14,12 @@
 
 /* Enhanced background with animated patterns */
 .nav-login::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(66, 133, 244, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(52, 168, 83, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(234, 67, 53, 0.08) 0%, transparent 70%);
-  animation: backgroundShift 12s ease-in-out infinite;
-  z-index: 1;
-  pointer-events: none;
+  content: none;
 }
 
 /* Animated particles */
 .nav-login::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
-    radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent);
-  background-repeat: repeat;
-  background-size: 200px 100px;
-  animation: sparkle 8s linear infinite;
-  z-index: 1;
-  pointer-events: none;
+  content: none;
 }
 
 /* Enhanced Header Section */
@@ -794,6 +769,17 @@
   z-index: 20;
 }
 
+.nav-login .brand-logo {
+  width: 54px;
+  height: 54px;
+  display: block;
+  margin: 0 auto 14px;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+}
+
 .nav-login .brand-icon {
   width: 54px;
   height: 54px;
@@ -919,8 +905,8 @@
 
 .nav-login .field input:focus {
   background: #ffffff;
-  border-color: rgba(37, 99, 235, 0.5);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  border-color: color-mix(in srgb, var(--brand-teal) 65%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-teal) 20%, transparent);
 }
 
 .nav-login .btn-primary {
@@ -931,7 +917,7 @@
   font-weight: 800;
   font-size: 15px;
   color: #ffffff;
-  background: linear-gradient(180deg, #0f172a, #020617);
+  background: linear-gradient(180deg, var(--brand-navy-2), var(--brand-navy));
   cursor: pointer;
   transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
 }
@@ -947,8 +933,8 @@
 
 .nav-login .demo-box {
   margin-top: 16px;
-  background: #eff6ff;
-  border: 1px solid rgba(37, 99, 235, 0.15);
+  background: color-mix(in srgb, var(--brand-teal) 10%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--brand-teal) 16%, transparent);
   border-radius: 14px;
   padding: 14px 14px;
 }
@@ -957,7 +943,7 @@
   margin: 0 0 8px;
   font-size: 14px;
   font-weight: 800;
-  color: #1d4ed8;
+  color: var(--brand-navy-2);
 }
 
 .nav-login .demo-box ul {
@@ -985,7 +971,7 @@
   border: 0;
   background: transparent;
   padding: 0;
-  color: #2563eb;
+  color: var(--brand-teal);
   font-weight: 800;
   cursor: pointer;
 }
@@ -1002,7 +988,7 @@
   min-height: 100vh;
   background: #ffffff;
   color: #0f172a;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 .sp-topbar {
@@ -1018,6 +1004,15 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.sp-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
 }
 
 .sp-cap {
@@ -1926,4 +1921,9 @@ textarea.sb-input {
   .aq-topbar {
     padding: 14px 16px;
   }
+}
+
+.nav-login .login-card {
+  position: relative;
+  z-index: 5;
 }

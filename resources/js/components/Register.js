@@ -80,9 +80,7 @@ export default function Register() {
         <div className="nav-login">
             <div className="login-card">
                 <div className="brand">
-                    <div className="brand-icon" aria-hidden="true">
-                        <span className="cap" />
-                    </div>
+                    <img className="brand-logo" src="/images/logo.png" alt="URIOS-ADVise" />
                     <h1 className="brand-title">URIOS-ADVise</h1>
                     <p className="brand-subtitle">Create your student account</p>
                 </div>

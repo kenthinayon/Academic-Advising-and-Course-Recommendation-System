@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "./ui/toast";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const [role, setRole] = useState("student");
+    const [submitting, setSubmitting] = useState(false);
     const navigate = useNavigate();
 
     // Fetch CSRF token
@@ -21,6 +23,10 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
+
+        if (submitting) return;
+        setSubmitting(true);
+    const toastId = toast.info("Signing in…", { duration: 1200 });
 
         try {
             // Fetch CSRF token
@@ -52,20 +58,26 @@ export default function Login() {
         } catch (err) {
             // Handle specific HTTP errors
             if (err.response?.status === 405) {
-                setError("Server error: POST method not supported for login route. Contact your administrator.");
+                const msg = "Server error: POST method not supported for login route. Contact your administrator.";
+                setError(msg);
+                toast.error(msg);
             } else {
                 const code = err.response?.data?.code;
                 if (code === "wrong_role") {
                     const actualRole = err.response?.data?.actualRole;
-                    setError(
-                        `Wrong role selected. This account is a ${actualRole}. Please choose the ${actualRole} tab and try again.`
-                    );
+                    const msg = `Wrong role selected. This account is a ${actualRole}. Please choose the ${actualRole} tab and try again.`;
+                    setError(msg);
+                    toast.warning(msg, { duration: 4500 });
                 } else {
-                    setError(
-                        err.response?.data?.message || "Login failed. Please check your credentials and try again."
-                    );
+                    const msg =
+                        err.response?.data?.message || "Login failed. Please check your credentials and try again.";
+                    setError(msg);
+                    toast.error(msg);
                 }
             }
+        } finally {
+            toast.dismiss(toastId);
+            setSubmitting(false);
         }
     };
 
@@ -73,9 +85,7 @@ export default function Login() {
         <div className="nav-login">
             <div className="login-card">
                 <div className="brand">
-                    <div className="brand-icon" aria-hidden="true">
-                        <span className="cap" />
-                    </div>
+                    <img className="brand-logo" src="/images/logo.png" alt="URIOS-ADVise" />
                     <h1 className="brand-title">URIOS-ADVise</h1>
                     <p className="brand-subtitle">
                         Academic Advising &amp; Course Recommendation System
@@ -147,8 +157,8 @@ export default function Login() {
                             />
                         </div>
 
-                        <button type="submit" className="btn-primary">
-                            Sign In
+                        <button type="submit" className="btn-primary" disabled={submitting}>
+                            {submitting ? "Signing in…" : "Sign In"}
                         </button>
                     </form>
 

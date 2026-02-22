@@ -12,10 +12,13 @@ import StudentCourseRecommendation from "./StudentCourseRecommendation";
 import AdvisorDashboard from "./AdvisorDashboard";
 import AdvisorStudentDetail from "./AdvisorStudentDetail";
 import AdminDashboard from "./AdminDashboard";
+import AdminStudentDetail from "./AdminStudentDetail";
+import { ToastHost } from "./ui/toast";
 
 export default function Routers() {
     return (
         <Router>
+            <ToastHost />
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
@@ -24,6 +27,7 @@ export default function Routers() {
                 <Route path="/advisor/students/:userId" element={<AdvisorStudentDetail />} />
 
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/students/:userId" element={<AdminStudentDetail />} />
 
                 <Route path="/student" element={<StudentPortal />} />
                 <Route path="/student/basic-information" element={<StudentBasicInformation />} />

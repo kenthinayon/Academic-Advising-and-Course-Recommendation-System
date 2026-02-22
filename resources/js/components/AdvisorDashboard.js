@@ -71,9 +71,7 @@ export default function AdvisorDashboard() {
         <div className="advisor">
             <header className="ad-topbar">
                 <div className="ad-brand">
-                    <div className="ad-logo" aria-hidden="true">
-                        <span />
-                    </div>
+                    <img className="ad-logo" src="/images/logo.png" alt="URIOS-ADVise" />
                     <div>
                         <div className="ad-name">URIOS-ADVise</div>
                         <div className="ad-sub">Academic Advisor Portal</div>

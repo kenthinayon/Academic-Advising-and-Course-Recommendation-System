@@ -49,5 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin/stats', [AdminController::class, 'stats']);
         Route::get('/admin/analytics', [AdminController::class, 'analytics']);
+
+        // Student details (admin)
+        Route::get('/admin/students/{userId}', [AdvisorController::class, 'studentDetail']);
     });
 });

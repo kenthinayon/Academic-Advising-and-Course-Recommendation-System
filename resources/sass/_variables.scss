@@ -1,25 +1,90 @@
 // filepath: c:\Users\User\hinayon-imo\resources\sass\_variables.scss
 // Variables for the project
-
-// Body
-$body-bg: #ffffff;
+// NeoLMS-inspired palette + semantic colors.
+// This file is imported BEFORE bootstrap, so Bootstrap can pick up these values.
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-size-base: 0.95rem;
 $line-height-base: 1.6;
 
-// Colors
-$primary-color: #007bff;
-$secondary-color: #6c757d;
-$success-color: #28a745;
-$danger-color: #dc3545;
-$warning-color: #ffc107;
-$info-color: #17a2b8;
-$light-color: #f8f9fa;
-$dark-color: #343a40;
+// --- Brand palette (NeoLMS-ish: deep navy + teal accent)
+$brand-navy: #0b1220;
+$brand-navy-2: #111827;
+$brand-teal: #14b8a6;
+$brand-teal-2: #22c7b5;
 
-// Button styles
-$btn-padding-y: 0.375rem;
-$btn-padding-x: 0.75rem;
-$btn-border-radius: 0.25rem;
+// --- Semantic colors
+$brand-success: #22c55e; // done
+$brand-danger: #ef4444;  // logout / destructive
+$brand-warning: #f59e0b;
+$brand-info: #38bdf8;
+
+// --- Surfaces
+$surface: #ffffff;
+$surface-2: #f5f7fb;
+$surface-3: #eef2f7;
+$text: #0f172a;
+$muted: rgba(15, 23, 42, 0.72);
+$border: rgba(15, 23, 42, 0.10);
+
+// Body
+$body-bg: $surface-2;
+
+// --- Bootstrap wiring
+$primary: $brand-teal;
+$secondary: #64748b;
+$success: $brand-success;
+$danger: $brand-danger;
+$warning: $brand-warning;
+$info: $brand-info;
+$light: #f8fafc;
+$dark: $brand-navy-2;
+
+// Buttons
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1rem;
+$btn-border-radius: 0.75rem;
+
+// Forms
+$input-border-color: $border;
+$input-border-radius: 0.75rem;
+$input-focus-border-color: rgba($brand-teal, 0.65);
+$input-focus-box-shadow: 0 0 0 0.2rem rgba($brand-teal, 0.18);
+
+// Cards
+$card-border-color: $border;
+$card-border-radius: 1rem;
+
+// Links
+$link-color: $brand-teal;
+$link-hover-color: $brand-teal-2;
+
+// ----------------------------------------------------------------------------
+// CSS variables for custom components.
+// Use these in our feature scss so everything stays uniform.
+:root {
+	--font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+	--brand-navy: #0b1220;
+	--brand-navy-2: #111827;
+	--brand-teal: #14b8a6;
+	--brand-teal-2: #22c7b5;
+
+	--success: #22c55e;
+	--danger: #ef4444;
+	--warning: #f59e0b;
+	--info: #38bdf8;
+
+	--bg: #f5f7fb;
+	--surface: #ffffff;
+	--surface-2: #eef2f7;
+	--text: #0f172a;
+	--muted: rgba(15, 23, 42, 0.72);
+	--border: rgba(15, 23, 42, 0.10);
+
+	--radius-sm: 0.75rem;
+	--radius-md: 1rem;
+	--shadow-sm: 0 10px 25px rgba(17, 24, 39, 0.06);
+	--shadow-md: 0 18px 45px rgba(17, 24, 39, 0.10);
+}
