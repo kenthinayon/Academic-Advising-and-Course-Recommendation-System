@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -13,6 +14,16 @@ class ProfileController extends Controller
     public function me(Request $request)
     {
         $user = $request->user();
+
+        $avatarUrl = null;
+        if ($user?->profile?->avatar_path) {
+            $avatarUrl = Storage::url($user->profile->avatar_path);
+        }
+
+        // Attach derived URL for SPA convenience
+        if ($user) {
+            $user->avatar_url = $avatarUrl;
+        }
 
         return response()->json([
             'user' => $user,
@@ -145,6 +156,34 @@ class ProfileController extends Controller
 
         return response()->json([
             'message' => 'Academic credentials saved.',
+            'profile' => $profile,
+        ]);
+    }
+
+    public function updateAvatar(Request $request)
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'avatar' => ['required', 'file', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+        ]);
+
+        $file = $validated['avatar'];
+        $path = $file->store('avatars', 'public');
+
+        $existing = $user->profile;
+        if (!empty($existing?->avatar_path) && Storage::disk('public')->exists($existing->avatar_path)) {
+            Storage::disk('public')->delete($existing->avatar_path);
+        }
+
+        $profile = Profile::updateOrCreate(
+            ['user_id' => $user->id],
+            ['avatar_path' => $path]
+        );
+
+        return response()->json([
+            'message' => 'Avatar updated successfully.',
+            'avatar_url' => Storage::url($path),
             'profile' => $profile,
         ]);
     }

@@ -1,0 +1,153 @@
+// Student appointments UI (inside Student Portal)
+
+
+.sp-appt-controls {
+  margin: 10px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.sp-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sp-filter-label {
+  font-size: 13px;
+  font-weight: 800;
+  color: #64748b;
+}
+
+.sp-filter-select {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+  outline: none;
+  min-width: 140px;
+}
+
+.sp-filter-select:focus {
+  border-color: color-mix(in srgb, #4f46e5 45%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, #4f46e5 18%, transparent);
+}
+
+/* Appointments page */
+.sp-pagehead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.sp-tabs {
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.02);
+  margin: 10px 0 18px;
+}
+
+.sp-tab {
+  border: 0;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 900;
+  color: #334155;
+}
+
+.sp-tab.is-active {
+  background: #ffffff;
+  border: 1px solid rgba(79, 70, 229, 0.18);
+  color: #3730a3;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+}
+
+.sp-appt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sp-appt-card {
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  border-radius: 16px;
+  padding: 14px;
+  background: #ffffff;
+}
+
+.sp-appt-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sp-appt-when {
+  text-align: right;
+}
+
+.sp-appt-date {
+  font-weight: 950;
+}
+
+.sp-appt-time {
+  margin-top: 4px;
+  color: #64748b;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.sp-appt-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.sp-empty {
+  border: 1px dashed rgba(15, 23, 42, 0.12);
+  border-radius: 16px;
+  padding: 26px;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.01);
+}
+
+.sp-empty-title {
+  font-weight: 1000;
+}
+
+@media (max-width: 780px) {
+  .sp-appt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-filter {
+    width: 100%;
+  }
+
+  .sp-filter-select {
+    flex: 1;
+  }
+
+  .sp-appt-controls {
+    align-items: stretch;
+  }
+
+  .sp-tabs {
+    width: 100%;
+  }
+}

@@ -78,18 +78,28 @@ export default function AdvisorDashboard() {
                     </div>
                 </div>
 
-                <button
-                    type="button"
-                    className="ad-logout"
-                    onClick={() => {
-                        localStorage.removeItem("authToken");
-                        localStorage.removeItem("user");
-                        localStorage.removeItem("userRole");
-                        navigate("/login");
-                    }}
-                >
-                    Logout
-                </button>
+                <div className="ad-topbar-actions">
+                    <button
+                        type="button"
+                        className="ad-btn ad-btn--ghost"
+                        onClick={() => navigate("/advisor/appointments")}
+                    >
+                        Appointments
+                    </button>
+
+                    <button
+                        type="button"
+                        className="ad-logout"
+                        onClick={() => {
+                            localStorage.removeItem("authToken");
+                            localStorage.removeItem("user");
+                            localStorage.removeItem("userRole");
+                            navigate("/login");
+                        }}
+                    >
+                        Logout
+                    </button>
+                </div>
             </header>
 
             <main className="ad-main">

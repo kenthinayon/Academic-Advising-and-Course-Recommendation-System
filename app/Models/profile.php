@@ -15,6 +15,7 @@ class Profile extends Model
         'gender',
         'high_school',
         'contact_number',
+        'avatar_path',
 
         // Step 2
         'shs_strand',

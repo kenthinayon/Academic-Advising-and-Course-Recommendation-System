@@ -1,0 +1,114 @@
+// Student School Calendar
+// Styles specific to the calendar page (`StudentSchoolCalendar.js`).
+// Keep this file feature-scoped so the calendar remains easy to maintain.
+
+.sp-schoolcal__pagehead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.sp-schoolcal__title {
+  margin: 0 0 4px 0;
+  font-size: 28px;
+}
+
+.sp-schoolcal__caption {
+  margin: 0;
+}
+
+.sp-schoolcal__nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sp-schoolcal__month {
+  min-width: 180px;
+  text-align: center;
+}
+
+.sp-schoolcal__dow {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 8px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.sp-schoolcal__dow-item {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.sp-schoolcal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.sp-schoolcal__day {
+  min-height: 78px;
+  padding: 10px 10px 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sp-schoolcal__day--out {
+  opacity: 0.45;
+}
+
+.sp-schoolcal__day--today {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+}
+
+.sp-schoolcal__dayhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sp-schoolcal__date {
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.sp-schoolcal__today-pill {
+  font-size: 10px;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.18);
+  color: #1d4ed8;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.sp-schoolcal__events {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sp-schoolcal__event {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sp-schoolcal__more {
+  font-size: 12px;
+}

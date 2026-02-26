@@ -30,8 +30,24 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'me']);
+    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar']);
+        Route::put('/account/password', [AuthController::class, 'changePassword']);
     Route::put('/profile/basic-info', [ProfileController::class, 'upsertBasicInfo']);
     Route::put('/profile/academic-credentials', [ProfileController::class, 'upsertAcademicCredentials']);
+
+    // Appointments (Student)
+    Route::get('/appointments', [\App\Http\Controllers\AppointmentController::class, 'index']);
+    Route::post('/appointments', [\App\Http\Controllers\AppointmentController::class, 'store']);
+    Route::get('/notifications', [\App\Http\Controllers\AppointmentController::class, 'studentNotifications']);
+
+    // Appointments (Advisor/Admin)
+    Route::middleware('role:advisor,admin')->group(function () {
+        Route::get('/advisor/appointments', [\App\Http\Controllers\AppointmentController::class, 'advisorIndex']);
+        Route::put('/advisor/appointments/{appointmentId}/approve', [\App\Http\Controllers\AppointmentController::class, 'advisorApprove']);
+        Route::put('/advisor/appointments/{appointmentId}/cancel', [\App\Http\Controllers\AppointmentController::class, 'advisorCancel']);
+        Route::put('/advisor/appointments/{appointmentId}/complete', [\App\Http\Controllers\AppointmentController::class, 'advisorComplete']);
+        Route::put('/advisor/appointments/{appointmentId}/reject', [\App\Http\Controllers\AppointmentController::class, 'advisorReject']);
+    });
 
     // Step 3/4 - Assessment + Recommendations
     Route::get('/assessment', [AssessmentController::class, 'show']);

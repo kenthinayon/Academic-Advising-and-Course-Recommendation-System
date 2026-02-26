@@ -9,7 +9,10 @@ import StudentBasicInformation from "./StudentBasicInformation";
 import StudentAcademicCredentials from "./StudentAcademicCredentials";
 import StudentAssessmentQuiz from "./StudentAssessmentQuiz";
 import StudentCourseRecommendation from "./StudentCourseRecommendation";
+import StudentAppointments from "./StudentAppointments";
+import StudentSchoolCalendar from "./StudentSchoolCalendar";
 import AdvisorDashboard from "./AdvisorDashboard";
+import AdvisorAppointments from "./AdvisorAppointments";
 import AdvisorStudentDetail from "./AdvisorStudentDetail";
 import AdminDashboard from "./AdminDashboard";
 import AdminStudentDetail from "./AdminStudentDetail";
@@ -24,6 +27,7 @@ export default function Routers() {
                 <Route path="/register" element={<Register />} />
 
                 <Route path="/advisor" element={<AdvisorDashboard />} />
+                <Route path="/advisor/appointments" element={<AdvisorAppointments />} />
                 <Route path="/advisor/students/:userId" element={<AdvisorStudentDetail />} />
 
                 <Route path="/admin" element={<AdminDashboard />} />
@@ -34,6 +38,8 @@ export default function Routers() {
                 <Route path="/student/academic-credentials" element={<StudentAcademicCredentials />} />
                 <Route path="/student/assessment-quiz" element={<StudentAssessmentQuiz />} />
                 <Route path="/student/course-recommendation" element={<StudentCourseRecommendation />} />
+                <Route path="/student/appointments" element={<StudentAppointments />} />
+                <Route path="/school-calendar" element={<StudentSchoolCalendar />} />
                 <Route path="*" element={<Login />} />
             </Routes>
         </Router>
