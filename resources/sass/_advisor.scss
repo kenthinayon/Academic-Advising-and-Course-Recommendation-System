@@ -16,6 +16,416 @@
   border-bottom: 1px solid var(--border);
 }
 
+.ad-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ad-iconbtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0;
+}
+
+.ad-iconbtn:hover {
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+}
+
+.ad-badge-dot {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--brand-teal);
+  color: white;
+  font-size: 11px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--surface);
+}
+
+.ad-notif {
+  position: relative;
+}
+
+.ad-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  z-index: 20;
+}
+
+.ad-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 10px 12px;
+}
+
+.ad-link {
+  border: none;
+  background: transparent;
+  color: var(--brand-teal);
+  font-weight: 800;
+  padding: 0;
+}
+
+.ad-menu-list {
+  max-height: min(56vh, 520px);
+  overflow: auto;
+}
+
+.ad-menu-item {
+  border-radius: 12px;
+  padding: 10px 10px;
+}
+
+.ad-menu-item + .ad-menu-item {
+  margin-top: 6px;
+}
+
+.ad-menu-item:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.ad-profile {
+  position: relative;
+}
+
+.ad-profile-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ad-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ad-avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: var(--brand-teal);
+  background: color-mix(in srgb, var(--brand-teal) 10%, transparent);
+}
+
+.ad-profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  z-index: 20;
+}
+
+.ad-profile-head {
+  padding: 10px 10px 12px;
+}
+
+.ad-profile-name {
+  font-weight: 900;
+}
+
+.ad-profile-email {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.ad-profile-role {
+  display: inline-flex;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 900;
+  border-radius: 999px;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--brand-teal) 25%, transparent);
+  background: color-mix(in srgb, var(--brand-teal) 12%, transparent);
+  color: var(--brand-teal);
+}
+
+.ad-profile-sep {
+  height: 1px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  margin: 6px 6px;
+}
+
+.ad-profile-item {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 0 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ad-profile-item:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.ad-profile-item--danger {
+  color: var(--danger);
+}
+
+/* Simple modal (advisor settings) */
+.ad-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 50;
+}
+
+.ad-modal {
+  width: min(720px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.28);
+}
+
+.ad-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 16px 0;
+}
+
+.ad-modal-title {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.ad-modal-sub {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.ad-modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.ad-modal-body {
+  padding: 14px 16px 16px;
+}
+
+.ad-modal-foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.ad-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.ad-profile-edit {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+}
+
+.ad-profile-edit__avatar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.ad-profile-edit__avatarImg {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+}
+
+.ad-profile-edit__avatarFallback {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--brand-teal);
+  border: 1px solid color-mix(in srgb, var(--brand-teal) 25%, transparent);
+  background: color-mix(in srgb, var(--brand-teal) 12%, transparent);
+}
+
+.ad-profile-edit__avatarActions {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+}
+
+.ad-profile-edit__form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ad-field {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.ad-field input,
+.ad-field select,
+.ad-field textarea {
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.ad-form--stack {
+  display: grid;
+  gap: 10px;
+}
+
+.ad-settings-section {
+  padding: 12px 0;
+}
+
+.ad-settings-section + .ad-settings-section {
+  border-top: 1px solid var(--border);
+}
+
+.ad-settings-section__title {
+  font-weight: 900;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.ad-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ad-settings-label {
+  font-weight: 800;
+  margin-bottom: 2px;
+  color: var(--text);
+}
+
+.ad-switch {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ad-switch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ad-switch__track {
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 18%, transparent);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  transition: background 140ms ease;
+}
+
+.ad-switch__thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.14);
+  transform: translateX(0);
+  transition: transform 140ms ease;
+}
+
+.ad-switch input:checked + .ad-switch__track {
+  background: color-mix(in srgb, var(--brand-teal) 35%, transparent);
+  border-color: color-mix(in srgb, var(--brand-teal) 40%, var(--border));
+}
+
+.ad-switch input:checked + .ad-switch__track .ad-switch__thumb {
+  transform: translateX(20px);
+}
+
+@media (max-width: 720px) {
+  .ad-profile-edit {
+    grid-template-columns: 1fr;
+  }
+
+  .ad-profile-edit__form {
+    grid-template-columns: 1fr;
+  }
+}
+
 .ad-brand {
   display: flex;
   align-items: center;
@@ -53,6 +463,25 @@
   font-size: 28px;
   margin: 0 0 6px;
   font-weight: 800;
+}
+
+.ad-hero-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ad-hero-text {
+  min-width: 0;
+}
+
+.ad-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  padding-top: 2px;
 }
 
 .ad-hero p {
@@ -180,6 +609,31 @@
 .ad-btn--ghost {
   background: var(--surface);
   color: var(--brand-teal);
+}
+
+/* Topbar primary action (Appointments) */
+.ad-btn--appointments {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  background: #16a34a;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(22, 163, 74, 0.18);
+}
+
+.ad-btn--appointments:hover {
+  filter: brightness(0.98);
+}
+
+.ad-btn--appointments:active {
+  transform: translateY(0.5px);
+}
+
+.ad-btn__icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
 }
 
 .ad-btn--danger {

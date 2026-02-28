@@ -186,19 +186,6 @@ export default function AdvisorAppointments() {
                     >
                         ← Dashboard
                     </button>
-
-                    <button
-                        type="button"
-                        className="ad-logout"
-                        onClick={() => {
-                            localStorage.removeItem("authToken");
-                            localStorage.removeItem("user");
-                            localStorage.removeItem("userRole");
-                            navigate("/login");
-                        }}
-                    >
-                        Logout
-                    </button>
                 </div>
             </header>
 

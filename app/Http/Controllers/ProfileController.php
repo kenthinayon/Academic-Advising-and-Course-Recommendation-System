@@ -63,6 +63,13 @@ class ProfileController extends Controller
             ]
         );
 
+        // Keep SPA user shape consistent (me() attaches avatar_url)
+        $avatarUrl = null;
+        if ($profile?->avatar_path) {
+            $avatarUrl = Storage::url($profile->avatar_path);
+        }
+        $user->avatar_url = $avatarUrl;
+
         return response()->json([
             'message' => 'Basic information saved.',
             'user' => $user,

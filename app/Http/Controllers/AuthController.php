@@ -6,6 +6,7 @@ use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
@@ -47,6 +48,9 @@ class AuthController extends Controller
 
         $token = $user->createToken('spa')->plainTextToken;
 
+    // Keep SPA user shape consistent with /api/profile (include derived avatar_url)
+    $user->avatar_url = $profile?->avatar_path ? Storage::url($profile->avatar_path) : null;
+
         return response()->json([
             'message' => 'Registered successfully.',
             'token' => $token,
@@ -85,11 +89,15 @@ class AuthController extends Controller
 
         $token = $user->createToken('spa')->plainTextToken;
 
+    // Ensure login returns the same user payload shape as /api/profile
+    $profile = $user->profile;
+    $user->avatar_url = $profile?->avatar_path ? Storage::url($profile->avatar_path) : null;
+
         return response()->json([
             'message' => 'Login successful.',
             'token' => $token,
             'user' => $user,
-            'profile' => $user->profile,
+            'profile' => $profile,
         ]);
     }
 
