@@ -119,7 +119,7 @@ export default function AdvisorDashboard() {
 
         setNotifLoading(true);
         try {
-            const res = await axios.get("/api/notifications?limit=10", { headers, withCredentials: true });
+            const res = await axios.get("/api/advisor/notifications?limit=10", { headers, withCredentials: true });
             setNotifs(res.data?.notifications || []);
         } catch {
             setNotifs([]);
@@ -189,11 +189,27 @@ export default function AdvisorDashboard() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
-    const logout = () => {
-        localStorage.removeItem("authToken");
-        localStorage.removeItem("user");
-        localStorage.removeItem("userRole");
-        navigate("/login");
+    const logout = async () => {
+        const t = localStorage.getItem("authToken");
+        try {
+            if (t) {
+                await axios.post(
+                    "/api/logout",
+                    {},
+                    {
+                        headers: { Authorization: `Bearer ${t}`, Accept: "application/json" },
+                        withCredentials: true,
+                    }
+                );
+            }
+        } catch {
+            // best-effort logout; still clear client state
+        } finally {
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("user");
+            localStorage.removeItem("userRole");
+            navigate("/login");
+        }
     };
 
     const goToAppointments = () => navigate("/advisor/appointments");
@@ -452,15 +468,18 @@ export default function AdvisorDashboard() {
                                             const isRejected = st === "rejected";
                                             const isCompleted = st === "completed";
 
-                                            const title = isScheduled
-                                                ? "Appointment confirmed"
-                                                : isCancelled
-                                                    ? "Appointment cancelled"
-                                                    : isRejected
-                                                        ? "Appointment rejected"
-                                                        : isCompleted
-                                                            ? "Appointment completed"
-                                                            : "Appointment request sent";
+                                            const hasStudent = Boolean(n.student?.name || n.student?.email);
+                                            const title = hasStudent
+                                                ? `New appointment request${n.student?.name ? `: ${n.student.name}` : ""}`
+                                                : isScheduled
+                                                    ? "Appointment confirmed"
+                                                    : isCancelled
+                                                        ? "Appointment cancelled"
+                                                        : isRejected
+                                                            ? "Appointment rejected"
+                                                            : isCompleted
+                                                                ? "Appointment completed"
+                                                                : "Appointment update";
 
                                             const whenIso = isScheduled ? n.scheduled_at : n.preferred_at;
                                             let when = "—";
@@ -481,6 +500,14 @@ export default function AdvisorDashboard() {
                                                     <div className="ad-muted" style={{ marginTop: 2 }}>
                                                         {n.session_type || "Advising Session"}
                                                     </div>
+
+                                                        {hasStudent ? (
+                                                            <div className="ad-muted" style={{ marginTop: 6 }}>
+                                                                <strong>Student:</strong>{" "}
+                                                                {n.student?.name || "Student"}
+                                                                {n.student?.email ? ` (${n.student.email})` : ""}
+                                                            </div>
+                                                        ) : null}
                                                     <div className="ad-muted" style={{ marginTop: 6 }}>
                                                         <strong>When:</strong> {when}
                                                     </div>

@@ -991,6 +991,132 @@
   font-family: var(--font-sans);
 }
 
+/* Dark mode for Student Portal (uses document.body.dataset.theme = 'dark') */
+body[data-theme="dark"] .student-portal {
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .sp-topbar {
+  background: rgba(11, 18, 32, 0.88);
+  border-bottom-color: rgba(148, 163, 184, 0.14);
+}
+
+body[data-theme="dark"] .sp-progress,
+body[data-theme="dark"] .sp-widget,
+body[data-theme="dark"] .sp-menu,
+body[data-theme="dark"] .sp-iconbtn,
+body[data-theme="dark"] .sp-btn {
+  background: #0f172a;
+  border-color: rgba(148, 163, 184, 0.18);
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .sp-iconbtn:hover {
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
+}
+
+body[data-theme="dark"] .sp-menu-item {
+  background: transparent;
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .sp-menu-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme="dark"] .sp-muted,
+body[data-theme="dark"] .sp-caption,
+body[data-theme="dark"] .sp-subtitle,
+body[data-theme="dark"] .sp-progress-meta,
+body[data-theme="dark"] .sp-widget-sub,
+body[data-theme="dark"] .sp-menu-email,
+body[data-theme="dark"] .sp-bar-labels,
+body[data-theme="dark"] .sp-field {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+body[data-theme="dark"] .sp-badge-dot {
+  border-color: #0f172a;
+}
+
+body[data-theme="dark"] .sp-widget-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+body[data-theme="dark"] .sp-modal {
+  background: rgba(0, 0, 0, 0.58);
+}
+
+body[data-theme="dark"] .sp-modal-card {
+  background: #0f172a;
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+body[data-theme="dark"] .sp-modal-head {
+  border-bottom-color: rgba(148, 163, 184, 0.14);
+}
+
+body[data-theme="dark"] .sp-field input,
+body[data-theme="dark"] .sp-field select,
+body[data-theme="dark"] .sp-field textarea {
+  background: rgba(2, 6, 23, 0.55);
+  color: #e5e7eb;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+body[data-theme="dark"] .sp-field input::placeholder,
+body[data-theme="dark"] .sp-field textarea::placeholder {
+  color: rgba(226, 232, 240, 0.45);
+}
+
+/* Dark mode for other student tabs/pages (Basic Info, Academic, etc.) */
+body[data-theme="dark"] .student-basic {
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .sb-topbar {
+  background: rgba(11, 18, 32, 0.88);
+  border-bottom-color: rgba(148, 163, 184, 0.14);
+}
+
+body[data-theme="dark"] .sb-card {
+  background: #0f172a;
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+body[data-theme="dark"] .sb-label,
+body[data-theme="dark"] .sb-subtitle {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+body[data-theme="dark"] .sb-input,
+body[data-theme="dark"] textarea.sb-input {
+  background: rgba(2, 6, 23, 0.55);
+  color: #e5e7eb;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+body[data-theme="dark"] .sb-secondary {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+body[data-theme="dark"] .sb-back {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+body[data-theme="dark"] .sb-back:hover {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
 .sp-topbar {
   display: flex;
   align-items: center;
@@ -1923,6 +2049,67 @@ textarea.sb-input {
   background: #ffffff;
   color: #0f172a;
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Dark mode: Assessment Quiz + Course Recommendation */
+body[data-theme="dark"] .assessment-quiz {
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .aq-topbar {
+  background: rgba(11, 18, 32, 0.88);
+  border-bottom-color: rgba(148, 163, 184, 0.14);
+}
+
+body[data-theme="dark"] .aq-back,
+body[data-theme="dark"] .aq-secondary {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+body[data-theme="dark"] .aq-back:hover,
+body[data-theme="dark"] .aq-secondary:hover {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+body[data-theme="dark"] .aq-card,
+body[data-theme="dark"] .aq-check,
+body[data-theme="dark"] .aq-option,
+body[data-theme="dark"] .aq-top-card,
+body[data-theme="dark"] .cr-panel {
+  background: #0f172a;
+  border-color: rgba(148, 163, 184, 0.16);
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .aq-sub,
+body[data-theme="dark"] .aq-help,
+body[data-theme="dark"] .aq-qmeta,
+body[data-theme="dark"] .aq-num,
+body[data-theme="dark"] .aq-top-score {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+body[data-theme="dark"] .aq-text,
+body[data-theme="dark"] .aq-letter,
+body[data-theme="dark"] .aq-opttext,
+body[data-theme="dark"] .aq-top-rank {
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .aq-bar {
+  background: rgba(148, 163, 184, 0.20);
+}
+
+body[data-theme="dark"] .aq-bar-fill {
+  background: #e5e7eb;
+}
+
+body[data-theme="dark"] .aq-actions {
+  border-top-color: rgba(148, 163, 184, 0.14);
 }
 
 .aq-topbar {

@@ -359,4 +359,35 @@ class AppointmentController extends Controller
             'notifications' => $items,
         ]);
     }
+
+    /**
+     * Advisor/Admin notifications for bell.
+     * Returns recent appointment requests (and optionally other statuses) so advisors see new requests.
+     */
+    public function advisorNotifications(Request $request)
+    {
+        $user = $request->user();
+        if (!in_array(($user->role ?? 'student'), ['advisor', 'admin'], true)) {
+            return response()->json(['message' => 'Forbidden'], 403);
+        }
+
+        $validated = $request->validate([
+            'limit' => ['nullable', 'integer', 'min:1', 'max:30'],
+        ]);
+
+        $limit = $validated['limit'] ?? 10;
+
+        // For now, treat all "requested" appointments as notifs.
+        // This avoids requiring a dedicated notifications table and ensures immediate reflection.
+        $items = Appointment::query()
+            ->where('status', 'requested')
+            ->with(['student:id,name,email,role'])
+            ->orderByDesc('created_at')
+            ->limit($limit)
+            ->get();
+
+        return response()->json([
+            'notifications' => $items,
+        ]);
+    }
 }

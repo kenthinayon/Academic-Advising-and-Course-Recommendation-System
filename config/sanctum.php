@@ -31,7 +31,8 @@ return [
     |
     */
 
-    'guard' => ['web'],
+    // Support both cookie-based SPA auth (web) and bearer-token auth (sanctum).
+    // Our frontend uses Authorization: Bearer <token>.</n+    'guard' => ['web', 'sanctum'],
 
     /*
     |--------------------------------------------------------------------------

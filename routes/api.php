@@ -28,7 +28,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth.bearer')->group(function () {
     Route::get('/profile', [ProfileController::class, 'me']);
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar']);
         Route::put('/account/password', [AuthController::class, 'changePassword']);
@@ -39,6 +39,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/appointments', [\App\Http\Controllers\AppointmentController::class, 'index']);
     Route::post('/appointments', [\App\Http\Controllers\AppointmentController::class, 'store']);
     Route::get('/notifications', [\App\Http\Controllers\AppointmentController::class, 'studentNotifications']);
+
+    // Notifications (Advisor/Admin)
+    Route::middleware('role:advisor,admin')->group(function () {
+        Route::get('/advisor/notifications', [\App\Http\Controllers\AppointmentController::class, 'advisorNotifications']);
+    });
 
     // Appointments (Advisor/Admin)
     Route::middleware('role:advisor,admin')->group(function () {

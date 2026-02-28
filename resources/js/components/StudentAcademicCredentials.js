@@ -53,6 +53,33 @@ export default function StudentAcademicCredentials() {
         ratings: PROGRAMS.reduce((acc, p) => ({ ...acc, [p]: 3 }), {}),
     });
 
+    const computedGWA = useMemo(() => {
+        const rows = Array.isArray(form.subjectGrades) ? form.subjectGrades : [];
+        const nums = rows
+            .map((r) => {
+                const raw = r?.grade;
+                if (raw === "" || raw == null) return null;
+                const n = Number(raw);
+                if (!Number.isFinite(n)) return null;
+                return n;
+            })
+            .filter((n) => n != null);
+
+        if (!nums.length) return "";
+        const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
+        // Keep 2 decimals for display and for what we send to the API.
+        return avg.toFixed(2);
+    }, [form.subjectGrades]);
+
+    useEffect(() => {
+        // Keep the input value synced with what's actually computed.
+        // This ensures the saved value matches what the UI shows.
+        setForm((prev) => {
+            if (prev.shs_general_average === computedGWA) return prev;
+            return { ...prev, shs_general_average: computedGWA };
+        });
+    }, [computedGWA]);
+
     const formatFile = (file) => {
         if (!file) return "";
         const kb = Math.round(file.size / 1024);
@@ -87,6 +114,7 @@ export default function StudentAcademicCredentials() {
                 setForm((prev) => ({
                     ...prev,
                     shs_strand: profile?.shs_strand ?? "",
+                    // This will be overwritten by computedGWA when subjects exist.
                     shs_general_average: profile?.shs_general_average ?? "",
                     subjectGrades:
                         Array.isArray(existingSubjects) && existingSubjects.length
@@ -408,10 +436,13 @@ export default function StudentAcademicCredentials() {
                                                     min="60"
                                                     max="100"
                                                     value={form.shs_general_average}
-                                                    onChange={setField("shs_general_average")}
                                                     placeholder="e.g., 88.50"
+                                                    readOnly
                                                     required
                                                 />
+                                                <div className="sb-muted" style={{ marginTop: 6 }}>
+                                                    Auto-computed from your subject grades.
+                                                </div>
                                             </label>
                                         </div>
                                     </div>
