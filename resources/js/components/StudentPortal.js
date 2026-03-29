@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "./ui/toast";
+import HighlightsCarousel from "./HighlightsCarousel";
 
 function initials(nameOrEmail) {
     const s = String(nameOrEmail || "").trim();
@@ -1151,6 +1152,8 @@ export default function StudentPortal() {
                         </div>
                     </button>
                 </section>
+
+                <HighlightsCarousel />
 
                 {editOpen ? (
                     <div className="sp-modal" role="dialog" aria-modal="true">

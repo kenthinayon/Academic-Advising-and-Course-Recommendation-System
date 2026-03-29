@@ -273,6 +273,30 @@ export default function AdminDashboard() {
     const [studentsLoading, setStudentsLoading] = useState(false);
     const [students, setStudents] = useState([]);
 
+    const [carouselSlides, setCarouselSlides] = useState([]);
+    const [carouselLoading, setCarouselLoading] = useState(false);
+    const [carouselOpen, setCarouselOpen] = useState(false);
+    const [carouselEditing, setCarouselEditing] = useState(null);
+    const [carouselSaving, setCarouselSaving] = useState(false);
+    const [carouselImageFile, setCarouselImageFile] = useState(null);
+    const [carouselImagePreview, setCarouselImagePreview] = useState("");
+    const [carouselForm, setCarouselForm] = useState({
+        category: "featured",
+        badge: "",
+        title: "",
+        greeting: "",
+        story: "",
+        sort_order: "",
+        is_active: true,
+    });
+
+    const carouselThumbSrc = (s) => {
+        const p = String(s?.image_path || "").trim();
+        if (p) return `/storage/${p.replace(/^\/+/, "")}`;
+        const u = String(s?.image_url || "").trim();
+        return u || "";
+    };
+
     const headers = useMemo(
         () => ({ Authorization: `Bearer ${token}`, Accept: "application/json" }),
         [token]
@@ -492,6 +516,150 @@ export default function AdminDashboard() {
         }
     };
 
+    const loadCarouselSlides = async ({ showLoading } = { showLoading: true } ) => {
+        if (!token) return;
+        if (showLoading) setCarouselLoading(true);
+        try {
+            const res = await axios.get("/api/admin/carousel-slides", { headers, withCredentials: true });
+            setCarouselSlides(res.data?.slides || []);
+        } catch (e) {
+            toast.error(e?.response?.data?.message || "Failed to load highlights.");
+            setCarouselSlides([]);
+        } finally {
+            if (showLoading) setCarouselLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (activeTab !== "highlights") return;
+        loadCarouselSlides({ showLoading: true });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeTab]);
+
+    const onPickCarouselImage = (file) => {
+        setCarouselImageFile(file || null);
+        if (!file) {
+            setCarouselImagePreview("");
+            return;
+        }
+        try {
+            const url = URL.createObjectURL(file);
+            setCarouselImagePreview(url);
+        } catch {
+            setCarouselImagePreview("");
+        }
+    };
+
+    const openNewCarouselSlide = () => {
+        setCarouselEditing(null);
+        setCarouselForm({
+            category: "featured",
+            badge: "",
+            title: "",
+            greeting: "",
+            story: "",
+            sort_order: "",
+            is_active: true,
+        });
+        setCarouselImageFile(null);
+        setCarouselImagePreview("");
+        setCarouselOpen(true);
+    };
+
+    const openEditCarouselSlide = (s) => {
+        setCarouselEditing(s);
+        setCarouselForm({
+            category: s?.category || "featured",
+            badge: s?.badge || "",
+            title: s?.title || "",
+            greeting: s?.greeting || "",
+            story: s?.story || "",
+            sort_order: s?.sort_order != null ? String(s.sort_order) : "",
+            is_active: Boolean(s?.is_active),
+        });
+        setCarouselImageFile(null);
+        setCarouselImagePreview("");
+        setCarouselOpen(true);
+    };
+
+    const saveCarouselSlide = async () => {
+        if (!token) return;
+        if (!String(carouselForm.title || "").trim()) {
+            toast.error("Title is required.");
+            return;
+        }
+
+        const form = new FormData();
+        form.append("category", String(carouselForm.category || "featured").trim());
+        form.append("badge", String(carouselForm.badge || "").trim());
+        form.append("title", String(carouselForm.title || "").trim());
+        form.append("greeting", String(carouselForm.greeting || "").trim());
+        form.append("story", String(carouselForm.story || "").trim());
+        if (String(carouselForm.sort_order || "").trim() !== "") {
+            form.append("sort_order", String(carouselForm.sort_order).trim());
+        }
+        form.append("is_active", carouselForm.is_active ? "1" : "0");
+        if (carouselImageFile) form.append("image", carouselImageFile);
+
+        try {
+            setCarouselSaving(true);
+            if (carouselEditing?.id) {
+                const res = await axios.post(`/api/admin/carousel-slides/${carouselEditing.id}`, form, {
+                    headers: { ...headers, "Content-Type": "multipart/form-data" },
+                    withCredentials: true,
+                });
+                toast.success(res.data?.message || "Slide updated.");
+            } else {
+                if (!carouselImageFile) {
+                    toast.error("Please choose an image.");
+                    return;
+                }
+                const res = await axios.post("/api/admin/carousel-slides", form, {
+                    headers: { ...headers, "Content-Type": "multipart/form-data" },
+                    withCredentials: true,
+                });
+                toast.success(res.data?.message || "Slide created.");
+            }
+
+            setCarouselOpen(false);
+            setCarouselEditing(null);
+            setCarouselImageFile(null);
+            setCarouselImagePreview("");
+            await loadCarouselSlides({ showLoading: true });
+        } catch (e) {
+            toast.error(e?.response?.data?.message || "Couldn’t save slide.");
+        } finally {
+            setCarouselSaving(false);
+        }
+    };
+
+    const deleteCarouselSlide = async (s) => {
+        if (!token) return;
+        const ok = window.confirm("Delete this slide?");
+        if (!ok) return;
+        try {
+            await axios.delete(`/api/admin/carousel-slides/${s.id}`, { headers, withCredentials: true });
+            toast.success("Slide deleted.");
+            await loadCarouselSlides({ showLoading: false });
+        } catch (e) {
+            toast.error(e?.response?.data?.message || "Couldn’t delete slide.");
+        }
+    };
+
+    const moveCarouselSlide = async (s, direction) => {
+        if (!token) return;
+        try {
+            await axios.post(
+                `/api/admin/carousel-slides/${s.id}/move`,
+                { direction },
+                { headers, withCredentials: true }
+            );
+            await loadCarouselSlides({ showLoading: false });
+        } catch (e) {
+            toast.error(e?.response?.data?.message || "Couldn’t reorder slide.");
+        }
+    };
+
     useEffect(() => {
         load();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -679,6 +847,15 @@ export default function AdminDashboard() {
                     >
                         Analytics
                     </button>
+                    <button
+                        type="button"
+                        className={activeTab === "highlights" ? "am-tab am-tab--active" : "am-tab"}
+                        onClick={() => setActiveTab("highlights")}
+                        role="tab"
+                        aria-selected={activeTab === "highlights"}
+                    >
+                        Highlights
+                    </button>
                 </div>
 
                 {activeTab === "overview" ? (
@@ -856,6 +1033,86 @@ export default function AdminDashboard() {
                         </div>
                     </section>
                 ) : null}
+
+                {activeTab === "highlights" ? (
+                    <section className="am-panel">
+                        <div className="am-panel-head" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+                            <div>
+                                <h2>Highlights Carousel</h2>
+                                <div className="am-muted">Manage the student-facing Campus Highlights slideshow</div>
+                            </div>
+                            <button type="button" className="am-btn" onClick={openNewCarouselSlide}>
+                                + Add slide
+                            </button>
+                        </div>
+
+                        {carouselLoading ? <div className="am-muted">Loading…</div> : null}
+
+                        {!carouselLoading && !carouselSlides.length ? (
+                            <div className="am-muted">No slides yet.</div>
+                        ) : null}
+
+                        {!carouselLoading && carouselSlides.length ? (
+                            <div style={{ display: "grid", gap: 10, marginTop: 10 }}>
+                                {carouselSlides.map((s) => (
+                                    <div
+                                        key={s.id}
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                            gap: 12,
+                                            padding: 12,
+                                            border: "1px solid var(--border)",
+                                            borderRadius: 14,
+                                            background: "var(--surface)",
+                                        }}
+                                    >
+                                        <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
+                                            {carouselThumbSrc(s) ? (
+                                                <img
+                                                    src={carouselThumbSrc(s)}
+                                                    alt={s.title || "Slide"}
+                                                    style={{ width: 86, height: 56, objectFit: "cover", borderRadius: 12, border: "1px solid var(--border)" }}
+                                                />
+                                            ) : (
+                                                <div
+                                                    style={{ width: 86, height: 56, borderRadius: 12, border: "1px solid var(--border)", background: "var(--surface-2)" }}
+                                                />
+                                            )}
+
+                                            <div style={{ minWidth: 0 }}>
+                                                <div style={{ fontWeight: 1000, color: "var(--text)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                                                    {s.title || "Untitled"}
+                                                </div>
+                                                <div className="am-muted" style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                                                    {s.badge ? `${String(s.badge).toUpperCase()} • ` : ""}
+                                                    {s.category || "featured"}
+                                                    {s.is_active ? "" : " • hidden"}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
+                                            <button type="button" className="am-btn am-btn--ghost" onClick={() => moveCarouselSlide(s, "up")}>
+                                                ↑
+                                            </button>
+                                            <button type="button" className="am-btn am-btn--ghost" onClick={() => moveCarouselSlide(s, "down")}>
+                                                ↓
+                                            </button>
+                                            <button type="button" className="am-btn am-btn--ghost" onClick={() => openEditCarouselSlide(s)}>
+                                                Edit
+                                            </button>
+                                            <button type="button" className="am-btn" onClick={() => deleteCarouselSlide(s)}>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : null}
+                    </section>
+                ) : null}
             </main>
 
             {schoolCalOpen ? (
@@ -1031,6 +1288,137 @@ export default function AdminDashboard() {
                             </button>
                             <button type="button" className="sp-btn sp-btn--primary" onClick={changePassword} disabled={pwSaving}>
                                 {pwSaving ? "Saving…" : "Save changes"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
+
+            {carouselOpen ? (
+                <div className="sp-modal" role="dialog" aria-modal="true">
+                    <div className="sp-modal-card" style={{ width: "min(980px, 100%)" }}>
+                        <div className="sp-modal-head">
+                            <div>
+                                <div className="sp-modal-title">{carouselEditing ? "Edit Slide" : "Add Slide"}</div>
+                                <div className="sp-muted">Image, title, greeting, and story appear on the student carousel</div>
+                            </div>
+                            <button type="button" className="sp-iconbtn" onClick={() => setCarouselOpen(false)} aria-label="Close">
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="sp-modal-body" style={{ gap: 18 }}>
+                            <div className="sp-modal-avatar">
+                                {carouselImagePreview ? (
+                                    <img className="sp-avatar-img sp-avatar-img--lg" src={carouselImagePreview} alt="Slide preview" />
+                                ) : carouselEditing?.image_url ? (
+                                    <img className="sp-avatar-img sp-avatar-img--lg" src={carouselEditing.image_url} alt="Slide" />
+                                ) : (
+                                    <div
+                                        style={{
+                                            width: 124,
+                                            height: 124,
+                                            borderRadius: 18,
+                                            border: "1px solid var(--border)",
+                                            background: "var(--surface-2)",
+                                        }}
+                                    />
+                                )}
+
+                                <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+                                    <label className="sp-btn sp-btn--ghost" style={{ cursor: "pointer" }}>
+                                        Choose image
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            style={{ display: "none" }}
+                                            onChange={(e) => onPickCarouselImage(e.target.files?.[0] || null)}
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="sp-form" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                                    <label className="sp-field">
+                                        Category
+                                        <select
+                                            value={carouselForm.category}
+                                            onChange={(e) => setCarouselForm((p) => ({ ...p, category: e.target.value }))}
+                                        >
+                                            <option value="featured">Featured</option>
+                                            <option value="school_achievement">School achievement</option>
+                                            <option value="program_achievement">Program achievement</option>
+                                        </select>
+                                    </label>
+
+                                    <label className="sp-field">
+                                        Badge (optional)
+                                        <input
+                                            value={carouselForm.badge}
+                                            onChange={(e) => setCarouselForm((p) => ({ ...p, badge: e.target.value }))}
+                                            placeholder="e.g. COMMUNITY"
+                                        />
+                                    </label>
+
+                                    <label className="sp-field" style={{ gridColumn: "1 / -1" }}>
+                                        Title
+                                        <input
+                                            value={carouselForm.title}
+                                            onChange={(e) => setCarouselForm((p) => ({ ...p, title: e.target.value }))}
+                                            placeholder="Slide title"
+                                        />
+                                    </label>
+
+                                    <label className="sp-field" style={{ gridColumn: "1 / -1" }}>
+                                        Greeting (optional)
+                                        <input
+                                            value={carouselForm.greeting}
+                                            onChange={(e) => setCarouselForm((p) => ({ ...p, greeting: e.target.value }))}
+                                            placeholder="Short greeting / intro"
+                                        />
+                                    </label>
+
+                                    <label className="sp-field" style={{ gridColumn: "1 / -1" }}>
+                                        Story (optional)
+                                        <textarea
+                                            value={carouselForm.story}
+                                            onChange={(e) => setCarouselForm((p) => ({ ...p, story: e.target.value }))}
+                                            rows={4}
+                                            placeholder="Short story/description"
+                                        />
+                                    </label>
+
+                                    <label className="sp-field">
+                                        Sort order (optional)
+                                        <input
+                                            value={carouselForm.sort_order}
+                                            onChange={(e) => setCarouselForm((p) => ({ ...p, sort_order: e.target.value }))}
+                                            placeholder="e.g. 10"
+                                            inputMode="numeric"
+                                        />
+                                    </label>
+
+                                    <label className="sp-field">
+                                        Visible
+                                        <select
+                                            value={carouselForm.is_active ? "1" : "0"}
+                                            onChange={(e) => setCarouselForm((p) => ({ ...p, is_active: e.target.value === "1" }))}
+                                        >
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="sp-modal-foot">
+                            <button type="button" className="sp-btn sp-btn--ghost" onClick={() => setCarouselOpen(false)}>
+                                Cancel
+                            </button>
+                            <button type="button" className="sp-btn sp-btn--primary" onClick={saveCarouselSlide} disabled={carouselSaving}>
+                                {carouselSaving ? "Saving…" : "Save"}
                             </button>
                         </div>
                     </div>

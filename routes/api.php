@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CarouselSlideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ Route::middleware('auth.bearer')->group(function () {
     Route::put('/account/profile', [ProfileController::class, 'updateAccountProfile']);
     Route::put('/profile/basic-info', [ProfileController::class, 'upsertBasicInfo']);
     Route::put('/profile/academic-credentials', [ProfileController::class, 'upsertAcademicCredentials']);
+
+    // Carousel slides (Student/Admin read)
+    Route::get('/carousel-slides', [CarouselSlideController::class, 'index']);
 
     // Appointments (Student)
     Route::get('/appointments', [\App\Http\Controllers\AppointmentController::class, 'index']);
@@ -71,6 +75,13 @@ Route::middleware('auth.bearer')->group(function () {
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin/stats', [AdminController::class, 'stats']);
         Route::get('/admin/analytics', [AdminController::class, 'analytics']);
+
+        // Carousel slides (Admin manage)
+        Route::get('/admin/carousel-slides', [CarouselSlideController::class, 'adminIndex']);
+        Route::post('/admin/carousel-slides', [CarouselSlideController::class, 'store']);
+        Route::post('/admin/carousel-slides/{id}/move', [CarouselSlideController::class, 'move']);
+        Route::post('/admin/carousel-slides/{id}', [CarouselSlideController::class, 'update']);
+        Route::delete('/admin/carousel-slides/{id}', [CarouselSlideController::class, 'destroy']);
 
         // Student details (admin)
         Route::get('/admin/students/{userId}', [AdvisorController::class, 'studentDetail']);
