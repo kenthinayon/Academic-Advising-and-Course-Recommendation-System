@@ -102,6 +102,25 @@ body[data-theme="dark"] .sp-switch__track {
 	transform: translateX(20px);
 }
 
+// Small dismiss button used in menus/cards (notifications, completed appointments)
+.sp-xbtn {
+	width: 28px;
+	height: 28px;
+	border-radius: 10px;
+	border: 1px solid var(--border);
+	background: transparent;
+	color: var(--text);
+	display: inline-grid;
+	place-items: center;
+	cursor: pointer;
+	font-weight: 900;
+	line-height: 1;
+}
+
+.sp-xbtn:hover {
+	background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
 // Account settings layout helpers
 .sp-form--stack {
 	grid-template-columns: 1fr;

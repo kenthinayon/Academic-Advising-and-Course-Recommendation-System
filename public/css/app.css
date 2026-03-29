@@ -117,6 +117,24 @@ body[data-theme=dark] .sp-switch__track {
   transform: translateX(20px);
 }
 
+.sp-xbtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.sp-xbtn:hover {
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
 .sp-form--stack {
   grid-template-columns: 1fr;
 }
@@ -15560,7 +15578,7 @@ body[data-theme=dark] .aq-actions {
 
 .ad-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   margin-top: 18px;
 }
@@ -15575,6 +15593,17 @@ body[data-theme=dark] .aq-actions {
 .ad-stat-label {
   font-size: 13px;
   color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ad-stat-icon {
+  width: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
 }
 
 .ad-stat-value {
@@ -16104,6 +16133,12 @@ body[data-theme=dark] .aq-actions {
   box-shadow: var(--shadow-sm);
 }
 
+.am-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .am-brand {
   display: flex;
   align-items: center;
@@ -16250,6 +16285,10 @@ body[data-theme=dark] .aq-actions {
   height: 34px;
   border-radius: 10px;
   background: #e5e7eb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
 }
 
 .am-stat-icon--blue {
@@ -16541,6 +16580,37 @@ details[open] .am-chevron {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.am-filterbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+.am-filterbox-label {
+  font-weight: 900;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.am-filterbox-select {
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-weight: 900;
+  color: #111827;
+  outline: none;
+}
+
+.am-filterbox-select:focus {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
 }
 
 .am-filter {

@@ -173,15 +173,21 @@ export default function StudentAssessmentQuiz() {
     const navigate = useNavigate();
     const token = useMemo(() => localStorage.getItem("authToken"), []);
 
+    const stepsTotal = 1 + PART2_QUESTIONS.length + 1;
+    const reviewStepIndex = stepsTotal - 1;
+
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [assessmentSaved, setAssessmentSaved] = useState(false);
 
     const [step, setStep] = useState(0); // 0 = Part I, 1..8 = Part II Q index, 9 = Review
 
     const [part1Selected, setPart1Selected] = useState([]); // array of statement numbers (1-based)
     const [part2Answers, setPart2Answers] = useState({}); // { [questionId]: 'A'|'B'|'C'|'D' }
+
+    const isLockedToReview = assessmentSaved;
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -203,6 +209,13 @@ export default function StudentAssessmentQuiz() {
                 if (assessment) {
                     setPart1Selected(Array.isArray(assessment.part1_selected) ? assessment.part1_selected : []);
                     setPart2Answers(assessment.part2_answers && typeof assessment.part2_answers === "object" ? assessment.part2_answers : {});
+
+                    const hasSavedRecommendation = Array.isArray(assessment.recommended_top3) && assessment.recommended_top3.length > 0;
+                    setAssessmentSaved(hasSavedRecommendation);
+
+                    if (hasSavedRecommendation) {
+                        setStep(reviewStepIndex);
+                    }
                 }
             } catch (e) {
                 // If endpoint isn't ready yet, don't hard-fail; the page can still be used.
@@ -212,9 +225,8 @@ export default function StudentAssessmentQuiz() {
         };
 
         fetchAssessment();
-    }, [navigate, token]);
+    }, [navigate, reviewStepIndex, token]);
 
-    const stepsTotal = 1 + PART2_QUESTIONS.length + 1;
     const currentLabel = useMemo(() => {
         if (step === 0) return "Part I – Personal Interest & Skills";
         if (step >= 1 && step <= PART2_QUESTIONS.length) {
@@ -222,6 +234,13 @@ export default function StudentAssessmentQuiz() {
         }
         return "Review";
     }, [step]);
+
+    useEffect(() => {
+        // If the assessment is already saved, keep the user on Review until they retake.
+        if (assessmentSaved && step !== reviewStepIndex) {
+            setStep(reviewStepIndex);
+        }
+    }, [assessmentSaved, reviewStepIndex, step]);
 
     const progress = useMemo(() => {
         const pct = Math.round(((step + 1) / stepsTotal) * 100);
@@ -269,6 +288,8 @@ export default function StudentAssessmentQuiz() {
             });
 
             setSuccess("Saved! Your assessment is complete.");
+            setAssessmentSaved(true);
+            setStep(reviewStepIndex);
             // Also store computed results so recommendation page can use it instantly.
             localStorage.setItem(
                 "assessmentResult",
@@ -282,10 +303,76 @@ export default function StudentAssessmentQuiz() {
         }
     };
 
+    const handleRetakeQuiz = () => {
+        const confirmed = window.confirm("This will clear your current quiz answers on this page. Continue?");
+        if (!confirmed) return;
+
+        setPart1Selected([]);
+        setPart2Answers({});
+        setAssessmentSaved(false);
+        setSuccess(null);
+        setError(null);
+        setStep(0);
+
+        try {
+            localStorage.removeItem("assessmentResult");
+        } catch {
+            // ignore
+        }
+    };
+
     const gotoPrev = () => setStep((s) => Math.max(0, s - 1));
     const gotoNext = () => setStep((s) => Math.min(stepsTotal - 1, s + 1));
 
+    const safeGotoPrev = () => {
+        if (isLockedToReview) return;
+        gotoPrev();
+    };
+
+    const safeGotoNext = () => {
+        if (isLockedToReview) return;
+        gotoNext();
+    };
+
+    const renderReview = () => {
+        return (
+            <>
+                <div className="aq-review">
+                    <div className="aq-review-title">Your top matches (based on your answers)</div>
+                    <div className="aq-top3">
+                        {top3.map((t) => (
+                            <div key={t.category} className="aq-top-card">
+                                <div className="aq-top-rank">#{t.rank}</div>
+                                <div className="aq-top-name">{t.category}</div>
+                                <div className="aq-top-score">Score: {t.score}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="aq-muted">
+                        Tip: Click “Save Assessment” then proceed to Course Recommendation.
+                    </div>
+
+                    <div className="aq-actions" style={{ marginTop: 12 }}>
+                        <button
+                            type="button"
+                            className="aq-secondary"
+                            onClick={handleRetakeQuiz}
+                            disabled={saving}
+                        >
+                            Retake Quiz
+                        </button>
+                    </div>
+                </div>
+            </>
+        );
+    };
+
     const renderBody = () => {
+        if (isLockedToReview && step !== reviewStepIndex) {
+            return renderReview();
+        }
+
         if (step === 0) {
             return (
                 <>
@@ -346,26 +433,7 @@ export default function StudentAssessmentQuiz() {
             );
         }
 
-        return (
-            <>
-                <div className="aq-review">
-                    <div className="aq-review-title">Your top matches (based on your answers)</div>
-                    <div className="aq-top3">
-                        {top3.map((t) => (
-                            <div key={t.category} className="aq-top-card">
-                                <div className="aq-top-rank">#{t.rank}</div>
-                                <div className="aq-top-name">{t.category}</div>
-                                <div className="aq-top-score">Score: {t.score}</div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="aq-muted">
-                        Tip: Click “Save Assessment” then proceed to Course Recommendation.
-                    </div>
-                </div>
-            </>
-        );
+        return renderReview();
     };
 
     return (
@@ -403,8 +471,8 @@ export default function StudentAssessmentQuiz() {
                                 <button
                                     type="button"
                                     className="aq-secondary"
-                                    onClick={gotoPrev}
-                                    disabled={step === 0 || saving}
+                                    onClick={safeGotoPrev}
+                                    disabled={step === 0 || saving || isLockedToReview}
                                 >
                                     ← Previous
                                 </button>
@@ -424,7 +492,8 @@ export default function StudentAssessmentQuiz() {
                                                 type="button"
                                                 className="aq-primary"
                                                 onClick={() => navigate("/student/course-recommendation")}
-                                                disabled={saving}
+                                                disabled={saving || !assessmentSaved}
+                                                title={!assessmentSaved ? "Save Assessment first to continue" : "Proceed to Course Recommendation"}
                                             >
                                                 Next →
                                             </button>
@@ -433,8 +502,8 @@ export default function StudentAssessmentQuiz() {
                                         <button
                                             type="button"
                                             className="aq-primary"
-                                            onClick={gotoNext}
-                                            disabled={!canGoNext || saving}
+                                            onClick={safeGotoNext}
+                                            disabled={!canGoNext || saving || isLockedToReview}
                                         >
                                             Next →
                                         </button>

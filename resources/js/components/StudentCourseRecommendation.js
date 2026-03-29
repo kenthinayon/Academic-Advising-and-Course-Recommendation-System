@@ -16,6 +16,43 @@ function formatFileName(path) {
     return parts[parts.length - 1] || path;
 }
 
+function hasBasicInfo(user, profile) {
+    return Boolean(
+        String(user?.name || "").trim() &&
+            String(user?.email || "").trim() &&
+            profile?.age != null &&
+            String(profile?.gender || "").trim() &&
+            String(profile?.high_school || "").trim() &&
+            String(profile?.contact_number || "").trim()
+    );
+}
+
+function hasAcademicCredentials(profile) {
+    const subjectGrades = Array.isArray(profile?.subject_grades) ? profile.subject_grades : [];
+    const hasAtLeastOneSubject = subjectGrades.some(
+        (r) => String(r?.subject || "").trim() && r?.grade != null && r?.grade !== ""
+    );
+
+    const hasSkills = Array.isArray(profile?.skills) ? profile.skills.filter(Boolean).length > 0 : false;
+    const ratings = profile?.program_interest_ratings;
+    const hasRatings = ratings && typeof ratings === "object" && Object.keys(ratings).length > 0;
+
+    return Boolean(
+        String(profile?.shs_strand || "").trim() &&
+            profile?.shs_general_average != null &&
+            String(profile?.career_goals || "").trim() &&
+            hasAtLeastOneSubject &&
+            hasSkills &&
+            hasRatings
+    );
+}
+
+function hasAssessmentCompleted(profile, assessment) {
+    const profileCompleted = Array.isArray(profile?.assessment_part1_selected) && profile.assessment_part1_selected.length > 0;
+    const assessmentCompleted = Array.isArray(assessment?.recommended_top3) && assessment.recommended_top3.length > 0;
+    return Boolean(profileCompleted || assessmentCompleted);
+}
+
 export default function StudentCourseRecommendation() {
     const navigate = useNavigate();
     const token = useMemo(() => localStorage.getItem("authToken"), []);
@@ -26,6 +63,7 @@ export default function StudentCourseRecommendation() {
     const [user, setUser] = useState(null);
     const [profile, setProfile] = useState(null);
     const [assessment, setAssessment] = useState(null);
+    const [locked, setLocked] = useState(false);
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -38,24 +76,41 @@ export default function StudentCourseRecommendation() {
         const fetchAll = async () => {
             setLoading(true);
             setError(null);
+            setLocked(false);
             try {
                 const res = await axios.get("/api/profile", {
                     headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
                     withCredentials: true,
                 });
-                setProfile(res.data?.profile || null);
+                const serverUser = res.data?.user || safeParse(storedUser) || null;
+                const serverProfile = res.data?.profile || null;
+
+                setUser(serverUser);
+                setProfile(serverProfile);
 
                 // Try server-side assessment if available
+                let assessmentData = null;
                 try {
                     const a = await axios.get("/api/assessment", {
                         headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
                         withCredentials: true,
                     });
-                    setAssessment(a.data?.assessment || null);
+                    assessmentData = a.data?.assessment || null;
+                    setAssessment(assessmentData);
                 } catch {
                     // fallback to localStorage
                     const local = safeParse(localStorage.getItem("assessmentResult") || "");
-                    setAssessment(local || null);
+                    assessmentData = local || null;
+                    setAssessment(assessmentData);
+                }
+
+                const unlocked =
+                    hasBasicInfo(serverUser, serverProfile) &&
+                    hasAcademicCredentials(serverProfile) &&
+                    hasAssessmentCompleted(serverProfile, assessmentData);
+
+                if (!unlocked) {
+                    setLocked(true);
                 }
             } catch (e) {
                 setError(e?.response?.data?.message || "Failed to load your data.");
@@ -104,6 +159,17 @@ export default function StudentCourseRecommendation() {
         return arr.map((p) => ({ path: p, url: `/storage/${p}`, name: formatFileName(p) }));
     }, [profile]);
 
+    const advisorStatus = useMemo(() => {
+        const raw = String(profile?.advisor_status || "pending").toLowerCase();
+        if (!profile) return "pending";
+        return raw;
+    }, [profile]);
+
+    const advisorComment = useMemo(() => {
+        const txt = String(profile?.advisor_comment || "").trim();
+        return txt || null;
+    }, [profile]);
+
     return (
         <div className="assessment-quiz">
             <header className="aq-topbar">
@@ -121,6 +187,26 @@ export default function StudentCourseRecommendation() {
                         <>
                             {error ? <div className="aq-alert aq-alert--error">{error}</div> : null}
 
+                            {locked ? (
+                                <>
+                                    <div className="aq-alert aq-alert--error">
+                                        Course Recommendation is locked. Complete Basic Information, Academic Credentials, and Assessment Quiz first.
+                                    </div>
+                                    <div className="cr-actions">
+                                        <button
+                                            type="button"
+                                            className="aq-primary"
+                                            onClick={() => navigate("/student")}
+                                        >
+                                            Go to Dashboard
+                                        </button>
+                                    </div>
+                                </>
+                            ) : null}
+
+                            {!locked ? (
+                                <>
+
                             <div className="aq-head">
                                 <div>
                                     <div className="aq-title">Course Recommendation</div>
@@ -129,6 +215,24 @@ export default function StudentCourseRecommendation() {
                                     </div>
                                 </div>
                             </div>
+
+                            {(advisorStatus === "approved" || advisorStatus === "rejected" || advisorStatus === "interview") && (
+                                <div className="cr-section" style={{ marginTop: 16 }}>
+                                    <div className="cr-section-title">Advisor Feedback</div>
+                                    <div className="cr-par">
+                                        <strong>Status:</strong> {advisorStatus.charAt(0).toUpperCase() + advisorStatus.slice(1)}
+                                    </div>
+                                    {advisorComment ? (
+                                        <div className="cr-par" style={{ marginTop: 4, whiteSpace: "pre-wrap" }}>
+                                            {advisorComment}
+                                        </div>
+                                    ) : (
+                                        <div className="cr-par" style={{ marginTop: 4 }}>
+                                            No comments from your advisor yet.
+                                        </div>
+                                    )}
+                                </div>
+                            )}
 
                             <div className="cr-grid">
                                 <div className="cr-panel">
@@ -270,6 +374,8 @@ export default function StudentCourseRecommendation() {
                                     </div>
                                 </div>
                             </div>
+                            </>
+                            ) : null}
                         </>
                     )}
                 </section>

@@ -80626,9 +80626,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-B7RQU5TL.mjs");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ui_toast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui/toast */ "./resources/js/components/ui/toast.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
@@ -80641,6 +80648,14 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
+function initials(nameOrEmail) {
+  var s = String(nameOrEmail || "").trim();
+  if (!s) return "A";
+  var parts = s.split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
 var DEPARTMENTS = [{
   name: "College of Accountancy",
   programs: [{
@@ -80778,6 +80793,10 @@ function statusPill(status) {
     label: "Rejected",
     cls: "am-pill am-pill--bad"
   };
+  if (s === "interview") return {
+    label: "Interview",
+    cls: "am-pill"
+  };
   return {
     label: "Pending",
     cls: "am-pill"
@@ -80792,58 +80811,406 @@ function AdminDashboard() {
   var role = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return localStorage.getItem("userRole");
   }, []);
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("overview"),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
-    activeTab = _useState2[0],
-    setActiveTab = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    user = _useState2[0],
+    setUser = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    loading = _useState4[0],
-    setLoading = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    menuOpen = _useState4[0],
+    setMenuOpen = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    error = _useState6[0],
-    setError = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    editOpen = _useState6[0],
+    setEditOpen = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    accountOpen = _useState8[0],
+    setAccountOpen = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    saving = _useState0[0],
+    setSaving = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    avatarFile = _useState10[0],
+    setAvatarFile = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState12 = _slicedToArray(_useState11, 2),
+    avatarPreview = _useState12[0],
+    setAvatarPreview = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    avatarSaving = _useState14[0],
+    setAvatarSaving = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      name: "",
+      email: ""
+    }),
+    _useState16 = _slicedToArray(_useState15, 2),
+    editForm = _useState16[0],
+    setEditForm = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      current_password: "",
+      password: "",
+      password_confirmation: ""
+    }),
+    _useState18 = _slicedToArray(_useState17, 2),
+    pwForm = _useState18[0],
+    setPwForm = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    pwSaving = _useState20[0],
+    setPwSaving = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+      try {
+        return localStorage.getItem("theme") === "dark";
+      } catch (_unused) {
+        return false;
+      }
+    }),
+    _useState22 = _slicedToArray(_useState21, 2),
+    darkMode = _useState22[0],
+    setDarkMode = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    schoolCalOpen = _useState24[0],
+    setSchoolCalOpen = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("overview"),
+    _useState26 = _slicedToArray(_useState25, 2),
+    activeTab = _useState26[0],
+    setActiveTab = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState28 = _slicedToArray(_useState27, 2),
+    loading = _useState28[0],
+    setLoading = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState30 = _slicedToArray(_useState29, 2),
+    error = _useState30[0],
+    setError = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       totalStudents: 0,
       completedAssessments: 0,
       pendingReview: 0,
       averageGpa: 0.0
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    stats = _useState8[0],
-    setStats = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    _useState32 = _slicedToArray(_useState31, 2),
+    stats = _useState32[0],
+    setStats = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       completionRate: 0,
       approvalRate: 0,
       pendingReviews: 0,
       topRecommendedPrograms: []
     }),
-    _useState0 = _slicedToArray(_useState9, 2),
-    analytics = _useState0[0],
-    setAnalytics = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-    _useState10 = _slicedToArray(_useState1, 2),
-    studentQ = _useState10[0],
-    setStudentQ = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
-    _useState12 = _slicedToArray(_useState11, 2),
-    studentFilter = _useState12[0],
-    setStudentFilter = _useState12[1]; // all | pending | approved | rejected
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState14 = _slicedToArray(_useState13, 2),
-    studentsLoading = _useState14[0],
-    setStudentsLoading = _useState14[1];
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState16 = _slicedToArray(_useState15, 2),
-    students = _useState16[0],
-    setStudents = _useState16[1];
+    _useState34 = _slicedToArray(_useState33, 2),
+    analytics = _useState34[0],
+    setAnalytics = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState36 = _slicedToArray(_useState35, 2),
+    studentQ = _useState36[0],
+    setStudentQ = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
+    _useState38 = _slicedToArray(_useState37, 2),
+    studentFilter = _useState38[0],
+    setStudentFilter = _useState38[1]; // all | pending | interview | approved | rejected
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState40 = _slicedToArray(_useState39, 2),
+    studentsLoading = _useState40[0],
+    setStudentsLoading = _useState40[1];
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState42 = _slicedToArray(_useState41, 2),
+    students = _useState42[0],
+    setStudents = _useState42[1];
   var headers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return {
       Authorization: "Bearer ".concat(token),
       Accept: "application/json"
     };
   }, [token]);
+  var handleLogout = function handleLogout() {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userRole");
+    navigate("/login");
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    try {
+      var raw = localStorage.getItem("user");
+      setUser(raw ? JSON.parse(raw) : null);
+    } catch (_unused2) {
+      setUser(null);
+    }
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    try {
+      document.body.dataset.theme = darkMode ? "dark" : "light";
+      localStorage.setItem("theme", darkMode ? "dark" : "light");
+    } catch (_unused3) {
+      // ignore
+    }
+  }, [darkMode]);
+  var refreshMe = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var _me$data, me, serverUser, avatarUrl, cacheBusted, nextUser, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            if (token) {
+              _context.n = 1;
+              break;
+            }
+            return _context.a(2);
+          case 1:
+            _context.p = 1;
+            _context.n = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
+              headers: headers,
+              withCredentials: true
+            });
+          case 2:
+            me = _context.v;
+            serverUser = ((_me$data = me.data) === null || _me$data === void 0 ? void 0 : _me$data.user) || null;
+            avatarUrl = serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url;
+            cacheBusted = avatarUrl ? "".concat(avatarUrl).concat(avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now()) : null;
+            nextUser = serverUser ? _objectSpread(_objectSpread({}, serverUser), {}, {
+              avatar_url: cacheBusted || avatarUrl
+            }) : null;
+            if (nextUser) {
+              setUser(nextUser);
+              try {
+                localStorage.setItem("user", JSON.stringify(nextUser));
+              } catch (_unused4) {
+                // ignore
+              }
+            }
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+          case 4:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3]]);
+    }));
+    return function refreshMe() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  var openEdit = function openEdit() {
+    setMenuOpen(false);
+    setEditForm({
+      name: (user === null || user === void 0 ? void 0 : user.name) || "",
+      email: (user === null || user === void 0 ? void 0 : user.email) || ""
+    });
+    setAvatarFile(null);
+    setAvatarPreview("");
+    setEditOpen(true);
+  };
+  var openAccount = function openAccount() {
+    setMenuOpen(false);
+    setPwForm({
+      current_password: "",
+      password: "",
+      password_confirmation: ""
+    });
+    setAccountOpen(true);
+  };
+  var onPickAvatar = function onPickAvatar(file) {
+    setAvatarFile(file || null);
+    if (!file) {
+      setAvatarPreview("");
+      return;
+    }
+    try {
+      var url = URL.createObjectURL(file);
+      setAvatarPreview(url);
+    } catch (_unused6) {
+      setAvatarPreview("");
+    }
+  };
+  var saveAvatar = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var form, _e$response, msg, _t2;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.p = _context2.n) {
+          case 0:
+            if (token) {
+              _context2.n = 1;
+              break;
+            }
+            return _context2.a(2);
+          case 1:
+            if (avatarFile) {
+              _context2.n = 2;
+              break;
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.info("Please choose an image first.");
+            return _context2.a(2);
+          case 2:
+            _context2.p = 2;
+            setAvatarSaving(true);
+            form = new FormData();
+            form.append("avatar", avatarFile);
+            _context2.n = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/profile/avatar", form, {
+              headers: _objectSpread(_objectSpread({}, headers), {}, {
+                "Content-Type": "multipart/form-data"
+              }),
+              withCredentials: true
+            });
+          case 3:
+            _context2.n = 4;
+            return refreshMe();
+          case 4:
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success("Profile photo updated.");
+            setAvatarFile(null);
+            setAvatarPreview("");
+            _context2.n = 6;
+            break;
+          case 5:
+            _context2.p = 5;
+            _t2 = _context2.v;
+            msg = (_t2 === null || _t2 === void 0 || (_e$response = _t2.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Couldn’t update photo.";
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
+          case 6:
+            _context2.p = 6;
+            setAvatarSaving(false);
+            return _context2.f(6);
+          case 7:
+            return _context2.a(2);
+        }
+      }, _callee2, null, [[2, 5, 6, 7]]);
+    }));
+    return function saveAvatar() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var saveProfile = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var payload, _res$data, _res$data2, res, nextUser, _e$response2, msg, _t3;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.p = _context3.n) {
+          case 0:
+            if (token) {
+              _context3.n = 1;
+              break;
+            }
+            return _context3.a(2);
+          case 1:
+            payload = {
+              name: String(editForm.name || "").trim(),
+              email: String(editForm.email || "").trim()
+            };
+            _context3.p = 2;
+            setSaving(true);
+            _context3.n = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/account/profile", payload, {
+              headers: headers,
+              withCredentials: true
+            });
+          case 3:
+            res = _context3.v;
+            nextUser = ((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.user) || user;
+            if (nextUser) {
+              setUser(nextUser);
+              try {
+                localStorage.setItem("user", JSON.stringify(nextUser));
+              } catch (_unused7) {
+                // ignore
+              }
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.message) || "Profile updated.");
+            setEditOpen(false);
+            _context3.n = 5;
+            break;
+          case 4:
+            _context3.p = 4;
+            _t3 = _context3.v;
+            msg = (_t3 === null || _t3 === void 0 || (_e$response2 = _t3.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Couldn’t save profile.";
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
+          case 5:
+            _context3.p = 5;
+            setSaving(false);
+            return _context3.f(5);
+          case 6:
+            return _context3.a(2);
+        }
+      }, _callee3, null, [[2, 4, 5, 6]]);
+    }));
+    return function saveProfile() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  var changePassword = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var _res$data3, res, _e$response3, msg, _t4;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
+          case 0:
+            if (token) {
+              _context4.n = 1;
+              break;
+            }
+            return _context4.a(2);
+          case 1:
+            if (pwForm.current_password) {
+              _context4.n = 2;
+              break;
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Please enter your current password.");
+            return _context4.a(2);
+          case 2:
+            if (!((pwForm.password || "").length < 8)) {
+              _context4.n = 3;
+              break;
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("New password must be at least 8 characters.");
+            return _context4.a(2);
+          case 3:
+            if (!(pwForm.password !== pwForm.password_confirmation)) {
+              _context4.n = 4;
+              break;
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("New password confirmation does not match.");
+            return _context4.a(2);
+          case 4:
+            _context4.p = 4;
+            setPwSaving(true);
+            _context4.n = 5;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/account/password", {
+              current_password: pwForm.current_password,
+              password: pwForm.password,
+              password_confirmation: pwForm.password_confirmation
+            }, {
+              headers: headers,
+              withCredentials: true
+            });
+          case 5:
+            res = _context4.v;
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.message) || "Password updated.");
+            setAccountOpen(false);
+            _context4.n = 7;
+            break;
+          case 6:
+            _context4.p = 6;
+            _t4 = _context4.v;
+            msg = (_t4 === null || _t4 === void 0 || (_e$response3 = _t4.response) === null || _e$response3 === void 0 || (_e$response3 = _e$response3.data) === null || _e$response3 === void 0 ? void 0 : _e$response3.message) || "Couldn’t change password.";
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
+          case 7:
+            _context4.p = 7;
+            setPwSaving(false);
+            return _context4.f(7);
+          case 8:
+            return _context4.a(2);
+        }
+      }, _callee4, null, [[4, 6, 7, 8]]);
+    }));
+    return function changePassword() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!token) {
       navigate("/login");
@@ -80855,15 +81222,15 @@ function AdminDashboard() {
     }
   }, [navigate, role, token]);
   var load = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-      var _yield$Promise$all, _yield$Promise$all2, s1, s2, _e$response, _t;
-      return _regenerator().w(function (_context) {
-        while (1) switch (_context.p = _context.n) {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+      var _yield$Promise$all, _yield$Promise$all2, s1, s2, _e$response4, _t5;
+      return _regenerator().w(function (_context5) {
+        while (1) switch (_context5.p = _context5.n) {
           case 0:
             setLoading(true);
             setError(null);
-            _context.p = 1;
-            _context.n = 2;
+            _context5.p = 1;
+            _context5.n = 2;
             return Promise.all([axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/admin/stats", {
               headers: headers,
               withCredentials: true
@@ -80872,77 +81239,166 @@ function AdminDashboard() {
               withCredentials: true
             })]);
           case 2:
-            _yield$Promise$all = _context.v;
+            _yield$Promise$all = _context5.v;
             _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
             s1 = _yield$Promise$all2[0];
             s2 = _yield$Promise$all2[1];
             setStats(s1.data || stats);
             setAnalytics(s2.data || analytics);
-            _context.n = 4;
+            _context5.n = 4;
             break;
           case 3:
-            _context.p = 3;
-            _t = _context.v;
-            setError((_t === null || _t === void 0 || (_e$response = _t.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Failed to load admin dashboard.");
+            _context5.p = 3;
+            _t5 = _context5.v;
+            setError((_t5 === null || _t5 === void 0 || (_e$response4 = _t5.response) === null || _e$response4 === void 0 || (_e$response4 = _e$response4.data) === null || _e$response4 === void 0 ? void 0 : _e$response4.message) || "Failed to load admin dashboard.");
           case 4:
-            _context.p = 4;
+            _context5.p = 4;
             setLoading(false);
-            return _context.f(4);
+            return _context5.f(4);
           case 5:
-            return _context.a(2);
+            return _context5.a(2);
         }
-      }, _callee, null, [[1, 3, 4, 5]]);
+      }, _callee5, null, [[1, 3, 4, 5]]);
     }));
     return function load() {
-      return _ref.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }();
   var loadStudents = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
       var search,
-        _res$data,
+        _ref7,
+        showLoading,
+        _res$data4,
         res,
-        _e$response2,
-        _args2 = arguments,
-        _t2;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
+        _e$response5,
+        _args6 = arguments,
+        _t6;
+      return _regenerator().w(function (_context6) {
+        while (1) switch (_context6.p = _context6.n) {
           case 0:
-            search = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : "";
-            setStudentsLoading(true);
-            setError(null);
-            _context2.p = 1;
-            _context2.n = 2;
+            search = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : "";
+            _ref7 = _args6.length > 1 && _args6[1] !== undefined ? _args6[1] : {
+              showLoading: true
+            }, showLoading = _ref7.showLoading;
+            if (showLoading) setStudentsLoading(true);
+            if (showLoading) setError(null);
+            _context6.p = 1;
+            _context6.n = 2;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/advisor/students?q=".concat(encodeURIComponent(search)), {
               headers: headers,
               withCredentials: true
             });
           case 2:
-            res = _context2.v;
-            setStudents(((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.students) || []);
-            _context2.n = 4;
+            res = _context6.v;
+            setStudents(((_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.students) || []);
+            _context6.n = 4;
             break;
           case 3:
-            _context2.p = 3;
-            _t2 = _context2.v;
-            setError((_t2 === null || _t2 === void 0 || (_e$response2 = _t2.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Failed to load students.");
+            _context6.p = 3;
+            _t6 = _context6.v;
+            if (showLoading) setError((_t6 === null || _t6 === void 0 || (_e$response5 = _t6.response) === null || _e$response5 === void 0 || (_e$response5 = _e$response5.data) === null || _e$response5 === void 0 ? void 0 : _e$response5.message) || "Failed to load students.");
           case 4:
-            _context2.p = 4;
-            setStudentsLoading(false);
-            return _context2.f(4);
+            _context6.p = 4;
+            if (showLoading) setStudentsLoading(false);
+            return _context6.f(4);
           case 5:
-            return _context2.a(2);
+            return _context6.a(2);
         }
-      }, _callee2, null, [[1, 3, 4, 5]]);
+      }, _callee6, null, [[1, 3, 4, 5]]);
     }));
     return function loadStudents() {
-      return _ref2.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Students tab: auto-fetch so admin doesn't need to click Refresh.
+  var studentQRef = react__WEBPACK_IMPORTED_MODULE_0___default().useRef("");
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    studentQRef.current = studentQ;
+  }, [studentQ]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (activeTab !== "students") return;
+    var stopped = false;
+    var tick = /*#__PURE__*/function () {
+      var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+        var _ref9,
+          showLoading,
+          _args7 = arguments;
+        return _regenerator().w(function (_context7) {
+          while (1) switch (_context7.n) {
+            case 0:
+              _ref9 = _args7.length > 0 && _args7[0] !== undefined ? _args7[0] : {
+                showLoading: false
+              }, showLoading = _ref9.showLoading;
+              if (!stopped) {
+                _context7.n = 1;
+                break;
+              }
+              return _context7.a(2);
+            case 1:
+              if (!(typeof document !== "undefined" && document.hidden)) {
+                _context7.n = 2;
+                break;
+              }
+              return _context7.a(2);
+            case 2:
+              _context7.n = 3;
+              return loadStudents(studentQRef.current, {
+                showLoading: showLoading
+              });
+            case 3:
+              return _context7.a(2);
+          }
+        }, _callee7);
+      }));
+      return function tick() {
+        return _ref8.apply(this, arguments);
+      };
+    }();
+
+    // Initial load for the tab.
+    tick({
+      showLoading: true
+    });
+
+    // Poll periodically.
+    var id = setInterval(function () {
+      return tick({
+        showLoading: false
+      });
+    }, 30000);
+    var onVis = function onVis() {
+      if (!document.hidden) tick({
+        showLoading: false
+      });
+    };
+    document.addEventListener("visibilitychange", onVis);
+    return function () {
+      stopped = true;
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", onVis);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
+
+  // Auto-search as you type (debounced).
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (activeTab !== "students") return;
+    var t = setTimeout(function () {
+      loadStudents(studentQ, {
+        showLoading: false
+      });
+    }, 250);
+    return function () {
+      return clearTimeout(t);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [studentQ, activeTab]);
   var filteredStudents = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var f = (studentFilter || "all").toLowerCase();
     if (f === "all") return students;
@@ -80950,119 +81406,182 @@ function AdminDashboard() {
       return (s.advisor_status || "pending").toLowerCase() === f;
     });
   }, [studentFilter, students]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "admin",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("header", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("header", {
       className: "am-topbar",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "am-brand",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
           className: "am-logo",
           src: "/images/logo.png",
           alt: "URIOS-ADVise"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-name",
             children: "URIOS-ADVise"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-sub",
             children: "Administrator Dashboard"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-        type: "button",
-        className: "am-logout",
-        onClick: function onClick() {
-          localStorage.removeItem("authToken");
-          localStorage.removeItem("user");
-          localStorage.removeItem("userRole");
-          navigate("/login");
-        },
-        children: "Logout"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "am-actions",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+          className: "sp-iconbtn",
+          type: "button",
+          title: "School Calendar",
+          "aria-label": "Open school calendar",
+          onClick: function onClick() {
+            return setSchoolCalOpen(true);
+          },
+          children: "\uD83D\uDCC5"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sp-profile",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-avatarbtn",
+            onClick: function onClick() {
+              return setMenuOpen(function (v) {
+                return !v;
+              });
+            },
+            "aria-haspopup": "menu",
+            "aria-expanded": menuOpen,
+            children: user !== null && user !== void 0 && user.avatar_url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+              className: "sp-avatar-img",
+              src: user.avatar_url,
+              alt: "Profile avatar"
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+              className: "sp-avatar",
+              "aria-hidden": "true",
+              children: initials((user === null || user === void 0 ? void 0 : user.name) || (user === null || user === void 0 ? void 0 : user.email))
+            })
+          }), menuOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "sp-menu",
+            role: "menu",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "sp-menu-head",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "sp-menu-name",
+                children: (user === null || user === void 0 ? void 0 : user.name) || "Administrator"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "sp-menu-email",
+                children: (user === null || user === void 0 ? void 0 : user.email) || ""
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "sp-role",
+                children: String((user === null || user === void 0 ? void 0 : user.role) || role || "admin").toLowerCase().replace(/^./, function (c) {
+                  return c.toUpperCase();
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              type: "button",
+              className: "sp-menu-item",
+              onClick: openEdit,
+              children: "Profile Settings"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              type: "button",
+              className: "sp-menu-item",
+              onClick: openAccount,
+              children: "Account Settings"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "sp-menu-sep"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              type: "button",
+              className: "sp-menu-item sp-menu-item--danger",
+              onClick: handleLogout,
+              children: "Logout"
+            })]
+          }) : null]
+        })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("main", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("main", {
       className: "am-main",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "am-hero",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
           children: "Welcome, System Administrator!"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           children: "System overview and analytics"
         })]
-      }), error ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), error ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "am-alert am-alert--error",
         children: error
-      }) : null, loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }) : null, loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "am-muted",
         children: "Loading\u2026"
-      }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "am-stats",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "am-stat-meta",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-stat-label",
               children: "Total Students"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-stat-icon am-stat-icon--blue",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              children: "\uD83D\uDC65"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-stat-value",
             children: stats.totalStudents
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "am-stat-meta",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-stat-label",
               children: "Completed Assessments"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-stat-icon am-stat-icon--green",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              children: "\uD83E\uDDFE"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-stat-value am-stat-value--green",
             children: stats.completedAssessments
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "am-stat-meta",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-stat-label",
               children: "Pending Review"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-stat-icon am-stat-icon--orange",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              children: "\u23F3"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-stat-value am-stat-value--orange",
             children: stats.pendingReview
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "am-stat-meta",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-stat-label",
               children: "Average GPA"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-stat-icon am-stat-icon--purple",
-              "aria-hidden": "true"
+              "aria-hidden": "true",
+              children: "\uD83D\uDCC8"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-stat-value am-stat-value--purple",
             children: stats.averageGpa
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "am-tabs",
         role: "tablist",
         "aria-label": "Admin tabs",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           type: "button",
           className: activeTab === "overview" ? "am-tab am-tab--active" : "am-tab",
           onClick: function onClick() {
@@ -81071,7 +81590,7 @@ function AdminDashboard() {
           role: "tab",
           "aria-selected": activeTab === "overview",
           children: "Overview"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           type: "button",
           className: activeTab === "students" ? "am-tab am-tab--active" : "am-tab",
           onClick: function onClick() {
@@ -81080,7 +81599,7 @@ function AdminDashboard() {
           role: "tab",
           "aria-selected": activeTab === "students",
           children: "Students"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           type: "button",
           className: activeTab === "analytics" ? "am-tab am-tab--active" : "am-tab",
           onClick: function onClick() {
@@ -81090,52 +81609,52 @@ function AdminDashboard() {
           "aria-selected": activeTab === "analytics",
           children: "Analytics"
         })]
-      }), activeTab === "overview" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+      }), activeTab === "overview" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("section", {
         className: "am-panel",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "am-panel-head",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
             children: "Department Summary"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "am-depts",
           children: DEPARTMENTS.map(function (d) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("details", {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("details", {
               className: "am-dept",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("summary", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("summary", {
                 className: "am-dept-summary",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   className: "am-dept-left",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "am-dept-icon",
                     "aria-hidden": "true"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "am-dept-name",
                     children: d.name
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   className: "am-dept-right",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
                     className: "am-badge",
                     children: [d.programs.length, " Programs"]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                     className: "am-chevron",
                     "aria-hidden": "true"
                   })]
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "am-dept-body",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
                   className: "am-prog-list",
                   children: d.programs.map(function (p) {
-                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
                       className: "am-prog",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                         className: "am-prog-title",
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
                           children: p.code
                         }), " \u2014 ", p.name]
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                         className: "am-prog-desc",
                         children: p.description
                       })]
@@ -81146,21 +81665,21 @@ function AdminDashboard() {
             }, d.name);
           })
         })]
-      }) : null, activeTab === "students" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+      }) : null, activeTab === "students" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("section", {
         className: "am-panel",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-panel-head",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
             children: "Students"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-muted",
             children: "View and filter students by review status"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-student-tools",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "am-search",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
               value: studentQ,
               placeholder: "Search students (name/email)\u2026",
               onChange: function onChange(e) {
@@ -81169,7 +81688,7 @@ function AdminDashboard() {
               onKeyDown: function onKeyDown(e) {
                 if (e.key === "Enter") loadStudents(studentQ);
               }
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
               type: "button",
               className: "am-btn",
               onClick: function onClick() {
@@ -81177,85 +81696,83 @@ function AdminDashboard() {
               },
               children: "Search"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-filters",
-            role: "tablist",
-            "aria-label": "Student filters",
-            children: [{
-              key: "all",
-              label: "All"
-            }, {
-              key: "pending",
-              label: "Pending"
-            }, {
-              key: "approved",
-              label: "Approved"
-            }, {
-              key: "rejected",
-              label: "Rejected"
-            }].map(function (x) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                type: "button",
-                className: studentFilter === x.key ? "am-filter am-filter--active" : "am-filter",
-                onClick: function onClick() {
-                  return setStudentFilter(x.key);
+            "aria-label": "Student status filter",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "am-filterbox",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "am-filterbox-label",
+                children: "Status"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
+                className: "am-filterbox-select",
+                value: studentFilter,
+                onChange: function onChange(e) {
+                  return setStudentFilter(e.target.value);
                 },
-                role: "tab",
-                "aria-selected": studentFilter === x.key,
-                children: x.label
-              }, x.key);
+                "aria-label": "Filter students by status",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+                  value: "all",
+                  children: "All"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+                  value: "pending",
+                  children: "Pending"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+                  value: "interview",
+                  children: "Interview"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+                  value: "approved",
+                  children: "Approved"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+                  value: "rejected",
+                  children: "Rejected"
+                })]
+              })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-            type: "button",
-            className: "am-btn am-btn--ghost",
-            onClick: function onClick() {
-              return loadStudents(studentQ);
-            },
-            children: "Refresh"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-student-head",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-muted",
             children: "All Students"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-muted",
             children: "Complete list of registered students"
           })]
-        }), studentsLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), studentsLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "am-muted",
           children: "Loading\u2026"
-        }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-student-list",
           children: [filteredStudents.map(function (s) {
             var pill = statusPill(s.advisor_status);
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "am-student-row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "am-student-main",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   className: "am-student-name",
                   children: s.name
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   className: "am-student-email",
                   children: s.email
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   className: "am-student-meta",
                   children: [s.strand ? "".concat(s.strand, " \u2022 ") : "", s.gwa ? "GPA: ".concat(s.gwa) : "GPA: —"]
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: pill.cls,
                 children: pill.label
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "am-student-actions",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                   type: "button",
                   className: "am-btn am-btn--ghost",
                   onClick: function onClick() {
                     return navigate("/admin/students/".concat(s.id));
                   },
                   children: "View"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                   type: "button",
                   className: "am-btn",
                   onClick: function onClick() {
@@ -81265,83 +81782,398 @@ function AdminDashboard() {
                 })]
               })]
             }, s.id);
-          }), !studentsLoading && !filteredStudents.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), !studentsLoading && !filteredStudents.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-muted",
             children: "No students registered yet"
           }) : null]
         })]
-      }) : null, activeTab === "analytics" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+      }) : null, activeTab === "analytics" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("section", {
         className: "am-grid",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-panel",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-panel-head",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
               children: "System Metrics"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "am-metrics",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "am-metric",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "am-metric-label",
                 children: "Completion Rate"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "am-metric-value",
                 children: pct(analytics.completionRate)
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-divider"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "am-metric",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "am-metric-label",
                 children: "Approval Rate"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "am-metric-value",
                 children: pct(analytics.approvalRate)
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "am-divider"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "am-metric",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "am-metric-label",
                 children: "Pending Reviews"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "am-metric-value",
                 children: analytics.pendingReviews
               })]
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "am-panel",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-panel-head",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
               children: "Top Recommended Programs"
             })
-          }), (_analytics$topRecomme = analytics.topRecommendedPrograms) !== null && _analytics$topRecomme !== void 0 && _analytics$topRecomme.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), (_analytics$topRecomme = analytics.topRecommendedPrograms) !== null && _analytics$topRecomme !== void 0 && _analytics$topRecomme.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-top",
             children: analytics.topRecommendedPrograms.map(function (r) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "am-top-row",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   className: "am-top-name",
                   children: r.name
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   className: "am-top-count",
                   children: r.count
                 })]
               }, r.name);
             })
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "am-muted",
             children: "No recommendations yet."
           })]
         })]
       }) : null]
-    })]
+    }), schoolCalOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "sp-modal",
+      role: "dialog",
+      "aria-modal": "true",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "sp-modal-card",
+        style: {
+          width: "min(980px, 100%)"
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sp-modal-head",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-iconbtn",
+            onClick: function onClick() {
+              return setSchoolCalOpen(false);
+            },
+            "aria-label": "Close",
+            children: "\u2715"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "sp-modal-body sp-modal-body--single",
+          style: {
+            padding: 0
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("iframe", {
+            title: "School calendar",
+            src: "/school-calendar",
+            style: {
+              width: "100%",
+              height: "min(72vh, 720px)",
+              border: 0
+            }
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "sp-modal-foot",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-btn sp-btn--ghost",
+            onClick: function onClick() {
+              return setSchoolCalOpen(false);
+            },
+            children: "Close"
+          })
+        })]
+      })
+    }) : null, editOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "sp-modal",
+      role: "dialog",
+      "aria-modal": "true",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "sp-modal-card",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sp-modal-head",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "sp-modal-title",
+            children: "Profile Settings"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-iconbtn",
+            onClick: function onClick() {
+              return setEditOpen(false);
+            },
+            "aria-label": "Close",
+            children: "\u2715"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sp-modal-body",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "sp-modal-avatar",
+            children: [avatarPreview ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+              className: "sp-avatar-img sp-avatar-img--lg",
+              src: avatarPreview,
+              alt: "Avatar preview"
+            }) : user !== null && user !== void 0 && user.avatar_url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+              className: "sp-avatar-img sp-avatar-img--lg",
+              src: user.avatar_url,
+              alt: "Profile avatar"
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+              className: "sp-avatar sp-avatar--lg",
+              "aria-hidden": "true",
+              children: initials((user === null || user === void 0 ? void 0 : user.name) || (user === null || user === void 0 ? void 0 : user.email))
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              style: {
+                marginTop: 10,
+                display: "flex",
+                gap: 10,
+                flexWrap: "wrap",
+                justifyContent: "center"
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+                className: "sp-btn sp-btn--ghost",
+                style: {
+                  cursor: "pointer"
+                },
+                children: ["Choose photo", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "file",
+                  accept: "image/*",
+                  style: {
+                    display: "none"
+                  },
+                  onChange: function onChange(e) {
+                    var _e$target$files;
+                    return onPickAvatar(((_e$target$files = e.target.files) === null || _e$target$files === void 0 ? void 0 : _e$target$files[0]) || null);
+                  }
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                type: "button",
+                className: "sp-btn sp-btn--primary",
+                onClick: saveAvatar,
+                disabled: avatarSaving,
+                children: avatarSaving ? "Saving…" : "Save photo"
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "sp-form",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+                className: "sp-field",
+                style: {
+                  gridColumn: "1 / -1"
+                },
+                children: ["Name", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  value: editForm.name,
+                  onChange: function onChange(e) {
+                    return setEditForm(function (p) {
+                      return _objectSpread(_objectSpread({}, p), {}, {
+                        name: e.target.value
+                      });
+                    });
+                  },
+                  placeholder: "Full name"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+                className: "sp-field",
+                style: {
+                  gridColumn: "1 / -1"
+                },
+                children: ["Email", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  value: editForm.email,
+                  onChange: function onChange(e) {
+                    return setEditForm(function (p) {
+                      return _objectSpread(_objectSpread({}, p), {}, {
+                        email: e.target.value
+                      });
+                    });
+                  },
+                  placeholder: "Email address"
+                })]
+              })]
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sp-modal-foot",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-btn sp-btn--ghost",
+            onClick: function onClick() {
+              return setEditOpen(false);
+            },
+            children: "Cancel"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-btn sp-btn--primary",
+            onClick: saveProfile,
+            disabled: saving,
+            children: saving ? "Saving…" : "Save"
+          })]
+        })]
+      })
+    }) : null, accountOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "sp-modal",
+      role: "dialog",
+      "aria-modal": "true",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "sp-modal-card",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sp-modal-head",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "sp-modal-title",
+              children: "Account Settings"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "sp-muted",
+              children: "Manage password and preferences"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-iconbtn",
+            onClick: function onClick() {
+              return setAccountOpen(false);
+            },
+            "aria-label": "Close",
+            children: "\u2715"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sp-modal-body sp-modal-body--single",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "sp-settings-section",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "sp-settings-section__title",
+              children: "Appearance"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "sp-settings-row",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                  className: "sp-settings-label",
+                  children: "Dark mode"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                  className: "sp-muted",
+                  children: "Switch to a darker theme."
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+                className: "sp-switch",
+                "aria-label": "Toggle dark mode",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "checkbox",
+                  checked: darkMode,
+                  onChange: function onChange(e) {
+                    return setDarkMode(e.target.checked);
+                  }
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  className: "sp-switch__track",
+                  "aria-hidden": "true",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                    className: "sp-switch__thumb"
+                  })
+                })]
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "sp-settings-section",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "sp-settings-section__title",
+              children: "Security"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "sp-muted",
+              style: {
+                marginTop: -6
+              },
+              children: "Change your password. Minimum 8 characters."
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "sp-form sp-form--stack",
+              style: {
+                marginTop: 12
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+                className: "sp-field",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  children: "Current password"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "password",
+                  value: pwForm.current_password,
+                  onChange: function onChange(e) {
+                    return setPwForm(function (p) {
+                      return _objectSpread(_objectSpread({}, p), {}, {
+                        current_password: e.target.value
+                      });
+                    });
+                  },
+                  autoComplete: "current-password"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+                className: "sp-field",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  children: "New password"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "password",
+                  value: pwForm.password,
+                  onChange: function onChange(e) {
+                    return setPwForm(function (p) {
+                      return _objectSpread(_objectSpread({}, p), {}, {
+                        password: e.target.value
+                      });
+                    });
+                  },
+                  autoComplete: "new-password"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("label", {
+                className: "sp-field",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  children: "Confirm new password"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                  type: "password",
+                  value: pwForm.password_confirmation,
+                  onChange: function onChange(e) {
+                    return setPwForm(function (p) {
+                      return _objectSpread(_objectSpread({}, p), {}, {
+                        password_confirmation: e.target.value
+                      });
+                    });
+                  },
+                  autoComplete: "new-password"
+                })]
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "sp-modal-foot",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-btn sp-btn--ghost",
+            onClick: function onClick() {
+              return setAccountOpen(false);
+            },
+            children: "Cancel"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+            type: "button",
+            className: "sp-btn sp-btn--primary",
+            onClick: changePassword,
+            disabled: pwSaving,
+            children: pwSaving ? "Saving…" : "Save changes"
+          })]
+        })]
+      })
+    }) : null]
   });
 }
 
@@ -82659,8 +83491,13 @@ function statusPill(status) {
     label: "Rejected",
     cls: "ad-pill ad-pill--bad"
   };
+  if (s === "interview") return {
+    label: "Interview",
+    cls: "ad-pill"
+  };
+  // Default/pending state: show as an indicator (not a button)
   return {
-    label: "Pending",
+    label: "Awaiting Review",
     cls: "ad-pill"
   };
 }
@@ -82695,6 +83532,7 @@ function AdvisorDashboard() {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       totalStudents: 0,
       pending: 0,
+      interview: 0,
       approved: 0
     }),
     _useState6 = _slicedToArray(_useState5, 2),
@@ -82712,78 +83550,82 @@ function AdvisorDashboard() {
     _useState10 = _slicedToArray(_useState1, 2),
     students = _useState10[0],
     setStudents = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState12 = _slicedToArray(_useState11, 2),
-    error = _useState12[0],
-    setError = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    suggestions = _useState12[0],
+    setSuggestions = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState14 = _slicedToArray(_useState13, 2),
-    profileMenuOpen = _useState14[0],
-    setProfileMenuOpen = _useState14[1];
-  var profileMenuRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+    error = _useState14[0],
+    setError = _useState14[1];
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    notifOpen = _useState16[0],
-    setNotifOpen = _useState16[1];
+    profileMenuOpen = _useState16[0],
+    setProfileMenuOpen = _useState16[1];
+  var profileMenuRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    notifLoading = _useState18[0],
-    setNotifLoading = _useState18[1];
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    notifOpen = _useState18[0],
+    setNotifOpen = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    notifs = _useState20[0],
-    setNotifs = _useState20[1];
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    notifLoading = _useState20[0],
+    setNotifLoading = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState22 = _slicedToArray(_useState21, 2),
-    schoolCalOpen = _useState22[0],
-    setSchoolCalOpen = _useState22[1];
+    notifs = _useState22[0],
+    setNotifs = _useState22[1];
   var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState24 = _slicedToArray(_useState23, 2),
-    profileSettingsOpen = _useState24[0],
-    setProfileSettingsOpen = _useState24[1];
+    schoolCalOpen = _useState24[0],
+    setSchoolCalOpen = _useState24[1];
   var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState26 = _slicedToArray(_useState25, 2),
-    accountSettingsOpen = _useState26[0],
-    setAccountSettingsOpen = _useState26[1];
+    profileSettingsOpen = _useState26[0],
+    setProfileSettingsOpen = _useState26[1];
   var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState28 = _slicedToArray(_useState27, 2),
-    profileSaving = _useState28[0],
-    setProfileSaving = _useState28[1];
+    accountSettingsOpen = _useState28[0],
+    setAccountSettingsOpen = _useState28[1];
   var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState30 = _slicedToArray(_useState29, 2),
-    avatarSaving = _useState30[0],
-    setAvatarSaving = _useState30[1];
+    profileSaving = _useState30[0],
+    setProfileSaving = _useState30[1];
   var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState32 = _slicedToArray(_useState31, 2),
-    pwSaving = _useState32[0],
-    setPwSaving = _useState32[1];
-  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    avatarSaving = _useState32[0],
+    setAvatarSaving = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState34 = _slicedToArray(_useState33, 2),
+    pwSaving = _useState34[0],
+    setPwSaving = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       name: "",
       email: "",
       age: "",
       gender: "",
       contact_number: ""
     }),
-    _useState34 = _slicedToArray(_useState33, 2),
-    editForm = _useState34[0],
-    setEditForm = _useState34[1];
-  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    _useState36 = _slicedToArray(_useState35, 2),
+    editForm = _useState36[0],
+    setEditForm = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       current_password: "",
       password: "",
       password_confirmation: ""
     }),
-    _useState36 = _slicedToArray(_useState35, 2),
-    pwForm = _useState36[0],
-    setPwForm = _useState36[1];
-  var avatarInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState38 = _slicedToArray(_useState37, 2),
-    avatarFile = _useState38[0],
-    setAvatarFile = _useState38[1];
-  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    pwForm = _useState38[0],
+    setPwForm = _useState38[1];
+  var avatarInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState40 = _slicedToArray(_useState39, 2),
-    avatarPreview = _useState40[0],
-    setAvatarPreview = _useState40[1];
+    avatarFile = _useState40[0],
+    setAvatarFile = _useState40[1];
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState42 = _slicedToArray(_useState41, 2),
+    avatarPreview = _useState42[0],
+    setAvatarPreview = _useState42[1];
   var headers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return {
       Authorization: "Bearer ".concat(token),
@@ -82863,88 +83705,163 @@ function AdvisorDashboard() {
       return _ref.apply(this, arguments);
     };
   }();
-  var load = /*#__PURE__*/function () {
+  var loadStats = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-      var search,
-        _s2$data,
-        _yield$Promise$all,
-        _yield$Promise$all2,
-        s1,
-        s2,
-        _e$response,
-        _args2 = arguments,
-        _t2;
+      var res;
       return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
+        while (1) switch (_context2.n) {
           case 0:
-            search = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : "";
-            setLoading(true);
-            setError(null);
-            _context2.p = 1;
-            _context2.n = 2;
-            return Promise.all([axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/advisor/stats", {
+            _context2.n = 1;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/advisor/stats", {
               headers: headers,
               withCredentials: true
-            }), axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/advisor/students?q=".concat(encodeURIComponent(search)), {
-              headers: headers,
-              withCredentials: true
-            })]);
-          case 2:
-            _yield$Promise$all = _context2.v;
-            _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
-            s1 = _yield$Promise$all2[0];
-            s2 = _yield$Promise$all2[1];
-            setStats(s1.data || {
+            });
+          case 1:
+            res = _context2.v;
+            setStats(res.data || {
               totalStudents: 0,
               pending: 0,
+              interview: 0,
               approved: 0
             });
-            setStudents(((_s2$data = s2.data) === null || _s2$data === void 0 ? void 0 : _s2$data.students) || []);
-            _context2.n = 4;
-            break;
-          case 3:
-            _context2.p = 3;
-            _t2 = _context2.v;
-            setError((_t2 === null || _t2 === void 0 || (_e$response = _t2.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Failed to load advisor dashboard.");
-          case 4:
-            _context2.p = 4;
-            setLoading(false);
-            return _context2.f(4);
-          case 5:
+          case 2:
             return _context2.a(2);
         }
-      }, _callee2, null, [[1, 3, 4, 5]]);
+      }, _callee2);
+    }));
+    return function loadStats() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var loadStudents = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var _res$data2;
+      var search,
+        res,
+        rows,
+        _args3 = arguments;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.n) {
+          case 0:
+            search = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : "";
+            _context3.n = 1;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/advisor/students?q=".concat(encodeURIComponent(search)), {
+              headers: headers,
+              withCredentials: true
+            });
+          case 1:
+            res = _context3.v;
+            rows = ((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.students) || [];
+            setStudents(rows);
+            if (!String(search || "").trim()) {
+              setSuggestions(rows);
+            }
+          case 2:
+            return _context3.a(2);
+        }
+      }, _callee3);
+    }));
+    return function loadStudents() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  var load = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var search,
+        _e$response,
+        _args4 = arguments,
+        _t2;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
+          case 0:
+            search = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : "";
+            setLoading(true);
+            setError(null);
+            _context4.p = 1;
+            _context4.n = 2;
+            return Promise.all([loadStats(), loadStudents(search)]);
+          case 2:
+            _context4.n = 4;
+            break;
+          case 3:
+            _context4.p = 3;
+            _t2 = _context4.v;
+            setError((_t2 === null || _t2 === void 0 || (_e$response = _t2.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Failed to load advisor dashboard.");
+          case 4:
+            _context4.p = 4;
+            setLoading(false);
+            return _context4.f(4);
+          case 5:
+            return _context4.a(2);
+        }
+      }, _callee4, null, [[1, 3, 4, 5]]);
     }));
     return function load() {
-      return _ref2.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     load("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  var autoSearchReadyRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!token) return;
+    if (!autoSearchReadyRef.current) {
+      autoSearchReadyRef.current = true;
+      return;
+    }
+    var t = setTimeout(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+      var _t3;
+      return _regenerator().w(function (_context5) {
+        while (1) switch (_context5.p = _context5.n) {
+          case 0:
+            _context5.p = 0;
+            setLoading(true);
+            _context5.n = 1;
+            return loadStudents(q);
+          case 1:
+            _context5.n = 3;
+            break;
+          case 2:
+            _context5.p = 2;
+            _t3 = _context5.v;
+          case 3:
+            _context5.p = 3;
+            setLoading(false);
+            return _context5.f(3);
+          case 4:
+            return _context5.a(2);
+        }
+      }, _callee5, null, [[0, 2, 3, 4]]);
+    })), 250);
+    return function () {
+      return clearTimeout(t);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var fetchMe = /*#__PURE__*/function () {
-      var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-        var _res$data2, _res$data3, res, serverUser, avatarUrl, cacheBusted, nextUser, serverProfile, _t3;
-        return _regenerator().w(function (_context3) {
-          while (1) switch (_context3.p = _context3.n) {
+      var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+        var _res$data3, _res$data4, res, serverUser, avatarUrl, cacheBusted, nextUser, serverProfile, _t4;
+        return _regenerator().w(function (_context6) {
+          while (1) switch (_context6.p = _context6.n) {
             case 0:
               if (token) {
-                _context3.n = 1;
+                _context6.n = 1;
                 break;
               }
-              return _context3.a(2);
+              return _context6.a(2);
             case 1:
-              _context3.p = 1;
-              _context3.n = 2;
+              _context6.p = 1;
+              _context6.n = 2;
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
                 headers: headers,
                 withCredentials: true
               });
             case 2:
-              res = _context3.v;
-              serverUser = ((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.user) || res.data; // cache-bust avatar to avoid stale browser caching after uploads
+              res = _context6.v;
+              serverUser = ((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.user) || res.data; // cache-bust avatar to avoid stale browser caching after uploads
               avatarUrl = serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url;
               cacheBusted = avatarUrl ? "".concat(avatarUrl).concat(avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now()) : null;
               nextUser = avatarUrl ? _objectSpread(_objectSpread({}, serverUser), {}, {
@@ -82952,47 +83869,47 @@ function AdvisorDashboard() {
               }) : serverUser;
               setUser(nextUser);
               localStorage.setItem("user", JSON.stringify(nextUser));
-              serverProfile = ((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.profile) || null;
+              serverProfile = ((_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.profile) || null;
               setEditForm(function (p) {
-                var _ref4, _serverProfile$age;
+                var _ref7, _serverProfile$age;
                 return _objectSpread(_objectSpread({}, p), {}, {
                   name: String((serverUser === null || serverUser === void 0 ? void 0 : serverUser.name) || p.name || ""),
                   email: String((serverUser === null || serverUser === void 0 ? void 0 : serverUser.email) || p.email || ""),
-                  age: (_ref4 = (_serverProfile$age = serverProfile === null || serverProfile === void 0 ? void 0 : serverProfile.age) !== null && _serverProfile$age !== void 0 ? _serverProfile$age : p.age) !== null && _ref4 !== void 0 ? _ref4 : "",
+                  age: (_ref7 = (_serverProfile$age = serverProfile === null || serverProfile === void 0 ? void 0 : serverProfile.age) !== null && _serverProfile$age !== void 0 ? _serverProfile$age : p.age) !== null && _ref7 !== void 0 ? _ref7 : "",
                   gender: String((serverProfile === null || serverProfile === void 0 ? void 0 : serverProfile.gender) || p.gender || ""),
                   contact_number: String((serverProfile === null || serverProfile === void 0 ? void 0 : serverProfile.contact_number) || p.contact_number || "")
                 });
               });
-              _context3.n = 4;
+              _context6.n = 4;
               break;
             case 3:
-              _context3.p = 3;
-              _t3 = _context3.v;
+              _context6.p = 3;
+              _t4 = _context6.v;
             case 4:
-              return _context3.a(2);
+              return _context6.a(2);
           }
-        }, _callee3, null, [[1, 3]]);
+        }, _callee6, null, [[1, 3]]);
       }));
       return function fetchMe() {
-        return _ref3.apply(this, arguments);
+        return _ref6.apply(this, arguments);
       };
     }();
     fetchMe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   var logout = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
-      var t, _t4;
-      return _regenerator().w(function (_context4) {
-        while (1) switch (_context4.p = _context4.n) {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+      var t, _t5;
+      return _regenerator().w(function (_context7) {
+        while (1) switch (_context7.p = _context7.n) {
           case 0:
             t = localStorage.getItem("authToken");
-            _context4.p = 1;
+            _context7.p = 1;
             if (!t) {
-              _context4.n = 2;
+              _context7.n = 2;
               break;
             }
-            _context4.n = 2;
+            _context7.n = 2;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/logout", {}, {
               headers: {
                 Authorization: "Bearer ".concat(t),
@@ -83001,25 +83918,25 @@ function AdvisorDashboard() {
               withCredentials: true
             });
           case 2:
-            _context4.n = 4;
+            _context7.n = 4;
             break;
           case 3:
-            _context4.p = 3;
-            _t4 = _context4.v;
+            _context7.p = 3;
+            _t5 = _context7.v;
           case 4:
-            _context4.p = 4;
+            _context7.p = 4;
             localStorage.removeItem("authToken");
             localStorage.removeItem("user");
             localStorage.removeItem("userRole");
             navigate("/login");
-            return _context4.f(4);
+            return _context7.f(4);
           case 5:
-            return _context4.a(2);
+            return _context7.a(2);
         }
-      }, _callee4, null, [[1, 3, 4, 5]]);
+      }, _callee7, null, [[1, 3, 4, 5]]);
     }));
     return function logout() {
-      return _ref5.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }();
   var goToAppointments = function goToAppointments() {
@@ -83066,52 +83983,52 @@ function AdvisorDashboard() {
       if (avatarPreview) {
         try {
           URL.revokeObjectURL(avatarPreview);
-        } catch (_unused7) {
+        } catch (_unused8) {
           // ignore
         }
       }
     };
   }, [avatarPreview]);
   var saveAvatar = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
-      var form, res, _me$data, _res$data4, me, serverUser, avatarUrl, cacheBusted, next, _res$data5, _avatarUrl, _cacheBusted, _t5;
-      return _regenerator().w(function (_context5) {
-        while (1) switch (_context5.p = _context5.n) {
+    var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
+      var form, res, _me$data, _res$data5, me, serverUser, avatarUrl, cacheBusted, next, _res$data6, _avatarUrl, _cacheBusted, _t6;
+      return _regenerator().w(function (_context8) {
+        while (1) switch (_context8.p = _context8.n) {
           case 0:
             if (token) {
-              _context5.n = 1;
+              _context8.n = 1;
               break;
             }
             navigate("/login");
-            return _context5.a(2);
+            return _context8.a(2);
           case 1:
             if (avatarFile) {
-              _context5.n = 2;
+              _context8.n = 2;
               break;
             }
-            return _context5.a(2);
+            return _context8.a(2);
           case 2:
-            _context5.p = 2;
+            _context8.p = 2;
             setAvatarSaving(true);
             form = new FormData();
             form.append("avatar", avatarFile);
-            _context5.n = 3;
+            _context8.n = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/profile/avatar", form, {
               headers: headers,
               withCredentials: true
             });
           case 3:
-            res = _context5.v;
-            _context5.p = 4;
-            _context5.n = 5;
+            res = _context8.v;
+            _context8.p = 4;
+            _context8.n = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
               headers: headers,
               withCredentials: true
             });
           case 5:
-            me = _context5.v;
+            me = _context8.v;
             serverUser = ((_me$data = me.data) === null || _me$data === void 0 ? void 0 : _me$data.user) || me.data;
-            avatarUrl = (serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url) || ((_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.avatar_url);
+            avatarUrl = (serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url) || ((_res$data5 = res.data) === null || _res$data5 === void 0 ? void 0 : _res$data5.avatar_url);
             cacheBusted = avatarUrl ? "".concat(avatarUrl).concat(avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now()) : null;
             if (serverUser) {
               next = avatarUrl ? _objectSpread(_objectSpread({}, serverUser), {}, {
@@ -83120,16 +84037,16 @@ function AdvisorDashboard() {
               setUser(next);
               try {
                 localStorage.setItem("user", JSON.stringify(next));
-              } catch (_unused8) {
+              } catch (_unused9) {
                 // ignore
               }
             }
-            _context5.n = 7;
+            _context8.n = 7;
             break;
           case 6:
-            _context5.p = 6;
-            _t5 = _context5.v;
-            _avatarUrl = (_res$data5 = res.data) === null || _res$data5 === void 0 ? void 0 : _res$data5.avatar_url;
+            _context8.p = 6;
+            _t6 = _context8.v;
+            _avatarUrl = (_res$data6 = res.data) === null || _res$data6 === void 0 ? void 0 : _res$data6.avatar_url;
             if (_avatarUrl) {
               _cacheBusted = "".concat(_avatarUrl).concat(_avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now());
               setUser(function (u) {
@@ -83138,7 +84055,7 @@ function AdvisorDashboard() {
                 });
                 try {
                   localStorage.setItem("user", JSON.stringify(next));
-                } catch (_unused0) {
+                } catch (_unused1) {
                   // ignore
                 }
                 return next;
@@ -83148,37 +84065,37 @@ function AdvisorDashboard() {
             setAvatarFile(null);
             setAvatarPreview("");
           case 8:
-            _context5.p = 8;
+            _context8.p = 8;
             setAvatarSaving(false);
-            return _context5.f(8);
+            return _context8.f(8);
           case 9:
-            return _context5.a(2);
+            return _context8.a(2);
         }
-      }, _callee5, null, [[4, 6], [2,, 8, 9]]);
+      }, _callee8, null, [[4, 6], [2,, 8, 9]]);
     }));
     return function saveAvatar() {
-      return _ref6.apply(this, arguments);
+      return _ref9.apply(this, arguments);
     };
   }();
   var saveProfile = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
-      var _res$data6, payload, res, newUser, _t6;
-      return _regenerator().w(function (_context6) {
-        while (1) switch (_context6.p = _context6.n) {
+    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9() {
+      var _res$data7, payload, res, newUser, _t7;
+      return _regenerator().w(function (_context9) {
+        while (1) switch (_context9.p = _context9.n) {
           case 0:
             if (token) {
-              _context6.n = 1;
+              _context9.n = 1;
               break;
             }
-            return _context6.a(2);
+            return _context9.a(2);
           case 1:
             if (!profileSaving) {
-              _context6.n = 2;
+              _context9.n = 2;
               break;
             }
-            return _context6.a(2);
+            return _context9.a(2);
           case 2:
-            _context6.p = 2;
+            _context9.p = 2;
             setProfileSaving(true);
             payload = {
               name: String(editForm.name || "").trim(),
@@ -83187,79 +84104,79 @@ function AdvisorDashboard() {
               gender: String(editForm.gender || "").trim(),
               contact_number: String(editForm.contact_number || "").trim()
             };
-            _context6.n = 3;
+            _context9.n = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/profile/basic-info", payload, {
               headers: headers,
               withCredentials: true
             });
           case 3:
-            res = _context6.v;
-            newUser = ((_res$data6 = res.data) === null || _res$data6 === void 0 ? void 0 : _res$data6.user) || user;
+            res = _context9.v;
+            newUser = ((_res$data7 = res.data) === null || _res$data7 === void 0 ? void 0 : _res$data7.user) || user;
             setUser(newUser);
             try {
               localStorage.setItem("user", JSON.stringify(newUser));
-            } catch (_unused1) {
+            } catch (_unused10) {
               // ignore
             }
             setProfileSettingsOpen(false);
-            _context6.n = 5;
+            _context9.n = 5;
             break;
           case 4:
-            _context6.p = 4;
-            _t6 = _context6.v;
+            _context9.p = 4;
+            _t7 = _context9.v;
           case 5:
-            _context6.p = 5;
+            _context9.p = 5;
             setProfileSaving(false);
-            return _context6.f(5);
+            return _context9.f(5);
           case 6:
-            return _context6.a(2);
+            return _context9.a(2);
         }
-      }, _callee6, null, [[2, 4, 5, 6]]);
+      }, _callee9, null, [[2, 4, 5, 6]]);
     }));
     return function saveProfile() {
-      return _ref7.apply(this, arguments);
+      return _ref0.apply(this, arguments);
     };
   }();
   var changePassword = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
-      var _t7;
-      return _regenerator().w(function (_context7) {
-        while (1) switch (_context7.p = _context7.n) {
+    var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
+      var _t8;
+      return _regenerator().w(function (_context0) {
+        while (1) switch (_context0.p = _context0.n) {
           case 0:
             if (token) {
-              _context7.n = 1;
+              _context0.n = 1;
               break;
             }
             navigate("/login");
-            return _context7.a(2);
+            return _context0.a(2);
           case 1:
             if (!pwSaving) {
-              _context7.n = 2;
+              _context0.n = 2;
               break;
             }
-            return _context7.a(2);
+            return _context0.a(2);
           case 2:
             if (String(pwForm.current_password || "").trim()) {
-              _context7.n = 3;
+              _context0.n = 3;
               break;
             }
-            return _context7.a(2);
+            return _context0.a(2);
           case 3:
             if (!(String(pwForm.password || "").length < 8)) {
-              _context7.n = 4;
+              _context0.n = 4;
               break;
             }
-            return _context7.a(2);
+            return _context0.a(2);
           case 4:
             if (!(pwForm.password !== pwForm.password_confirmation)) {
-              _context7.n = 5;
+              _context0.n = 5;
               break;
             }
-            return _context7.a(2);
+            return _context0.a(2);
           case 5:
-            _context7.p = 5;
+            _context0.p = 5;
             setPwSaving(true);
-            _context7.n = 6;
+            _context0.n = 6;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/account/password", {
               current_password: pwForm.current_password,
               password: pwForm.password,
@@ -83270,22 +84187,22 @@ function AdvisorDashboard() {
             });
           case 6:
             setAccountSettingsOpen(false);
-            _context7.n = 8;
+            _context0.n = 8;
             break;
           case 7:
-            _context7.p = 7;
-            _t7 = _context7.v;
+            _context0.p = 7;
+            _t8 = _context0.v;
           case 8:
-            _context7.p = 8;
+            _context0.p = 8;
             setPwSaving(false);
-            return _context7.f(8);
+            return _context0.f(8);
           case 9:
-            return _context7.a(2);
+            return _context0.a(2);
         }
-      }, _callee7, null, [[5, 7, 8, 9]]);
+      }, _callee0, null, [[5, 7, 8, 9]]);
     }));
     return function changePassword() {
-      return _ref8.apply(this, arguments);
+      return _ref1.apply(this, arguments);
     };
   }();
   var AppointmentsButton = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
@@ -83340,23 +84257,23 @@ function AdvisorDashboard() {
             className: "ad-iconbtn",
             title: "Notifications",
             "aria-label": "Notifications",
-            onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
+            onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1() {
               var next;
-              return _regenerator().w(function (_context8) {
-                while (1) switch (_context8.n) {
+              return _regenerator().w(function (_context1) {
+                while (1) switch (_context1.n) {
                   case 0:
                     next = !notifOpen;
                     setNotifOpen(next);
                     if (!next) {
-                      _context8.n = 1;
+                      _context1.n = 1;
                       break;
                     }
-                    _context8.n = 1;
+                    _context1.n = 1;
                     return loadNotifications();
                   case 1:
-                    return _context8.a(2);
+                    return _context1.a(2);
                 }
-              }, _callee8);
+              }, _callee1);
             })),
             children: ["\uD83D\uDD14", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
               className: "ad-badge-dot",
@@ -83412,7 +84329,7 @@ function AdvisorDashboard() {
                 var when = "—";
                 try {
                   when = whenIso ? new Date(whenIso).toLocaleString() : "—";
-                } catch (_unused12) {
+                } catch (_unused13) {
                   when = whenIso || "—";
                 }
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -83926,27 +84843,52 @@ function AdvisorDashboard() {
         className: "ad-stats",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "ad-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "ad-stat-label",
-            children: "Total Students"
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: "ad-stat-icon",
+              "aria-hidden": "true",
+              children: "\uD83D\uDC65"
+            }), " Total Students"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "ad-stat-value",
             children: stats.totalStudents
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "ad-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "ad-stat-label",
-            children: "Pending Review"
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: "ad-stat-icon",
+              "aria-hidden": "true",
+              children: "\u23F3"
+            }), " Pending Review"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "ad-stat-value ad-stat-value--warn",
             children: stats.pending
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "ad-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "ad-stat-label",
-            children: "Approved"
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: "ad-stat-icon",
+              "aria-hidden": "true",
+              children: "\uD83C\uDFA4"
+            }), " Interview"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "ad-stat-value ad-stat-value--warn",
+            children: stats.interview
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "ad-stat",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "ad-stat-label",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: "ad-stat-icon",
+              "aria-hidden": "true",
+              children: "\u2705"
+            }), " Approved"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "ad-stat-value ad-stat-value--good",
             children: stats.approved
@@ -83960,9 +84902,30 @@ function AdvisorDashboard() {
           onChange: function onChange(e) {
             return setQ(e.target.value);
           },
+          list: "ad-student-suggestions",
           onKeyDown: function onKeyDown(e) {
             if (e.key === "Enter") load(q);
           }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("datalist", {
+          id: "ad-student-suggestions",
+          children: (Array.isArray(suggestions) ? suggestions : []).slice(0, 30).flatMap(function (s) {
+            var name = String((s === null || s === void 0 ? void 0 : s.name) || "").trim();
+            var email = String((s === null || s === void 0 ? void 0 : s.email) || "").trim();
+            var out = [];
+            if (name) out.push({
+              k: "".concat(s.id, "-n"),
+              v: name
+            });
+            if (email) out.push({
+              k: "".concat(s.id, "-e"),
+              v: email
+            });
+            return out;
+          }).map(function (o) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: o.v
+            }, o.k);
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
           type: "button",
           className: "ad-btn",
@@ -84019,23 +84982,16 @@ function AdvisorDashboard() {
                 className: "ad-rec-sub",
                 children: ["Match Score: \u2014 \xA0\u2022\xA0 Assessment: ", (_s$assessment_score_p = s.assessment_score_preview) !== null && _s$assessment_score_p !== void 0 ? _s$assessment_score_p : "—", "%"]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "ad-actions",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                 type: "button",
                 className: "ad-btn ad-btn--ghost",
                 onClick: function onClick() {
                   return navigate("/advisor/students/".concat(s.id));
                 },
                 children: "View Details"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                type: "button",
-                className: "ad-btn",
-                onClick: function onClick() {
-                  return navigate("/advisor/students/".concat(s.id));
-                },
-                children: s.advisor_status === "approved" ? "Approved" : "Awaiting Review"
-              })]
+              })
             })]
           }, s.id);
         }), !loading && !students.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -84213,14 +85169,26 @@ function AdvisorStudentDetail() {
     _useState14 = _slicedToArray(_useState13, 2),
     degrees = _useState14[0],
     setDegrees = _useState14[1];
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState16 = _slicedToArray(_useState15, 2),
-    saving = _useState16[0],
-    setSaving = _useState16[1];
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    interviewDate = _useState16[0],
+    setInterviewDate = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState18 = _slicedToArray(_useState17, 2),
-    success = _useState18[0],
-    setSuccess = _useState18[1];
+    interviewTime = _useState18[0],
+    setInterviewTime = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState20 = _slicedToArray(_useState19, 2),
+    interviewVenue = _useState20[0],
+    setInterviewVenue = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    saving = _useState22[0],
+    setSaving = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState24 = _slicedToArray(_useState23, 2),
+    success = _useState24[0],
+    setSuccess = _useState24[1];
   var headers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return {
       Authorization: "Bearer ".concat(token),
@@ -84239,7 +85207,7 @@ function AdvisorStudentDetail() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var load = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _res$data, _res$data2, _res$data3, _res$data4, _p$advisor_recommende, res, p, st, cm, base, norm, _e$response, _t;
+        var _res$data, _res$data2, _res$data3, _res$data4, _p$advisor_recommende, res, p, st, cm, base, norm, rawInterviewDate, normInterviewDate, _e$response, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -84267,6 +85235,11 @@ function AdvisorStudentDetail() {
               setStatus(st);
               setComment(cm);
               setDegrees(norm);
+              rawInterviewDate = (p === null || p === void 0 ? void 0 : p.advisor_interview_date) || "";
+              normInterviewDate = String(rawInterviewDate).includes("T") ? String(rawInterviewDate).slice(0, 10) : String(rawInterviewDate);
+              setInterviewDate(normInterviewDate);
+              setInterviewTime(p !== null && p !== void 0 && p.advisor_interview_time ? String(p.advisor_interview_time).slice(0, 5) : "");
+              setInterviewVenue((p === null || p === void 0 ? void 0 : p.advisor_interview_venue) || "");
               _context.n = 4;
               break;
             case 3:
@@ -84317,14 +85290,43 @@ function AdvisorStudentDetail() {
   };
   var onSave = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-      var cleaned, _e$response2, _e$response3, apiMessage, apiErrors, _apiErrors$firstKey, firstKey, firstMsg, _t2;
+      var nextStatus, cleaned, interviewDateClean, interviewTimeClean, _e$response2, _e$response3, apiMessage, apiErrors, _apiErrors$firstKey, firstKey, firstMsg, _t2;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
           case 0:
             setSaving(true);
             setError(null);
             setSuccess(null);
-            _context2.p = 1;
+            nextStatus = String(status || "pending").toLowerCase();
+            if (!(nextStatus === "interview")) {
+              _context2.n = 3;
+              break;
+            }
+            if (String(interviewDate || "").trim()) {
+              _context2.n = 1;
+              break;
+            }
+            setSaving(false);
+            setError("Interview date is required.");
+            return _context2.a(2);
+          case 1:
+            if (String(interviewTime || "").trim()) {
+              _context2.n = 2;
+              break;
+            }
+            setSaving(false);
+            setError("Interview time is required.");
+            return _context2.a(2);
+          case 2:
+            if (String(interviewVenue || "").trim()) {
+              _context2.n = 3;
+              break;
+            }
+            setSaving(false);
+            setError("Interview venue is required.");
+            return _context2.a(2);
+          case 3:
+            _context2.p = 3;
             cleaned = degrees.map(function (d) {
               return {
                 code: String(d.code || "").trim(),
@@ -84334,21 +85336,27 @@ function AdvisorStudentDetail() {
             }).filter(function (d) {
               return d.code && d.name;
             });
-            _context2.n = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/advisor/students/".concat(userId, "/recommendation"), {
+            interviewDateClean = String(interviewDate || "").trim();
+            interviewTimeClean = String(interviewTime || "").trim();
+            _context2.n = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/advisor/students/".concat(userId, "/recommendation"), _objectSpread({
               advisor_status: status,
               advisor_comment: comment,
               advisor_recommended_degrees: cleaned
-            }, {
+            }, nextStatus === "interview" ? {
+              advisor_interview_date: interviewDateClean.includes("T") ? interviewDateClean.slice(0, 10) : interviewDateClean,
+              advisor_interview_time: interviewTimeClean.length >= 5 ? interviewTimeClean.slice(0, 5) : interviewTimeClean,
+              advisor_interview_venue: String(interviewVenue || "").trim()
+            } : {}), {
               headers: headers,
               withCredentials: true
             });
-          case 2:
-            setSuccess("Saved review successfully.");
-            _context2.n = 4;
+          case 4:
+            setSuccess(nextStatus === "interview" ? "Interview scheduled." : "Saved review successfully.");
+            _context2.n = 6;
             break;
-          case 3:
-            _context2.p = 3;
+          case 5:
+            _context2.p = 5;
             _t2 = _context2.v;
             apiMessage = _t2 === null || _t2 === void 0 || (_e$response2 = _t2.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message;
             apiErrors = _t2 === null || _t2 === void 0 || (_e$response3 = _t2.response) === null || _e$response3 === void 0 || (_e$response3 = _e$response3.data) === null || _e$response3 === void 0 ? void 0 : _e$response3.errors;
@@ -84359,14 +85367,14 @@ function AdvisorStudentDetail() {
             } else {
               setError(apiMessage || "Failed to save review.");
             }
-          case 4:
-            _context2.p = 4;
+          case 6:
+            _context2.p = 6;
             setSaving(false);
-            return _context2.f(4);
-          case 5:
+            return _context2.f(6);
+          case 7:
             return _context2.a(2);
         }
-      }, _callee2, null, [[1, 3, 4, 5]]);
+      }, _callee2, null, [[3, 5, 6, 7]]);
     }));
     return function onSave() {
       return _ref2.apply(this, arguments);
@@ -84622,6 +85630,9 @@ function AdvisorStudentDetail() {
                       value: "pending",
                       children: "Pending"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                      value: "interview",
+                      children: "Interview"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
                       value: "approved",
                       children: "Approved"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
@@ -84630,7 +85641,72 @@ function AdvisorStudentDetail() {
                     })]
                   })]
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              }), String(status || "").toLowerCase() === "interview" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-review-row",
+                style: {
+                  gridColumn: "1 / -1"
+                },
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "ad-field",
+                  style: {
+                    gridColumn: "1 / -1"
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: "Interview schedule"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "ad-muted",
+                    style: {
+                      marginTop: 4
+                    },
+                    children: "Set the interview date, time, and venue before scheduling."
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    style: {
+                      marginTop: 10,
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: 10
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
+                      className: "ad-field",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                        children: "Date"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                        type: "date",
+                        value: interviewDate,
+                        onChange: function onChange(e) {
+                          return setInterviewDate(e.target.value);
+                        }
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
+                      className: "ad-field",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                        children: "Time"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                        type: "time",
+                        value: interviewTime,
+                        onChange: function onChange(e) {
+                          return setInterviewTime(e.target.value);
+                        }
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
+                      className: "ad-field",
+                      style: {
+                        gridColumn: "1 / -1"
+                      },
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                        children: "Venue"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                        type: "text",
+                        value: interviewVenue,
+                        onChange: function onChange(e) {
+                          return setInterviewVenue(e.target.value);
+                        },
+                        placeholder: "e.g., Advising Office, Room 203"
+                      })]
+                    })]
+                  })]
+                })
+              }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                 className: "ad-review-row",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
                   className: "ad-field",
@@ -84749,7 +85825,7 @@ function AdvisorStudentDetail() {
                       className: "ad-btn",
                       disabled: saving,
                       onClick: onSave,
-                      children: saving ? "Saving…" : "Save review"
+                      children: saving ? "Saving…" : String(status || "").toLowerCase() === "interview" ? "Schedule Interview" : "Save review"
                     })
                   })]
                 })
@@ -86256,6 +87332,10 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -86288,9 +87368,49 @@ function formatApptTime(dt) {
     minute: "2-digit"
   });
 }
+function formatLocalDateLabel(raw) {
+  var s = String(raw || "").trim();
+  if (!s) return "";
+  var ymd = s.includes("T") ? s.slice(0, 10) : s;
+  var m = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/.exec(ymd);
+  if (m) {
+    var year = Number(m[1]);
+    var month = Number(m[2]);
+    var day = Number(m[3]);
+    var d = new Date(year, Math.max(0, month - 1), day);
+    if (!Number.isNaN(d.getTime())) {
+      return d.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+  }
+  return s;
+}
+function formatTimeHHMM(t) {
+  var s = String(t || "").trim();
+  if (!s) return "";
+  return s.length >= 5 ? s.slice(0, 5) : s;
+}
+function formatHHMMToAMPM(hhmm) {
+  var s = String(hhmm || "").trim();
+  if (!s) return "";
+  var m = /^([0-9]{1,2}):([0-9]{2})$/.exec(s);
+  if (!m) return s;
+  var h = Number(m[1]);
+  var min = Number(m[2]);
+  var d = new Date(2000, 0, 1, h, min, 0);
+  if (Number.isNaN(d.getTime())) return s;
+  return d.toLocaleTimeString(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true
+  });
+}
 function statusBadge(status) {
   var s = String(status || "scheduled").toLowerCase();
-  var cls = s === "completed" ? "sp-badge sp-badge--done" : s === "cancelled" ? "sp-badge sp-badge--muted" : "sp-badge sp-badge--info";
+  var cls = s === "completed" ? "sp-badge sp-badge--done" : s === "cancelled" ? "sp-badge sp-badge--muted" : s === "interview" ? "sp-badge sp-badge--info" : "sp-badge sp-badge--info";
   var label = s.charAt(0).toUpperCase() + s.slice(1);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
     className: cls,
@@ -86315,23 +87435,35 @@ function StudentAppointments() {
     _useState8 = _slicedToArray(_useState7, 2),
     statusFilter = _useState8[0],
     setStatusFilter = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+      try {
+        var raw = localStorage.getItem("studentDismissedAppointmentIds");
+        var parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed.map(String) : [];
+      } catch (_unused) {
+        return [];
+      }
+    }),
     _useState0 = _slicedToArray(_useState9, 2),
-    bookOpen = _useState0[0],
-    setBookOpen = _useState0[1];
+    dismissedApptIds = _useState0[0],
+    setDismissedApptIds = _useState0[1];
   var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState10 = _slicedToArray(_useState1, 2),
-    submitting = _useState10[0],
-    setSubmitting = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    bookOpen = _useState10[0],
+    setBookOpen = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    submitting = _useState12[0],
+    setSubmitting = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       session_type: "Initial Consultation",
       date: "",
       time: "",
       notes: ""
     }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    bookForm = _useState12[0],
-    setBookForm = _useState12[1];
+    _useState14 = _slicedToArray(_useState13, 2),
+    bookForm = _useState14[0],
+    setBookForm = _useState14[1];
   var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return localStorage.getItem("authToken");
   }, []);
@@ -86391,6 +87523,7 @@ function StudentAppointments() {
   }, [tab]);
   var visibleAppts = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var now = Date.now();
+    var dismissed = new Set((Array.isArray(dismissedApptIds) ? dismissedApptIds : []).map(String));
     var withinTab = function withinTab(a) {
       var st = String((a === null || a === void 0 ? void 0 : a.status) || "requested").toLowerCase();
       var scheduled = a !== null && a !== void 0 && a.scheduled_at ? new Date(a.scheduled_at).getTime() : null;
@@ -86403,7 +87536,7 @@ function StudentAppointments() {
       }
 
       // Upcoming tab
-      if (st === "requested" || st === "rejected") return true;
+      if (st === "requested" || st === "rejected" || st === "interview") return true;
       if (scheduled != null && scheduled >= now) return true;
       return false;
     };
@@ -86411,10 +87544,34 @@ function StudentAppointments() {
       if (statusFilter === "all") return true;
       return String((a === null || a === void 0 ? void 0 : a.status) || "requested").toLowerCase() === statusFilter;
     };
+    var withinDismissed = function withinDismissed(a) {
+      var st = String((a === null || a === void 0 ? void 0 : a.status) || "requested").toLowerCase();
+      var id = String((a === null || a === void 0 ? void 0 : a.id) || "");
+      if (!id) return true;
+      // Only allow hiding "done" appointments.
+      if (st !== "completed") return true;
+      return !dismissed.has(id);
+    };
     return (Array.isArray(appts) ? appts : []).filter(function (a) {
-      return withinTab(a) && withinStatus(a);
+      return withinTab(a) && withinStatus(a) && withinDismissed(a);
     });
-  }, [appts, statusFilter, tab]);
+  }, [appts, dismissedApptIds, statusFilter, tab]);
+  var dismissAppointment = function dismissAppointment(a) {
+    var st = String((a === null || a === void 0 ? void 0 : a.status) || "requested").toLowerCase();
+    if (st !== "completed") return;
+    var id = String((a === null || a === void 0 ? void 0 : a.id) || "");
+    if (!id) return;
+    setDismissedApptIds(function (prev) {
+      var cur = Array.isArray(prev) ? prev.map(String) : [];
+      var next = Array.from(new Set([id].concat(_toConsumableArray(cur)))).slice(0, 300);
+      try {
+        localStorage.setItem("studentDismissedAppointmentIds", JSON.stringify(next));
+      } catch (_unused2) {
+        // ignore
+      }
+      return next;
+    });
+  };
   var requestAppointment = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
       var date, time, preferredAt, _res$data2, res, _e$response, msg, _t2;
@@ -86637,14 +87794,30 @@ function StudentAppointments() {
               className: "sp-appt-card",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "sp-appt-top",
-                children: [statusBadge(a.status), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  style: {
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8
+                  },
+                  children: [statusBadge(a.status), String((a === null || a === void 0 ? void 0 : a.status) || "").toLowerCase() === "completed" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                    type: "button",
+                    className: "sp-xbtn",
+                    "aria-label": "Remove completed appointment",
+                    title: "Remove",
+                    onClick: function onClick() {
+                      return dismissAppointment(a);
+                    },
+                    children: "\u2715"
+                  }) : null]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   className: "sp-appt-when",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "sp-appt-date",
-                    children: a.scheduled_at ? formatApptDate(a.scheduled_at) : "Awaiting schedule"
+                    children: String((a === null || a === void 0 ? void 0 : a.status) || "").toLowerCase() === "interview" && a !== null && a !== void 0 && a.interview_date ? formatLocalDateLabel(a.interview_date) : a.scheduled_at ? formatApptDate(a.scheduled_at) : "Awaiting schedule"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "sp-appt-time",
-                    children: a.scheduled_at ? formatApptTime(a.scheduled_at) : a.session_type || "Advising Session"
+                    children: String((a === null || a === void 0 ? void 0 : a.status) || "").toLowerCase() === "interview" && a !== null && a !== void 0 && a.interview_time ? formatHHMMToAMPM(formatTimeHHMM(a.interview_time)) : a.scheduled_at ? formatApptTime(a.scheduled_at) : a.session_type || "Advising Session"
                   })]
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -87017,6 +88190,8 @@ function StudentAssessmentQuiz() {
   var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return localStorage.getItem("authToken");
   }, []);
+  var stepsTotal = 1 + PART2_QUESTIONS.length + 1;
+  var reviewStepIndex = stepsTotal - 1;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
     _useState2 = _slicedToArray(_useState, 2),
     loading = _useState2[0],
@@ -87033,20 +88208,25 @@ function StudentAssessmentQuiz() {
     _useState8 = _slicedToArray(_useState7, 2),
     success = _useState8[0],
     setSuccess = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
-    step = _useState0[0],
-    setStep = _useState0[1]; // 0 = Part I, 1..8 = Part II Q index, 9 = Review
-
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    assessmentSaved = _useState0[0],
+    setAssessmentSaved = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     _useState10 = _slicedToArray(_useState1, 2),
-    part1Selected = _useState10[0],
-    setPart1Selected = _useState10[1]; // array of statement numbers (1-based)
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-    _useState12 = _slicedToArray(_useState11, 2),
-    part2Answers = _useState12[0],
-    setPart2Answers = _useState12[1]; // { [questionId]: 'A'|'B'|'C'|'D' }
+    step = _useState10[0],
+    setStep = _useState10[1]; // 0 = Part I, 1..8 = Part II Q index, 9 = Review
 
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    part1Selected = _useState12[0],
+    setPart1Selected = _useState12[1]; // array of statement numbers (1-based)
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState14 = _slicedToArray(_useState13, 2),
+    part2Answers = _useState14[0],
+    setPart2Answers = _useState14[1]; // { [questionId]: 'A'|'B'|'C'|'D' }
+
+  var isLockedToReview = assessmentSaved;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var storedUser = localStorage.getItem("user");
     if (!storedUser || !token) {
@@ -87055,7 +88235,7 @@ function StudentAssessmentQuiz() {
     }
     var fetchAssessment = /*#__PURE__*/function () {
       var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _res$data, res, assessment, _t;
+        var _res$data, res, assessment, hasSavedRecommendation, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -87076,6 +88256,11 @@ function StudentAssessmentQuiz() {
               if (assessment) {
                 setPart1Selected(Array.isArray(assessment.part1_selected) ? assessment.part1_selected : []);
                 setPart2Answers(assessment.part2_answers && _typeof(assessment.part2_answers) === "object" ? assessment.part2_answers : {});
+                hasSavedRecommendation = Array.isArray(assessment.recommended_top3) && assessment.recommended_top3.length > 0;
+                setAssessmentSaved(hasSavedRecommendation);
+                if (hasSavedRecommendation) {
+                  setStep(reviewStepIndex);
+                }
               }
               _context.n = 4;
               break;
@@ -87096,8 +88281,7 @@ function StudentAssessmentQuiz() {
       };
     }();
     fetchAssessment();
-  }, [navigate, token]);
-  var stepsTotal = 1 + PART2_QUESTIONS.length + 1;
+  }, [navigate, reviewStepIndex, token]);
   var currentLabel = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     if (step === 0) return "Part I – Personal Interest & Skills";
     if (step >= 1 && step <= PART2_QUESTIONS.length) {
@@ -87105,6 +88289,12 @@ function StudentAssessmentQuiz() {
     }
     return "Review";
   }, [step]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // If the assessment is already saved, keep the user on Review until they retake.
+    if (assessmentSaved && step !== reviewStepIndex) {
+      setStep(reviewStepIndex);
+    }
+  }, [assessmentSaved, reviewStepIndex, step]);
   var progress = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var pct = Math.round((step + 1) / stepsTotal * 100);
     return Math.max(0, Math.min(100, pct));
@@ -87165,6 +88355,8 @@ function StudentAssessmentQuiz() {
             });
           case 2:
             setSuccess("Saved! Your assessment is complete.");
+            setAssessmentSaved(true);
+            setStep(reviewStepIndex);
             // Also store computed results so recommendation page can use it instantly.
             localStorage.setItem("assessmentResult", JSON.stringify({
               scores: scores,
@@ -87191,6 +88383,21 @@ function StudentAssessmentQuiz() {
       return _ref6.apply(this, arguments);
     };
   }();
+  var handleRetakeQuiz = function handleRetakeQuiz() {
+    var confirmed = window.confirm("This will clear your current quiz answers on this page. Continue?");
+    if (!confirmed) return;
+    setPart1Selected([]);
+    setPart2Answers({});
+    setAssessmentSaved(false);
+    setSuccess(null);
+    setError(null);
+    setStep(0);
+    try {
+      localStorage.removeItem("assessmentResult");
+    } catch (_unused) {
+      // ignore
+    }
+  };
   var gotoPrev = function gotoPrev() {
     return setStep(function (s) {
       return Math.max(0, s - 1);
@@ -87201,7 +88408,61 @@ function StudentAssessmentQuiz() {
       return Math.min(stepsTotal - 1, s + 1);
     });
   };
+  var safeGotoPrev = function safeGotoPrev() {
+    if (isLockedToReview) return;
+    gotoPrev();
+  };
+  var safeGotoNext = function safeGotoNext() {
+    if (isLockedToReview) return;
+    gotoNext();
+  };
+  var renderReview = function renderReview() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "aq-review",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "aq-review-title",
+          children: "Your top matches (based on your answers)"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "aq-top3",
+          children: top3.map(function (t) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "aq-top-card",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "aq-top-rank",
+                children: ["#", t.rank]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "aq-top-name",
+                children: t.category
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "aq-top-score",
+                children: ["Score: ", t.score]
+              })]
+            }, t.category);
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "aq-muted",
+          children: "Tip: Click \u201CSave Assessment\u201D then proceed to Course Recommendation."
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "aq-actions",
+          style: {
+            marginTop: 12
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            type: "button",
+            className: "aq-secondary",
+            onClick: handleRetakeQuiz,
+            disabled: saving,
+            children: "Retake Quiz"
+          })
+        })]
+      })
+    });
+  };
   var renderBody = function renderBody() {
+    if (isLockedToReview && step !== reviewStepIndex) {
+      return renderReview();
+    }
     if (step === 0) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -87272,35 +88533,7 @@ function StudentAssessmentQuiz() {
         })]
       });
     }
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "aq-review",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "aq-review-title",
-          children: "Your top matches (based on your answers)"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "aq-top3",
-          children: top3.map(function (t) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-              className: "aq-top-card",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "aq-top-rank",
-                children: ["#", t.rank]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "aq-top-name",
-                children: t.category
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "aq-top-score",
-                children: ["Score: ", t.score]
-              })]
-            }, t.category);
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "aq-muted",
-          children: "Tip: Click \u201CSave Assessment\u201D then proceed to Course Recommendation."
-        })]
-      })
-    });
+    return renderReview();
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "assessment-quiz",
@@ -87354,8 +88587,8 @@ function StudentAssessmentQuiz() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               type: "button",
               className: "aq-secondary",
-              onClick: gotoPrev,
-              disabled: step === 0 || saving,
+              onClick: safeGotoPrev,
+              disabled: step === 0 || saving || isLockedToReview,
               children: "\u2190 Previous"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "aq-actions-right",
@@ -87372,14 +88605,15 @@ function StudentAssessmentQuiz() {
                   onClick: function onClick() {
                     return navigate("/student/course-recommendation");
                   },
-                  disabled: saving,
+                  disabled: saving || !assessmentSaved,
+                  title: !assessmentSaved ? "Save Assessment first to continue" : "Proceed to Course Recommendation",
                   children: "Next \u2192"
                 })]
               }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                 type: "button",
                 className: "aq-primary",
-                onClick: gotoNext,
-                disabled: !canGoNext || saving,
+                onClick: safeGotoNext,
+                disabled: !canGoNext || saving || isLockedToReview,
                 children: "Next \u2192"
               })
             })]
@@ -87763,7 +88997,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-B7RQU5TL.mjs");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -87774,6 +89007,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 
 
 
@@ -87789,6 +89023,24 @@ function formatFileName(path) {
   if (!path) return "";
   var parts = String(path).split("/");
   return parts[parts.length - 1] || path;
+}
+function hasBasicInfo(user, profile) {
+  return Boolean(String((user === null || user === void 0 ? void 0 : user.name) || "").trim() && String((user === null || user === void 0 ? void 0 : user.email) || "").trim() && (profile === null || profile === void 0 ? void 0 : profile.age) != null && String((profile === null || profile === void 0 ? void 0 : profile.gender) || "").trim() && String((profile === null || profile === void 0 ? void 0 : profile.high_school) || "").trim() && String((profile === null || profile === void 0 ? void 0 : profile.contact_number) || "").trim());
+}
+function hasAcademicCredentials(profile) {
+  var subjectGrades = Array.isArray(profile === null || profile === void 0 ? void 0 : profile.subject_grades) ? profile.subject_grades : [];
+  var hasAtLeastOneSubject = subjectGrades.some(function (r) {
+    return String((r === null || r === void 0 ? void 0 : r.subject) || "").trim() && (r === null || r === void 0 ? void 0 : r.grade) != null && (r === null || r === void 0 ? void 0 : r.grade) !== "";
+  });
+  var hasSkills = Array.isArray(profile === null || profile === void 0 ? void 0 : profile.skills) ? profile.skills.filter(Boolean).length > 0 : false;
+  var ratings = profile === null || profile === void 0 ? void 0 : profile.program_interest_ratings;
+  var hasRatings = ratings && _typeof(ratings) === "object" && Object.keys(ratings).length > 0;
+  return Boolean(String((profile === null || profile === void 0 ? void 0 : profile.shs_strand) || "").trim() && (profile === null || profile === void 0 ? void 0 : profile.shs_general_average) != null && String((profile === null || profile === void 0 ? void 0 : profile.career_goals) || "").trim() && hasAtLeastOneSubject && hasSkills && hasRatings);
+}
+function hasAssessmentCompleted(profile, assessment) {
+  var profileCompleted = Array.isArray(profile === null || profile === void 0 ? void 0 : profile.assessment_part1_selected) && profile.assessment_part1_selected.length > 0;
+  var assessmentCompleted = Array.isArray(assessment === null || assessment === void 0 ? void 0 : assessment.recommended_top3) && assessment.recommended_top3.length > 0;
+  return Boolean(profileCompleted || assessmentCompleted);
 }
 function StudentCourseRecommendation() {
   var _profile$shs_general_;
@@ -87816,6 +89068,10 @@ function StudentCourseRecommendation() {
     _useState0 = _slicedToArray(_useState9, 2),
     assessment = _useState0[0],
     setAssessment = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    locked = _useState10[0],
+    setLocked = _useState10[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var storedUser = localStorage.getItem("user");
     if (!storedUser || !token) {
@@ -87825,12 +89081,13 @@ function StudentCourseRecommendation() {
     setUser(safeParse(storedUser));
     var fetchAll = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _res$data, res, _a$data, a, local, _e$response, _t, _t2;
+        var _res$data, _res$data2, res, serverUser, serverProfile, assessmentData, _a$data, a, local, unlocked, _e$response, _t, _t2;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
               setLoading(true);
               setError(null);
+              setLocked(false);
               _context.p = 1;
               _context.n = 2;
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
@@ -87842,9 +89099,13 @@ function StudentCourseRecommendation() {
               });
             case 2:
               res = _context.v;
-              setProfile(((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.profile) || null);
+              serverUser = ((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.user) || safeParse(storedUser) || null;
+              serverProfile = ((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.profile) || null;
+              setUser(serverUser);
+              setProfile(serverProfile);
 
               // Try server-side assessment if available
+              assessmentData = null;
               _context.p = 3;
               _context.n = 4;
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/assessment", {
@@ -87856,7 +89117,8 @@ function StudentCourseRecommendation() {
               });
             case 4:
               a = _context.v;
-              setAssessment(((_a$data = a.data) === null || _a$data === void 0 ? void 0 : _a$data.assessment) || null);
+              assessmentData = ((_a$data = a.data) === null || _a$data === void 0 ? void 0 : _a$data.assessment) || null;
+              setAssessment(assessmentData);
               _context.n = 6;
               break;
             case 5:
@@ -87864,8 +89126,13 @@ function StudentCourseRecommendation() {
               _t = _context.v;
               // fallback to localStorage
               local = safeParse(localStorage.getItem("assessmentResult") || "");
-              setAssessment(local || null);
+              assessmentData = local || null;
+              setAssessment(assessmentData);
             case 6:
+              unlocked = hasBasicInfo(serverUser, serverProfile) && hasAcademicCredentials(serverProfile) && hasAssessmentCompleted(serverProfile, assessmentData);
+              if (!unlocked) {
+                setLocked(true);
+              }
               _context.n = 8;
               break;
             case 7:
@@ -87931,6 +89198,15 @@ function StudentCourseRecommendation() {
       };
     });
   }, [profile]);
+  var advisorStatus = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var raw = String((profile === null || profile === void 0 ? void 0 : profile.advisor_status) || "pending").toLowerCase();
+    if (!profile) return "pending";
+    return raw;
+  }, [profile]);
+  var advisorComment = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var txt = String((profile === null || profile === void 0 ? void 0 : profile.advisor_comment) || "").trim();
+    return txt || null;
+  }, [profile]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "assessment-quiz",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("header", {
@@ -87955,197 +89231,241 @@ function StudentCourseRecommendation() {
           children: [error ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "aq-alert aq-alert--error",
             children: error
-          }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "aq-head",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }) : null, locked ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "aq-alert aq-alert--error",
+              children: "Course Recommendation is locked. Complete Basic Information, Academic Credentials, and Assessment Quiz first."
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "cr-actions",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                type: "button",
+                className: "aq-primary",
+                onClick: function onClick() {
+                  return navigate("/student");
+                },
+                children: "Go to Dashboard"
+              })
+            })]
+          }) : null, !locked ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "aq-head",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "aq-title",
+                  children: "Course Recommendation"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "aq-sub",
+                  children: "Based on your academic credentials and assessment results"
+                })]
+              })
+            }), (advisorStatus === "approved" || advisorStatus === "rejected" || advisorStatus === "interview") && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "cr-section",
+              style: {
+                marginTop: 16
+              },
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "aq-title",
-                children: "Course Recommendation"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "aq-sub",
-                children: "Based on your academic credentials and assessment results"
-              })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "cr-grid",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-              className: "cr-panel",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "cr-panel-title",
-                children: "Top 3 Suggested Courses"
-              }), top3.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "aq-top3",
-                children: top3.map(function (t) {
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                    className: "aq-top-card",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                      className: "aq-top-rank",
-                      children: ["#", t.rank]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                      className: "aq-top-name",
-                      children: isDegreeList ? "".concat(t.code, " \u2014 ").concat(t.name) : t.category
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                      className: "aq-top-score",
-                      children: isDegreeList ? "Track: ".concat(t.category) : "Score: ".concat(t.score)
-                    })]
-                  }, "".concat(t.category || "cat", "-").concat(t.code || t.rank || "x"));
-                })
+                className: "cr-section-title",
+                children: "Advisor Feedback"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "cr-par",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                  children: "Status:"
+                }), " ", advisorStatus.charAt(0).toUpperCase() + advisorStatus.slice(1)]
+              }), advisorComment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "cr-par",
+                style: {
+                  marginTop: 4,
+                  whiteSpace: "pre-wrap"
+                },
+                children: advisorComment
               }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "aq-muted",
-                children: "No assessment result found yet. Please complete the Assessment Quiz first."
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "cr-actions",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                  type: "button",
-                  className: "aq-primary",
-                  onClick: function onClick() {
-                    return navigate("/student/assessment-quiz");
-                  },
-                  children: "Go to Assessment Quiz"
-                })
+                className: "cr-par",
+                style: {
+                  marginTop: 4
+                },
+                children: "No comments from your advisor yet."
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-              className: "cr-panel",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "cr-panel-title",
-                children: "Your Saved Credentials"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "cr-kv",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "cr-k",
-                    children: "Name"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "cr-v",
-                    children: (user === null || user === void 0 ? void 0 : user.name) || "—"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "cr-k",
-                    children: "Email"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "cr-v",
-                    children: (user === null || user === void 0 ? void 0 : user.email) || "—"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "cr-k",
-                    children: "SHS Strand"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "cr-v",
-                    children: (profile === null || profile === void 0 ? void 0 : profile.shs_strand) || "—"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "cr-k",
-                    children: "SHS General Average"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "cr-v",
-                    children: (_profile$shs_general_ = profile === null || profile === void 0 ? void 0 : profile.shs_general_average) !== null && _profile$shs_general_ !== void 0 ? _profile$shs_general_ : "—"
-                  })]
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "cr-section",
+              className: "cr-grid",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "cr-panel",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "cr-section-title",
-                  children: "Academic Records"
-                }), Array.isArray(profile === null || profile === void 0 ? void 0 : profile.subject_grades) && profile.subject_grades.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  className: "cr-table",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                    className: "cr-tr cr-th",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                      children: "Subject"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                      children: "Grade"
-                    })]
-                  }), profile.subject_grades.map(function (r, idx) {
-                    var _r$grade;
+                  className: "cr-panel-title",
+                  children: "Top 3 Suggested Courses"
+                }), top3.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "aq-top3",
+                  children: top3.map(function (t) {
                     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                      className: "cr-tr",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                        children: (r === null || r === void 0 ? void 0 : r.subject) || "—"
+                      className: "aq-top-card",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                        className: "aq-top-rank",
+                        children: ["#", t.rank]
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                        children: (_r$grade = r === null || r === void 0 ? void 0 : r.grade) !== null && _r$grade !== void 0 ? _r$grade : "—"
+                        className: "aq-top-name",
+                        children: isDegreeList ? "".concat(t.code, " \u2014 ").concat(t.name) : t.category
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        className: "aq-top-score",
+                        children: isDegreeList ? "Track: ".concat(t.category) : "Score: ".concat(t.score)
                       })]
-                    }, idx);
-                  })]
-                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "aq-muted",
-                  children: "No subjects saved yet."
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "cr-section",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "cr-section-title",
-                  children: "Skills"
-                }), Array.isArray(profile === null || profile === void 0 ? void 0 : profile.skills) && profile.skills.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "cr-tags",
-                  children: profile.skills.map(function (s, idx) {
-                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                      className: "cr-tag",
-                      children: s
-                    }, idx);
+                    }, "".concat(t.category || "cat", "-").concat(t.code || t.rank || "x"));
                   })
                 }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                   className: "aq-muted",
-                  children: "No skills saved yet."
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "cr-section",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "cr-section-title",
-                  children: "Career Goals"
+                  children: "No assessment result found yet. Please complete the Assessment Quiz first."
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "cr-par",
-                  children: profile !== null && profile !== void 0 && profile.career_goals ? profile.career_goals : "—"
+                  className: "cr-actions",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                    type: "button",
+                    className: "aq-primary",
+                    onClick: function onClick() {
+                      return navigate("/student/assessment-quiz");
+                    },
+                    children: "Go to Assessment Quiz"
+                  })
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "cr-section",
+                className: "cr-panel",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "cr-section-title",
-                  children: "Attachments"
+                  className: "cr-panel-title",
+                  children: "Your Saved Credentials"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  className: "cr-attach",
+                  className: "cr-kv",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                    className: "cr-attach-row",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                       className: "cr-k",
-                      children: "Report Card"
-                    }), reportCardUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-                      className: "cr-link",
-                      href: reportCardUrl,
-                      target: "_blank",
-                      rel: "noreferrer",
-                      children: ["View (", formatFileName(profile.report_card_path), ")"]
-                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      children: "Name"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                       className: "cr-v",
-                      children: "\u2014"
+                      children: (user === null || user === void 0 ? void 0 : user.name) || "—"
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                    className: "cr-attach-row",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                       className: "cr-k",
-                      children: "Skill Certificates"
-                    }), skillAttachmentUrls.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                      className: "cr-links",
-                      children: skillAttachmentUrls.map(function (f) {
-                        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-                          className: "cr-link",
-                          href: f.url,
-                          target: "_blank",
-                          rel: "noreferrer",
-                          children: f.name
-                        }, f.path);
-                      })
-                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      children: "Email"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                       className: "cr-v",
-                      children: "\u2014"
+                      children: (user === null || user === void 0 ? void 0 : user.email) || "—"
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      className: "cr-k",
+                      children: "SHS Strand"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      className: "cr-v",
+                      children: (profile === null || profile === void 0 ? void 0 : profile.shs_strand) || "—"
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      className: "cr-k",
+                      children: "SHS General Average"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      className: "cr-v",
+                      children: (_profile$shs_general_ = profile === null || profile === void 0 ? void 0 : profile.shs_general_average) !== null && _profile$shs_general_ !== void 0 ? _profile$shs_general_ : "—"
+                    })]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "cr-section",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "cr-section-title",
+                    children: "Academic Records"
+                  }), Array.isArray(profile === null || profile === void 0 ? void 0 : profile.subject_grades) && profile.subject_grades.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "cr-table",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      className: "cr-tr cr-th",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        children: "Subject"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        children: "Grade"
+                      })]
+                    }), profile.subject_grades.map(function (r, idx) {
+                      var _r$grade;
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                        className: "cr-tr",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                          children: (r === null || r === void 0 ? void 0 : r.subject) || "—"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                          children: (_r$grade = r === null || r === void 0 ? void 0 : r.grade) !== null && _r$grade !== void 0 ? _r$grade : "—"
+                        })]
+                      }, idx);
+                    })]
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "aq-muted",
+                    children: "No subjects saved yet."
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "cr-section",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "cr-section-title",
+                    children: "Skills"
+                  }), Array.isArray(profile === null || profile === void 0 ? void 0 : profile.skills) && profile.skills.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "cr-tags",
+                    children: profile.skills.map(function (s, idx) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                        className: "cr-tag",
+                        children: s
+                      }, idx);
+                    })
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "aq-muted",
+                    children: "No skills saved yet."
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "cr-section",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "cr-section-title",
+                    children: "Career Goals"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "cr-par",
+                    children: profile !== null && profile !== void 0 && profile.career_goals ? profile.career_goals : "—"
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "cr-section",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "cr-section-title",
+                    children: "Attachments"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "cr-attach",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      className: "cr-attach-row",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        className: "cr-k",
+                        children: "Report Card"
+                      }), reportCardUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+                        className: "cr-link",
+                        href: reportCardUrl,
+                        target: "_blank",
+                        rel: "noreferrer",
+                        children: ["View (", formatFileName(profile.report_card_path), ")"]
+                      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        className: "cr-v",
+                        children: "\u2014"
+                      })]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      className: "cr-attach-row",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        className: "cr-k",
+                        children: "Skill Certificates"
+                      }), skillAttachmentUrls.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        className: "cr-links",
+                        children: skillAttachmentUrls.map(function (f) {
+                          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                            className: "cr-link",
+                            href: f.url,
+                            target: "_blank",
+                            rel: "noreferrer",
+                            children: f.name
+                          }, f.path);
+                        })
+                      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        className: "cr-v",
+                        children: "\u2014"
+                      })]
                     })]
                   })]
                 })]
               })]
             })]
-          })]
+          }) : null]
         })
       })
     })]
@@ -88171,14 +89491,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var _ui_toast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui/toast */ "./resources/js/components/ui/toast.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
@@ -88225,6 +89549,72 @@ function formatApptFull(dt) {
     hour: "2-digit",
     minute: "2-digit"
   });
+}
+function formatTimeHHMM(t) {
+  var s = String(t || "").trim();
+  if (!s) return "";
+  // Handles "HH:MM" or "HH:MM:SS"
+  return s.length >= 5 ? s.slice(0, 5) : s;
+}
+function formatLocalDateLabel(raw) {
+  var s = String(raw || "").trim();
+  if (!s) return "";
+
+  // Prefer date-only parsing to avoid timezone shifting.
+  // Handles "YYYY-MM-DD" and ISO strings like "YYYY-MM-DDT...".
+  var ymd = s.includes("T") ? s.slice(0, 10) : s;
+  var m = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/.exec(ymd);
+  if (m) {
+    var year = Number(m[1]);
+    var month = Number(m[2]);
+    var day = Number(m[3]);
+    var d = new Date(year, Math.max(0, month - 1), day);
+    if (!Number.isNaN(d.getTime())) {
+      return d.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+  }
+
+  // Fallback
+  try {
+    var _d = new Date(s);
+    if (!Number.isNaN(_d.getTime())) {
+      return _d.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    }
+  } catch (_unused) {
+    // ignore
+  }
+  return s;
+}
+function formatHHMMToAMPM(hhmm) {
+  var s = String(hhmm || "").trim();
+  if (!s) return "";
+  var m = /^([0-9]{1,2}):([0-9]{2})$/.exec(s);
+  if (!m) return s;
+  var h = Number(m[1]);
+  var min = Number(m[2]);
+  var d = new Date(2000, 0, 1, h, min, 0);
+  if (Number.isNaN(d.getTime())) return s;
+  return d.toLocaleTimeString(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true
+  });
+}
+function formatInterviewWhen(item) {
+  var date = formatLocalDateLabel((item === null || item === void 0 ? void 0 : item.interview_date) || "");
+  var time = formatHHMMToAMPM(formatTimeHHMM((item === null || item === void 0 ? void 0 : item.interview_time) || ""));
+  if (date && time) return "".concat(date, " \u2022 ").concat(time);
+  if (date) return date;
+  if (time) return time;
+  return "—";
 }
 function StudentPortal() {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
@@ -88289,46 +89679,70 @@ function StudentPortal() {
     _useState26 = _slicedToArray(_useState25, 2),
     notifLoading = _useState26[0],
     setNotifLoading = _useState26[1];
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+      try {
+        var raw = localStorage.getItem("studentNotifDismissedIds");
+        var parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed.map(String) : [];
+      } catch (_unused2) {
+        return [];
+      }
+    }),
     _useState28 = _slicedToArray(_useState27, 2),
-    schoolCalOpen = _useState28[0],
-    setSchoolCalOpen = _useState28[1];
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    notifDismissedIds = _useState28[0],
+    setNotifDismissedIds = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+      try {
+        var raw = localStorage.getItem("studentNotifLastSeenTs");
+        var n = raw ? Number(raw) : 0;
+        return Number.isFinite(n) ? n : 0;
+      } catch (_unused3) {
+        return 0;
+      }
+    }),
     _useState30 = _slicedToArray(_useState29, 2),
-    avatarFile = _useState30[0],
-    setAvatarFile = _useState30[1];
-  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    notifLastSeenTs = _useState30[0],
+    setNotifLastSeenTs = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState32 = _slicedToArray(_useState31, 2),
-    avatarPreview = _useState32[0],
-    setAvatarPreview = _useState32[1];
-  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    schoolCalOpen = _useState32[0],
+    setSchoolCalOpen = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState34 = _slicedToArray(_useState33, 2),
-    avatarSaving = _useState34[0],
-    setAvatarSaving = _useState34[1];
+    avatarFile = _useState34[0],
+    setAvatarFile = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState36 = _slicedToArray(_useState35, 2),
+    avatarPreview = _useState36[0],
+    setAvatarPreview = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState38 = _slicedToArray(_useState37, 2),
+    avatarSaving = _useState38[0],
+    setAvatarSaving = _useState38[1];
   var avatarInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
       try {
         return localStorage.getItem("theme") === "dark";
-      } catch (_unused) {
+      } catch (_unused4) {
         return false;
       }
     }),
-    _useState36 = _slicedToArray(_useState35, 2),
-    darkMode = _useState36[0],
-    setDarkMode = _useState36[1];
-  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    _useState40 = _slicedToArray(_useState39, 2),
+    darkMode = _useState40[0],
+    setDarkMode = _useState40[1];
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       current_password: "",
       password: "",
       password_confirmation: ""
     }),
-    _useState38 = _slicedToArray(_useState37, 2),
-    pwForm = _useState38[0],
-    setPwForm = _useState38[1];
-  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState40 = _slicedToArray(_useState39, 2),
-    pwSaving = _useState40[0],
-    setPwSaving = _useState40[1];
-  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    _useState42 = _slicedToArray(_useState41, 2),
+    pwForm = _useState42[0],
+    setPwForm = _useState42[1];
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState44 = _slicedToArray(_useState43, 2),
+    pwSaving = _useState44[0],
+    setPwSaving = _useState44[1];
+  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       name: "",
       email: "",
       age: "",
@@ -88336,9 +89750,9 @@ function StudentPortal() {
       contact_number: "",
       high_school: ""
     }),
-    _useState42 = _slicedToArray(_useState41, 2),
-    editForm = _useState42[0],
-    setEditForm = _useState42[1];
+    _useState46 = _slicedToArray(_useState45, 2),
+    editForm = _useState46[0],
+    setEditForm = _useState46[1];
   var fullName = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     if (!(user !== null && user !== void 0 && user.name)) return "Student";
     return user.name;
@@ -88351,7 +89765,7 @@ function StudentPortal() {
     }
     try {
       setUser(JSON.parse(stored));
-    } catch (_unused2) {
+    } catch (_unused5) {
       localStorage.removeItem("user");
       navigate("/login");
     }
@@ -88360,7 +89774,7 @@ function StudentPortal() {
     try {
       document.body.dataset.theme = darkMode ? "dark" : "light";
       localStorage.setItem("theme", darkMode ? "dark" : "light");
-    } catch (_unused3) {
+    } catch (_unused6) {
       // ignore
     }
   }, [darkMode]);
@@ -88372,7 +89786,7 @@ function StudentPortal() {
     }
     var fetchProfile = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _res$data, res, _t;
+        var _res$data, _res$data2, res, serverUser, avatarUrl, cacheBusted, nextUser, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -88388,7 +89802,21 @@ function StudentPortal() {
               });
             case 2:
               res = _context.v;
-              setProfile(((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.profile) || null);
+              serverUser = ((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.user) || null;
+              avatarUrl = serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url;
+              cacheBusted = avatarUrl ? "".concat(avatarUrl).concat(avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now()) : null;
+              if (serverUser) {
+                nextUser = cacheBusted ? _objectSpread(_objectSpread({}, serverUser), {}, {
+                  avatar_url: cacheBusted
+                }) : serverUser;
+                setUser(nextUser);
+                try {
+                  localStorage.setItem("user", JSON.stringify(nextUser));
+                } catch (_unused7) {
+                  // ignore
+                }
+              }
+              setProfile(((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.profile) || null);
               _context.n = 4;
               break;
             case 3:
@@ -88416,7 +89844,7 @@ function StudentPortal() {
     if (!token) return;
     var fetchUpcoming = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-        var _res$data2, res, _t2;
+        var _res$data3, res, _t2;
         return _regenerator().w(function (_context2) {
           while (1) switch (_context2.p = _context2.n) {
             case 0:
@@ -88431,7 +89859,7 @@ function StudentPortal() {
               });
             case 1:
               res = _context2.v;
-              setUpcoming(((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.appointments) || []);
+              setUpcoming(((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.appointments) || []);
               _context2.n = 3;
               break;
             case 2:
@@ -88481,12 +89909,21 @@ function StudentPortal() {
     });
     return "Next appointment: ".concat(when);
   }, [nextUpcoming]);
-  var loadNotifications = /*#__PURE__*/function () {
+  var fetchNotifications = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-      var token, _res$data3, res, _t3;
+      var _ref4,
+        showLoading,
+        token,
+        _res$data4,
+        res,
+        _args3 = arguments,
+        _t3;
       return _regenerator().w(function (_context3) {
         while (1) switch (_context3.p = _context3.n) {
           case 0:
+            _ref4 = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {
+              showLoading: false
+            }, showLoading = _ref4.showLoading;
             token = localStorage.getItem("authToken");
             if (token) {
               _context3.n = 1;
@@ -88494,7 +89931,7 @@ function StudentPortal() {
             }
             return _context3.a(2);
           case 1:
-            setNotifLoading(true);
+            if (showLoading) setNotifLoading(true);
             _context3.p = 2;
             _context3.n = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/notifications?limit=10", {
@@ -88506,7 +89943,7 @@ function StudentPortal() {
             });
           case 3:
             res = _context3.v;
-            setNotifs(((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.notifications) || []);
+            setNotifs(((_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.notifications) || []);
             _context3.n = 5;
             break;
           case 4:
@@ -88515,17 +89952,134 @@ function StudentPortal() {
             setNotifs([]);
           case 5:
             _context3.p = 5;
-            setNotifLoading(false);
+            if (showLoading) setNotifLoading(false);
             return _context3.f(5);
           case 6:
             return _context3.a(2);
         }
       }, _callee3, null, [[2, 4, 5, 6]]);
     }));
-    return function loadNotifications() {
+    return function fetchNotifications() {
       return _ref3.apply(this, arguments);
     };
   }();
+  var loadNotifications = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.n) {
+          case 0:
+            return _context4.a(2, fetchNotifications({
+              showLoading: true
+            }));
+        }
+      }, _callee4);
+    }));
+    return function loadNotifications() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  // Keep notification badge updated automatically (so the user doesn't need to click the bell).
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var token = localStorage.getItem("authToken");
+    if (!token) return;
+    var stopped = false;
+    var tick = /*#__PURE__*/function () {
+      var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+        return _regenerator().w(function (_context5) {
+          while (1) switch (_context5.n) {
+            case 0:
+              if (!stopped) {
+                _context5.n = 1;
+                break;
+              }
+              return _context5.a(2);
+            case 1:
+              if (!(typeof document !== "undefined" && document.hidden)) {
+                _context5.n = 2;
+                break;
+              }
+              return _context5.a(2);
+            case 2:
+              _context5.n = 3;
+              return fetchNotifications({
+                showLoading: false
+              });
+            case 3:
+              return _context5.a(2);
+          }
+        }, _callee5);
+      }));
+      return function tick() {
+        return _ref6.apply(this, arguments);
+      };
+    }();
+
+    // Initial fetch for badge count.
+    tick();
+
+    // Poll periodically.
+    var id = setInterval(tick, 30000);
+
+    // Refresh quickly when tab becomes active again.
+    var onVis = function onVis() {
+      if (!document.hidden) tick();
+    };
+    document.addEventListener("visibilitychange", onVis);
+    return function () {
+      stopped = true;
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", onVis);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  var unreadNotifCount = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var items = Array.isArray(notifs) ? notifs : [];
+    if (!items.length) return 0;
+    var dismissed = new Set((Array.isArray(notifDismissedIds) ? notifDismissedIds : []).map(String));
+    var visible = items.filter(function (n) {
+      return !dismissed.has(String(n === null || n === void 0 ? void 0 : n.id));
+    });
+    if (!visible.length) return 0;
+    return visible.filter(function (n) {
+      var dt = (n === null || n === void 0 ? void 0 : n.updated_at) || (n === null || n === void 0 ? void 0 : n.created_at) || (n === null || n === void 0 ? void 0 : n.scheduled_at) || (n === null || n === void 0 ? void 0 : n.preferred_at);
+      if (!dt) return true; // conservative: treat unknown timestamps as unread
+      var t = new Date(dt).getTime();
+      if (!Number.isFinite(t)) return true;
+      return t > (notifLastSeenTs || 0);
+    }).length;
+  }, [notifs, notifDismissedIds, notifLastSeenTs]);
+  var visibleNotifs = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var items = Array.isArray(notifs) ? notifs : [];
+    if (!items.length) return [];
+    var dismissed = new Set((Array.isArray(notifDismissedIds) ? notifDismissedIds : []).map(String));
+    return items.filter(function (n) {
+      return !dismissed.has(String(n === null || n === void 0 ? void 0 : n.id));
+    });
+  }, [notifs, notifDismissedIds]);
+  var dismissNotification = function dismissNotification(n) {
+    var id = String((n === null || n === void 0 ? void 0 : n.id) || "");
+    if (!id) return;
+    setNotifDismissedIds(function (prev) {
+      var cur = Array.isArray(prev) ? prev.map(String) : [];
+      var next = Array.from(new Set([id].concat(_toConsumableArray(cur)))).slice(0, 200);
+      try {
+        localStorage.setItem("studentNotifDismissedIds", JSON.stringify(next));
+      } catch (_unused1) {
+        // ignore
+      }
+      return next;
+    });
+  };
+  var markNotificationsSeenNow = function markNotificationsSeenNow() {
+    var now = Date.now();
+    setNotifLastSeenTs(now);
+    try {
+      localStorage.setItem("studentNotifLastSeenTs", String(now));
+    } catch (_unused10) {
+      // ignore
+    }
+  };
   var completion = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var u = user;
     var p = profile;
@@ -88563,6 +90117,9 @@ function StudentPortal() {
       advisorStatus: advisorStatus
     };
   }, [user, profile]);
+  var isCourseRecommendationUnlocked = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return Boolean(completion.step1 && completion.step2 && completion.step3);
+  }, [completion.step1, completion.step2, completion.step3]);
   var progressMetaText = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     if (loading) return "Loading progress…";
 
@@ -88572,6 +90129,22 @@ function StudentPortal() {
     }
     return "".concat(completion.percent, "% complete - ").concat(completion.remaining, " step").concat(completion.remaining === 1 ? "" : "s", " remaining");
   }, [completion.percent, completion.remaining, completion.step4, completion.step5, loading]);
+  var interviewSchedule = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var p = profile;
+    var status = String((p === null || p === void 0 ? void 0 : p.advisor_status) || "pending").toLowerCase();
+    if (status !== "interview") return null;
+    var rawDate = p === null || p === void 0 ? void 0 : p.advisor_interview_date;
+    var timeHHMM = formatTimeHHMM(p === null || p === void 0 ? void 0 : p.advisor_interview_time);
+    var venue = String((p === null || p === void 0 ? void 0 : p.advisor_interview_venue) || "").trim();
+    if (!rawDate || !timeHHMM || !venue) return null;
+    var dateLabel = formatLocalDateLabel(rawDate);
+    var timeLabel = formatHHMMToAMPM(timeHHMM);
+    return {
+      date: dateLabel,
+      time: timeLabel,
+      venue: venue
+    };
+  }, [profile]);
   var pillText = function pillText(isComplete) {
     return isComplete ? "Completed" : "Pending";
   };
@@ -88587,18 +90160,18 @@ function StudentPortal() {
     }) : null;
   };
   var handleLogout = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
       var token;
-      return _regenerator().w(function (_context4) {
-        while (1) switch (_context4.p = _context4.n) {
+      return _regenerator().w(function (_context6) {
+        while (1) switch (_context6.p = _context6.n) {
           case 0:
             token = localStorage.getItem("authToken");
-            _context4.p = 1;
+            _context6.p = 1;
             if (!token) {
-              _context4.n = 2;
+              _context6.n = 2;
               break;
             }
-            _context4.n = 2;
+            _context6.n = 2;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/logout", {}, {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -88607,19 +90180,19 @@ function StudentPortal() {
               withCredentials: true
             });
           case 2:
-            _context4.p = 2;
+            _context6.p = 2;
             localStorage.removeItem("authToken");
             localStorage.removeItem("user");
             localStorage.removeItem("userRole");
             navigate("/login");
-            return _context4.f(2);
+            return _context6.f(2);
           case 3:
-            return _context4.a(2);
+            return _context6.a(2);
         }
-      }, _callee4, null, [[1,, 2, 3]]);
+      }, _callee6, null, [[1,, 2, 3]]);
     }));
     return function handleLogout() {
-      return _ref4.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }();
   var roleLabel = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
@@ -88652,6 +90225,13 @@ function StudentPortal() {
     });
     setAccountOpen(true);
   };
+  var openCourseRecommendation = function openCourseRecommendation() {
+    if (!isCourseRecommendationUnlocked) {
+      _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.info("Finish Basic Information, Academic Credentials, and Assessment Quiz first.");
+      return;
+    }
+    navigate("/student/course-recommendation");
+  };
   var onPickAvatar = function onPickAvatar(file) {
     if (!file) {
       setAvatarFile(null);
@@ -88673,39 +90253,39 @@ function StudentPortal() {
       if (avatarPreview) {
         try {
           URL.revokeObjectURL(avatarPreview);
-        } catch (_unused7) {
+        } catch (_unused11) {
           // ignore
         }
       }
     };
   }, [avatarPreview]);
   var saveAvatar = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
-      var token, _res$data6, form, res, _me$data, _res$data4, me, serverUser, avatarUrl, cacheBusted, _me$data2, next, _res$data5, _avatarUrl, _cacheBusted, _e$response, msg, _t4, _t5;
-      return _regenerator().w(function (_context5) {
-        while (1) switch (_context5.p = _context5.n) {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+      var token, _res$data7, form, res, _me$data, _res$data5, me, serverUser, avatarUrl, cacheBusted, _me$data2, next, _res$data6, _avatarUrl, _cacheBusted, _e$response, msg, _t4, _t5;
+      return _regenerator().w(function (_context7) {
+        while (1) switch (_context7.p = _context7.n) {
           case 0:
             token = localStorage.getItem("authToken");
             if (token) {
-              _context5.n = 1;
+              _context7.n = 1;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Your session expired. Please log in again.");
             navigate("/login");
-            return _context5.a(2);
+            return _context7.a(2);
           case 1:
             if (avatarFile) {
-              _context5.n = 2;
+              _context7.n = 2;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.info("Please choose an image first.");
-            return _context5.a(2);
+            return _context7.a(2);
           case 2:
-            _context5.p = 2;
+            _context7.p = 2;
             setAvatarSaving(true);
             form = new FormData();
             form.append("avatar", avatarFile);
-            _context5.n = 3;
+            _context7.n = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/profile/avatar", form, {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -88714,9 +90294,9 @@ function StudentPortal() {
               withCredentials: true
             });
           case 3:
-            res = _context5.v;
-            _context5.p = 4;
-            _context5.n = 5;
+            res = _context7.v;
+            _context7.p = 4;
+            _context7.n = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -88725,9 +90305,9 @@ function StudentPortal() {
               withCredentials: true
             });
           case 5:
-            me = _context5.v;
+            me = _context7.v;
             serverUser = (_me$data = me.data) === null || _me$data === void 0 ? void 0 : _me$data.user;
-            avatarUrl = (serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url) || ((_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.avatar_url);
+            avatarUrl = (serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url) || ((_res$data5 = res.data) === null || _res$data5 === void 0 ? void 0 : _res$data5.avatar_url);
             cacheBusted = avatarUrl ? "".concat(avatarUrl).concat(avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now()) : null;
             if (serverUser) {
               next = _objectSpread(_objectSpread({}, serverUser), {}, {
@@ -88737,7 +90317,7 @@ function StudentPortal() {
               setProfile(((_me$data2 = me.data) === null || _me$data2 === void 0 ? void 0 : _me$data2.profile) || null);
               try {
                 localStorage.setItem("user", JSON.stringify(next));
-              } catch (_unused8) {
+              } catch (_unused12) {
                 // ignore
               }
             } else if (avatarUrl) {
@@ -88747,18 +90327,18 @@ function StudentPortal() {
                 });
                 try {
                   localStorage.setItem("user", JSON.stringify(next));
-                } catch (_unused9) {
+                } catch (_unused13) {
                   // ignore
                 }
                 return next;
               });
             }
-            _context5.n = 7;
+            _context7.n = 7;
             break;
           case 6:
-            _context5.p = 6;
-            _t4 = _context5.v;
-            _avatarUrl = (_res$data5 = res.data) === null || _res$data5 === void 0 ? void 0 : _res$data5.avatar_url;
+            _context7.p = 6;
+            _t4 = _context7.v;
+            _avatarUrl = (_res$data6 = res.data) === null || _res$data6 === void 0 ? void 0 : _res$data6.avatar_url;
             if (_avatarUrl) {
               _cacheBusted = "".concat(_avatarUrl).concat(_avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now());
               setUser(function (u) {
@@ -88767,179 +90347,38 @@ function StudentPortal() {
                 });
                 try {
                   localStorage.setItem("user", JSON.stringify(next));
-                } catch (_unused1) {
+                } catch (_unused15) {
                   // ignore
                 }
                 return next;
               });
             }
           case 7:
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data6 = res.data) === null || _res$data6 === void 0 ? void 0 : _res$data6.message) || "Profile photo updated.");
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data7 = res.data) === null || _res$data7 === void 0 ? void 0 : _res$data7.message) || "Profile photo updated.");
             // Avatar upload now lives inside the Profile Settings modal.
-            _context5.n = 9;
+            _context7.n = 9;
             break;
           case 8:
-            _context5.p = 8;
-            _t5 = _context5.v;
+            _context7.p = 8;
+            _t5 = _context7.v;
             msg = (_t5 === null || _t5 === void 0 || (_e$response = _t5.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Couldn’t upload profile photo.";
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
           case 9:
-            _context5.p = 9;
+            _context7.p = 9;
             setAvatarSaving(false);
-            return _context5.f(9);
+            return _context7.f(9);
           case 10:
-            return _context5.a(2);
+            return _context7.a(2);
         }
-      }, _callee5, null, [[4, 6], [2, 8, 9, 10]]);
+      }, _callee7, null, [[4, 6], [2, 8, 9, 10]]);
     }));
     return function saveAvatar() {
-      return _ref5.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }();
   var changePassword = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
-      var token, _res$data7, res, _e$response2, msg, _t6;
-      return _regenerator().w(function (_context6) {
-        while (1) switch (_context6.p = _context6.n) {
-          case 0:
-            token = localStorage.getItem("authToken");
-            if (token) {
-              _context6.n = 1;
-              break;
-            }
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Your session expired. Please log in again.");
-            navigate("/login");
-            return _context6.a(2);
-          case 1:
-            if (!pwSaving) {
-              _context6.n = 2;
-              break;
-            }
-            return _context6.a(2);
-          case 2:
-            if (String(pwForm.current_password || "").trim()) {
-              _context6.n = 3;
-              break;
-            }
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Please enter your current password.");
-            return _context6.a(2);
-          case 3:
-            if (!(String(pwForm.password || "").length < 8)) {
-              _context6.n = 4;
-              break;
-            }
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("New password must be at least 8 characters.");
-            return _context6.a(2);
-          case 4:
-            if (!(pwForm.password !== pwForm.password_confirmation)) {
-              _context6.n = 5;
-              break;
-            }
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("New password confirmation does not match.");
-            return _context6.a(2);
-          case 5:
-            _context6.p = 5;
-            setPwSaving(true);
-            _context6.n = 6;
-            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/account/password", {
-              current_password: pwForm.current_password,
-              password: pwForm.password,
-              password_confirmation: pwForm.password_confirmation
-            }, {
-              headers: {
-                Authorization: "Bearer ".concat(token),
-                Accept: "application/json"
-              },
-              withCredentials: true
-            });
-          case 6:
-            res = _context6.v;
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data7 = res.data) === null || _res$data7 === void 0 ? void 0 : _res$data7.message) || "Password updated.");
-            setAccountOpen(false);
-            _context6.n = 8;
-            break;
-          case 7:
-            _context6.p = 7;
-            _t6 = _context6.v;
-            msg = (_t6 === null || _t6 === void 0 || (_e$response2 = _t6.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Couldn’t change password.";
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
-          case 8:
-            _context6.p = 8;
-            setPwSaving(false);
-            return _context6.f(8);
-          case 9:
-            return _context6.a(2);
-        }
-      }, _callee6, null, [[5, 7, 8, 9]]);
-    }));
-    return function changePassword() {
-      return _ref6.apply(this, arguments);
-    };
-  }();
-  var saveProfile = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
-      var token, _res$data8, _res$data9, _res$data0, payload, res, newUser, newProfile, _e$response3, msg, _t7;
-      return _regenerator().w(function (_context7) {
-        while (1) switch (_context7.p = _context7.n) {
-          case 0:
-            token = localStorage.getItem("authToken");
-            if (token) {
-              _context7.n = 1;
-              break;
-            }
-            return _context7.a(2);
-          case 1:
-            setSaving(true);
-            _context7.p = 2;
-            payload = {
-              name: String(editForm.name || "").trim(),
-              email: String(editForm.email || "").trim(),
-              age: Number(editForm.age),
-              gender: String(editForm.gender || "").trim(),
-              high_school: String(editForm.high_school || "").trim(),
-              contact_number: String(editForm.contact_number || "").trim()
-            };
-            _context7.n = 3;
-            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/profile/basic-info", payload, {
-              headers: {
-                Authorization: "Bearer ".concat(token),
-                Accept: "application/json"
-              },
-              withCredentials: true
-            });
-          case 3:
-            res = _context7.v;
-            // reflect immediately
-            newUser = ((_res$data8 = res.data) === null || _res$data8 === void 0 ? void 0 : _res$data8.user) || user;
-            newProfile = ((_res$data9 = res.data) === null || _res$data9 === void 0 ? void 0 : _res$data9.profile) || profile;
-            setUser(newUser);
-            setProfile(newProfile);
-            localStorage.setItem("user", JSON.stringify(newUser));
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data0 = res.data) === null || _res$data0 === void 0 ? void 0 : _res$data0.message) || "Profile updated.");
-            setEditOpen(false);
-            _context7.n = 5;
-            break;
-          case 4:
-            _context7.p = 4;
-            _t7 = _context7.v;
-            msg = (_t7 === null || _t7 === void 0 || (_e$response3 = _t7.response) === null || _e$response3 === void 0 || (_e$response3 = _e$response3.data) === null || _e$response3 === void 0 ? void 0 : _e$response3.message) || "Couldn’t save profile.";
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
-          case 5:
-            _context7.p = 5;
-            setSaving(false);
-            return _context7.f(5);
-          case 6:
-            return _context7.a(2);
-        }
-      }, _callee7, null, [[2, 4, 5, 6]]);
-    }));
-    return function saveProfile() {
-      return _ref7.apply(this, arguments);
-    };
-  }();
-  var submitRequest = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
-      var token, date, time, preferredAt, _res$data1, _list$data, res, list, _e$response4, msg, _t8;
+    var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
+      var token, _res$data8, res, _e$response2, msg, _t6;
       return _regenerator().w(function (_context8) {
         while (1) switch (_context8.p = _context8.n) {
           case 0:
@@ -88952,25 +90391,166 @@ function StudentPortal() {
             navigate("/login");
             return _context8.a(2);
           case 1:
-            if (!bookSubmitting) {
+            if (!pwSaving) {
               _context8.n = 2;
               break;
             }
             return _context8.a(2);
           case 2:
-            date = String(bookForm.date || "").trim();
-            time = String(bookForm.time || "").trim();
-            if (!(!date || !time)) {
+            if (String(pwForm.current_password || "").trim()) {
               _context8.n = 3;
               break;
             }
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Please select a date and time.");
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Please enter your current password.");
             return _context8.a(2);
           case 3:
+            if (!(String(pwForm.password || "").length < 8)) {
+              _context8.n = 4;
+              break;
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("New password must be at least 8 characters.");
+            return _context8.a(2);
+          case 4:
+            if (!(pwForm.password !== pwForm.password_confirmation)) {
+              _context8.n = 5;
+              break;
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("New password confirmation does not match.");
+            return _context8.a(2);
+          case 5:
+            _context8.p = 5;
+            setPwSaving(true);
+            _context8.n = 6;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/account/password", {
+              current_password: pwForm.current_password,
+              password: pwForm.password,
+              password_confirmation: pwForm.password_confirmation
+            }, {
+              headers: {
+                Authorization: "Bearer ".concat(token),
+                Accept: "application/json"
+              },
+              withCredentials: true
+            });
+          case 6:
+            res = _context8.v;
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data8 = res.data) === null || _res$data8 === void 0 ? void 0 : _res$data8.message) || "Password updated.");
+            setAccountOpen(false);
+            _context8.n = 8;
+            break;
+          case 7:
+            _context8.p = 7;
+            _t6 = _context8.v;
+            msg = (_t6 === null || _t6 === void 0 || (_e$response2 = _t6.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Couldn’t change password.";
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
+          case 8:
+            _context8.p = 8;
+            setPwSaving(false);
+            return _context8.f(8);
+          case 9:
+            return _context8.a(2);
+        }
+      }, _callee8, null, [[5, 7, 8, 9]]);
+    }));
+    return function changePassword() {
+      return _ref9.apply(this, arguments);
+    };
+  }();
+  var saveProfile = /*#__PURE__*/function () {
+    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9() {
+      var token, _res$data9, _res$data0, _res$data1, payload, res, newUser, newProfile, _e$response3, msg, _t7;
+      return _regenerator().w(function (_context9) {
+        while (1) switch (_context9.p = _context9.n) {
+          case 0:
+            token = localStorage.getItem("authToken");
+            if (token) {
+              _context9.n = 1;
+              break;
+            }
+            return _context9.a(2);
+          case 1:
+            setSaving(true);
+            _context9.p = 2;
+            payload = {
+              name: String(editForm.name || "").trim(),
+              email: String(editForm.email || "").trim(),
+              age: Number(editForm.age),
+              gender: String(editForm.gender || "").trim(),
+              high_school: String(editForm.high_school || "").trim(),
+              contact_number: String(editForm.contact_number || "").trim()
+            };
+            _context9.n = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/profile/basic-info", payload, {
+              headers: {
+                Authorization: "Bearer ".concat(token),
+                Accept: "application/json"
+              },
+              withCredentials: true
+            });
+          case 3:
+            res = _context9.v;
+            // reflect immediately
+            newUser = ((_res$data9 = res.data) === null || _res$data9 === void 0 ? void 0 : _res$data9.user) || user;
+            newProfile = ((_res$data0 = res.data) === null || _res$data0 === void 0 ? void 0 : _res$data0.profile) || profile;
+            setUser(newUser);
+            setProfile(newProfile);
+            localStorage.setItem("user", JSON.stringify(newUser));
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data1 = res.data) === null || _res$data1 === void 0 ? void 0 : _res$data1.message) || "Profile updated.");
+            setEditOpen(false);
+            _context9.n = 5;
+            break;
+          case 4:
+            _context9.p = 4;
+            _t7 = _context9.v;
+            msg = (_t7 === null || _t7 === void 0 || (_e$response3 = _t7.response) === null || _e$response3 === void 0 || (_e$response3 = _e$response3.data) === null || _e$response3 === void 0 ? void 0 : _e$response3.message) || "Couldn’t save profile.";
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
+          case 5:
+            _context9.p = 5;
+            setSaving(false);
+            return _context9.f(5);
+          case 6:
+            return _context9.a(2);
+        }
+      }, _callee9, null, [[2, 4, 5, 6]]);
+    }));
+    return function saveProfile() {
+      return _ref0.apply(this, arguments);
+    };
+  }();
+  var submitRequest = /*#__PURE__*/function () {
+    var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
+      var token, date, time, preferredAt, _res$data10, _list$data, res, list, _e$response4, msg, _t8;
+      return _regenerator().w(function (_context0) {
+        while (1) switch (_context0.p = _context0.n) {
+          case 0:
+            token = localStorage.getItem("authToken");
+            if (token) {
+              _context0.n = 1;
+              break;
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Your session expired. Please log in again.");
+            navigate("/login");
+            return _context0.a(2);
+          case 1:
+            if (!bookSubmitting) {
+              _context0.n = 2;
+              break;
+            }
+            return _context0.a(2);
+          case 2:
+            date = String(bookForm.date || "").trim();
+            time = String(bookForm.time || "").trim();
+            if (!(!date || !time)) {
+              _context0.n = 3;
+              break;
+            }
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Please select a date and time.");
+            return _context0.a(2);
+          case 3:
             preferredAt = "".concat(date, "T").concat(time, ":00");
-            _context8.p = 4;
+            _context0.p = 4;
             setBookSubmitting(true);
-            _context8.n = 5;
+            _context0.n = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/appointments", {
               session_type: String(bookForm.session_type || "Initial Consultation"),
               preferred_at: preferredAt,
@@ -88983,8 +90563,8 @@ function StudentPortal() {
               withCredentials: true
             });
           case 5:
-            res = _context8.v;
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data1 = res.data) === null || _res$data1 === void 0 ? void 0 : _res$data1.message) || "Appointment request sent.");
+            res = _context0.v;
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data10 = res.data) === null || _res$data10 === void 0 ? void 0 : _res$data10.message) || "Appointment request sent.");
             setBookOpen(false);
             setBookForm(function (p) {
               return _objectSpread(_objectSpread({}, p), {}, {
@@ -88993,7 +90573,7 @@ function StudentPortal() {
                 notes: ""
               });
             });
-            _context8.n = 6;
+            _context0.n = 6;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/appointments?scope=upcoming&limit=3", {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -89002,26 +90582,26 @@ function StudentPortal() {
               withCredentials: true
             });
           case 6:
-            list = _context8.v;
+            list = _context0.v;
             setUpcoming(((_list$data = list.data) === null || _list$data === void 0 ? void 0 : _list$data.appointments) || []);
-            _context8.n = 8;
+            _context0.n = 8;
             break;
           case 7:
-            _context8.p = 7;
-            _t8 = _context8.v;
+            _context0.p = 7;
+            _t8 = _context0.v;
             msg = (_t8 === null || _t8 === void 0 || (_e$response4 = _t8.response) === null || _e$response4 === void 0 || (_e$response4 = _e$response4.data) === null || _e$response4 === void 0 ? void 0 : _e$response4.message) || "Couldn’t send request.";
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
           case 8:
-            _context8.p = 8;
+            _context0.p = 8;
             setBookSubmitting(false);
-            return _context8.f(8);
+            return _context0.f(8);
           case 9:
-            return _context8.a(2);
+            return _context0.a(2);
         }
-      }, _callee8, null, [[4, 7, 8, 9]]);
+      }, _callee0, null, [[4, 7, 8, 9]]);
     }));
     return function submitRequest() {
-      return _ref8.apply(this, arguments);
+      return _ref1.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -89055,29 +90635,31 @@ function StudentPortal() {
             type: "button",
             title: "Notifications",
             "aria-label": "Notifications",
-            onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9() {
+            onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1() {
               var next;
-              return _regenerator().w(function (_context9) {
-                while (1) switch (_context9.n) {
+              return _regenerator().w(function (_context1) {
+                while (1) switch (_context1.n) {
                   case 0:
                     next = !notifOpen;
                     setNotifOpen(next);
                     if (!next) {
-                      _context9.n = 1;
+                      _context1.n = 2;
                       break;
                     }
-                    _context9.n = 1;
+                    _context1.n = 1;
                     return loadNotifications();
                   case 1:
-                    return _context9.a(2);
+                    markNotificationsSeenNow();
+                  case 2:
+                    return _context1.a(2);
                 }
-              }, _callee9);
+              }, _callee1);
             })),
-            children: ["\uD83D\uDD14", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+            children: ["\uD83D\uDD14", unreadNotifCount ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
               className: "sp-badge-dot",
-              "aria-label": "".concat(notifs.length, " items"),
-              children: notifs.length
-            })]
+              "aria-label": "".concat(unreadNotifCount, " unread"),
+              children: unreadNotifCount
+            }) : null]
           }), notifOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "sp-menu",
             style: {
@@ -89106,35 +90688,60 @@ function StudentPortal() {
                 padding: "10px 12px"
               },
               children: "Loading\u2026"
-            }) : null, !notifLoading && !notifs.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            }) : null, !notifLoading && !visibleNotifs.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "sp-muted",
               style: {
                 padding: "10px 12px"
               },
               children: "No notifications yet."
-            }) : null, !notifLoading && notifs.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            }) : null, !notifLoading && visibleNotifs.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "sp-menu-list",
-              children: notifs.map(function (n) {
+              children: visibleNotifs.map(function (n) {
                 var _n$advisor;
                 var st = String(n.status || "requested").toLowerCase();
                 var isScheduled = st === "scheduled";
+                var isInterview = st === "interview";
                 var isCancelled = st === "cancelled";
                 var isRejected = st === "rejected";
                 var isCompleted = st === "completed";
-                var title = isScheduled ? "Appointment confirmed" : isCancelled ? "Appointment cancelled" : isRejected ? "Appointment rejected" : isCompleted ? "Appointment completed" : "Appointment request sent";
-                var when = isScheduled ? formatApptFull(n.scheduled_at) : n.preferred_at ? "Preferred: ".concat(formatApptFull(n.preferred_at)) : "Preferred: —";
+                var title = isScheduled ? "Appointment confirmed" : isInterview ? "Interview scheduled" : isCancelled ? "Appointment cancelled" : isRejected ? "Appointment rejected" : isCompleted ? "Appointment completed" : "Appointment request sent";
+                var when = isScheduled ? formatApptFull(n.scheduled_at) : isInterview ? function () {
+                  var txt = formatInterviewWhen(n);
+                  if (txt !== "—") return txt.replace(" • ", " ");
+                  // Fallback to datetime parsing if raw fields aren't available.
+                  return n.scheduled_at ? formatApptFull(n.scheduled_at) : "—";
+                }() : n.preferred_at ? "Preferred: ".concat(formatApptFull(n.preferred_at)) : "Preferred: —";
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   className: "sp-menu-item",
                   role: "menuitem",
                   style: {
                     cursor: "default"
                   },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                     style: {
-                      fontWeight: 900,
-                      color: "#0f172a"
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 10
                     },
-                    children: title
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                      style: {
+                        fontWeight: 900,
+                        color: "#0f172a"
+                      },
+                      children: title
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                      type: "button",
+                      className: "sp-xbtn",
+                      "aria-label": "Dismiss notification",
+                      title: "Dismiss",
+                      onClick: function onClick(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        dismissNotification(n);
+                      },
+                      children: "\u2715"
+                    })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "sp-muted",
                     style: {
@@ -89152,7 +90759,7 @@ function StudentPortal() {
                       },
                       children: "When:"
                     }), " ", when]
-                  }), (isScheduled || isCancelled || isCompleted) && n.location ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  }), (isInterview || isScheduled || isCancelled || isCompleted) && n.location ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                     className: "sp-muted",
                     style: {
                       marginTop: 4
@@ -89163,7 +90770,7 @@ function StudentPortal() {
                       },
                       children: "Where:"
                     }), " ", n.location]
-                  }) : null, (isScheduled || isCancelled || isRejected || isCompleted) && (_n$advisor = n.advisor) !== null && _n$advisor !== void 0 && _n$advisor.name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  }) : null, (isInterview || isScheduled || isCancelled || isRejected || isCompleted) && (_n$advisor = n.advisor) !== null && _n$advisor !== void 0 && _n$advisor.name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                     className: "sp-muted",
                     style: {
                       marginTop: 4
@@ -89174,7 +90781,7 @@ function StudentPortal() {
                       },
                       children: "Advisor:"
                     }), " ", n.advisor.name]
-                  }) : null, (isScheduled || isCancelled || isRejected || isCompleted) && n.advisor_comment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  }) : null, (isInterview || isScheduled || isCancelled || isRejected || isCompleted) && n.advisor_comment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                     className: "sp-muted",
                     style: {
                       marginTop: 8,
@@ -89298,7 +90905,25 @@ function StudentPortal() {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                 children: "Recommendation Ready"
               })]
-            })]
+            }), interviewSchedule ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "sp-note",
+              style: {
+                marginTop: 12
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
+                children: "Interview scheduled"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                style: {
+                  marginTop: 6
+                },
+                children: ["Date: ", interviewSchedule.date, " \xA0\u2022\xA0 Time: ", interviewSchedule.time]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                style: {
+                  marginTop: 4
+                },
+                children: ["Venue: ", interviewSchedule.venue]
+              })]
+            }) : null]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("aside", {
           className: "sp-hero-right",
@@ -89347,7 +90972,7 @@ function StudentPortal() {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                       className: "sp-strong",
-                      children: a.scheduled_at ? "".concat(formatApptDate(a.scheduled_at), " \u2022 ").concat(formatApptTime(a.scheduled_at)) : "Awaiting schedule"
+                      children: String((a === null || a === void 0 ? void 0 : a.status) || "").toLowerCase() === "interview" ? formatInterviewWhen(a) : a.scheduled_at ? "".concat(formatApptDate(a.scheduled_at), " \u2022 ").concat(formatApptTime(a.scheduled_at)) : "Awaiting schedule"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                       className: "sp-muted",
                       children: a.session_type || "Advising Session"
@@ -89442,9 +91067,10 @@ function StudentPortal() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
           type: "button",
           className: "sp-card sp-card--button",
-          onClick: function onClick() {
-            return navigate("/student/course-recommendation");
-          },
+          onClick: openCourseRecommendation,
+          disabled: !isCourseRecommendationUnlocked,
+          "aria-disabled": !isCourseRecommendationUnlocked,
+          title: !isCourseRecommendationUnlocked ? "Locked until Steps 1 to 3 are completed" : "Open Course Recommendation",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "sp-card-icon",
             "aria-hidden": "true",
@@ -89456,10 +91082,10 @@ function StudentPortal() {
               children: ["Course Recommendation ", doneMark(completion.step4)]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "sp-card-sub",
-              children: "View your recommended programs"
+              children: isCourseRecommendationUnlocked ? "View your recommended programs" : "Complete Steps 1 to 3 to unlock"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-              className: pillClass(completion.step4),
-              children: pillText(completion.step4)
+              className: pillClass(isCourseRecommendationUnlocked && completion.step4),
+              children: isCourseRecommendationUnlocked ? pillText(completion.step4) : "Locked"
             })]
           })]
         })]

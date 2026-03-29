@@ -1,6 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "./ui/toast";
+
+function initials(nameOrEmail) {
+    const s = String(nameOrEmail || "").trim();
+    if (!s) return "A";
+    const parts = s.split(/\s+/).filter(Boolean);
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
 
 const DEPARTMENTS = [
     {
@@ -200,6 +210,7 @@ function statusPill(status) {
     const s = (status || "pending").toLowerCase();
     if (s === "approved") return { label: "Approved", cls: "am-pill am-pill--good" };
     if (s === "rejected") return { label: "Rejected", cls: "am-pill am-pill--bad" };
+    if (s === "interview") return { label: "Interview", cls: "am-pill" };
     return { label: "Pending", cls: "am-pill" };
 }
 
@@ -207,6 +218,37 @@ export default function AdminDashboard() {
     const navigate = useNavigate();
     const token = useMemo(() => localStorage.getItem("authToken"), []);
     const role = useMemo(() => localStorage.getItem("userRole"), []);
+
+    const [user, setUser] = useState(null);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [editOpen, setEditOpen] = useState(false);
+    const [accountOpen, setAccountOpen] = useState(false);
+    const [saving, setSaving] = useState(false);
+
+    const [avatarFile, setAvatarFile] = useState(null);
+    const [avatarPreview, setAvatarPreview] = useState("");
+    const [avatarSaving, setAvatarSaving] = useState(false);
+
+    const [editForm, setEditForm] = useState({
+        name: "",
+        email: "",
+    });
+
+    const [pwForm, setPwForm] = useState({
+        current_password: "",
+        password: "",
+        password_confirmation: "",
+    });
+    const [pwSaving, setPwSaving] = useState(false);
+
+    const [darkMode, setDarkMode] = useState(() => {
+        try {
+            return localStorage.getItem("theme") === "dark";
+        } catch {
+            return false;
+        }
+    });
+    const [schoolCalOpen, setSchoolCalOpen] = useState(false);
 
     const [activeTab, setActiveTab] = useState("overview");
     const [loading, setLoading] = useState(true);
@@ -227,7 +269,7 @@ export default function AdminDashboard() {
     });
 
     const [studentQ, setStudentQ] = useState("");
-    const [studentFilter, setStudentFilter] = useState("all"); // all | pending | approved | rejected
+    const [studentFilter, setStudentFilter] = useState("all"); // all | pending | interview | approved | rejected
     const [studentsLoading, setStudentsLoading] = useState(false);
     const [students, setStudents] = useState([]);
 
@@ -235,6 +277,175 @@ export default function AdminDashboard() {
         () => ({ Authorization: `Bearer ${token}`, Accept: "application/json" }),
         [token]
     );
+
+    const handleLogout = () => {
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("user");
+        localStorage.removeItem("userRole");
+        navigate("/login");
+    };
+
+    useEffect(() => {
+        try {
+            const raw = localStorage.getItem("user");
+            setUser(raw ? JSON.parse(raw) : null);
+        } catch {
+            setUser(null);
+        }
+    }, []);
+
+    useEffect(() => {
+        try {
+            document.body.dataset.theme = darkMode ? "dark" : "light";
+            localStorage.setItem("theme", darkMode ? "dark" : "light");
+        } catch {
+            // ignore
+        }
+    }, [darkMode]);
+
+    const refreshMe = async () => {
+        if (!token) return;
+        try {
+            const me = await axios.get("/api/profile", { headers, withCredentials: true });
+            const serverUser = me.data?.user || null;
+            const avatarUrl = serverUser?.avatar_url;
+            const cacheBusted = avatarUrl ? `${avatarUrl}${avatarUrl.includes("?") ? "&" : "?"}t=${Date.now()}` : null;
+            const nextUser = serverUser ? { ...serverUser, avatar_url: cacheBusted || avatarUrl } : null;
+            if (nextUser) {
+                setUser(nextUser);
+                try {
+                    localStorage.setItem("user", JSON.stringify(nextUser));
+                } catch {
+                    // ignore
+                }
+            }
+        } catch {
+            // ignore
+        }
+    };
+
+    const openEdit = () => {
+        setMenuOpen(false);
+        setEditForm({
+            name: user?.name || "",
+            email: user?.email || "",
+        });
+        setAvatarFile(null);
+        setAvatarPreview("");
+        setEditOpen(true);
+    };
+
+    const openAccount = () => {
+        setMenuOpen(false);
+        setPwForm({ current_password: "", password: "", password_confirmation: "" });
+        setAccountOpen(true);
+    };
+
+    const onPickAvatar = (file) => {
+        setAvatarFile(file || null);
+        if (!file) {
+            setAvatarPreview("");
+            return;
+        }
+        try {
+            const url = URL.createObjectURL(file);
+            setAvatarPreview(url);
+        } catch {
+            setAvatarPreview("");
+        }
+    };
+
+    const saveAvatar = async () => {
+        if (!token) return;
+        if (!avatarFile) {
+            toast.info("Please choose an image first.");
+            return;
+        }
+
+        try {
+            setAvatarSaving(true);
+            const form = new FormData();
+            form.append("avatar", avatarFile);
+            await axios.post("/api/profile/avatar", form, {
+                headers: { ...headers, "Content-Type": "multipart/form-data" },
+                withCredentials: true,
+            });
+            await refreshMe();
+            toast.success("Profile photo updated.");
+            setAvatarFile(null);
+            setAvatarPreview("");
+        } catch (e) {
+            const msg = e?.response?.data?.message || "Couldn’t update photo.";
+            toast.error(msg);
+        } finally {
+            setAvatarSaving(false);
+        }
+    };
+
+    const saveProfile = async () => {
+        if (!token) return;
+        const payload = {
+            name: String(editForm.name || "").trim(),
+            email: String(editForm.email || "").trim(),
+        };
+
+        try {
+            setSaving(true);
+            const res = await axios.put("/api/account/profile", payload, { headers, withCredentials: true });
+            const nextUser = res.data?.user || user;
+            if (nextUser) {
+                setUser(nextUser);
+                try {
+                    localStorage.setItem("user", JSON.stringify(nextUser));
+                } catch {
+                    // ignore
+                }
+            }
+            toast.success(res.data?.message || "Profile updated.");
+            setEditOpen(false);
+        } catch (e) {
+            const msg = e?.response?.data?.message || "Couldn’t save profile.";
+            toast.error(msg);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const changePassword = async () => {
+        if (!token) return;
+        if (!pwForm.current_password) {
+            toast.error("Please enter your current password.");
+            return;
+        }
+        if ((pwForm.password || "").length < 8) {
+            toast.error("New password must be at least 8 characters.");
+            return;
+        }
+        if (pwForm.password !== pwForm.password_confirmation) {
+            toast.error("New password confirmation does not match.");
+            return;
+        }
+
+        try {
+            setPwSaving(true);
+            const res = await axios.put(
+                "/api/account/password",
+                {
+                    current_password: pwForm.current_password,
+                    password: pwForm.password,
+                    password_confirmation: pwForm.password_confirmation,
+                },
+                { headers, withCredentials: true }
+            );
+            toast.success(res.data?.message || "Password updated.");
+            setAccountOpen(false);
+        } catch (e) {
+            const msg = e?.response?.data?.message || "Couldn’t change password.";
+            toast.error(msg);
+        } finally {
+            setPwSaving(false);
+        }
+    };
 
     useEffect(() => {
         if (!token) {
@@ -264,9 +475,9 @@ export default function AdminDashboard() {
         }
     };
 
-    const loadStudents = async (search = "") => {
-        setStudentsLoading(true);
-        setError(null);
+    const loadStudents = async (search = "", { showLoading } = { showLoading: true }) => {
+        if (showLoading) setStudentsLoading(true);
+        if (showLoading) setError(null);
         try {
             // Reuse advisor endpoint for student listing (already includes advisor_status and key profile fields).
             const res = await axios.get(`/api/advisor/students?q=${encodeURIComponent(search)}`, {
@@ -275,9 +486,9 @@ export default function AdminDashboard() {
             });
             setStudents(res.data?.students || []);
         } catch (e) {
-            setError(e?.response?.data?.message || "Failed to load students.");
+            if (showLoading) setError(e?.response?.data?.message || "Failed to load students.");
         } finally {
-            setStudentsLoading(false);
+            if (showLoading) setStudentsLoading(false);
         }
     };
 
@@ -285,6 +496,52 @@ export default function AdminDashboard() {
         load();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    // Students tab: auto-fetch so admin doesn't need to click Refresh.
+    const studentQRef = React.useRef("");
+    useEffect(() => {
+        studentQRef.current = studentQ;
+    }, [studentQ]);
+
+    useEffect(() => {
+        if (activeTab !== "students") return;
+
+        let stopped = false;
+
+        const tick = async ({ showLoading } = { showLoading: false }) => {
+            if (stopped) return;
+            if (typeof document !== "undefined" && document.hidden) return;
+            await loadStudents(studentQRef.current, { showLoading });
+        };
+
+        // Initial load for the tab.
+        tick({ showLoading: true });
+
+        // Poll periodically.
+        const id = setInterval(() => tick({ showLoading: false }), 30000);
+
+        const onVis = () => {
+            if (!document.hidden) tick({ showLoading: false });
+        };
+        document.addEventListener("visibilitychange", onVis);
+
+        return () => {
+            stopped = true;
+            clearInterval(id);
+            document.removeEventListener("visibilitychange", onVis);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeTab]);
+
+    // Auto-search as you type (debounced).
+    useEffect(() => {
+        if (activeTab !== "students") return;
+        const t = setTimeout(() => {
+            loadStudents(studentQ, { showLoading: false });
+        }, 250);
+        return () => clearTimeout(t);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [studentQ, activeTab]);
 
     const filteredStudents = useMemo(() => {
         const f = (studentFilter || "all").toLowerCase();
@@ -303,18 +560,55 @@ export default function AdminDashboard() {
                     </div>
                 </div>
 
-                <button
-                    type="button"
-                    className="am-logout"
-                    onClick={() => {
-                        localStorage.removeItem("authToken");
-                        localStorage.removeItem("user");
-                        localStorage.removeItem("userRole");
-                        navigate("/login");
-                    }}
-                >
-                    Logout
-                </button>
+                <div className="am-actions">
+                    <button
+                        className="sp-iconbtn"
+                        type="button"
+                        title="School Calendar"
+                        aria-label="Open school calendar"
+                        onClick={() => setSchoolCalOpen(true)}
+                    >
+                        📅
+                    </button>
+
+                    <div className="sp-profile">
+                        <button
+                            type="button"
+                            className="sp-avatarbtn"
+                            onClick={() => setMenuOpen((v) => !v)}
+                            aria-haspopup="menu"
+                            aria-expanded={menuOpen}
+                        >
+                            {user?.avatar_url ? (
+                                <img className="sp-avatar-img" src={user.avatar_url} alt="Profile avatar" />
+                            ) : (
+                                <span className="sp-avatar" aria-hidden="true">
+                                    {initials(user?.name || user?.email)}
+                                </span>
+                            )}
+                        </button>
+
+                        {menuOpen ? (
+                            <div className="sp-menu" role="menu">
+                                <div className="sp-menu-head">
+                                    <div className="sp-menu-name">{user?.name || "Administrator"}</div>
+                                    <div className="sp-menu-email">{user?.email || ""}</div>
+                                    <div className="sp-role">{String(user?.role || role || "admin").toLowerCase().replace(/^./, (c) => c.toUpperCase())}</div>
+                                </div>
+                                <button type="button" className="sp-menu-item" onClick={openEdit}>
+                                    Profile Settings
+                                </button>
+                                <button type="button" className="sp-menu-item" onClick={openAccount}>
+                                    Account Settings
+                                </button>
+                                <div className="sp-menu-sep" />
+                                <button type="button" className="sp-menu-item sp-menu-item--danger" onClick={handleLogout}>
+                                    Logout
+                                </button>
+                            </div>
+                        ) : null}
+                    </div>
+                </div>
             </header>
 
             <main className="am-main">
@@ -330,28 +624,28 @@ export default function AdminDashboard() {
                     <div className="am-stat">
                         <div className="am-stat-meta">
                             <div className="am-stat-label">Total Students</div>
-                            <div className="am-stat-icon am-stat-icon--blue" aria-hidden="true" />
+                            <div className="am-stat-icon am-stat-icon--blue" aria-hidden="true">👥</div>
                         </div>
                         <div className="am-stat-value">{stats.totalStudents}</div>
                     </div>
                     <div className="am-stat">
                         <div className="am-stat-meta">
                             <div className="am-stat-label">Completed Assessments</div>
-                            <div className="am-stat-icon am-stat-icon--green" aria-hidden="true" />
+                            <div className="am-stat-icon am-stat-icon--green" aria-hidden="true">🧾</div>
                         </div>
                         <div className="am-stat-value am-stat-value--green">{stats.completedAssessments}</div>
                     </div>
                     <div className="am-stat">
                         <div className="am-stat-meta">
                             <div className="am-stat-label">Pending Review</div>
-                            <div className="am-stat-icon am-stat-icon--orange" aria-hidden="true" />
+                            <div className="am-stat-icon am-stat-icon--orange" aria-hidden="true">⏳</div>
                         </div>
                         <div className="am-stat-value am-stat-value--orange">{stats.pendingReview}</div>
                     </div>
                     <div className="am-stat">
                         <div className="am-stat-meta">
                             <div className="am-stat-label">Average GPA</div>
-                            <div className="am-stat-icon am-stat-icon--purple" aria-hidden="true" />
+                            <div className="am-stat-icon am-stat-icon--purple" aria-hidden="true">📈</div>
                         </div>
                         <div className="am-stat-value am-stat-value--purple">{stats.averageGpa}</div>
                     </div>
@@ -448,33 +742,23 @@ export default function AdminDashboard() {
                                 </button>
                             </div>
 
-                            <div className="am-filters" role="tablist" aria-label="Student filters">
-                                {[
-                                    { key: "all", label: "All" },
-                                    { key: "pending", label: "Pending" },
-                                    { key: "approved", label: "Approved" },
-                                    { key: "rejected", label: "Rejected" },
-                                ].map((x) => (
-                                    <button
-                                        key={x.key}
-                                        type="button"
-                                        className={
-                                            studentFilter === x.key
-                                                ? "am-filter am-filter--active"
-                                                : "am-filter"
-                                        }
-                                        onClick={() => setStudentFilter(x.key)}
-                                        role="tab"
-                                        aria-selected={studentFilter === x.key}
+                            <div className="am-filters" aria-label="Student status filter">
+                                <div className="am-filterbox">
+                                    <div className="am-filterbox-label">Status</div>
+                                    <select
+                                        className="am-filterbox-select"
+                                        value={studentFilter}
+                                        onChange={(e) => setStudentFilter(e.target.value)}
+                                        aria-label="Filter students by status"
                                     >
-                                        {x.label}
-                                    </button>
-                                ))}
+                                        <option value="all">All</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="interview">Interview</option>
+                                        <option value="approved">Approved</option>
+                                        <option value="rejected">Rejected</option>
+                                    </select>
+                                </div>
                             </div>
-
-                            <button type="button" className="am-btn am-btn--ghost" onClick={() => loadStudents(studentQ)}>
-                                Refresh
-                            </button>
                         </div>
 
                         <div className="am-student-head">
@@ -573,6 +857,185 @@ export default function AdminDashboard() {
                     </section>
                 ) : null}
             </main>
+
+            {schoolCalOpen ? (
+                <div className="sp-modal" role="dialog" aria-modal="true">
+                    <div className="sp-modal-card" style={{ width: "min(980px, 100%)" }}>
+                        <div className="sp-modal-head">
+                            <div />
+                            <button type="button" className="sp-iconbtn" onClick={() => setSchoolCalOpen(false)} aria-label="Close">
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="sp-modal-body sp-modal-body--single" style={{ padding: 0 }}>
+                            <iframe
+                                title="School calendar"
+                                src="/school-calendar"
+                                style={{ width: "100%", height: "min(72vh, 720px)", border: 0 }}
+                            />
+                        </div>
+
+                        <div className="sp-modal-foot">
+                            <button type="button" className="sp-btn sp-btn--ghost" onClick={() => setSchoolCalOpen(false)}>
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
+
+            {editOpen ? (
+                <div className="sp-modal" role="dialog" aria-modal="true">
+                    <div className="sp-modal-card">
+                        <div className="sp-modal-head">
+                            <div className="sp-modal-title">Profile Settings</div>
+                            <button type="button" className="sp-iconbtn" onClick={() => setEditOpen(false)} aria-label="Close">
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="sp-modal-body">
+                            <div className="sp-modal-avatar">
+                                {avatarPreview ? (
+                                    <img className="sp-avatar-img sp-avatar-img--lg" src={avatarPreview} alt="Avatar preview" />
+                                ) : user?.avatar_url ? (
+                                    <img className="sp-avatar-img sp-avatar-img--lg" src={user.avatar_url} alt="Profile avatar" />
+                                ) : (
+                                    <span className="sp-avatar sp-avatar--lg" aria-hidden="true">
+                                        {initials(user?.name || user?.email)}
+                                    </span>
+                                )}
+
+                                <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+                                    <label className="sp-btn sp-btn--ghost" style={{ cursor: "pointer" }}>
+                                        Choose photo
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            style={{ display: "none" }}
+                                            onChange={(e) => onPickAvatar(e.target.files?.[0] || null)}
+                                        />
+                                    </label>
+                                    <button type="button" className="sp-btn sp-btn--primary" onClick={saveAvatar} disabled={avatarSaving}>
+                                        {avatarSaving ? "Saving…" : "Save photo"}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="sp-form">
+                                    <label className="sp-field" style={{ gridColumn: "1 / -1" }}>
+                                        Name
+                                        <input
+                                            value={editForm.name}
+                                            onChange={(e) => setEditForm((p) => ({ ...p, name: e.target.value }))}
+                                            placeholder="Full name"
+                                        />
+                                    </label>
+                                    <label className="sp-field" style={{ gridColumn: "1 / -1" }}>
+                                        Email
+                                        <input
+                                            value={editForm.email}
+                                            onChange={(e) => setEditForm((p) => ({ ...p, email: e.target.value }))}
+                                            placeholder="Email address"
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="sp-modal-foot">
+                            <button type="button" className="sp-btn sp-btn--ghost" onClick={() => setEditOpen(false)}>
+                                Cancel
+                            </button>
+                            <button type="button" className="sp-btn sp-btn--primary" onClick={saveProfile} disabled={saving}>
+                                {saving ? "Saving…" : "Save"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
+
+            {accountOpen ? (
+                <div className="sp-modal" role="dialog" aria-modal="true">
+                    <div className="sp-modal-card">
+                        <div className="sp-modal-head">
+                            <div>
+                                <div className="sp-modal-title">Account Settings</div>
+                                <div className="sp-muted">Manage password and preferences</div>
+                            </div>
+                            <button type="button" className="sp-iconbtn" onClick={() => setAccountOpen(false)} aria-label="Close">
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="sp-modal-body sp-modal-body--single">
+                            <div className="sp-settings-section">
+                                <div className="sp-settings-section__title">Appearance</div>
+                                <div className="sp-settings-row">
+                                    <div>
+                                        <div className="sp-settings-label">Dark mode</div>
+                                        <div className="sp-muted">Switch to a darker theme.</div>
+                                    </div>
+                                    <label className="sp-switch" aria-label="Toggle dark mode">
+                                        <input type="checkbox" checked={darkMode} onChange={(e) => setDarkMode(e.target.checked)} />
+                                        <span className="sp-switch__track" aria-hidden="true">
+                                            <span className="sp-switch__thumb" />
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="sp-settings-section">
+                                <div className="sp-settings-section__title">Security</div>
+                                <div className="sp-muted" style={{ marginTop: -6 }}>
+                                    Change your password. Minimum 8 characters.
+                                </div>
+
+                                <div className="sp-form sp-form--stack" style={{ marginTop: 12 }}>
+                                    <label className="sp-field">
+                                        <span>Current password</span>
+                                        <input
+                                            type="password"
+                                            value={pwForm.current_password}
+                                            onChange={(e) => setPwForm((p) => ({ ...p, current_password: e.target.value }))}
+                                            autoComplete="current-password"
+                                        />
+                                    </label>
+                                    <label className="sp-field">
+                                        <span>New password</span>
+                                        <input
+                                            type="password"
+                                            value={pwForm.password}
+                                            onChange={(e) => setPwForm((p) => ({ ...p, password: e.target.value }))}
+                                            autoComplete="new-password"
+                                        />
+                                    </label>
+                                    <label className="sp-field">
+                                        <span>Confirm new password</span>
+                                        <input
+                                            type="password"
+                                            value={pwForm.password_confirmation}
+                                            onChange={(e) => setPwForm((p) => ({ ...p, password_confirmation: e.target.value }))}
+                                            autoComplete="new-password"
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="sp-modal-foot">
+                            <button type="button" className="sp-btn sp-btn--ghost" onClick={() => setAccountOpen(false)}>
+                                Cancel
+                            </button>
+                            <button type="button" className="sp-btn sp-btn--primary" onClick={changePassword} disabled={pwSaving}>
+                                {pwSaving ? "Saving…" : "Save changes"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
         </div>
     );
 }

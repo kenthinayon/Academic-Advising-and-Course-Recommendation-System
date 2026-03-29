@@ -39,6 +39,13 @@ class Profile extends Model
         'advisor_comment',
         'advisor_reviewed_at',
         'advisor_reviewed_by',
+
+        // Advisor interview schedule
+        'advisor_interview_date',
+        'advisor_interview_time',
+        'advisor_interview_venue',
+        'advisor_interview_scheduled_at',
+        'advisor_interview_scheduled_by',
     ];
 
     protected $casts = [
@@ -54,6 +61,9 @@ class Profile extends Model
 
         'advisor_recommended_degrees' => 'array',
         'advisor_reviewed_at' => 'datetime',
+
+        'advisor_interview_date' => 'date',
+        'advisor_interview_scheduled_at' => 'datetime',
     ];
 
     public function user()

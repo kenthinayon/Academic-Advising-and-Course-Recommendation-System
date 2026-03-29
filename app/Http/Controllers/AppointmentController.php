@@ -47,8 +47,102 @@ class AppointmentController extends Controller
             $q->limit($limit);
         }
 
+        $appointments = $q->get();
+
+        // Also surface advisor interview schedule as a virtual appointment so that
+        // it appears in the student's appointments list and dashboard widget.
+        $profile = $user->profile;
+        if ($profile && ($profile->advisor_status === 'interview')) {
+            $date = $profile->advisor_interview_date;
+            $time = $profile->advisor_interview_time;
+            $venue = $profile->advisor_interview_venue;
+
+            if ($date && $time && $venue) {
+                try {
+                    $dateStr = $date instanceof Carbon ? $date->format('Y-m-d') : Carbon::parse((string) $date)->format('Y-m-d');
+                    $timeStr = trim((string) $time);
+                    $timeHHMM = strlen($timeStr) >= 5 ? substr($timeStr, 0, 5) : $timeStr;
+
+                    $when = Carbon::createFromFormat('Y-m-d H:i', $dateStr . ' ' . $timeHHMM, config('app.timezone'));
+
+                    $advisor = null;
+                    if (!empty($profile->advisor_interview_scheduled_by)) {
+                        $advisor = User::query()
+                            ->whereIn('role', ['advisor', 'admin'])
+                            ->find($profile->advisor_interview_scheduled_by, ['id', 'name', 'email', 'role']);
+                    }
+
+                    $scheduledAt = $when->toJSON();
+                    $metaTs = ($profile->advisor_interview_scheduled_at instanceof Carbon)
+                        ? $profile->advisor_interview_scheduled_at->toJSON()
+                        : ($profile->advisor_interview_scheduled_at ? Carbon::parse((string) $profile->advisor_interview_scheduled_at)->toJSON() : $scheduledAt);
+
+                    $virtual = (object) [
+                        'id' => 'interview-' . $profile->id,
+                        'student_id' => $user->id,
+                        'advisor_id' => $advisor?->id,
+                        'session_type' => 'Interview',
+                        'preferred_at' => null,
+                        // Match Appointment datetime JSON shape (ISO string)
+                        'scheduled_at' => $scheduledAt,
+                        // Also include raw date/time so the UI can display without timezone shifting.
+                        'interview_date' => $dateStr,
+                        'interview_time' => $timeHHMM,
+                        'status' => 'interview',
+                        'notes' => null,
+                        // Use advisor profile comment as the interview note.
+                        'advisor_comment' => $profile->advisor_comment,
+                        'location' => (string) $venue,
+                        'advisor' => $advisor,
+                        'created_at' => $metaTs,
+                        'updated_at' => $metaTs,
+                    ];
+
+                    // Only include in upcoming/all scopes; avoid duplicating in past-only views.
+                    if ($scope === 'upcoming') {
+                        $appointments = $appointments->push($virtual);
+                        // Keep the same ordering semantics as the DB query:
+                        // requested (no scheduled_at) first, then by scheduled_at asc, then created_at desc.
+                        $appointments = $appointments
+                            ->sort(function ($a, $b) {
+                                $aSched = $a->scheduled_at ?? null;
+                                $bSched = $b->scheduled_at ?? null;
+                                $aGroup = $aSched ? 1 : 0;
+                                $bGroup = $bSched ? 1 : 0;
+                                if ($aGroup !== $bGroup) return $aGroup <=> $bGroup;
+
+                                $aCreated = $a->created_at ?? null;
+                                $bCreated = $b->created_at ?? null;
+                                $aCreatedTs = $aCreated ? strtotime((string) $aCreated) : 0;
+                                $bCreatedTs = $bCreated ? strtotime((string) $bCreated) : 0;
+
+                                // Both requested
+                                if (!$aSched && !$bSched) {
+                                    return $bCreatedTs <=> $aCreatedTs;
+                                }
+
+                                // Both have schedule
+                                $aSchedTs = $aSched ? strtotime((string) $aSched) : 0;
+                                $bSchedTs = $bSched ? strtotime((string) $bSched) : 0;
+                                if ($aSchedTs !== $bSchedTs) return $aSchedTs <=> $bSchedTs;
+                                return $bCreatedTs <=> $aCreatedTs;
+                            })
+                            ->values();
+                    } elseif ($scope === 'all') {
+                        $appointments = collect([$virtual])->merge($appointments);
+                    }
+
+                    if ($limit && $appointments instanceof \Illuminate\Support\Collection) {
+                        $appointments = $appointments->take($limit)->values();
+                    }
+                } catch (\Throwable $e) {
+                    // If parsing fails, just skip the virtual appointment.
+                }
+            }
+        }
+
         return response()->json([
-            'appointments' => $q->get(),
+            'appointments' => $appointments,
         ]);
     }
 
@@ -354,6 +448,59 @@ class AppointmentController extends Controller
             ->orderByDesc('updated_at')
             ->limit($limit)
             ->get();
+
+        // Also include advisor interview schedule as an in-app notification.
+        $profile = $user->profile;
+        $interviewNotif = null;
+        if ($profile && ($profile->advisor_status === 'interview')) {
+            $date = $profile->advisor_interview_date;
+            $time = $profile->advisor_interview_time;
+            $venue = $profile->advisor_interview_venue;
+            if ($date && $time && $venue) {
+                $advisor = null;
+                if (!empty($profile->advisor_interview_scheduled_by)) {
+                    $advisor = \App\Models\User::query()
+                        ->whereIn('role', ['advisor', 'admin'])
+                        ->find($profile->advisor_interview_scheduled_by, ['id', 'name', 'email', 'role']);
+                }
+
+                try {
+                    $dateStr = $date instanceof Carbon ? $date->format('Y-m-d') : Carbon::parse((string) $date)->format('Y-m-d');
+                    $timeStr = trim((string) $time);
+                    $timeHHMM = strlen($timeStr) >= 5 ? substr($timeStr, 0, 5) : $timeStr;
+                    $when = Carbon::createFromFormat('Y-m-d H:i', $dateStr . ' ' . $timeHHMM, config('app.timezone'));
+                    $scheduledAt = $when->toJSON();
+                } catch (\Throwable $e) {
+                    $scheduledAt = null;
+                }
+
+                // Mimic the Appointment shape that the UI expects.
+                $interviewNotif = (object) [
+                    'id' => 'interview-' . $profile->id,
+                    'status' => 'interview',
+                    'session_type' => 'Interview',
+                    'scheduled_at' => $scheduledAt,
+                    'interview_date' => $dateStr ?? null,
+                    'interview_time' => $timeHHMM ?? null,
+                    'preferred_at' => null,
+                    'location' => (string) $venue,
+                    'advisor' => $advisor,
+                    // Surface advisor's profile comment, if any.
+                    'advisor_comment' => $profile->advisor_comment,
+                    'updated_at' => $profile->advisor_interview_scheduled_at ?? $profile->updated_at,
+                ];
+            }
+        }
+
+        if ($interviewNotif) {
+            $merged = collect([$interviewNotif])->merge($items);
+            $items = $merged
+                ->sortByDesc(function ($n) {
+                    return $n->updated_at ?? null;
+                })
+                ->take($limit)
+                ->values();
+        }
 
         return response()->json([
             'notifications' => $items,

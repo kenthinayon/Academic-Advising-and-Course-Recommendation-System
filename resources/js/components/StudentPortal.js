@@ -35,6 +35,64 @@ function formatApptFull(dt) {
     });
 }
 
+function formatTimeHHMM(t) {
+    const s = String(t || "").trim();
+    if (!s) return "";
+    // Handles "HH:MM" or "HH:MM:SS"
+    return s.length >= 5 ? s.slice(0, 5) : s;
+}
+
+function formatLocalDateLabel(raw) {
+    const s = String(raw || "").trim();
+    if (!s) return "";
+
+    // Prefer date-only parsing to avoid timezone shifting.
+    // Handles "YYYY-MM-DD" and ISO strings like "YYYY-MM-DDT...".
+    const ymd = s.includes("T") ? s.slice(0, 10) : s;
+    const m = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/.exec(ymd);
+    if (m) {
+        const year = Number(m[1]);
+        const month = Number(m[2]);
+        const day = Number(m[3]);
+        const d = new Date(year, Math.max(0, month - 1), day);
+        if (!Number.isNaN(d.getTime())) {
+            return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+        }
+    }
+
+    // Fallback
+    try {
+        const d = new Date(s);
+        if (!Number.isNaN(d.getTime())) {
+            return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+        }
+    } catch {
+        // ignore
+    }
+    return s;
+}
+
+function formatHHMMToAMPM(hhmm) {
+    const s = String(hhmm || "").trim();
+    if (!s) return "";
+    const m = /^([0-9]{1,2}):([0-9]{2})$/.exec(s);
+    if (!m) return s;
+    const h = Number(m[1]);
+    const min = Number(m[2]);
+    const d = new Date(2000, 0, 1, h, min, 0);
+    if (Number.isNaN(d.getTime())) return s;
+    return d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit", hour12: true });
+}
+
+function formatInterviewWhen(item) {
+    const date = formatLocalDateLabel(item?.interview_date || "");
+    const time = formatHHMMToAMPM(formatTimeHHMM(item?.interview_time || ""));
+    if (date && time) return `${date} • ${time}`;
+    if (date) return date;
+    if (time) return time;
+    return "—";
+}
+
 export default function StudentPortal() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -57,6 +115,24 @@ export default function StudentPortal() {
     const [notifOpen, setNotifOpen] = useState(false);
     const [notifs, setNotifs] = useState([]);
     const [notifLoading, setNotifLoading] = useState(false);
+    const [notifDismissedIds, setNotifDismissedIds] = useState(() => {
+        try {
+            const raw = localStorage.getItem("studentNotifDismissedIds");
+            const parsed = raw ? JSON.parse(raw) : [];
+            return Array.isArray(parsed) ? parsed.map(String) : [];
+        } catch {
+            return [];
+        }
+    });
+    const [notifLastSeenTs, setNotifLastSeenTs] = useState(() => {
+        try {
+            const raw = localStorage.getItem("studentNotifLastSeenTs");
+            const n = raw ? Number(raw) : 0;
+            return Number.isFinite(n) ? n : 0;
+        } catch {
+            return 0;
+        }
+    });
 
     const [schoolCalOpen, setSchoolCalOpen] = useState(false);
 
@@ -134,6 +210,22 @@ export default function StudentPortal() {
                     },
                     withCredentials: true,
                 });
+                const serverUser = res.data?.user || null;
+                const avatarUrl = serverUser?.avatar_url;
+                const cacheBusted = avatarUrl
+                    ? `${avatarUrl}${avatarUrl.includes("?") ? "&" : "?"}t=${Date.now()}`
+                    : null;
+
+                if (serverUser) {
+                    const nextUser = cacheBusted ? { ...serverUser, avatar_url: cacheBusted } : serverUser;
+                    setUser(nextUser);
+                    try {
+                        localStorage.setItem("user", JSON.stringify(nextUser));
+                    } catch {
+                        // ignore
+                    }
+                }
+
                 setProfile(res.data?.profile || null);
             } catch {
                 // If token is stale, portal will still render from localStorage user.
@@ -193,11 +285,11 @@ export default function StudentPortal() {
         return `Next appointment: ${when}`;
     }, [nextUpcoming]);
 
-    const loadNotifications = async () => {
+    const fetchNotifications = async ({ showLoading } = { showLoading: false }) => {
         const token = localStorage.getItem("authToken");
         if (!token) return;
 
-        setNotifLoading(true);
+        if (showLoading) setNotifLoading(true);
         try {
             const res = await axios.get("/api/notifications?limit=10", {
                 headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
@@ -207,7 +299,92 @@ export default function StudentPortal() {
         } catch {
             setNotifs([]);
         } finally {
-            setNotifLoading(false);
+            if (showLoading) setNotifLoading(false);
+        }
+    };
+
+    const loadNotifications = async () => fetchNotifications({ showLoading: true });
+
+    // Keep notification badge updated automatically (so the user doesn't need to click the bell).
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        if (!token) return;
+
+        let stopped = false;
+
+        const tick = async () => {
+            if (stopped) return;
+            // Avoid work when tab is hidden.
+            if (typeof document !== "undefined" && document.hidden) return;
+            await fetchNotifications({ showLoading: false });
+        };
+
+        // Initial fetch for badge count.
+        tick();
+
+        // Poll periodically.
+        const id = setInterval(tick, 30000);
+
+        // Refresh quickly when tab becomes active again.
+        const onVis = () => {
+            if (!document.hidden) tick();
+        };
+        document.addEventListener("visibilitychange", onVis);
+
+        return () => {
+            stopped = true;
+            clearInterval(id);
+            document.removeEventListener("visibilitychange", onVis);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const unreadNotifCount = useMemo(() => {
+        const items = Array.isArray(notifs) ? notifs : [];
+        if (!items.length) return 0;
+
+        const dismissed = new Set((Array.isArray(notifDismissedIds) ? notifDismissedIds : []).map(String));
+        const visible = items.filter((n) => !dismissed.has(String(n?.id)));
+        if (!visible.length) return 0;
+
+        return visible.filter((n) => {
+            const dt = n?.updated_at || n?.created_at || n?.scheduled_at || n?.preferred_at;
+            if (!dt) return true; // conservative: treat unknown timestamps as unread
+            const t = new Date(dt).getTime();
+            if (!Number.isFinite(t)) return true;
+            return t > (notifLastSeenTs || 0);
+        }).length;
+    }, [notifs, notifDismissedIds, notifLastSeenTs]);
+
+    const visibleNotifs = useMemo(() => {
+        const items = Array.isArray(notifs) ? notifs : [];
+        if (!items.length) return [];
+        const dismissed = new Set((Array.isArray(notifDismissedIds) ? notifDismissedIds : []).map(String));
+        return items.filter((n) => !dismissed.has(String(n?.id)));
+    }, [notifs, notifDismissedIds]);
+
+    const dismissNotification = (n) => {
+        const id = String(n?.id || "");
+        if (!id) return;
+        setNotifDismissedIds((prev) => {
+            const cur = Array.isArray(prev) ? prev.map(String) : [];
+            const next = Array.from(new Set([id, ...cur])).slice(0, 200);
+            try {
+                localStorage.setItem("studentNotifDismissedIds", JSON.stringify(next));
+            } catch {
+                // ignore
+            }
+            return next;
+        });
+    };
+
+    const markNotificationsSeenNow = () => {
+        const now = Date.now();
+        setNotifLastSeenTs(now);
+        try {
+            localStorage.setItem("studentNotifLastSeenTs", String(now));
+        } catch {
+            // ignore
         }
     };
 
@@ -272,6 +449,11 @@ export default function StudentPortal() {
         };
     }, [user, profile]);
 
+    const isCourseRecommendationUnlocked = useMemo(
+        () => Boolean(completion.step1 && completion.step2 && completion.step3),
+        [completion.step1, completion.step2, completion.step3]
+    );
+
     const progressMetaText = useMemo(() => {
         if (loading) return "Loading progress…";
 
@@ -284,6 +466,23 @@ export default function StudentPortal() {
             completion.remaining === 1 ? "" : "s"
         } remaining`;
     }, [completion.percent, completion.remaining, completion.step4, completion.step5, loading]);
+
+    const interviewSchedule = useMemo(() => {
+        const p = profile;
+        const status = String(p?.advisor_status || "pending").toLowerCase();
+        if (status !== "interview") return null;
+
+        const rawDate = p?.advisor_interview_date;
+        const timeHHMM = formatTimeHHMM(p?.advisor_interview_time);
+        const venue = String(p?.advisor_interview_venue || "").trim();
+
+        if (!rawDate || !timeHHMM || !venue) return null;
+
+        const dateLabel = formatLocalDateLabel(rawDate);
+        const timeLabel = formatHHMMToAMPM(timeHHMM);
+
+        return { date: dateLabel, time: timeLabel, venue };
+    }, [profile]);
 
     const pillText = (isComplete) => (isComplete ? "Completed" : "Pending");
     const pillClass = (isComplete) =>
@@ -343,6 +542,14 @@ export default function StudentPortal() {
         setMenuOpen(false);
         setPwForm({ current_password: "", password: "", password_confirmation: "" });
         setAccountOpen(true);
+    };
+
+    const openCourseRecommendation = () => {
+        if (!isCourseRecommendationUnlocked) {
+            toast.info("Finish Basic Information, Academic Credentials, and Assessment Quiz first.");
+            return;
+        }
+        navigate("/student/course-recommendation");
     };
 
     const onPickAvatar = (file) => {
@@ -616,11 +823,16 @@ export default function StudentPortal() {
                             onClick={async () => {
                                 const next = !notifOpen;
                                 setNotifOpen(next);
-                                if (next) await loadNotifications();
+                                if (next) {
+                                    await loadNotifications();
+                                    markNotificationsSeenNow();
+                                }
                             }}
                         >
                             🔔
-                            <span className="sp-badge-dot" aria-label={`${notifs.length} items`}>{notifs.length}</span>
+                            {unreadNotifCount ? (
+                                <span className="sp-badge-dot" aria-label={`${unreadNotifCount} unread`}>{unreadNotifCount}</span>
+                            ) : null}
                         </button>
 
                         {notifOpen ? (
@@ -634,21 +846,24 @@ export default function StudentPortal() {
 
                                 {notifLoading ? <div className="sp-muted" style={{ padding: "10px 12px" }}>Loading…</div> : null}
 
-                                {!notifLoading && !notifs.length ? (
+                                {!notifLoading && !visibleNotifs.length ? (
                                     <div className="sp-muted" style={{ padding: "10px 12px" }}>No notifications yet.</div>
                                 ) : null}
 
-                                {!notifLoading && notifs.length ? (
+                                {!notifLoading && visibleNotifs.length ? (
                                     <div className="sp-menu-list">
-                                        {notifs.map((n) => {
+                                        {visibleNotifs.map((n) => {
                                             const st = String(n.status || "requested").toLowerCase();
                                             const isScheduled = st === "scheduled";
+                                            const isInterview = st === "interview";
                                             const isCancelled = st === "cancelled";
                                             const isRejected = st === "rejected";
                                             const isCompleted = st === "completed";
 
                                             const title = isScheduled
                                                 ? "Appointment confirmed"
+                                                : isInterview
+                                                    ? "Interview scheduled"
                                                 : isCancelled
                                                     ? "Appointment cancelled"
                                                     : isRejected
@@ -659,29 +874,51 @@ export default function StudentPortal() {
 
                                             const when = isScheduled
                                                 ? formatApptFull(n.scheduled_at)
+                                                : isInterview
+                                                    ? (() => {
+                                                        const txt = formatInterviewWhen(n);
+                                                        if (txt !== "—") return txt.replace(" • ", " ");
+                                                        // Fallback to datetime parsing if raw fields aren't available.
+                                                        return n.scheduled_at ? formatApptFull(n.scheduled_at) : "—";
+                                                    })()
                                                 : n.preferred_at
                                                     ? `Preferred: ${formatApptFull(n.preferred_at)}`
                                                     : "Preferred: —";
                                             return (
                                                 <div key={n.id} className="sp-menu-item" role="menuitem" style={{ cursor: "default" }}>
-                                                    <div style={{ fontWeight: 900, color: "#0f172a" }}>{title}</div>
+                                                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+                                                        <div style={{ fontWeight: 900, color: "#0f172a" }}>{title}</div>
+                                                        <button
+                                                            type="button"
+                                                            className="sp-xbtn"
+                                                            aria-label="Dismiss notification"
+                                                            title="Dismiss"
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
+                                                                e.stopPropagation();
+                                                                dismissNotification(n);
+                                                            }}
+                                                        >
+                                                            ✕
+                                                        </button>
+                                                    </div>
                                                     <div className="sp-muted" style={{ marginTop: 2 }}>
                                                         {n.session_type || "Advising Session"}
                                                     </div>
                                                     <div className="sp-muted" style={{ marginTop: 6 }}>
                                                         <strong style={{ color: "#0f172a" }}>When:</strong> {when}
                                                     </div>
-                                                    {(isScheduled || isCancelled || isCompleted) && n.location ? (
+                                                    {(isInterview || isScheduled || isCancelled || isCompleted) && n.location ? (
                                                         <div className="sp-muted" style={{ marginTop: 4 }}>
                                                             <strong style={{ color: "#0f172a" }}>Where:</strong> {n.location}
                                                         </div>
                                                     ) : null}
-                                                    {(isScheduled || isCancelled || isRejected || isCompleted) && n.advisor?.name ? (
+                                                    {(isInterview || isScheduled || isCancelled || isRejected || isCompleted) && n.advisor?.name ? (
                                                         <div className="sp-muted" style={{ marginTop: 4 }}>
                                                             <strong style={{ color: "#0f172a" }}>Advisor:</strong> {n.advisor.name}
                                                         </div>
                                                     ) : null}
-                                                    {((isScheduled || isCancelled || isRejected || isCompleted) && n.advisor_comment) ? (
+                                                    {((isInterview || isScheduled || isCancelled || isRejected || isCompleted) && n.advisor_comment) ? (
                                                         <div className="sp-muted" style={{ marginTop: 8, whiteSpace: "pre-wrap" }}>
                                                             <strong style={{ color: "#0f172a" }}>Note:</strong> {n.advisor_comment}
                                                         </div>
@@ -767,6 +1004,18 @@ export default function StudentPortal() {
                                 <span>Getting Started</span>
                                 <span>Recommendation Ready</span>
                             </div>
+
+                            {interviewSchedule ? (
+                                <div className="sp-note" style={{ marginTop: 12 }}>
+                                    <strong>Interview scheduled</strong>
+                                    <div style={{ marginTop: 6 }}>
+                                        Date: {interviewSchedule.date} &nbsp;•&nbsp; Time: {interviewSchedule.time}
+                                    </div>
+                                    <div style={{ marginTop: 4 }}>
+                                        Venue: {interviewSchedule.venue}
+                                    </div>
+                                </div>
+                            ) : null}
                         </section>
                     </section>
 
@@ -796,9 +1045,11 @@ export default function StudentPortal() {
                                         <div key={a.id} className="sp-widget-item">
                                             <div>
                                                 <div className="sp-strong">
-                                                    {a.scheduled_at
-                                                        ? `${formatApptDate(a.scheduled_at)} • ${formatApptTime(a.scheduled_at)}`
-                                                        : "Awaiting schedule"}
+                                                    {String(a?.status || "").toLowerCase() === "interview"
+                                                        ? formatInterviewWhen(a)
+                                                        : a.scheduled_at
+                                                            ? `${formatApptDate(a.scheduled_at)} • ${formatApptTime(a.scheduled_at)}`
+                                                            : "Awaiting schedule"}
                                                 </div>
                                                 <div className="sp-muted">{a.session_type || "Advising Session"}</div>
                                             </div>
@@ -877,7 +1128,10 @@ export default function StudentPortal() {
                     <button
                         type="button"
                         className="sp-card sp-card--button"
-                        onClick={() => navigate("/student/course-recommendation")}
+                        onClick={openCourseRecommendation}
+                        disabled={!isCourseRecommendationUnlocked}
+                        aria-disabled={!isCourseRecommendationUnlocked}
+                        title={!isCourseRecommendationUnlocked ? "Locked until Steps 1 to 3 are completed" : "Open Course Recommendation"}
                     >
                         <div className="sp-card-icon" aria-hidden="true">
                             🎯
@@ -886,9 +1140,13 @@ export default function StudentPortal() {
                             <div className="sp-card-title">
                                 Course Recommendation {doneMark(completion.step4)}
                             </div>
-                            <div className="sp-card-sub">View your recommended programs</div>
-                            <span className={pillClass(completion.step4)}>
-                                {pillText(completion.step4)}
+                            <div className="sp-card-sub">
+                                {isCourseRecommendationUnlocked
+                                    ? "View your recommended programs"
+                                    : "Complete Steps 1 to 3 to unlock"}
+                            </div>
+                            <span className={pillClass(isCourseRecommendationUnlocked && completion.step4)}>
+                                {isCourseRecommendationUnlocked ? pillText(completion.step4) : "Locked"}
                             </span>
                         </div>
                     </button>

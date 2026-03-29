@@ -32,6 +32,7 @@ Route::middleware('auth.bearer')->group(function () {
     Route::get('/profile', [ProfileController::class, 'me']);
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar']);
         Route::put('/account/password', [AuthController::class, 'changePassword']);
+    Route::put('/account/profile', [ProfileController::class, 'updateAccountProfile']);
     Route::put('/profile/basic-info', [ProfileController::class, 'upsertBasicInfo']);
     Route::put('/profile/academic-credentials', [ProfileController::class, 'upsertAcademicCredentials']);
 

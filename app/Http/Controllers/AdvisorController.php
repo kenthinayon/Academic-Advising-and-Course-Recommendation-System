@@ -6,6 +6,7 @@ use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Mail;
 
 class AdvisorController extends Controller
 {
@@ -27,9 +28,14 @@ class AdvisorController extends Controller
             ->where('advisor_status', 'approved')
             ->count();
 
+        $interview = Profile::whereHas('user', fn ($q) => $q->where('role', 'student'))
+            ->where('advisor_status', 'interview')
+            ->count();
+
         return response()->json([
             'totalStudents' => $totalStudents,
             'pending' => $pending,
+            'interview' => $interview,
             'approved' => $approved,
         ]);
     }
@@ -109,26 +115,69 @@ class AdvisorController extends Controller
         $advisor = $request->user();
 
         $validated = $request->validate([
-            'advisor_status' => ['required', 'in:pending,approved,rejected'],
+            'advisor_status' => ['required', 'in:pending,approved,rejected,interview'],
             'advisor_comment' => ['nullable', 'string', 'max:5000'],
             'advisor_recommended_degrees' => ['nullable', 'array'],
             'advisor_recommended_degrees.*.code' => ['required_with:advisor_recommended_degrees', 'string', 'max:32'],
             'advisor_recommended_degrees.*.name' => ['required_with:advisor_recommended_degrees', 'string', 'max:255'],
             'advisor_recommended_degrees.*.track' => ['nullable', 'string', 'max:64'],
+
+            // Interview schedule (required when advisor_status=interview)
+            'advisor_interview_date' => ['required_if:advisor_status,interview', 'date'],
+            'advisor_interview_time' => ['required_if:advisor_status,interview', 'date_format:H:i'],
+            'advisor_interview_venue' => ['required_if:advisor_status,interview', 'string', 'max:255'],
         ]);
 
         $student = User::where('role', 'student')->with('profile')->findOrFail($userId);
         $profile = $student->profile ?: Profile::create(['user_id' => $student->id]);
 
-        $profile->advisor_status = $validated['advisor_status'];
+        $status = $validated['advisor_status'];
+
+        $profile->advisor_status = $status;
         $profile->advisor_comment = $validated['advisor_comment'] ?? null;
         $profile->advisor_recommended_degrees = $validated['advisor_recommended_degrees'] ?? [];
         $profile->advisor_reviewed_at = now();
         $profile->advisor_reviewed_by = $advisor?->id;
+
+        $scheduledInterview = false;
+        if ($status === 'interview') {
+            $profile->advisor_interview_date = $validated['advisor_interview_date'];
+            $profile->advisor_interview_time = $validated['advisor_interview_time'];
+            $profile->advisor_interview_venue = $validated['advisor_interview_venue'];
+            $profile->advisor_interview_scheduled_at = now();
+            $profile->advisor_interview_scheduled_by = $advisor?->id;
+            $scheduledInterview = true;
+        } else {
+            // Keep data consistent when status changes away from interview
+            $profile->advisor_interview_date = null;
+            $profile->advisor_interview_time = null;
+            $profile->advisor_interview_venue = null;
+            $profile->advisor_interview_scheduled_at = null;
+            $profile->advisor_interview_scheduled_by = null;
+        }
+
         $profile->save();
 
+        // Best-effort notification when interview is scheduled.
+        if ($scheduledInterview && !empty($student->email)) {
+            try {
+                $date = (string) ($profile->advisor_interview_date ?? '');
+                $time = (string) ($profile->advisor_interview_time ?? '');
+                $venue = (string) ($profile->advisor_interview_venue ?? '');
+
+                Mail::raw(
+                    "Your advisor scheduled an interview.\n\nDate: {$date}\nTime: {$time}\nVenue: {$venue}\n\nPlease be on time.",
+                    function ($m) use ($student) {
+                        $m->to($student->email)->subject('Interview Scheduled');
+                    }
+                );
+            } catch (\Throwable $e) {
+                // ignore mail errors
+            }
+        }
+
         return response()->json([
-            'message' => 'Advisor review saved.',
+            'message' => $scheduledInterview ? 'Interview scheduled.' : 'Advisor review saved.',
             'profile' => $profile,
         ]);
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -192,6 +193,42 @@ class ProfileController extends Controller
             'message' => 'Avatar updated successfully.',
             'avatar_url' => Storage::url($path),
             'profile' => $profile,
+        ]);
+    }
+
+    /**
+     * Update the authenticated user's account profile fields (name/email) only.
+     * This is intentionally separate from student "basic-info" which requires academic fields.
+     */
+    public function updateAccountProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($user?->id),
+            ],
+        ]);
+
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ]);
+
+        $avatarUrl = null;
+        if ($user?->profile?->avatar_path) {
+            $avatarUrl = Storage::url($user->profile->avatar_path);
+        }
+        $user->avatar_url = $avatarUrl;
+
+        return response()->json([
+            'message' => 'Profile updated.',
+            'user' => $user,
         ]);
     }
 }

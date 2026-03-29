@@ -15,9 +15,51 @@ function formatApptTime(dt) {
     return d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
 }
 
+function formatLocalDateLabel(raw) {
+    const s = String(raw || "").trim();
+    if (!s) return "";
+    const ymd = s.includes("T") ? s.slice(0, 10) : s;
+    const m = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/.exec(ymd);
+    if (m) {
+        const year = Number(m[1]);
+        const month = Number(m[2]);
+        const day = Number(m[3]);
+        const d = new Date(year, Math.max(0, month - 1), day);
+        if (!Number.isNaN(d.getTime())) {
+            return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+        }
+    }
+    return s;
+}
+
+function formatTimeHHMM(t) {
+    const s = String(t || "").trim();
+    if (!s) return "";
+    return s.length >= 5 ? s.slice(0, 5) : s;
+}
+
+function formatHHMMToAMPM(hhmm) {
+    const s = String(hhmm || "").trim();
+    if (!s) return "";
+    const m = /^([0-9]{1,2}):([0-9]{2})$/.exec(s);
+    if (!m) return s;
+    const h = Number(m[1]);
+    const min = Number(m[2]);
+    const d = new Date(2000, 0, 1, h, min, 0);
+    if (Number.isNaN(d.getTime())) return s;
+    return d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit", hour12: true });
+}
+
 function statusBadge(status) {
     const s = String(status || "scheduled").toLowerCase();
-    const cls = s === "completed" ? "sp-badge sp-badge--done" : s === "cancelled" ? "sp-badge sp-badge--muted" : "sp-badge sp-badge--info";
+    const cls =
+        s === "completed"
+            ? "sp-badge sp-badge--done"
+            : s === "cancelled"
+            ? "sp-badge sp-badge--muted"
+            : s === "interview"
+            ? "sp-badge sp-badge--info"
+            : "sp-badge sp-badge--info";
     const label = s.charAt(0).toUpperCase() + s.slice(1);
     return <span className={cls}>{label}</span>;
 }
@@ -28,6 +70,15 @@ export default function StudentAppointments() {
     const [loading, setLoading] = useState(false);
     const [appts, setAppts] = useState([]);
     const [statusFilter, setStatusFilter] = useState("all");
+    const [dismissedApptIds, setDismissedApptIds] = useState(() => {
+        try {
+            const raw = localStorage.getItem("studentDismissedAppointmentIds");
+            const parsed = raw ? JSON.parse(raw) : [];
+            return Array.isArray(parsed) ? parsed.map(String) : [];
+        } catch {
+            return [];
+        }
+    });
     const [bookOpen, setBookOpen] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [bookForm, setBookForm] = useState({
@@ -71,6 +122,7 @@ export default function StudentAppointments() {
 
     const visibleAppts = useMemo(() => {
         const now = Date.now();
+        const dismissed = new Set((Array.isArray(dismissedApptIds) ? dismissedApptIds : []).map(String));
         const withinTab = (a) => {
             const st = String(a?.status || "requested").toLowerCase();
             const scheduled = a?.scheduled_at ? new Date(a.scheduled_at).getTime() : null;
@@ -84,7 +136,7 @@ export default function StudentAppointments() {
             }
 
             // Upcoming tab
-            if (st === "requested" || st === "rejected") return true;
+            if (st === "requested" || st === "rejected" || st === "interview") return true;
             if (scheduled != null && scheduled >= now) return true;
             return false;
         };
@@ -94,8 +146,35 @@ export default function StudentAppointments() {
             return String(a?.status || "requested").toLowerCase() === statusFilter;
         };
 
-        return (Array.isArray(appts) ? appts : []).filter((a) => withinTab(a) && withinStatus(a));
-    }, [appts, statusFilter, tab]);
+        const withinDismissed = (a) => {
+            const st = String(a?.status || "requested").toLowerCase();
+            const id = String(a?.id || "");
+            if (!id) return true;
+            // Only allow hiding "done" appointments.
+            if (st !== "completed") return true;
+            return !dismissed.has(id);
+        };
+
+        return (Array.isArray(appts) ? appts : []).filter((a) => withinTab(a) && withinStatus(a) && withinDismissed(a));
+    }, [appts, dismissedApptIds, statusFilter, tab]);
+
+    const dismissAppointment = (a) => {
+        const st = String(a?.status || "requested").toLowerCase();
+        if (st !== "completed") return;
+        const id = String(a?.id || "");
+        if (!id) return;
+
+        setDismissedApptIds((prev) => {
+            const cur = Array.isArray(prev) ? prev.map(String) : [];
+            const next = Array.from(new Set([id, ...cur])).slice(0, 300);
+            try {
+                localStorage.setItem("studentDismissedAppointmentIds", JSON.stringify(next));
+            } catch {
+                // ignore
+            }
+            return next;
+        });
+    };
 
     const requestAppointment = async () => {
         if (!token) {
@@ -213,13 +292,34 @@ export default function StudentAppointments() {
                             {visibleAppts.map((a) => (
                                 <div key={a.id} className="sp-appt-card">
                                     <div className="sp-appt-top">
-                                        {statusBadge(a.status)}
+                                        <div style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                                            {statusBadge(a.status)}
+                                            {String(a?.status || "").toLowerCase() === "completed" ? (
+                                                <button
+                                                    type="button"
+                                                    className="sp-xbtn"
+                                                    aria-label="Remove completed appointment"
+                                                    title="Remove"
+                                                    onClick={() => dismissAppointment(a)}
+                                                >
+                                                    ✕
+                                                </button>
+                                            ) : null}
+                                        </div>
                                         <div className="sp-appt-when">
                                             <div className="sp-appt-date">
-                                                {a.scheduled_at ? formatApptDate(a.scheduled_at) : "Awaiting schedule"}
+                                                {String(a?.status || "").toLowerCase() === "interview" && a?.interview_date
+                                                    ? formatLocalDateLabel(a.interview_date)
+                                                    : a.scheduled_at
+                                                        ? formatApptDate(a.scheduled_at)
+                                                        : "Awaiting schedule"}
                                             </div>
                                             <div className="sp-appt-time">
-                                                {a.scheduled_at ? formatApptTime(a.scheduled_at) : (a.session_type || "Advising Session")}
+                                                {String(a?.status || "").toLowerCase() === "interview" && a?.interview_time
+                                                    ? formatHHMMToAMPM(formatTimeHHMM(a.interview_time))
+                                                    : a.scheduled_at
+                                                        ? formatApptTime(a.scheduled_at)
+                                                        : (a.session_type || "Advising Session")}
                                             </div>
                                         </div>
                                     </div>

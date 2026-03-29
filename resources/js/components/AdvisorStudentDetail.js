@@ -50,6 +50,10 @@ export default function AdvisorStudentDetail() {
     const [status, setStatus] = useState("pending");
     const [comment, setComment] = useState("");
     const [degrees, setDegrees] = useState([]);
+
+    const [interviewDate, setInterviewDate] = useState("");
+    const [interviewTime, setInterviewTime] = useState("");
+    const [interviewVenue, setInterviewVenue] = useState("");
     const [saving, setSaving] = useState(false);
     const [success, setSuccess] = useState(null);
 
@@ -94,6 +98,14 @@ export default function AdvisorStudentDetail() {
                 setStatus(st);
                 setComment(cm);
                 setDegrees(norm);
+
+                const rawInterviewDate = p?.advisor_interview_date || "";
+                const normInterviewDate = String(rawInterviewDate).includes("T")
+                    ? String(rawInterviewDate).slice(0, 10)
+                    : String(rawInterviewDate);
+                setInterviewDate(normInterviewDate);
+                setInterviewTime(p?.advisor_interview_time ? String(p.advisor_interview_time).slice(0, 5) : "");
+                setInterviewVenue(p?.advisor_interview_venue || "");
             } catch (e) {
                 setError(e?.response?.data?.message || "Failed to load student details.");
             } finally {
@@ -122,6 +134,26 @@ export default function AdvisorStudentDetail() {
         setSaving(true);
         setError(null);
         setSuccess(null);
+
+        const nextStatus = String(status || "pending").toLowerCase();
+        if (nextStatus === "interview") {
+            if (!String(interviewDate || "").trim()) {
+                setSaving(false);
+                setError("Interview date is required.");
+                return;
+            }
+            if (!String(interviewTime || "").trim()) {
+                setSaving(false);
+                setError("Interview time is required.");
+                return;
+            }
+            if (!String(interviewVenue || "").trim()) {
+                setSaving(false);
+                setError("Interview venue is required.");
+                return;
+            }
+        }
+
         try {
             const cleaned = degrees
                 .map((d) => ({
@@ -131,17 +163,31 @@ export default function AdvisorStudentDetail() {
                 }))
                 .filter((d) => d.code && d.name);
 
+            const interviewDateClean = String(interviewDate || "").trim();
+            const interviewTimeClean = String(interviewTime || "").trim();
+
             await axios.put(
                 `/api/advisor/students/${userId}/recommendation`,
                 {
                     advisor_status: status,
                     advisor_comment: comment,
                     advisor_recommended_degrees: cleaned,
+                    ...(nextStatus === "interview"
+                        ? {
+                            advisor_interview_date: interviewDateClean.includes("T")
+                                ? interviewDateClean.slice(0, 10)
+                                : interviewDateClean,
+                            advisor_interview_time: interviewTimeClean.length >= 5
+                                ? interviewTimeClean.slice(0, 5)
+                                : interviewTimeClean,
+                            advisor_interview_venue: String(interviewVenue || "").trim(),
+                        }
+                        : {}),
                 },
                 { headers, withCredentials: true }
             );
 
-            setSuccess("Saved review successfully.");
+            setSuccess(nextStatus === "interview" ? "Interview scheduled." : "Saved review successfully.");
         } catch (e) {
             const apiMessage = e?.response?.data?.message;
             const apiErrors = e?.response?.data?.errors;
@@ -321,11 +367,51 @@ export default function AdvisorStudentDetail() {
                                             <span>Status</span>
                                             <select value={status} onChange={(e) => setStatus(e.target.value)}>
                                                 <option value="pending">Pending</option>
+                                                <option value="interview">Interview</option>
                                                 <option value="approved">Approved</option>
                                                 <option value="rejected">Rejected</option>
                                             </select>
                                         </label>
                                     </div>
+
+                                    {String(status || "").toLowerCase() === "interview" ? (
+                                        <div className="ad-review-row" style={{ gridColumn: "1 / -1" }}>
+                                            <div className="ad-field" style={{ gridColumn: "1 / -1" }}>
+                                                <span>Interview schedule</span>
+                                                <div className="ad-muted" style={{ marginTop: 4 }}>
+                                                    Set the interview date, time, and venue before scheduling.
+                                                </div>
+
+                                                <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                                                    <label className="ad-field">
+                                                        <span>Date</span>
+                                                        <input
+                                                            type="date"
+                                                            value={interviewDate}
+                                                            onChange={(e) => setInterviewDate(e.target.value)}
+                                                        />
+                                                    </label>
+                                                    <label className="ad-field">
+                                                        <span>Time</span>
+                                                        <input
+                                                            type="time"
+                                                            value={interviewTime}
+                                                            onChange={(e) => setInterviewTime(e.target.value)}
+                                                        />
+                                                    </label>
+                                                    <label className="ad-field" style={{ gridColumn: "1 / -1" }}>
+                                                        <span>Venue</span>
+                                                        <input
+                                                            type="text"
+                                                            value={interviewVenue}
+                                                            onChange={(e) => setInterviewVenue(e.target.value)}
+                                                            placeholder="e.g., Advising Office, Room 203"
+                                                        />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : null}
 
                                     <div className="ad-review-row">
                                         <label className="ad-field" style={{ gridColumn: "1 / -1" }}>
@@ -405,7 +491,11 @@ export default function AdvisorStudentDetail() {
 
                                             <div style={{ marginTop: 14 }}>
                                                 <button type="button" className="ad-btn" disabled={saving} onClick={onSave}>
-                                                    {saving ? "Saving…" : "Save review"}
+                                                    {saving
+                                                        ? "Saving…"
+                                                        : String(status || "").toLowerCase() === "interview"
+                                                            ? "Schedule Interview"
+                                                            : "Save review"}
                                                 </button>
                                             </div>
                                         </div>

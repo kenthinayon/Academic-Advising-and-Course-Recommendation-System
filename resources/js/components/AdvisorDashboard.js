@@ -11,7 +11,9 @@ function statusPill(status) {
     const s = (status || "pending").toLowerCase();
     if (s === "approved") return { label: "Approved", cls: "ad-pill ad-pill--good" };
     if (s === "rejected") return { label: "Rejected", cls: "ad-pill ad-pill--bad" };
-    return { label: "Pending", cls: "ad-pill" };
+    if (s === "interview") return { label: "Interview", cls: "ad-pill" };
+    // Default/pending state: show as an indicator (not a button)
+    return { label: "Awaiting Review", cls: "ad-pill" };
 }
 
 export default function AdvisorDashboard() {
@@ -34,10 +36,11 @@ export default function AdvisorDashboard() {
         }
     });
 
-    const [stats, setStats] = useState({ totalStudents: 0, pending: 0, approved: 0 });
+    const [stats, setStats] = useState({ totalStudents: 0, pending: 0, interview: 0, approved: 0 });
     const [q, setQ] = useState("");
     const [loading, setLoading] = useState(true);
     const [students, setStudents] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
     const [error, setError] = useState(null);
 
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -128,20 +131,28 @@ export default function AdvisorDashboard() {
         }
     };
 
+    const loadStats = async () => {
+        const res = await axios.get("/api/advisor/stats", { headers, withCredentials: true });
+        setStats(res.data || { totalStudents: 0, pending: 0, interview: 0, approved: 0 });
+    };
+
+    const loadStudents = async (search = "") => {
+        const res = await axios.get(`/api/advisor/students?q=${encodeURIComponent(search)}`, {
+            headers,
+            withCredentials: true,
+        });
+        const rows = res.data?.students || [];
+        setStudents(rows);
+        if (!String(search || "").trim()) {
+            setSuggestions(rows);
+        }
+    };
+
     const load = async (search = "") => {
         setLoading(true);
         setError(null);
         try {
-            const [s1, s2] = await Promise.all([
-                axios.get("/api/advisor/stats", { headers, withCredentials: true }),
-                axios.get(`/api/advisor/students?q=${encodeURIComponent(search)}`, {
-                    headers,
-                    withCredentials: true,
-                }),
-            ]);
-
-            setStats(s1.data || { totalStudents: 0, pending: 0, approved: 0 });
-            setStudents(s2.data?.students || []);
+            await Promise.all([loadStats(), loadStudents(search)]);
         } catch (e) {
             setError(e?.response?.data?.message || "Failed to load advisor dashboard.");
         } finally {
@@ -153,6 +164,29 @@ export default function AdvisorDashboard() {
         load("");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const autoSearchReadyRef = useRef(false);
+    useEffect(() => {
+        if (!token) return;
+        if (!autoSearchReadyRef.current) {
+            autoSearchReadyRef.current = true;
+            return;
+        }
+
+        const t = setTimeout(async () => {
+            try {
+                setLoading(true);
+                await loadStudents(q);
+            } catch {
+                // ignore; keep last results
+            } finally {
+                setLoading(false);
+            }
+        }, 250);
+
+        return () => clearTimeout(t);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [q]);
 
     useEffect(() => {
         const fetchMe = async () => {
@@ -899,15 +933,19 @@ export default function AdvisorDashboard() {
 
                 <div className="ad-stats">
                     <div className="ad-stat">
-                        <div className="ad-stat-label">Total Students</div>
+                        <div className="ad-stat-label"><span className="ad-stat-icon" aria-hidden="true">👥</span> Total Students</div>
                         <div className="ad-stat-value">{stats.totalStudents}</div>
                     </div>
                     <div className="ad-stat">
-                        <div className="ad-stat-label">Pending Review</div>
+                        <div className="ad-stat-label"><span className="ad-stat-icon" aria-hidden="true">⏳</span> Pending Review</div>
                         <div className="ad-stat-value ad-stat-value--warn">{stats.pending}</div>
                     </div>
                     <div className="ad-stat">
-                        <div className="ad-stat-label">Approved</div>
+                        <div className="ad-stat-label"><span className="ad-stat-icon" aria-hidden="true">🎤</span> Interview</div>
+                        <div className="ad-stat-value ad-stat-value--warn">{stats.interview}</div>
+                    </div>
+                    <div className="ad-stat">
+                        <div className="ad-stat-label"><span className="ad-stat-icon" aria-hidden="true">✅</span> Approved</div>
                         <div className="ad-stat-value ad-stat-value--good">{stats.approved}</div>
                     </div>
                 </div>
@@ -917,10 +955,23 @@ export default function AdvisorDashboard() {
                         value={q}
                         placeholder="Search students by name or email..."
                         onChange={(e) => setQ(e.target.value)}
+                        list="ad-student-suggestions"
                         onKeyDown={(e) => {
                             if (e.key === "Enter") load(q);
                         }}
                     />
+                    <datalist id="ad-student-suggestions">
+                        {(Array.isArray(suggestions) ? suggestions : []).slice(0, 30).flatMap((s) => {
+                            const name = String(s?.name || "").trim();
+                            const email = String(s?.email || "").trim();
+                            const out = [];
+                            if (name) out.push({ k: `${s.id}-n`, v: name });
+                            if (email) out.push({ k: `${s.id}-e`, v: email });
+                            return out;
+                        }).map((o) => (
+                            <option key={o.k} value={o.v} />
+                        ))}
+                    </datalist>
                     <button type="button" className="ad-btn" onClick={() => load(q)}>
                         Search
                     </button>
@@ -971,13 +1022,6 @@ export default function AdvisorDashboard() {
                                         onClick={() => navigate(`/advisor/students/${s.id}`)}
                                     >
                                         View Details
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="ad-btn"
-                                        onClick={() => navigate(`/advisor/students/${s.id}`)}
-                                    >
-                                        {s.advisor_status === "approved" ? "Approved" : "Awaiting Review"}
                                     </button>
                                 </div>
                             </div>
