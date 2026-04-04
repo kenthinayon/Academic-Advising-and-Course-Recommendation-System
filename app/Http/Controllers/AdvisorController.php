@@ -196,8 +196,13 @@ class AdvisorController extends Controller
             return null;
         }
 
-        // Typical quiz scoring ends up around ~0-10; map that roughly into 0-100.
-        $pct = max(0, min(100, ((float) $top) / 10.0 * 100.0));
+        // With the current quiz design:
+        // - Part I contributes up to ~2 points per category
+        // - Part II contributes up to 10 points per category (5 course questions × 2 points)
+        // - Readiness questions contribute up to +5 points per category (5 questions × +1 to all)
+        // Academic boosts can push slightly above that, so clamp.
+        $max = 17.0;
+        $pct = max(0, min(100, ((float) $top) / $max * 100.0));
         return round($pct, 1);
     }
 }

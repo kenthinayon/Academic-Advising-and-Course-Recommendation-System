@@ -16,7 +16,6 @@ const DEFAULT_DEGREES = [
     { code: "BSME", name: "Bachelor of Science in Mechanical Engineering", track: "Engineering & Technology" },
     { code: "BSPSY", name: "Bachelor of Science in Psychology", track: "Arts & Sciences" },
     { code: "BAComm", name: "Bachelor of Arts in Communication", track: "Arts & Sciences" },
-    { code: "BA-PolSci", name: "Bachelor of Arts in Political Science", track: "Law" },
 ];
 
 function normalizeDegree(item) {

@@ -20,102 +20,560 @@ const PART1_STATEMENTS = [
     "I am comfortable speaking in front of many people.",
 ];
 
-const PART2_QUESTIONS = [
-    {
-        id: 1,
-        prompt: "What is the basic accounting equation?",
-        options: {
-            A: "Assets = Liabilities – Capital",
-            B: "Assets = Liabilities + Owner’s Equity",
-            C: "Income = Expenses + Assets",
-            D: "Profit = Assets – Liabilities",
+const PART2_BANK = {
+    Accountancy: [
+        {
+            id: "acc_1",
+            prompt: "What is the basic accounting equation?",
+            options: {
+                A: "Assets = Liabilities – Capital",
+                B: "Assets = Liabilities + Owner’s Equity",
+                C: "Income = Expenses + Assets",
+                D: "Profit = Assets – Liabilities",
+            },
+            correct: "B",
+            category: "Accountancy",
         },
-        correct: "B",
-        category: "Accountancy",
+        {
+            id: "acc_2",
+            prompt: "In double-entry bookkeeping, every transaction affects:",
+            options: {
+                A: "Only one account",
+                B: "At least two accounts",
+                C: "Only revenue accounts",
+                D: "Only cash accounts",
+            },
+            correct: "B",
+            category: "Accountancy",
+        },
+        {
+            id: "acc_3",
+            prompt: "A trial balance is used mainly to:",
+            options: {
+                A: "Determine company profit automatically",
+                B: "Check if total debits equal total credits",
+                C: "Record daily transactions",
+                D: "Create marketing plans",
+            },
+            correct: "B",
+            category: "Accountancy",
+        },
+        {
+            id: "acc_4",
+            prompt: "Which financial statement shows a company’s financial position on a specific date?",
+            options: {
+                A: "Income statement",
+                B: "Balance sheet",
+                C: "Cash flow statement",
+                D: "Statement of changes in equity only",
+            },
+            correct: "B",
+            category: "Accountancy",
+        },
+        {
+            id: "acc_5",
+            prompt: "Revenue is generally recognized when it is:",
+            options: {
+                A: "Planned",
+                B: "Earned",
+                C: "Promised",
+                D: "Discussed with the customer",
+            },
+            correct: "B",
+            category: "Accountancy",
+        },
+    ],
+    "Arts & Sciences": [
+        {
+            id: "arts_1",
+            prompt: "Which branch of science studies human behavior?",
+            options: {
+                A: "Biology",
+                B: "Sociology",
+                C: "Psychology",
+                D: "Chemistry",
+            },
+            correct: "C",
+            category: "Arts & Sciences",
+        },
+        {
+            id: "arts_2",
+            prompt: "In research, the variable you change/control is the:",
+            options: {
+                A: "Dependent variable",
+                B: "Independent variable",
+                C: "Random variable",
+                D: "Confounding variable",
+            },
+            correct: "B",
+            category: "Arts & Sciences",
+        },
+        {
+            id: "arts_3",
+            prompt: "Correlation means two variables:",
+            options: {
+                A: "Prove cause and effect",
+                B: "Are unrelated",
+                C: "Move together in some pattern",
+                D: "Are always equal",
+            },
+            correct: "C",
+            category: "Arts & Sciences",
+        },
+        {
+            id: "arts_4",
+            prompt: "A hypothesis is best described as:",
+            options: {
+                A: "A final conclusion",
+                B: "A testable prediction",
+                C: "A personal opinion",
+                D: "A proven fact",
+            },
+            correct: "B",
+            category: "Arts & Sciences",
+        },
+        {
+            id: "arts_5",
+            prompt: "Which is an example of a qualitative method?",
+            options: {
+                A: "Measuring height in cm",
+                B: "Counting survey scores",
+                C: "Interviewing participants for themes",
+                D: "Computing averages",
+            },
+            correct: "C",
+            category: "Arts & Sciences",
+        },
+    ],
+    "Business Administration": [
+        {
+            id: "bus_1",
+            prompt: "What does ROI mean in business?",
+            options: {
+                A: "Rate of Income",
+                B: "Return on Investment",
+                C: "Revenue of Industry",
+                D: "Risk of Investment",
+            },
+            correct: "B",
+            category: "Business Administration",
+        },
+        {
+            id: "bus_2",
+            prompt: "The 4Ps of marketing include Product, Price, Place, and:",
+            options: {
+                A: "People",
+                B: "Promotion",
+                C: "Profit",
+                D: "Process only",
+            },
+            correct: "B",
+            category: "Business Administration",
+        },
+        {
+            id: "bus_3",
+            prompt: "A SWOT analysis stands for:",
+            options: {
+                A: "Sales, Work, Output, Time",
+                B: "Strengths, Weaknesses, Opportunities, Threats",
+                C: "Strategy, Work, Operations, Targets",
+                D: "Stock, Wealth, Options, Taxes",
+            },
+            correct: "B",
+            category: "Business Administration",
+        },
+        {
+            id: "bus_4",
+            prompt: "Break-even point is when:",
+            options: {
+                A: "Revenue is zero",
+                B: "Profit is maximum",
+                C: "Total revenue equals total costs",
+                D: "Costs stop increasing",
+            },
+            correct: "C",
+            category: "Business Administration",
+        },
+        {
+            id: "bus_5",
+            prompt: "Supply and demand most directly influences:",
+            options: {
+                A: "Office layout",
+                B: "Market price",
+                C: "Employee attendance",
+                D: "Product color",
+            },
+            correct: "B",
+            category: "Business Administration",
+        },
+    ],
+    "Computer Studies": [
+        {
+            id: "cs_1",
+            prompt: "What does CPU stand for in computer systems?",
+            options: {
+                A: "Central Process Unit",
+                B: "Computer Personal Unit",
+                C: "Central Processing Unit",
+                D: "Control Program Utility",
+            },
+            correct: "C",
+            category: "Computer Studies",
+        },
+        {
+            id: "cs_2",
+            prompt: "An algorithm is:",
+            options: {
+                A: "A computer brand",
+                B: "A step-by-step procedure to solve a problem",
+                C: "A type of monitor",
+                D: "An internet provider",
+            },
+            correct: "B",
+            category: "Computer Studies",
+        },
+        {
+            id: "cs_3",
+            prompt: "Which is an example of an operating system?",
+            options: {
+                A: "Google",
+                B: "Windows",
+                C: "HTML",
+                D: "Router",
+            },
+            correct: "B",
+            category: "Computer Studies",
+        },
+        {
+            id: "cs_4",
+            prompt: "Which command is used to retrieve data in SQL?",
+            options: {
+                A: "INSERT",
+                B: "DELETE",
+                C: "SELECT",
+                D: "DROP",
+            },
+            correct: "C",
+            category: "Computer Studies",
+        },
+        {
+            id: "cs_5",
+            prompt: "An IP address is used to:",
+            options: {
+                A: "Identify a device on a network",
+                B: "Print documents",
+                C: "Charge a battery",
+                D: "Increase CPU speed",
+            },
+            correct: "A",
+            category: "Computer Studies",
+        },
+    ],
+    "Criminal Justice Education": [
+        {
+            id: "cje_1",
+            prompt: "Which agency is responsible for enforcing laws?",
+            options: {
+                A: "Department of Health",
+                B: "Police Department",
+                C: "Department of Education",
+                D: "Securities Commission",
+            },
+            correct: "B",
+            category: "Criminal Justice Education",
+        },
+        {
+            id: "cje_2",
+            prompt: "Presumption of innocence means the accused is:",
+            options: {
+                A: "Always guilty",
+                B: "Considered innocent until proven guilty",
+                C: "Punished immediately",
+                D: "Detained without rights",
+            },
+            correct: "B",
+            category: "Criminal Justice Education",
+        },
+        {
+            id: "cje_3",
+            prompt: "Chain of custody is important to:",
+            options: {
+                A: "Make trials faster",
+                B: "Keep evidence properly tracked and unaltered",
+                C: "Increase police budget",
+                D: "Replace witnesses",
+            },
+            correct: "B",
+            category: "Criminal Justice Education",
+        },
+        {
+            id: "cje_4",
+            prompt: "Which is an example of physical evidence?",
+            options: {
+                A: "Rumors",
+                B: "A fingerprint",
+                C: "An opinion",
+                D: "A promise",
+            },
+            correct: "B",
+            category: "Criminal Justice Education",
+        },
+        {
+            id: "cje_5",
+            prompt: "A warrant is generally required to:",
+            options: {
+                A: "File a complaint",
+                B: "Conduct certain searches legally",
+                C: "Write a report",
+                D: "Give a warning",
+            },
+            correct: "B",
+            category: "Criminal Justice Education",
+        },
+    ],
+    "Engineering & Technology": [
+        {
+            id: "eng_1",
+            prompt: "Which formula is used to compute speed?",
+            options: {
+                A: "Speed = Distance × Time",
+                B: "Speed = Distance ÷ Time",
+                C: "Speed = Time ÷ Distance",
+                D: "Speed = Mass × Acceleration",
+            },
+            correct: "B",
+            category: "Engineering & Technology",
+        },
+        {
+            id: "eng_2",
+            prompt: "Ohm’s Law is:",
+            options: {
+                A: "P = VI",
+                B: "V = IR",
+                C: "F = ma",
+                D: "E = mc²",
+            },
+            correct: "B",
+            category: "Engineering & Technology",
+        },
+        {
+            id: "eng_3",
+            prompt: "Force is calculated by:",
+            options: {
+                A: "F = m + a",
+                B: "F = ma",
+                C: "F = m/a",
+                D: "F = a/m",
+            },
+            correct: "B",
+            category: "Engineering & Technology",
+        },
+        {
+            id: "eng_4",
+            prompt: "The SI unit of power is:",
+            options: {
+                A: "Newton",
+                B: "Watt",
+                C: "Joule",
+                D: "Pascal",
+            },
+            correct: "B",
+            category: "Engineering & Technology",
+        },
+        {
+            id: "eng_5",
+            prompt: "Engineering design most often balances:",
+            options: {
+                A: "Cost, safety, and performance",
+                B: "Luck and speed",
+                C: "Opinion only",
+                D: "Color and style only",
+            },
+            correct: "A",
+            category: "Engineering & Technology",
+        },
+    ],
+    Nursing: [
+        {
+            id: "nurs_1",
+            prompt: "What is the normal body temperature in Celsius?",
+            options: {
+                A: "35°C",
+                B: "36.5–37.5°C",
+                C: "38–39°C",
+                D: "40°C",
+            },
+            correct: "B",
+            category: "Nursing",
+        },
+        {
+            id: "nurs_2",
+            prompt: "A normal adult resting heart rate is typically:",
+            options: {
+                A: "20–40 bpm",
+                B: "60–100 bpm",
+                C: "120–160 bpm",
+                D: "180–220 bpm",
+            },
+            correct: "B",
+            category: "Nursing",
+        },
+        {
+            id: "nurs_3",
+            prompt: "The most effective way to prevent infection spread in healthcare is:",
+            options: {
+                A: "Wearing perfume",
+                B: "Hand hygiene",
+                C: "Speaking quietly",
+                D: "Drinking vitamins",
+            },
+            correct: "B",
+            category: "Nursing",
+        },
+        {
+            id: "nurs_4",
+            prompt: "Blood pressure measures the force of blood against:",
+            options: {
+                A: "Bones",
+                B: "Artery walls",
+                C: "Skin pores",
+                D: "Hair follicles",
+            },
+            correct: "B",
+            category: "Nursing",
+        },
+        {
+            id: "nurs_5",
+            prompt: "A fever is commonly considered at or above:",
+            options: {
+                A: "36.0°C",
+                B: "37.0°C",
+                C: "38.0°C",
+                D: "39.9°C always",
+            },
+            correct: "C",
+            category: "Nursing",
+        },
+    ],
+    "Teacher Education": [
+        {
+            id: "teach_1",
+            prompt: "What is the main purpose of a lesson plan?",
+            options: {
+                A: "To discipline students",
+                B: "To organize teaching and learning",
+                C: "To increase school profit",
+                D: "To record attendance",
+            },
+            correct: "B",
+            category: "Teacher Education",
+        },
+        {
+            id: "teach_2",
+            prompt: "Formative assessment is mainly used to:",
+            options: {
+                A: "Grade final performance only",
+                B: "Monitor learning and give feedback during learning",
+                C: "Replace teaching",
+                D: "Punish students",
+            },
+            correct: "B",
+            category: "Teacher Education",
+        },
+        {
+            id: "teach_3",
+            prompt: "Summative assessment is usually:",
+            options: {
+                A: "A final evaluation at the end of a unit/term",
+                B: "A daily warm-up",
+                C: "A classroom rule",
+                D: "A seating plan",
+            },
+            correct: "A",
+            category: "Teacher Education",
+        },
+        {
+            id: "teach_4",
+            prompt: "Bloom’s taxonomy is commonly used to:",
+            options: {
+                A: "Classify school uniforms",
+                B: "Design learning objectives by cognitive level",
+                C: "Compute grades automatically",
+                D: "Manage school finances",
+            },
+            correct: "B",
+            category: "Teacher Education",
+        },
+        {
+            id: "teach_5",
+            prompt: "Classroom management primarily aims to:",
+            options: {
+                A: "Keep students silent always",
+                B: "Create a safe, organized learning environment",
+                C: "Reduce homework",
+                D: "Avoid lesson planning",
+            },
+            correct: "B",
+            category: "Teacher Education",
+        },
+    ],
+};
+
+const READINESS_QUESTIONS = [
+    {
+        id: "gen_1",
+        prompt: "What number comes next in the sequence: 2, 4, 8, 16, __ ?",
+        options: {
+            A: "18",
+            B: "20",
+            C: "24",
+            D: "32",
+        },
+        correct: "D",
     },
     {
-        id: 2,
-        prompt: "Which branch of science studies human behavior?",
+        id: "gen_2",
+        prompt: "A student scored 45 out of 60. What percent is this?",
         options: {
-            A: "Biology",
-            B: "Sociology",
-            C: "Psychology",
-            D: "Chemistry",
+            A: "70%",
+            B: "75%",
+            C: "80%",
+            D: "85%",
+        },
+        correct: "B",
+    },
+    {
+        id: "gen_3",
+        prompt: "Which sentence best states the main purpose of a conclusion in a report?",
+        options: {
+            A: "To introduce new evidence",
+            B: "To summarize findings and state final points clearly",
+            C: "To list all references used",
+            D: "To repeat the title in different words",
+        },
+        correct: "B",
+    },
+    {
+        id: "gen_4",
+        prompt: "Enrollment increased from 200 to 260 students. What is the increase?",
+        options: {
+            A: "30",
+            B: "50",
+            C: "60",
+            D: "80",
         },
         correct: "C",
-        category: "Arts & Sciences",
     },
     {
-        id: 3,
-        prompt: "What does ROI mean in business?",
+        id: "gen_5",
+        prompt: "If it takes 3 hours to travel 150 km, what is the average speed?",
         options: {
-            A: "Rate of Income",
-            B: "Return on Investment",
-            C: "Revenue of Industry",
-            D: "Risk of Investment",
-        },
-        correct: "B",
-        category: "Business Administration",
-    },
-    {
-        id: 4,
-        prompt: "What does CPU stand for in computer systems?",
-        options: {
-            A: "Central Process Unit",
-            B: "Computer Personal Unit",
-            C: "Central Processing Unit",
-            D: "Control Program Utility",
+            A: "40 km/h",
+            B: "45 km/h",
+            C: "50 km/h",
+            D: "55 km/h",
         },
         correct: "C",
-        category: "Computer Studies",
-    },
-    {
-        id: 5,
-        prompt: "Which agency is responsible for enforcing laws?",
-        options: {
-            A: "Department of Health",
-            B: "Police Department",
-            C: "Department of Education",
-            D: "Securities Commission",
-        },
-        correct: "B",
-        category: "Criminal Justice Education",
-    },
-    {
-        id: 6,
-        prompt: "Which formula is used to compute speed?",
-        options: {
-            A: "Speed = Distance × Time",
-            B: "Speed = Distance ÷ Time",
-            C: "Speed = Time ÷ Distance",
-            D: "Speed = Mass × Acceleration",
-        },
-        correct: "B",
-        category: "Engineering & Technology",
-    },
-    {
-        id: 7,
-        prompt: "What is the normal body temperature in Celsius?",
-        options: {
-            A: "35°C",
-            B: "36.5–37.5°C",
-            C: "38–39°C",
-            D: "40°C",
-        },
-        correct: "B",
-        category: "Nursing",
-    },
-    {
-        id: 8,
-        prompt: "What is the main purpose of a lesson plan?",
-        options: {
-            A: "To discipline students",
-            B: "To organize teaching and learning",
-            C: "To increase school profit",
-            D: "To record attendance",
-        },
-        correct: "B",
-        category: "Teacher Education",
     },
 ];
 
@@ -135,6 +593,62 @@ const CATEGORY_WEIGHTS = {
     part2: 2,
 };
 
+const CATEGORY_ORDER = Object.keys(PART1_CATEGORY_MAP);
+
+function buildPart2QuestionIndex() {
+    const idx = {};
+    Object.values(PART2_BANK).forEach((list) => {
+        (Array.isArray(list) ? list : []).forEach((q) => {
+            if (!q?.id) return;
+            idx[String(q.id)] = q;
+        });
+    });
+    return idx;
+}
+
+const PART2_INDEX = buildPart2QuestionIndex();
+
+function deriveTopCategoriesFromPart1(part1Selected, n = 3) {
+    const selected = Array.isArray(part1Selected) ? part1Selected : [];
+    const raw = Object.entries(PART1_CATEGORY_MAP).map(([category, nums]) => {
+        const count = (Array.isArray(nums) ? nums : []).reduce((c, num) => c + (selected.includes(num) ? 1 : 0), 0);
+        return { category, score: count };
+    });
+
+    raw.sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        // stable tie-breaker
+        return CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
+    });
+
+    return raw.slice(0, n).map((x) => x.category);
+}
+
+function categoriesFromPart2Answers(part2Answers) {
+    const ans = part2Answers && typeof part2Answers === "object" ? part2Answers : {};
+    const seen = new Set();
+    const out = [];
+    Object.keys(ans).forEach((qid) => {
+        const q = PART2_INDEX[String(qid)];
+        const cat = q?.category;
+        if (!cat || seen.has(cat)) return;
+        seen.add(cat);
+        out.push(cat);
+    });
+    return out;
+}
+
+function buildPart2Questions(categories) {
+    const cats = Array.isArray(categories) ? categories : [];
+    const out = [];
+    cats.forEach((cat) => {
+        const list = PART2_BANK[cat];
+        if (Array.isArray(list) && list.length) out.push(...list);
+    });
+    // Always include general readiness questions (affect all categories equally)
+    return out.concat(READINESS_QUESTIONS);
+}
+
 function computeScores(part1Selected, part2Answers) {
     const scores = Object.keys(PART1_CATEGORY_MAP).reduce((acc, k) => {
         acc[k] = 0;
@@ -148,8 +662,23 @@ function computeScores(part1Selected, part2Answers) {
     });
 
     // Part 2 scoring: +2 for each correct answer, applied to that question's category
-    PART2_QUESTIONS.forEach((q) => {
-        const user = (part2Answers[q.id] || "").toUpperCase();
+    const answers = part2Answers && typeof part2Answers === "object" ? part2Answers : {};
+    Object.entries(answers).forEach(([qid, ans]) => {
+        // General readiness: +1 to ALL categories when correct
+        const rq = READINESS_QUESTIONS.find((x) => String(x.id) === String(qid));
+        if (rq) {
+            const user = String(ans || "").toUpperCase();
+            if (user && user === rq.correct) {
+                Object.keys(scores).forEach((cat) => {
+                    scores[cat] += 1;
+                });
+            }
+            return;
+        }
+
+        const q = PART2_INDEX[String(qid)];
+        if (!q) return;
+        const user = String(ans || "").toUpperCase();
         if (user && user === q.correct) {
             scores[q.category] += 1 * CATEGORY_WEIGHTS.part2;
         }
@@ -173,7 +702,19 @@ export default function StudentAssessmentQuiz() {
     const navigate = useNavigate();
     const token = useMemo(() => localStorage.getItem("authToken"), []);
 
-    const stepsTotal = 1 + PART2_QUESTIONS.length + 1;
+    const [part1Selected, setPart1Selected] = useState([]); // array of statement numbers (1-based)
+    const [part2Answers, setPart2Answers] = useState({}); // { [questionId]: 'A'|'B'|'C'|'D' }
+    const [part2Categories, setPart2Categories] = useState([]);
+
+    const effectivePart2Categories = useMemo(() => {
+        const stored = Array.isArray(part2Categories) ? part2Categories.filter(Boolean) : [];
+        if (stored.length) return stored.slice(0, 3);
+        return deriveTopCategoriesFromPart1(part1Selected, 3);
+    }, [part1Selected, part2Categories]);
+
+    const part2Questions = useMemo(() => buildPart2Questions(effectivePart2Categories), [effectivePart2Categories]);
+
+    const stepsTotal = 1 + part2Questions.length + 1;
     const reviewStepIndex = stepsTotal - 1;
 
     const [loading, setLoading] = useState(true);
@@ -182,10 +723,7 @@ export default function StudentAssessmentQuiz() {
     const [success, setSuccess] = useState(null);
     const [assessmentSaved, setAssessmentSaved] = useState(false);
 
-    const [step, setStep] = useState(0); // 0 = Part I, 1..8 = Part II Q index, 9 = Review
-
-    const [part1Selected, setPart1Selected] = useState([]); // array of statement numbers (1-based)
-    const [part2Answers, setPart2Answers] = useState({}); // { [questionId]: 'A'|'B'|'C'|'D' }
+    const [step, setStep] = useState(0); // 0 = Part I, 1..N = Part II Q index, Review = last
 
     const isLockedToReview = assessmentSaved;
 
@@ -210,6 +748,13 @@ export default function StudentAssessmentQuiz() {
                     setPart1Selected(Array.isArray(assessment.part1_selected) ? assessment.part1_selected : []);
                     setPart2Answers(assessment.part2_answers && typeof assessment.part2_answers === "object" ? assessment.part2_answers : {});
 
+                    // Try to reconstruct which categories were used for Part II.
+                    // Prefer the categories implied by the stored question IDs.
+                    const catsFromAnswers = categoriesFromPart2Answers(assessment.part2_answers);
+                    if (catsFromAnswers.length) {
+                        setPart2Categories(catsFromAnswers.slice(0, 3));
+                    }
+
                     const hasSavedRecommendation = Array.isArray(assessment.recommended_top3) && assessment.recommended_top3.length > 0;
                     setAssessmentSaved(hasSavedRecommendation);
 
@@ -225,22 +770,22 @@ export default function StudentAssessmentQuiz() {
         };
 
         fetchAssessment();
-    }, [navigate, reviewStepIndex, token]);
+    }, [navigate, token]);
 
     const currentLabel = useMemo(() => {
         if (step === 0) return "Part I – Personal Interest & Skills";
-        if (step >= 1 && step <= PART2_QUESTIONS.length) {
-            return `Part II – General Knowledge (Question ${step} of ${PART2_QUESTIONS.length})`;
+        if (step >= 1 && step <= part2Questions.length) {
+            return `Part II – General Knowledge (Question ${step} of ${part2Questions.length})`;
         }
         return "Review";
-    }, [step]);
+    }, [part2Questions.length, step]);
 
     useEffect(() => {
         // If the assessment is already saved, keep the user on Review until they retake.
-        if (assessmentSaved && step !== reviewStepIndex) {
-            setStep(reviewStepIndex);
+        if (assessmentSaved) {
+            setStep(stepsTotal - 1);
         }
-    }, [assessmentSaved, reviewStepIndex, step]);
+    }, [assessmentSaved, stepsTotal]);
 
     const progress = useMemo(() => {
         const pct = Math.round(((step + 1) / stepsTotal) * 100);
@@ -264,12 +809,12 @@ export default function StudentAssessmentQuiz() {
 
     const canGoNext = useMemo(() => {
         if (step === 0) return part1Selected.length > 0;
-        if (step >= 1 && step <= PART2_QUESTIONS.length) {
-            const q = PART2_QUESTIONS[step - 1];
+        if (step >= 1 && step <= part2Questions.length) {
+            const q = part2Questions[step - 1];
             return Boolean(part2Answers[q.id]);
         }
         return true;
-    }, [step, part1Selected, part2Answers]);
+    }, [step, part1Selected, part2Answers, part2Questions]);
 
     const handleSave = async () => {
         setSaving(true);
@@ -307,22 +852,62 @@ export default function StudentAssessmentQuiz() {
         const confirmed = window.confirm("This will clear your current quiz answers on this page. Continue?");
         if (!confirmed) return;
 
-        setPart1Selected([]);
-        setPart2Answers({});
-        setAssessmentSaved(false);
-        setSuccess(null);
-        setError(null);
-        setStep(0);
+        const clearServer = async () => {
+            try {
+                await axios.delete("/api/assessment", {
+                    headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
+                    withCredentials: true,
+                });
+            } catch (e) {
+                const msg = e?.response?.data?.message || "Couldn’t reset your assessment. Please try again.";
+                setError(msg);
+                return;
+            }
 
-        try {
-            localStorage.removeItem("assessmentResult");
-        } catch {
-            // ignore
-        }
+            setPart1Selected([]);
+            setPart2Answers({});
+            setPart2Categories([]);
+            setAssessmentSaved(false);
+            setSuccess(null);
+            setError(null);
+            setStep(0);
+
+            try {
+                localStorage.removeItem("assessmentResult");
+            } catch {
+                // ignore
+            }
+        };
+
+        clearServer();
     };
 
     const gotoPrev = () => setStep((s) => Math.max(0, s - 1));
-    const gotoNext = () => setStep((s) => Math.min(stepsTotal - 1, s + 1));
+
+    const gotoNext = () => {
+        // When transitioning out of Part I, lock in the Part II categories
+        // so the question set stays consistent unless the user goes back.
+        if (step === 0) {
+            const nextCats = deriveTopCategoriesFromPart1(part1Selected, 3);
+            setPart2Categories(nextCats);
+
+            // Prune any old answers that no longer belong to the new question set
+            const nextIds = new Set(buildPart2Questions(nextCats).map((q) => String(q.id)));
+            setPart2Answers((prev) => {
+                const cur = prev && typeof prev === "object" ? prev : {};
+                const next = {};
+                Object.entries(cur).forEach(([qid, ans]) => {
+                    if (nextIds.has(String(qid))) next[qid] = ans;
+                });
+                return next;
+            });
+
+            setStep(1);
+            return;
+        }
+
+        setStep((s) => Math.min(stepsTotal - 1, s + 1));
+    };
 
     const safeGotoPrev = () => {
         if (isLockedToReview) return;
@@ -369,7 +954,7 @@ export default function StudentAssessmentQuiz() {
     };
 
     const renderBody = () => {
-        if (isLockedToReview && step !== reviewStepIndex) {
+        if (isLockedToReview) {
             return renderReview();
         }
 
@@ -401,8 +986,8 @@ export default function StudentAssessmentQuiz() {
             );
         }
 
-        if (step >= 1 && step <= PART2_QUESTIONS.length) {
-            const q = PART2_QUESTIONS[step - 1];
+        if (step >= 1 && step <= part2Questions.length) {
+            const q = part2Questions[step - 1];
             const chosen = (part2Answers[q.id] || "").toUpperCase();
 
             return (

@@ -14180,6 +14180,11 @@ textarea.sb-input {
   background: #f8fafc;
 }
 
+.sb-rating-row input[type=range] {
+  width: 100%;
+  accent-color: var(--bs-blue);
+}
+
 .sb-rating-name {
   font-weight: 800;
   color: #0f172a;
@@ -14887,12 +14892,19 @@ body[data-theme=dark] .aq-actions {
 }
 
 .sp-highlights-card {
-  position: relative;
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.sp-highlights-media {
+  position: relative;
   background: var(--surface-2);
-  min-height: 220px;
+  height: clamp(190px, 26vw, 260px);
   background-size: cover;
   background-position: center;
 }
@@ -14903,7 +14915,7 @@ body[data-theme=dark] .aq-actions {
   top: 0;
   bottom: 0;
   width: min(560px, 100%);
-  padding: 28px;
+  padding: 22px;
   background: linear-gradient(90deg, color-mix(in srgb, var(--brand-navy-2) 92%, transparent), color-mix(in srgb, var(--brand-navy-2) 78%, transparent), transparent);
   color: var(--surface);
 }
@@ -14928,7 +14940,7 @@ body[data-theme=dark] .aq-actions {
 
 .sp-highlights-h {
   margin-top: 10px;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 1100;
   line-height: 1.05;
 }
@@ -14941,16 +14953,29 @@ body[data-theme=dark] .aq-actions {
 }
 
 .sp-highlights-footer {
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 14px;
+  padding: 12px 18px;
+  background: var(--surface);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 }
 
+@media (max-width: 720px) {
+  .sp-highlights-media {
+    height: 210px;
+  }
+  .sp-highlights-title {
+    font-size: 20px;
+  }
+  .sp-highlights-overlay {
+    padding: 18px;
+    width: min(520px, 100%);
+  }
+  .sp-highlights-h {
+    font-size: 30px;
+  }
+}
 .sp-highlights-dots {
   display: flex;
   gap: 8px;
@@ -14961,18 +14986,18 @@ body[data-theme=dark] .aq-actions {
   height: 10px;
   border-radius: 999px;
   border: 0;
-  background: color-mix(in srgb, var(--surface) 35%, transparent);
+  background: color-mix(in srgb, var(--text) 12%, transparent);
 }
 
 .sp-highlights-dot--active {
   width: 28px;
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  background: color-mix(in srgb, var(--brand-navy-2) 96%, transparent);
 }
 
 .sp-highlights-count {
   font-weight: 900;
   font-size: 12px;
-  color: color-mix(in srgb, var(--surface) 85%, transparent);
+  color: color-mix(in srgb, var(--text) 55%, transparent);
 }
 
 .student-portal .sp-pagehead {

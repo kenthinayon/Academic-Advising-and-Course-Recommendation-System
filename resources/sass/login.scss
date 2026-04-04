@@ -2012,6 +2012,13 @@ textarea.sb-input {
   background: #f8fafc;
 }
 
+// Program interest sliders: force a consistent accent color (blue)
+// so it doesn't depend on OS/browser theme defaults.
+.sb-rating-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--bs-blue);
+}
+
 .sb-rating-name {
   font-weight: 800;
   color: #0f172a;

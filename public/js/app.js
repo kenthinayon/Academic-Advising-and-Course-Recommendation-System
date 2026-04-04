@@ -82957,10 +82957,6 @@ var DEFAULT_DEGREES = [{
   code: "BAComm",
   name: "Bachelor of Arts in Communication",
   track: "Arts & Sciences"
-}, {
-  code: "BA-PolSci",
-  name: "Bachelor of Arts in Political Science",
-  track: "Law"
 }];
 function normalizeDegree(item) {
   if (!item) return null;
@@ -85876,10 +85872,6 @@ var DEFAULT_DEGREES = [{
   code: "BAComm",
   name: "Bachelor of Arts in Communication",
   track: "Arts & Sciences"
-}, {
-  code: "BA-PolSci",
-  name: "Bachelor of Arts in Political Science",
-  track: "Law"
 }];
 function normalizeDegree(item) {
   if (!item) return null;
@@ -86801,18 +86793,21 @@ function HighlightsCarousel() {
         role: "group",
         "aria-roledescription": "slide",
         "aria-label": "No slides",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "sp-highlights-overlay",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "sp-highlights-badge",
-            children: "HIGHLIGHTS"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "sp-highlights-h",
-            children: "No highlights yet"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "sp-highlights-story",
-            children: "An administrator can add featured stories and achievements."
-          })]
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "sp-highlights-media",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "sp-highlights-overlay",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "sp-highlights-badge",
+              children: "HIGHLIGHTS"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "sp-highlights-h",
+              children: "No highlights yet"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "sp-highlights-story",
+              children: "An administrator can add featured stories and achievements."
+            })]
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "sp-highlights-footer",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -86878,27 +86873,30 @@ function HighlightsCarousel() {
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "sp-highlights-card",
-      style: {
-        backgroundImage: currentImage ? "url(".concat(currentImage, ")") : undefined
-      },
       role: "group",
       "aria-roledescription": "slide",
       "aria-label": "".concat(idx + 1, " of ").concat(slides.length),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "sp-highlights-overlay",
-        children: [current.badge ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "sp-highlights-badge",
-          children: String(current.badge).toUpperCase()
-        }) : null, current.greeting ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "sp-highlights-greeting",
-          children: current.greeting
-        }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "sp-highlights-h",
-          children: current.title
-        }), current.story ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "sp-highlights-story",
-          children: current.story
-        }) : null]
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "sp-highlights-media",
+        style: {
+          backgroundImage: currentImage ? "url(".concat(currentImage, ")") : undefined
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "sp-highlights-overlay",
+          children: [current.badge ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "sp-highlights-badge",
+            children: String(current.badge).toUpperCase()
+          }) : null, current.greeting ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "sp-highlights-greeting",
+            children: current.greeting
+          }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "sp-highlights-h",
+            children: current.title
+          }), current.story ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "sp-highlights-story",
+            children: current.story
+          }) : null]
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "sp-highlights-footer",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -87753,7 +87751,7 @@ var STRANDS = [{
   value: "TVL",
   label: "Technical-Vocational-Livelihood (TVL) Track"
 }];
-var PROGRAMS = ["Accountancy", "Arts and Sciences", "Business Administration", "Criminal Justice Education", "Computer Studies", "Engineering And Technology", "Law", "Nursing", "Teachers Education"];
+var PROGRAMS = ["Accountancy", "Arts and Sciences", "Business Administration", "Criminal Justice Education", "Computer Studies", "Engineering And Technology", "Nursing", "Teachers Education"];
 function StudentAcademicCredentials() {
   var _form$skillFiles;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
@@ -89142,15 +89140,15 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -89162,94 +89160,506 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var PART1_STATEMENTS = ["I enjoy working with numbers and financial records.", "I like studying human behavior and social issues.", "I am interested in starting or managing a business.", "I enjoy coding, troubleshooting, or learning new technologies.", "I am interested in law enforcement and public safety.", "I enjoy building, designing, or fixing machines.", "I like caring for sick or injured people.", "I enjoy explaining lessons to others.", "I am detail-oriented and organized.", "I enjoy research and reading academic materials.", "I am confident leading a team or group.", "I enjoy solving logical or technical problems.", "I value discipline and following procedures.", "I am patient and compassionate.", "I am comfortable speaking in front of many people."];
-var PART2_QUESTIONS = [{
-  id: 1,
-  prompt: "What is the basic accounting equation?",
+var PART2_BANK = {
+  Accountancy: [{
+    id: "acc_1",
+    prompt: "What is the basic accounting equation?",
+    options: {
+      A: "Assets = Liabilities – Capital",
+      B: "Assets = Liabilities + Owner’s Equity",
+      C: "Income = Expenses + Assets",
+      D: "Profit = Assets – Liabilities"
+    },
+    correct: "B",
+    category: "Accountancy"
+  }, {
+    id: "acc_2",
+    prompt: "In double-entry bookkeeping, every transaction affects:",
+    options: {
+      A: "Only one account",
+      B: "At least two accounts",
+      C: "Only revenue accounts",
+      D: "Only cash accounts"
+    },
+    correct: "B",
+    category: "Accountancy"
+  }, {
+    id: "acc_3",
+    prompt: "A trial balance is used mainly to:",
+    options: {
+      A: "Determine company profit automatically",
+      B: "Check if total debits equal total credits",
+      C: "Record daily transactions",
+      D: "Create marketing plans"
+    },
+    correct: "B",
+    category: "Accountancy"
+  }, {
+    id: "acc_4",
+    prompt: "Which financial statement shows a company’s financial position on a specific date?",
+    options: {
+      A: "Income statement",
+      B: "Balance sheet",
+      C: "Cash flow statement",
+      D: "Statement of changes in equity only"
+    },
+    correct: "B",
+    category: "Accountancy"
+  }, {
+    id: "acc_5",
+    prompt: "Revenue is generally recognized when it is:",
+    options: {
+      A: "Planned",
+      B: "Earned",
+      C: "Promised",
+      D: "Discussed with the customer"
+    },
+    correct: "B",
+    category: "Accountancy"
+  }],
+  "Arts & Sciences": [{
+    id: "arts_1",
+    prompt: "Which branch of science studies human behavior?",
+    options: {
+      A: "Biology",
+      B: "Sociology",
+      C: "Psychology",
+      D: "Chemistry"
+    },
+    correct: "C",
+    category: "Arts & Sciences"
+  }, {
+    id: "arts_2",
+    prompt: "In research, the variable you change/control is the:",
+    options: {
+      A: "Dependent variable",
+      B: "Independent variable",
+      C: "Random variable",
+      D: "Confounding variable"
+    },
+    correct: "B",
+    category: "Arts & Sciences"
+  }, {
+    id: "arts_3",
+    prompt: "Correlation means two variables:",
+    options: {
+      A: "Prove cause and effect",
+      B: "Are unrelated",
+      C: "Move together in some pattern",
+      D: "Are always equal"
+    },
+    correct: "C",
+    category: "Arts & Sciences"
+  }, {
+    id: "arts_4",
+    prompt: "A hypothesis is best described as:",
+    options: {
+      A: "A final conclusion",
+      B: "A testable prediction",
+      C: "A personal opinion",
+      D: "A proven fact"
+    },
+    correct: "B",
+    category: "Arts & Sciences"
+  }, {
+    id: "arts_5",
+    prompt: "Which is an example of a qualitative method?",
+    options: {
+      A: "Measuring height in cm",
+      B: "Counting survey scores",
+      C: "Interviewing participants for themes",
+      D: "Computing averages"
+    },
+    correct: "C",
+    category: "Arts & Sciences"
+  }],
+  "Business Administration": [{
+    id: "bus_1",
+    prompt: "What does ROI mean in business?",
+    options: {
+      A: "Rate of Income",
+      B: "Return on Investment",
+      C: "Revenue of Industry",
+      D: "Risk of Investment"
+    },
+    correct: "B",
+    category: "Business Administration"
+  }, {
+    id: "bus_2",
+    prompt: "The 4Ps of marketing include Product, Price, Place, and:",
+    options: {
+      A: "People",
+      B: "Promotion",
+      C: "Profit",
+      D: "Process only"
+    },
+    correct: "B",
+    category: "Business Administration"
+  }, {
+    id: "bus_3",
+    prompt: "A SWOT analysis stands for:",
+    options: {
+      A: "Sales, Work, Output, Time",
+      B: "Strengths, Weaknesses, Opportunities, Threats",
+      C: "Strategy, Work, Operations, Targets",
+      D: "Stock, Wealth, Options, Taxes"
+    },
+    correct: "B",
+    category: "Business Administration"
+  }, {
+    id: "bus_4",
+    prompt: "Break-even point is when:",
+    options: {
+      A: "Revenue is zero",
+      B: "Profit is maximum",
+      C: "Total revenue equals total costs",
+      D: "Costs stop increasing"
+    },
+    correct: "C",
+    category: "Business Administration"
+  }, {
+    id: "bus_5",
+    prompt: "Supply and demand most directly influences:",
+    options: {
+      A: "Office layout",
+      B: "Market price",
+      C: "Employee attendance",
+      D: "Product color"
+    },
+    correct: "B",
+    category: "Business Administration"
+  }],
+  "Computer Studies": [{
+    id: "cs_1",
+    prompt: "What does CPU stand for in computer systems?",
+    options: {
+      A: "Central Process Unit",
+      B: "Computer Personal Unit",
+      C: "Central Processing Unit",
+      D: "Control Program Utility"
+    },
+    correct: "C",
+    category: "Computer Studies"
+  }, {
+    id: "cs_2",
+    prompt: "An algorithm is:",
+    options: {
+      A: "A computer brand",
+      B: "A step-by-step procedure to solve a problem",
+      C: "A type of monitor",
+      D: "An internet provider"
+    },
+    correct: "B",
+    category: "Computer Studies"
+  }, {
+    id: "cs_3",
+    prompt: "Which is an example of an operating system?",
+    options: {
+      A: "Google",
+      B: "Windows",
+      C: "HTML",
+      D: "Router"
+    },
+    correct: "B",
+    category: "Computer Studies"
+  }, {
+    id: "cs_4",
+    prompt: "Which command is used to retrieve data in SQL?",
+    options: {
+      A: "INSERT",
+      B: "DELETE",
+      C: "SELECT",
+      D: "DROP"
+    },
+    correct: "C",
+    category: "Computer Studies"
+  }, {
+    id: "cs_5",
+    prompt: "An IP address is used to:",
+    options: {
+      A: "Identify a device on a network",
+      B: "Print documents",
+      C: "Charge a battery",
+      D: "Increase CPU speed"
+    },
+    correct: "A",
+    category: "Computer Studies"
+  }],
+  "Criminal Justice Education": [{
+    id: "cje_1",
+    prompt: "Which agency is responsible for enforcing laws?",
+    options: {
+      A: "Department of Health",
+      B: "Police Department",
+      C: "Department of Education",
+      D: "Securities Commission"
+    },
+    correct: "B",
+    category: "Criminal Justice Education"
+  }, {
+    id: "cje_2",
+    prompt: "Presumption of innocence means the accused is:",
+    options: {
+      A: "Always guilty",
+      B: "Considered innocent until proven guilty",
+      C: "Punished immediately",
+      D: "Detained without rights"
+    },
+    correct: "B",
+    category: "Criminal Justice Education"
+  }, {
+    id: "cje_3",
+    prompt: "Chain of custody is important to:",
+    options: {
+      A: "Make trials faster",
+      B: "Keep evidence properly tracked and unaltered",
+      C: "Increase police budget",
+      D: "Replace witnesses"
+    },
+    correct: "B",
+    category: "Criminal Justice Education"
+  }, {
+    id: "cje_4",
+    prompt: "Which is an example of physical evidence?",
+    options: {
+      A: "Rumors",
+      B: "A fingerprint",
+      C: "An opinion",
+      D: "A promise"
+    },
+    correct: "B",
+    category: "Criminal Justice Education"
+  }, {
+    id: "cje_5",
+    prompt: "A warrant is generally required to:",
+    options: {
+      A: "File a complaint",
+      B: "Conduct certain searches legally",
+      C: "Write a report",
+      D: "Give a warning"
+    },
+    correct: "B",
+    category: "Criminal Justice Education"
+  }],
+  "Engineering & Technology": [{
+    id: "eng_1",
+    prompt: "Which formula is used to compute speed?",
+    options: {
+      A: "Speed = Distance × Time",
+      B: "Speed = Distance ÷ Time",
+      C: "Speed = Time ÷ Distance",
+      D: "Speed = Mass × Acceleration"
+    },
+    correct: "B",
+    category: "Engineering & Technology"
+  }, {
+    id: "eng_2",
+    prompt: "Ohm’s Law is:",
+    options: {
+      A: "P = VI",
+      B: "V = IR",
+      C: "F = ma",
+      D: "E = mc²"
+    },
+    correct: "B",
+    category: "Engineering & Technology"
+  }, {
+    id: "eng_3",
+    prompt: "Force is calculated by:",
+    options: {
+      A: "F = m + a",
+      B: "F = ma",
+      C: "F = m/a",
+      D: "F = a/m"
+    },
+    correct: "B",
+    category: "Engineering & Technology"
+  }, {
+    id: "eng_4",
+    prompt: "The SI unit of power is:",
+    options: {
+      A: "Newton",
+      B: "Watt",
+      C: "Joule",
+      D: "Pascal"
+    },
+    correct: "B",
+    category: "Engineering & Technology"
+  }, {
+    id: "eng_5",
+    prompt: "Engineering design most often balances:",
+    options: {
+      A: "Cost, safety, and performance",
+      B: "Luck and speed",
+      C: "Opinion only",
+      D: "Color and style only"
+    },
+    correct: "A",
+    category: "Engineering & Technology"
+  }],
+  Nursing: [{
+    id: "nurs_1",
+    prompt: "What is the normal body temperature in Celsius?",
+    options: {
+      A: "35°C",
+      B: "36.5–37.5°C",
+      C: "38–39°C",
+      D: "40°C"
+    },
+    correct: "B",
+    category: "Nursing"
+  }, {
+    id: "nurs_2",
+    prompt: "A normal adult resting heart rate is typically:",
+    options: {
+      A: "20–40 bpm",
+      B: "60–100 bpm",
+      C: "120–160 bpm",
+      D: "180–220 bpm"
+    },
+    correct: "B",
+    category: "Nursing"
+  }, {
+    id: "nurs_3",
+    prompt: "The most effective way to prevent infection spread in healthcare is:",
+    options: {
+      A: "Wearing perfume",
+      B: "Hand hygiene",
+      C: "Speaking quietly",
+      D: "Drinking vitamins"
+    },
+    correct: "B",
+    category: "Nursing"
+  }, {
+    id: "nurs_4",
+    prompt: "Blood pressure measures the force of blood against:",
+    options: {
+      A: "Bones",
+      B: "Artery walls",
+      C: "Skin pores",
+      D: "Hair follicles"
+    },
+    correct: "B",
+    category: "Nursing"
+  }, {
+    id: "nurs_5",
+    prompt: "A fever is commonly considered at or above:",
+    options: {
+      A: "36.0°C",
+      B: "37.0°C",
+      C: "38.0°C",
+      D: "39.9°C always"
+    },
+    correct: "C",
+    category: "Nursing"
+  }],
+  "Teacher Education": [{
+    id: "teach_1",
+    prompt: "What is the main purpose of a lesson plan?",
+    options: {
+      A: "To discipline students",
+      B: "To organize teaching and learning",
+      C: "To increase school profit",
+      D: "To record attendance"
+    },
+    correct: "B",
+    category: "Teacher Education"
+  }, {
+    id: "teach_2",
+    prompt: "Formative assessment is mainly used to:",
+    options: {
+      A: "Grade final performance only",
+      B: "Monitor learning and give feedback during learning",
+      C: "Replace teaching",
+      D: "Punish students"
+    },
+    correct: "B",
+    category: "Teacher Education"
+  }, {
+    id: "teach_3",
+    prompt: "Summative assessment is usually:",
+    options: {
+      A: "A final evaluation at the end of a unit/term",
+      B: "A daily warm-up",
+      C: "A classroom rule",
+      D: "A seating plan"
+    },
+    correct: "A",
+    category: "Teacher Education"
+  }, {
+    id: "teach_4",
+    prompt: "Bloom’s taxonomy is commonly used to:",
+    options: {
+      A: "Classify school uniforms",
+      B: "Design learning objectives by cognitive level",
+      C: "Compute grades automatically",
+      D: "Manage school finances"
+    },
+    correct: "B",
+    category: "Teacher Education"
+  }, {
+    id: "teach_5",
+    prompt: "Classroom management primarily aims to:",
+    options: {
+      A: "Keep students silent always",
+      B: "Create a safe, organized learning environment",
+      C: "Reduce homework",
+      D: "Avoid lesson planning"
+    },
+    correct: "B",
+    category: "Teacher Education"
+  }]
+};
+var READINESS_QUESTIONS = [{
+  id: "gen_1",
+  prompt: "What number comes next in the sequence: 2, 4, 8, 16, __ ?",
   options: {
-    A: "Assets = Liabilities – Capital",
-    B: "Assets = Liabilities + Owner’s Equity",
-    C: "Income = Expenses + Assets",
-    D: "Profit = Assets – Liabilities"
+    A: "18",
+    B: "20",
+    C: "24",
+    D: "32"
   },
-  correct: "B",
-  category: "Accountancy"
+  correct: "D"
 }, {
-  id: 2,
-  prompt: "Which branch of science studies human behavior?",
+  id: "gen_2",
+  prompt: "A student scored 45 out of 60. What percent is this?",
   options: {
-    A: "Biology",
-    B: "Sociology",
-    C: "Psychology",
-    D: "Chemistry"
+    A: "70%",
+    B: "75%",
+    C: "80%",
+    D: "85%"
   },
-  correct: "C",
-  category: "Arts & Sciences"
+  correct: "B"
 }, {
-  id: 3,
-  prompt: "What does ROI mean in business?",
+  id: "gen_3",
+  prompt: "Which sentence best states the main purpose of a conclusion in a report?",
   options: {
-    A: "Rate of Income",
-    B: "Return on Investment",
-    C: "Revenue of Industry",
-    D: "Risk of Investment"
+    A: "To introduce new evidence",
+    B: "To summarize findings and state final points clearly",
+    C: "To list all references used",
+    D: "To repeat the title in different words"
   },
-  correct: "B",
-  category: "Business Administration"
+  correct: "B"
 }, {
-  id: 4,
-  prompt: "What does CPU stand for in computer systems?",
+  id: "gen_4",
+  prompt: "Enrollment increased from 200 to 260 students. What is the increase?",
   options: {
-    A: "Central Process Unit",
-    B: "Computer Personal Unit",
-    C: "Central Processing Unit",
-    D: "Control Program Utility"
+    A: "30",
+    B: "50",
+    C: "60",
+    D: "80"
   },
-  correct: "C",
-  category: "Computer Studies"
+  correct: "C"
 }, {
-  id: 5,
-  prompt: "Which agency is responsible for enforcing laws?",
+  id: "gen_5",
+  prompt: "If it takes 3 hours to travel 150 km, what is the average speed?",
   options: {
-    A: "Department of Health",
-    B: "Police Department",
-    C: "Department of Education",
-    D: "Securities Commission"
+    A: "40 km/h",
+    B: "45 km/h",
+    C: "50 km/h",
+    D: "55 km/h"
   },
-  correct: "B",
-  category: "Criminal Justice Education"
-}, {
-  id: 6,
-  prompt: "Which formula is used to compute speed?",
-  options: {
-    A: "Speed = Distance × Time",
-    B: "Speed = Distance ÷ Time",
-    C: "Speed = Time ÷ Distance",
-    D: "Speed = Mass × Acceleration"
-  },
-  correct: "B",
-  category: "Engineering & Technology"
-}, {
-  id: 7,
-  prompt: "What is the normal body temperature in Celsius?",
-  options: {
-    A: "35°C",
-    B: "36.5–37.5°C",
-    C: "38–39°C",
-    D: "40°C"
-  },
-  correct: "B",
-  category: "Nursing"
-}, {
-  id: 8,
-  prompt: "What is the main purpose of a lesson plan?",
-  options: {
-    A: "To discipline students",
-    B: "To organize teaching and learning",
-    C: "To increase school profit",
-    D: "To record attendance"
-  },
-  correct: "B",
-  category: "Teacher Education"
+  correct: "C"
 }];
 var PART1_CATEGORY_MAP = {
   Accountancy: [1, 9],
@@ -89265,6 +89675,65 @@ var CATEGORY_WEIGHTS = {
   part1: 1,
   part2: 2
 };
+var CATEGORY_ORDER = Object.keys(PART1_CATEGORY_MAP);
+function buildPart2QuestionIndex() {
+  var idx = {};
+  Object.values(PART2_BANK).forEach(function (list) {
+    (Array.isArray(list) ? list : []).forEach(function (q) {
+      if (!(q !== null && q !== void 0 && q.id)) return;
+      idx[String(q.id)] = q;
+    });
+  });
+  return idx;
+}
+var PART2_INDEX = buildPart2QuestionIndex();
+function deriveTopCategoriesFromPart1(part1Selected) {
+  var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
+  var selected = Array.isArray(part1Selected) ? part1Selected : [];
+  var raw = Object.entries(PART1_CATEGORY_MAP).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+      category = _ref2[0],
+      nums = _ref2[1];
+    var count = (Array.isArray(nums) ? nums : []).reduce(function (c, num) {
+      return c + (selected.includes(num) ? 1 : 0);
+    }, 0);
+    return {
+      category: category,
+      score: count
+    };
+  });
+  raw.sort(function (a, b) {
+    if (b.score !== a.score) return b.score - a.score;
+    // stable tie-breaker
+    return CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
+  });
+  return raw.slice(0, n).map(function (x) {
+    return x.category;
+  });
+}
+function categoriesFromPart2Answers(part2Answers) {
+  var ans = part2Answers && _typeof(part2Answers) === "object" ? part2Answers : {};
+  var seen = new Set();
+  var out = [];
+  Object.keys(ans).forEach(function (qid) {
+    var q = PART2_INDEX[String(qid)];
+    var cat = q === null || q === void 0 ? void 0 : q.category;
+    if (!cat || seen.has(cat)) return;
+    seen.add(cat);
+    out.push(cat);
+  });
+  return out;
+}
+function buildPart2Questions(categories) {
+  var cats = Array.isArray(categories) ? categories : [];
+  var out = [];
+  cats.forEach(function (cat) {
+    var list = PART2_BANK[cat];
+    if (Array.isArray(list) && list.length) out.push.apply(out, _toConsumableArray(list));
+  });
+  // Always include general readiness questions (affect all categories equally)
+  return out.concat(READINESS_QUESTIONS);
+}
 function computeScores(part1Selected, part2Answers) {
   var scores = Object.keys(PART1_CATEGORY_MAP).reduce(function (acc, k) {
     acc[k] = 0;
@@ -89272,10 +89741,10 @@ function computeScores(part1Selected, part2Answers) {
   }, {});
 
   // Part 1 scoring: count checks mapped to each category
-  Object.entries(PART1_CATEGORY_MAP).forEach(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-      category = _ref2[0],
-      numbers = _ref2[1];
+  Object.entries(PART1_CATEGORY_MAP).forEach(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+      category = _ref4[0],
+      numbers = _ref4[1];
     var count = numbers.reduce(function (c, n) {
       return c + (part1Selected.includes(n) ? 1 : 0);
     }, 0);
@@ -89283,8 +89752,27 @@ function computeScores(part1Selected, part2Answers) {
   });
 
   // Part 2 scoring: +2 for each correct answer, applied to that question's category
-  PART2_QUESTIONS.forEach(function (q) {
-    var user = (part2Answers[q.id] || "").toUpperCase();
+  var answers = part2Answers && _typeof(part2Answers) === "object" ? part2Answers : {};
+  Object.entries(answers).forEach(function (_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 2),
+      qid = _ref6[0],
+      ans = _ref6[1];
+    // General readiness: +1 to ALL categories when correct
+    var rq = READINESS_QUESTIONS.find(function (x) {
+      return String(x.id) === String(qid);
+    });
+    if (rq) {
+      var _user = String(ans || "").toUpperCase();
+      if (_user && _user === rq.correct) {
+        Object.keys(scores).forEach(function (cat) {
+          scores[cat] += 1;
+        });
+      }
+      return;
+    }
+    var q = PART2_INDEX[String(qid)];
+    if (!q) return;
+    var user = String(ans || "").toUpperCase();
     if (user && user === q.correct) {
       scores[q.category] += 1 * CATEGORY_WEIGHTS.part2;
     }
@@ -89295,10 +89783,10 @@ function topN(scores) {
   var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
   return Object.entries(scores).sort(function (a, b) {
     return b[1] - a[1];
-  }).slice(0, n).map(function (_ref3, idx) {
-    var _ref4 = _slicedToArray(_ref3, 2),
-      category = _ref4[0],
-      score = _ref4[1];
+  }).slice(0, n).map(function (_ref7, idx) {
+    var _ref8 = _slicedToArray(_ref7, 2),
+      category = _ref8[0],
+      score = _ref8[1];
     return {
       rank: idx + 1,
       category: category,
@@ -89311,41 +89799,52 @@ function StudentAssessmentQuiz() {
   var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return localStorage.getItem("authToken");
   }, []);
-  var stepsTotal = 1 + PART2_QUESTIONS.length + 1;
-  var reviewStepIndex = stepsTotal - 1;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
-    loading = _useState2[0],
-    setLoading = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    part1Selected = _useState2[0],
+    setPart1Selected = _useState2[1]; // array of statement numbers (1-based)
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
     _useState4 = _slicedToArray(_useState3, 2),
-    saving = _useState4[0],
-    setSaving = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    part2Answers = _useState4[0],
+    setPart2Answers = _useState4[1]; // { [questionId]: 'A'|'B'|'C'|'D' }
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState6 = _slicedToArray(_useState5, 2),
-    error = _useState6[0],
-    setError = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    part2Categories = _useState6[0],
+    setPart2Categories = _useState6[1];
+  var effectivePart2Categories = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var stored = Array.isArray(part2Categories) ? part2Categories.filter(Boolean) : [];
+    if (stored.length) return stored.slice(0, 3);
+    return deriveTopCategoriesFromPart1(part1Selected, 3);
+  }, [part1Selected, part2Categories]);
+  var part2Questions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return buildPart2Questions(effectivePart2Categories);
+  }, [effectivePart2Categories]);
+  var stepsTotal = 1 + part2Questions.length + 1;
+  var reviewStepIndex = stepsTotal - 1;
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
     _useState8 = _slicedToArray(_useState7, 2),
-    success = _useState8[0],
-    setSuccess = _useState8[1];
+    loading = _useState8[0],
+    setLoading = _useState8[1];
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
-    assessmentSaved = _useState0[0],
-    setAssessmentSaved = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    saving = _useState0[0],
+    setSaving = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState10 = _slicedToArray(_useState1, 2),
-    step = _useState10[0],
-    setStep = _useState10[1]; // 0 = Part I, 1..8 = Part II Q index, 9 = Review
-
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    error = _useState10[0],
+    setError = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    part1Selected = _useState12[0],
-    setPart1Selected = _useState12[1]; // array of statement numbers (1-based)
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    success = _useState12[0],
+    setSuccess = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    part2Answers = _useState14[0],
-    setPart2Answers = _useState14[1]; // { [questionId]: 'A'|'B'|'C'|'D' }
+    assessmentSaved = _useState14[0],
+    setAssessmentSaved = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState16 = _slicedToArray(_useState15, 2),
+    step = _useState16[0],
+    setStep = _useState16[1]; // 0 = Part I, 1..N = Part II Q index, Review = last
 
   var isLockedToReview = assessmentSaved;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -89355,8 +89854,8 @@ function StudentAssessmentQuiz() {
       return;
     }
     var fetchAssessment = /*#__PURE__*/function () {
-      var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _res$data, res, assessment, hasSavedRecommendation, _t;
+      var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var _res$data, res, assessment, catsFromAnswers, hasSavedRecommendation, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -89377,6 +89876,13 @@ function StudentAssessmentQuiz() {
               if (assessment) {
                 setPart1Selected(Array.isArray(assessment.part1_selected) ? assessment.part1_selected : []);
                 setPart2Answers(assessment.part2_answers && _typeof(assessment.part2_answers) === "object" ? assessment.part2_answers : {});
+
+                // Try to reconstruct which categories were used for Part II.
+                // Prefer the categories implied by the stored question IDs.
+                catsFromAnswers = categoriesFromPart2Answers(assessment.part2_answers);
+                if (catsFromAnswers.length) {
+                  setPart2Categories(catsFromAnswers.slice(0, 3));
+                }
                 hasSavedRecommendation = Array.isArray(assessment.recommended_top3) && assessment.recommended_top3.length > 0;
                 setAssessmentSaved(hasSavedRecommendation);
                 if (hasSavedRecommendation) {
@@ -89398,24 +89904,24 @@ function StudentAssessmentQuiz() {
         }, _callee, null, [[1, 3, 4, 5]]);
       }));
       return function fetchAssessment() {
-        return _ref5.apply(this, arguments);
+        return _ref9.apply(this, arguments);
       };
     }();
     fetchAssessment();
-  }, [navigate, reviewStepIndex, token]);
+  }, [navigate, token]);
   var currentLabel = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     if (step === 0) return "Part I – Personal Interest & Skills";
-    if (step >= 1 && step <= PART2_QUESTIONS.length) {
-      return "Part II \u2013 General Knowledge (Question ".concat(step, " of ").concat(PART2_QUESTIONS.length, ")");
+    if (step >= 1 && step <= part2Questions.length) {
+      return "Part II \u2013 General Knowledge (Question ".concat(step, " of ").concat(part2Questions.length, ")");
     }
     return "Review";
-  }, [step]);
+  }, [part2Questions.length, step]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // If the assessment is already saved, keep the user on Review until they retake.
-    if (assessmentSaved && step !== reviewStepIndex) {
-      setStep(reviewStepIndex);
+    if (assessmentSaved) {
+      setStep(stepsTotal - 1);
     }
-  }, [assessmentSaved, reviewStepIndex, step]);
+  }, [assessmentSaved, stepsTotal]);
   var progress = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var pct = Math.round((step + 1) / stepsTotal * 100);
     return Math.max(0, Math.min(100, pct));
@@ -89444,14 +89950,14 @@ function StudentAssessmentQuiz() {
   };
   var canGoNext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     if (step === 0) return part1Selected.length > 0;
-    if (step >= 1 && step <= PART2_QUESTIONS.length) {
-      var q = PART2_QUESTIONS[step - 1];
+    if (step >= 1 && step <= part2Questions.length) {
+      var q = part2Questions[step - 1];
       return Boolean(part2Answers[q.id]);
     }
     return true;
-  }, [step, part1Selected, part2Answers]);
+  }, [step, part1Selected, part2Answers, part2Questions]);
   var handleSave = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
       var payload, _e$response, msg, _t2;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
@@ -89501,23 +90007,59 @@ function StudentAssessmentQuiz() {
       }, _callee2, null, [[1, 3, 4, 5]]);
     }));
     return function handleSave() {
-      return _ref6.apply(this, arguments);
+      return _ref0.apply(this, arguments);
     };
   }();
   var handleRetakeQuiz = function handleRetakeQuiz() {
     var confirmed = window.confirm("This will clear your current quiz answers on this page. Continue?");
     if (!confirmed) return;
-    setPart1Selected([]);
-    setPart2Answers({});
-    setAssessmentSaved(false);
-    setSuccess(null);
-    setError(null);
-    setStep(0);
-    try {
-      localStorage.removeItem("assessmentResult");
-    } catch (_unused) {
-      // ignore
-    }
+    var clearServer = /*#__PURE__*/function () {
+      var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+        var _e$response2, msg, _t3;
+        return _regenerator().w(function (_context3) {
+          while (1) switch (_context3.p = _context3.n) {
+            case 0:
+              _context3.p = 0;
+              _context3.n = 1;
+              return axios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/api/assessment", {
+                headers: {
+                  Authorization: "Bearer ".concat(token),
+                  Accept: "application/json"
+                },
+                withCredentials: true
+              });
+            case 1:
+              _context3.n = 3;
+              break;
+            case 2:
+              _context3.p = 2;
+              _t3 = _context3.v;
+              msg = (_t3 === null || _t3 === void 0 || (_e$response2 = _t3.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Couldn’t reset your assessment. Please try again.";
+              setError(msg);
+              return _context3.a(2);
+            case 3:
+              setPart1Selected([]);
+              setPart2Answers({});
+              setPart2Categories([]);
+              setAssessmentSaved(false);
+              setSuccess(null);
+              setError(null);
+              setStep(0);
+              try {
+                localStorage.removeItem("assessmentResult");
+              } catch (_unused) {
+                // ignore
+              }
+            case 4:
+              return _context3.a(2);
+          }
+        }, _callee3, null, [[0, 2]]);
+      }));
+      return function clearServer() {
+        return _ref1.apply(this, arguments);
+      };
+    }();
+    clearServer();
   };
   var gotoPrev = function gotoPrev() {
     return setStep(function (s) {
@@ -89525,7 +90067,31 @@ function StudentAssessmentQuiz() {
     });
   };
   var gotoNext = function gotoNext() {
-    return setStep(function (s) {
+    // When transitioning out of Part I, lock in the Part II categories
+    // so the question set stays consistent unless the user goes back.
+    if (step === 0) {
+      var nextCats = deriveTopCategoriesFromPart1(part1Selected, 3);
+      setPart2Categories(nextCats);
+
+      // Prune any old answers that no longer belong to the new question set
+      var nextIds = new Set(buildPart2Questions(nextCats).map(function (q) {
+        return String(q.id);
+      }));
+      setPart2Answers(function (prev) {
+        var cur = prev && _typeof(prev) === "object" ? prev : {};
+        var next = {};
+        Object.entries(cur).forEach(function (_ref10) {
+          var _ref11 = _slicedToArray(_ref10, 2),
+            qid = _ref11[0],
+            ans = _ref11[1];
+          if (nextIds.has(String(qid))) next[qid] = ans;
+        });
+        return next;
+      });
+      setStep(1);
+      return;
+    }
+    setStep(function (s) {
       return Math.min(stepsTotal - 1, s + 1);
     });
   };
@@ -89581,7 +90147,7 @@ function StudentAssessmentQuiz() {
     });
   };
   var renderBody = function renderBody() {
-    if (isLockedToReview && step !== reviewStepIndex) {
+    if (isLockedToReview) {
       return renderReview();
     }
     if (step === 0) {
@@ -89614,8 +90180,8 @@ function StudentAssessmentQuiz() {
         })]
       });
     }
-    if (step >= 1 && step <= PART2_QUESTIONS.length) {
-      var q = PART2_QUESTIONS[step - 1];
+    if (step >= 1 && step <= part2Questions.length) {
+      var q = part2Questions[step - 1];
       var chosen = (part2Answers[q.id] || "").toUpperCase();
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -89629,10 +90195,10 @@ function StudentAssessmentQuiz() {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "aq-options",
-          children: Object.entries(q.options).map(function (_ref7) {
-            var _ref8 = _slicedToArray(_ref7, 2),
-              letter = _ref8[0],
-              text = _ref8[1];
+          children: Object.entries(q.options).map(function (_ref12) {
+            var _ref13 = _slicedToArray(_ref12, 2),
+              letter = _ref13[0],
+              text = _ref13[1];
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
               className: "aq-option ".concat(chosen === letter ? "aq-option--on" : ""),
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
@@ -92066,7 +92632,7 @@ function StudentPortal() {
           className: "sp-pagehead-sub",
           children: "Your personalized academic pathway awaits"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_HighlightsCarousel__WEBPACK_IMPORTED_MODULE_4__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
         className: "sp-overview",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "sp-progress sp-progress--card",
@@ -92186,7 +92752,7 @@ function StudentPortal() {
             })]
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_HighlightsCarousel__WEBPACK_IMPORTED_MODULE_4__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
         className: "sp-journey",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "sp-journey-head",

@@ -62,6 +62,7 @@ Route::middleware('auth.bearer')->group(function () {
     // Step 3/4 - Assessment + Recommendations
     Route::get('/assessment', [AssessmentController::class, 'show']);
     Route::put('/assessment', [AssessmentController::class, 'upsert']);
+    Route::delete('/assessment', [AssessmentController::class, 'destroy']);
 
     // Advisor/Admin review endpoints
     Route::middleware('role:advisor,admin')->group(function () {

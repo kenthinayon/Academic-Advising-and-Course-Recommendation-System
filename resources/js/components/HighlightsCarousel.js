@@ -99,15 +99,24 @@ export default function HighlightsCarousel() {
                 </div>
 
                 <div className="sp-highlights-card" role="group" aria-roledescription="slide" aria-label="No slides">
-                    <div className="sp-highlights-overlay">
-                        <div className="sp-highlights-badge">HIGHLIGHTS</div>
-                        <div className="sp-highlights-h">No highlights yet</div>
-                        <div className="sp-highlights-story">An administrator can add featured stories and achievements.</div>
+                    <div className="sp-highlights-media">
+                        <div className="sp-highlights-overlay">
+                            <div className="sp-highlights-badge">HIGHLIGHTS</div>
+                            <div className="sp-highlights-h">No highlights yet</div>
+                            <div className="sp-highlights-story">
+                                An administrator can add featured stories and achievements.
+                            </div>
+                        </div>
                     </div>
 
                     <div className="sp-highlights-footer">
                         <div className="sp-highlights-dots" aria-label="Slide selector">
-                            <button type="button" className="sp-highlights-dot sp-highlights-dot--active" aria-label="Slide 1" disabled />
+                            <button
+                                type="button"
+                                className="sp-highlights-dot sp-highlights-dot--active"
+                                aria-label="Slide 1"
+                                disabled
+                            />
                         </div>
                         <div className="sp-highlights-count">0 / 0</div>
                     </div>
@@ -154,20 +163,21 @@ export default function HighlightsCarousel() {
                 </div>
             </div>
 
-            <div
-                className="sp-highlights-card"
-                style={{
-                    backgroundImage: currentImage ? `url(${currentImage})` : undefined,
-                }}
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`${idx + 1} of ${slides.length}`}
-            >
-                <div className="sp-highlights-overlay">
-                    {current.badge ? <div className="sp-highlights-badge">{String(current.badge).toUpperCase()}</div> : null}
-                    {current.greeting ? <div className="sp-highlights-greeting">{current.greeting}</div> : null}
-                    <div className="sp-highlights-h">{current.title}</div>
-                    {current.story ? <div className="sp-highlights-story">{current.story}</div> : null}
+            <div className="sp-highlights-card" role="group" aria-roledescription="slide" aria-label={`${idx + 1} of ${slides.length}`}>
+                <div
+                    className="sp-highlights-media"
+                    style={{
+                        backgroundImage: currentImage ? `url(${currentImage})` : undefined,
+                    }}
+                >
+                    <div className="sp-highlights-overlay">
+                        {current.badge ? (
+                            <div className="sp-highlights-badge">{String(current.badge).toUpperCase()}</div>
+                        ) : null}
+                        {current.greeting ? <div className="sp-highlights-greeting">{current.greeting}</div> : null}
+                        <div className="sp-highlights-h">{current.title}</div>
+                        {current.story ? <div className="sp-highlights-story">{current.story}</div> : null}
+                    </div>
                 </div>
 
                 <div className="sp-highlights-footer">

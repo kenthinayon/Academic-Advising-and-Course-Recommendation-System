@@ -1058,6 +1058,8 @@ export default function StudentPortal() {
                     <div className="sp-pagehead-sub">Your personalized academic pathway awaits</div>
                 </div>
 
+                <HighlightsCarousel />
+
                 <section className="sp-overview">
                     <div className="sp-progress sp-progress--card">
                         <div className="sp-progress-head">
@@ -1139,8 +1141,6 @@ export default function StudentPortal() {
                         </div>
                     </aside>
                 </section>
-
-                <HighlightsCarousel />
 
                 <section className="sp-journey">
                     <div className="sp-journey-head">

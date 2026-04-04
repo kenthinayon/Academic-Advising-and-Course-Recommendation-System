@@ -28,7 +28,6 @@ const PROGRAMS = [
     "Criminal Justice Education",
     "Computer Studies",
     "Engineering And Technology",
-    "Law",
     "Nursing",
     "Teachers Education",
 ];

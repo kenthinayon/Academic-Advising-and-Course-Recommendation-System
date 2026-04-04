@@ -28,12 +28,10 @@ class AssessmentController extends Controller
         'ABM' => [
             'Accountancy' => 2.0,
             'Business Administration' => 2.0,
-            'Law' => 0.75,
         ],
         'HUMSS' => [
             'Arts & Sciences' => 2.0,
             'Teacher Education' => 1.25,
-            'Law' => 1.25,
         ],
         'TVL' => [
             'Engineering & Technology' => 1.5,
@@ -87,10 +85,6 @@ class AssessmentController extends Controller
             ['BEEd', 'Bachelor of Elementary Education'],
             ['BSEd', 'Bachelor of Secondary Education'],
         ],
-        'Law' => [
-            ['LLB', 'Bachelor of Laws (legacy) / Pre-Law Track'],
-            ['BA-PolSci', 'Bachelor of Arts in Political Science'],
-        ],
     ];
 
     // Threshold rules to improve accuracy (soft disqualify or reduce).
@@ -114,15 +108,73 @@ class AssessmentController extends Controller
         ],
     ];
 
-    private const PART2_QUESTIONS = [
-        1 => ['correct' => 'B', 'category' => 'Accountancy'],
-        2 => ['correct' => 'C', 'category' => 'Arts & Sciences'],
-        3 => ['correct' => 'B', 'category' => 'Business Administration'],
-        4 => ['correct' => 'C', 'category' => 'Computer Studies'],
-        5 => ['correct' => 'B', 'category' => 'Criminal Justice Education'],
-        6 => ['correct' => 'B', 'category' => 'Engineering & Technology'],
-        7 => ['correct' => 'B', 'category' => 'Nursing'],
-        8 => ['correct' => 'B', 'category' => 'Teacher Education'],
+    // Part II question bank: 5 foundational general-knowledge questions per category.
+    // Keys must match the frontend question IDs.
+    private const PART2_BANK = [
+        // Accountancy
+        'acc_1' => ['correct' => 'B', 'category' => 'Accountancy'],
+        'acc_2' => ['correct' => 'B', 'category' => 'Accountancy'],
+        'acc_3' => ['correct' => 'B', 'category' => 'Accountancy'],
+        'acc_4' => ['correct' => 'B', 'category' => 'Accountancy'],
+        'acc_5' => ['correct' => 'B', 'category' => 'Accountancy'],
+
+        // Arts & Sciences
+        'arts_1' => ['correct' => 'C', 'category' => 'Arts & Sciences'],
+        'arts_2' => ['correct' => 'B', 'category' => 'Arts & Sciences'],
+        'arts_3' => ['correct' => 'C', 'category' => 'Arts & Sciences'],
+        'arts_4' => ['correct' => 'B', 'category' => 'Arts & Sciences'],
+        'arts_5' => ['correct' => 'C', 'category' => 'Arts & Sciences'],
+
+        // Business Administration
+        'bus_1' => ['correct' => 'B', 'category' => 'Business Administration'],
+        'bus_2' => ['correct' => 'B', 'category' => 'Business Administration'],
+        'bus_3' => ['correct' => 'B', 'category' => 'Business Administration'],
+        'bus_4' => ['correct' => 'C', 'category' => 'Business Administration'],
+        'bus_5' => ['correct' => 'B', 'category' => 'Business Administration'],
+
+        // Computer Studies
+        'cs_1' => ['correct' => 'C', 'category' => 'Computer Studies'],
+        'cs_2' => ['correct' => 'B', 'category' => 'Computer Studies'],
+        'cs_3' => ['correct' => 'B', 'category' => 'Computer Studies'],
+        'cs_4' => ['correct' => 'C', 'category' => 'Computer Studies'],
+        'cs_5' => ['correct' => 'A', 'category' => 'Computer Studies'],
+
+        // Criminal Justice Education
+        'cje_1' => ['correct' => 'B', 'category' => 'Criminal Justice Education'],
+        'cje_2' => ['correct' => 'B', 'category' => 'Criminal Justice Education'],
+        'cje_3' => ['correct' => 'B', 'category' => 'Criminal Justice Education'],
+        'cje_4' => ['correct' => 'B', 'category' => 'Criminal Justice Education'],
+        'cje_5' => ['correct' => 'B', 'category' => 'Criminal Justice Education'],
+
+        // Engineering & Technology
+        'eng_1' => ['correct' => 'B', 'category' => 'Engineering & Technology'],
+        'eng_2' => ['correct' => 'B', 'category' => 'Engineering & Technology'],
+        'eng_3' => ['correct' => 'B', 'category' => 'Engineering & Technology'],
+        'eng_4' => ['correct' => 'B', 'category' => 'Engineering & Technology'],
+        'eng_5' => ['correct' => 'A', 'category' => 'Engineering & Technology'],
+
+        // Nursing
+        'nurs_1' => ['correct' => 'B', 'category' => 'Nursing'],
+        'nurs_2' => ['correct' => 'B', 'category' => 'Nursing'],
+        'nurs_3' => ['correct' => 'B', 'category' => 'Nursing'],
+        'nurs_4' => ['correct' => 'B', 'category' => 'Nursing'],
+        'nurs_5' => ['correct' => 'C', 'category' => 'Nursing'],
+
+        // Teacher Education
+        'teach_1' => ['correct' => 'B', 'category' => 'Teacher Education'],
+        'teach_2' => ['correct' => 'B', 'category' => 'Teacher Education'],
+        'teach_3' => ['correct' => 'A', 'category' => 'Teacher Education'],
+        'teach_4' => ['correct' => 'B', 'category' => 'Teacher Education'],
+        'teach_5' => ['correct' => 'B', 'category' => 'Teacher Education'],
+    ];
+
+    // General readiness questions: each correct answer adds +1 to ALL categories equally.
+    private const READINESS_QUESTIONS = [
+        'gen_1' => ['correct' => 'D'],
+        'gen_2' => ['correct' => 'B'],
+        'gen_3' => ['correct' => 'B'],
+        'gen_4' => ['correct' => 'C'],
+        'gen_5' => ['correct' => 'C'],
     ];
 
     /**
@@ -159,17 +211,30 @@ class AssessmentController extends Controller
             'part1_selected' => ['required', 'array', 'min:1'],
             'part1_selected.*' => ['integer', 'min:1', 'max:15'],
 
-            'part2_answers' => ['required', 'array'],
-            'part2_answers.*' => ['string', 'size:1'],
+            // Part II is dynamic (top 3 categories × 5 questions each) + 5 readiness questions
+            'part2_answers' => ['required', 'array', 'min:20'],
+            'part2_answers.*' => ['string', 'size:1', 'in:A,B,C,D,a,b,c,d'],
         ]);
 
         $part1 = array_values(array_unique(array_map('intval', $validated['part1_selected'])));
         sort($part1);
 
-        $part2 = $validated['part2_answers'] ?? [];
-        // normalize answers to uppercase A-D
-        foreach ($part2 as $k => $v) {
-            $part2[$k] = strtoupper(trim((string) $v));
+        $part2Raw = $validated['part2_answers'] ?? [];
+
+        // normalize + whitelist question IDs to prevent unexpected payload keys
+        $part2 = [];
+        foreach ($part2Raw as $qid => $v) {
+            $qid = trim((string) $qid);
+            if ($qid === '' || (!isset(self::PART2_BANK[$qid]) && !isset(self::READINESS_QUESTIONS[$qid]))) {
+                continue;
+            }
+            $part2[$qid] = strtoupper(trim((string) $v));
+        }
+
+        if (count($part2) < 20) {
+            return response()->json([
+                'message' => 'Please answer all Part II questions before saving.',
+            ], 422);
         }
 
         $scores = $this->computeScores($part1, $part2);
@@ -210,6 +275,45 @@ class AssessmentController extends Controller
         ]);
     }
 
+    /**
+     * Clear/reset saved assessment and recommendations for the authenticated user.
+     */
+    public function destroy(Request $request)
+    {
+        $user = $request->user();
+        $profile = $user?->profile;
+
+        if (!$profile) {
+            // Create a profile row if it doesn't exist yet (keeps behavior consistent)
+            $profile = Profile::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'assessment_part1_selected' => [],
+                    'assessment_part2_answers' => [],
+                    'recommended_top3' => [],
+                    'recommended_degrees' => [],
+                ]
+            );
+        } else {
+            $profile->assessment_part1_selected = [];
+            $profile->assessment_part2_answers = [];
+            $profile->recommended_top3 = [];
+            $profile->recommended_degrees = [];
+            $profile->save();
+        }
+
+        return response()->json([
+            'message' => 'Assessment reset.',
+            'assessment' => [
+                'part1_selected' => [],
+                'part2_answers' => (object) [],
+                'scores' => $this->computeScores([], []),
+                'recommended_top3' => [],
+                'recommended_degrees' => [],
+            ],
+        ]);
+    }
+
     private function computeScores(array $part1Selected, array $part2Answers): array
     {
         $scores = [];
@@ -228,11 +332,38 @@ class AssessmentController extends Controller
             $scores[$category] += $count;
         }
 
-        // Part 2: 2 points per correct answer, to the matching category
-        foreach (self::PART2_QUESTIONS as $qid => $meta) {
-            $userAnswer = strtoupper((string) ($part2Answers[$qid] ?? ''));
-            if ($userAnswer !== '' && $userAnswer === $meta['correct']) {
-                $scores[$meta['category']] += 2;
+        // Part 2: course questions (+2 to their category) + readiness questions (+1 to all categories)
+        if (is_array($part2Answers)) {
+            foreach ($part2Answers as $qid => $ans) {
+                $qid = (string) $qid;
+                $userAnswer = strtoupper((string) $ans);
+
+                if ($userAnswer === '') {
+                    continue;
+                }
+
+                // Readiness questions
+                if (isset(self::READINESS_QUESTIONS[$qid])) {
+                    $correct = self::READINESS_QUESTIONS[$qid]['correct'] ?? '';
+                    if ($correct !== '' && $userAnswer === $correct) {
+                        foreach (array_keys($scores) as $cat) {
+                            $scores[$cat] += 1;
+                        }
+                    }
+                    continue;
+                }
+
+                // Course questions
+                if (!isset(self::PART2_BANK[$qid])) {
+                    continue;
+                }
+                $meta = self::PART2_BANK[$qid];
+                if ($userAnswer === $meta['correct']) {
+                    $cat = $meta['category'];
+                    if (array_key_exists($cat, $scores)) {
+                        $scores[$cat] += 2;
+                    }
+                }
             }
         }
 
@@ -438,7 +569,6 @@ class AssessmentController extends Controller
         if ($p === 'computer studies') return 'Computer Studies';
         if ($p === 'accountancy') return 'Accountancy';
         if ($p === 'nursing') return 'Nursing';
-        if ($p === 'law') return 'Law';
 
         return null;
     }
