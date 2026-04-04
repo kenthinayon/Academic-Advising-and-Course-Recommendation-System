@@ -8,11 +8,13 @@ $font-family-sans-serif: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 
 $font-size-base: 0.95rem;
 $line-height-base: 1.6;
 
-// --- Brand palette (NeoLMS-ish: deep navy + teal accent)
+// --- Brand palette (high-end: deep navy + accent blue)
 $brand-navy: #0b1220;
 $brand-navy-2: #111827;
-$brand-teal: #14b8a6;
-$brand-teal-2: #22c7b5;
+// Primary (used as Bootstrap $primary + most highlights)
+$brand-teal: #203354;
+// Accent (used for subtle gradients/hover emphasis)
+$brand-teal-2: #3b82f6;
 
 // --- Semantic colors
 $brand-success: #22c55e; // done
@@ -68,8 +70,8 @@ $link-hover-color: $brand-teal-2;
 
 	--brand-navy: #0b1220;
 	--brand-navy-2: #111827;
-	--brand-teal: #14b8a6;
-	--brand-teal-2: #22c7b5;
+	--brand-teal: #203354;
+	--brand-teal-2: #3b82f6;
 
 	--success: #22c55e;
 	--danger: #ef4444;

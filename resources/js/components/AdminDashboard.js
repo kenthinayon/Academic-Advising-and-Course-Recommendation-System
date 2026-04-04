@@ -15,6 +15,7 @@ function initials(nameOrEmail) {
 const DEPARTMENTS = [
     {
         name: "College of Accountancy",
+        logo: "/images/colleges/accountancy.png",
         programs: [
             {
                 code: "BSA",
@@ -44,6 +45,7 @@ const DEPARTMENTS = [
     },
     {
         name: "College of Business Administration",
+        logo: "/images/colleges/business-administration.png",
         programs: [
             {
                 code: "BSBA-OM",
@@ -73,6 +75,7 @@ const DEPARTMENTS = [
     },
     {
         name: "College of Computer Studies",
+        logo: "/images/colleges/computer-studies.png",
         programs: [
             {
                 code: "BSCS",
@@ -114,6 +117,7 @@ const DEPARTMENTS = [
     },
     {
         name: "College of Engineering and Technology",
+        logo: "/images/colleges/engineering-technology.png",
         programs: [
             {
                 code: "BSCE",
@@ -131,6 +135,7 @@ const DEPARTMENTS = [
     },
     {
         name: "College of Nursing",
+        logo: "/images/colleges/nursing.png",
         programs: [
             {
                 code: "BSN",
@@ -141,7 +146,20 @@ const DEPARTMENTS = [
         ],
     },
     {
+        name: "College of Criminal Justice Education",
+        logo: "/images/colleges/criminal-justice-education.png",
+        programs: [
+            {
+                code: "BSCrim",
+                name: "Criminology",
+                description:
+                    "Focuses on criminal law, criminological theory, corrections, law enforcement fundamentals, and investigative basics.",
+            },
+        ],
+    },
+    {
         name: "College of Teacher Education",
+        logo: "/images/colleges/teacher-education.png",
         programs: [
             {
                 code: "BEEd",
@@ -171,6 +189,7 @@ const DEPARTMENTS = [
     },
     {
         name: "College of Arts and Sciences",
+        logo: "/images/colleges/arts-sciences.png",
         programs: [
             {
                 code: "BAPSY",
@@ -212,6 +231,15 @@ function statusPill(status) {
     if (s === "rejected") return { label: "Rejected", cls: "am-pill am-pill--bad" };
     if (s === "interview") return { label: "Interview", cls: "am-pill" };
     return { label: "Pending", cls: "am-pill" };
+}
+
+function withFallbackLogoSrc(src, attempt) {
+    const s = String(src || "");
+    if (!s) return "";
+    // attempt 0 => original, 1 => .jpg, 2 => .jpeg
+    if (attempt === 1) return s.replace(/\.png$/i, ".jpg");
+    if (attempt === 2) return s.replace(/\.(png|jpg)$/i, ".jpeg");
+    return s;
 }
 
 export default function AdminDashboard() {
@@ -870,7 +898,47 @@ export default function AdminDashboard() {
                                 <details key={d.name} className="am-dept">
                                     <summary className="am-dept-summary">
                                         <div className="am-dept-left">
-                                            <div className="am-dept-icon" aria-hidden="true" />
+                                            <div className="am-dept-icon">
+                                                {d.logo ? (
+                                                    <img
+                                                        className="am-dept-logo"
+                                                        src={withFallbackLogoSrc(d.logo, 0)}
+                                                        alt={`${d.name} logo`}
+                                                        loading="lazy"
+                                                        title="View logo"
+                                                        role="button"
+                                                        tabIndex={0}
+                                                        onClick={(e) => {
+                                                            // Prevent the <summary> click from toggling; open the image instead.
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            const url = e.currentTarget.currentSrc || e.currentTarget.src;
+                                                            if (url) window.open(url, "_blank");
+                                                        }}
+                                                        onKeyDown={(e) => {
+                                                            if (e.key !== "Enter" && e.key !== " ") return;
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            const url = e.currentTarget.currentSrc || e.currentTarget.src;
+                                                            if (url) window.open(url, "_blank");
+                                                        }}
+                                                        onError={(e) => {
+                                                            const attemptRaw = e.currentTarget.getAttribute("data-fallback-attempt") || "0";
+                                                            const attempt = Number(attemptRaw) || 0;
+
+                                                            if (attempt >= 2) {
+                                                                // If the image is missing, hide it and fall back to the colored tile.
+                                                                e.currentTarget.style.display = "none";
+                                                                return;
+                                                            }
+
+                                                            const nextAttempt = attempt + 1;
+                                                            e.currentTarget.setAttribute("data-fallback-attempt", String(nextAttempt));
+                                                            e.currentTarget.src = withFallbackLogoSrc(d.logo, nextAttempt);
+                                                        }}
+                                                    />
+                                                ) : null}
+                                            </div>
                                             <div className="am-dept-name">{d.name}</div>
                                         </div>
                                         <div className="am-dept-right">

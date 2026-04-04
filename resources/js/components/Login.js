@@ -148,7 +148,7 @@ export default function Login() {
 
                     {error && <div className="alert-error">{error}</div>}
 
-                    <form onSubmit={handleSubmit} className="login-form" noValidate>
+                    <form onSubmit={handleSubmit} className="auth-form" noValidate>
                         <div className="field">
                             <label htmlFor="email">Email</label>
                             <input

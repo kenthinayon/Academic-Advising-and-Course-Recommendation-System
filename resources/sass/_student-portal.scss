@@ -303,11 +303,11 @@
 
 .student-portal .sp-bar {
   height: 10px;
-  background: var(--surface-2);
+  background: color-mix(in srgb, var(--brand-teal) 14%, var(--surface-2));
 }
 
 .student-portal .sp-bar-fill {
-  background: linear-gradient(90deg, var(--brand-navy-2), var(--warning));
+  background: linear-gradient(90deg, var(--brand-teal), var(--brand-teal-2));
 }
 
 .student-portal .sp-next {
@@ -443,12 +443,12 @@
 }
 
 .student-portal .sp-journey .sp-card--done {
-  background: color-mix(in srgb, var(--warning) 6%, var(--surface));
-  border-color: color-mix(in srgb, var(--warning) 35%, var(--border));
+  background: color-mix(in srgb, var(--brand-teal-2) 6%, var(--surface));
+  border-color: color-mix(in srgb, var(--brand-teal-2) 28%, var(--border));
 }
 
 body[data-theme="dark"] .student-portal .sp-journey .sp-card--done {
-  background: color-mix(in srgb, var(--surface) 94%, var(--warning));
+  background: color-mix(in srgb, var(--surface) 94%, var(--brand-teal-2));
 }
 
 .student-portal .sp-journey .sp-card--locked {
@@ -471,12 +471,12 @@ body[data-theme="dark"] .student-portal .sp-journey .sp-card--done {
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  background: color-mix(in srgb, var(--warning) 14%, var(--surface));
-  color: color-mix(in srgb, var(--text) 82%, var(--brand-navy-2));
+  background: color-mix(in srgb, var(--brand-teal-2) 12%, var(--surface));
+  color: color-mix(in srgb, var(--text) 84%, var(--brand-teal));
 }
 
 body[data-theme="dark"] .student-portal .sp-journey .sp-card-icon {
-  background: color-mix(in srgb, var(--surface) 90%, var(--warning));
+  background: color-mix(in srgb, var(--surface) 90%, var(--brand-teal-2));
 }
 
 .student-portal .sp-journey .sp-card-check {
@@ -492,8 +492,8 @@ body[data-theme="dark"] .student-portal .sp-journey .sp-card-icon {
   font-weight: 1000;
   font-size: 13px;
   line-height: 1;
-  border: 2px solid color-mix(in srgb, var(--warning) 55%, var(--border));
-  color: color-mix(in srgb, var(--warning) 78%, var(--text));
+  border: 2px solid color-mix(in srgb, var(--brand-teal-2) 45%, var(--border));
+  color: color-mix(in srgb, var(--brand-teal) 80%, var(--text));
   background: color-mix(in srgb, var(--surface) 75%, transparent);
 }
 
@@ -551,9 +551,9 @@ body[data-theme="dark"] .student-portal .sp-journey .sp-card-icon {
 }
 
 .student-portal .sp-journey .sp-pill--done {
-  background: color-mix(in srgb, var(--warning) 16%, var(--surface));
-  border-color: color-mix(in srgb, var(--warning) 30%, var(--border));
-  color: color-mix(in srgb, var(--warning) 70%, var(--text));
+  background: color-mix(in srgb, var(--brand-teal-2) 12%, var(--surface));
+  border-color: color-mix(in srgb, var(--brand-teal-2) 22%, var(--border));
+  color: color-mix(in srgb, var(--brand-teal) 72%, var(--text));
 }
 
 .student-portal .sp-journey .sp-pill--pending {

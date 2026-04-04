@@ -674,26 +674,26 @@
 .ad-progress-value {
   font-size: 12px;
   font-weight: 900;
-  color: var(--warning);
+  color: var(--brand-teal-2);
 }
 
 .ad-progress-bar {
   margin-top: 8px;
   height: 10px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--text) 10%, transparent);
+  background: color-mix(in srgb, var(--brand-teal) 14%, transparent);
   overflow: hidden;
 }
 
 .ad-progress-bar--empty {
-  background: color-mix(in srgb, var(--text) 7%, transparent);
+  background: color-mix(in srgb, var(--brand-teal) 10%, transparent);
 }
 
 .ad-progress-fill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--brand-navy-2), var(--warning));
-  box-shadow: 0 10px 22px color-mix(in srgb, var(--brand-navy-2) 18%, transparent);
+  background: linear-gradient(90deg, var(--brand-teal), var(--brand-teal-2));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--brand-teal-2) 18%, transparent);
 }
 
 .ad-actions {
@@ -707,8 +707,8 @@
   height: 40px;
   padding: 0 14px;
   border-radius: 12px;
-  border: 1px solid color-mix(in srgb, #4f46e5 35%, transparent);
-  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  border: 1px solid color-mix(in srgb, var(--brand-teal) 35%, transparent);
+  background: linear-gradient(135deg, var(--brand-teal), var(--brand-teal-2));
   color: #fff;
   font-weight: 700;
 
@@ -722,9 +722,16 @@
 }
 
 .ad-btn--ghost {
-  background: var(--surface);
-  color: var(--brand-navy-2);
-  border-color: var(--border);
+  background: color-mix(in srgb, var(--brand-teal-2) 8%, var(--surface));
+  color: var(--brand-teal);
+  border-color: color-mix(in srgb, var(--brand-teal-2) 28%, var(--border));
+}
+
+.ad-btn--ghost:hover {
+  background: linear-gradient(135deg, var(--brand-teal), var(--brand-teal-2));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--brand-teal-2) 22%, transparent);
 }
 
 /* Topbar primary action (Appointments) */
@@ -732,10 +739,10 @@
   height: 40px;
   padding: 0 16px;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, #4f46e5 35%, transparent);
-  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  border: 1px solid color-mix(in srgb, var(--brand-teal) 35%, transparent);
+  background: linear-gradient(135deg, var(--brand-teal), var(--brand-teal-2));
   color: #fff;
-  box-shadow: 0 8px 18px color-mix(in srgb, #2563eb 22%, transparent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--brand-teal-2) 22%, transparent);
 }
 
 .ad-btn--appointments:hover {

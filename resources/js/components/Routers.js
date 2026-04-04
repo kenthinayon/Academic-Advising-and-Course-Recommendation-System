@@ -40,6 +40,7 @@ export default function Routers() {
                 <Route path="/student/course-recommendation" element={<StudentCourseRecommendation />} />
                 <Route path="/student/appointments" element={<StudentAppointments />} />
                 <Route path="/school-calendar" element={<StudentSchoolCalendar />} />
+
                 <Route path="*" element={<Login />} />
             </Routes>
         </Router>

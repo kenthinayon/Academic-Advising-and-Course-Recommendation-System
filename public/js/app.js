@@ -80658,6 +80658,7 @@ function initials(nameOrEmail) {
 }
 var DEPARTMENTS = [{
   name: "College of Accountancy",
+  logo: "/images/colleges/accountancy.png",
   programs: [{
     code: "BSA",
     name: "Accountancy",
@@ -80677,6 +80678,7 @@ var DEPARTMENTS = [{
   }]
 }, {
   name: "College of Business Administration",
+  logo: "/images/colleges/business-administration.png",
   programs: [{
     code: "BSBA-OM",
     name: "Operations Management",
@@ -80696,6 +80698,7 @@ var DEPARTMENTS = [{
   }]
 }, {
   name: "College of Computer Studies",
+  logo: "/images/colleges/computer-studies.png",
   programs: [{
     code: "BSCS",
     name: "Computer Science",
@@ -80723,6 +80726,7 @@ var DEPARTMENTS = [{
   }]
 }, {
   name: "College of Engineering and Technology",
+  logo: "/images/colleges/engineering-technology.png",
   programs: [{
     code: "BSCE",
     name: "Civil Engineering",
@@ -80734,13 +80738,23 @@ var DEPARTMENTS = [{
   }]
 }, {
   name: "College of Nursing",
+  logo: "/images/colleges/nursing.png",
   programs: [{
     code: "BSN",
     name: "Nursing",
     description: "Prepares students for professional nursing practice: patient care, clinical skills, community health, and evidence-based practice."
   }]
 }, {
+  name: "College of Criminal Justice Education",
+  logo: "/images/colleges/criminal-justice-education.png",
+  programs: [{
+    code: "BSCrim",
+    name: "Criminology",
+    description: "Focuses on criminal law, criminological theory, corrections, law enforcement fundamentals, and investigative basics."
+  }]
+}, {
   name: "College of Teacher Education",
+  logo: "/images/colleges/teacher-education.png",
   programs: [{
     code: "BEEd",
     name: "Elementary Education",
@@ -80760,6 +80774,7 @@ var DEPARTMENTS = [{
   }]
 }, {
   name: "College of Arts and Sciences",
+  logo: "/images/colleges/arts-sciences.png",
   programs: [{
     code: "BAPSY",
     name: "Psychology",
@@ -80801,6 +80816,14 @@ function statusPill(status) {
     label: "Pending",
     cls: "am-pill"
   };
+}
+function withFallbackLogoSrc(src, attempt) {
+  var s = String(src || "");
+  if (!s) return "";
+  // attempt 0 => original, 1 => .jpg, 2 => .jpeg
+  if (attempt === 1) return s.replace(/\.png$/i, ".jpg");
+  if (attempt === 2) return s.replace(/\.(png|jpg)$/i, ".jpeg");
+  return s;
 }
 function AdminDashboard() {
   var _analytics$topRecomme;
@@ -81966,7 +81989,41 @@ function AdminDashboard() {
                   className: "am-dept-left",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "am-dept-icon",
-                    "aria-hidden": "true"
+                    children: d.logo ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                      className: "am-dept-logo",
+                      src: withFallbackLogoSrc(d.logo, 0),
+                      alt: "".concat(d.name, " logo"),
+                      loading: "lazy",
+                      title: "View logo",
+                      role: "button",
+                      tabIndex: 0,
+                      onClick: function onClick(e) {
+                        // Prevent the <summary> click from toggling; open the image instead.
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var url = e.currentTarget.currentSrc || e.currentTarget.src;
+                        if (url) window.open(url, "_blank");
+                      },
+                      onKeyDown: function onKeyDown(e) {
+                        if (e.key !== "Enter" && e.key !== " ") return;
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var url = e.currentTarget.currentSrc || e.currentTarget.src;
+                        if (url) window.open(url, "_blank");
+                      },
+                      onError: function onError(e) {
+                        var attemptRaw = e.currentTarget.getAttribute("data-fallback-attempt") || "0";
+                        var attempt = Number(attemptRaw) || 0;
+                        if (attempt >= 2) {
+                          // If the image is missing, hide it and fall back to the colored tile.
+                          e.currentTarget.style.display = "none";
+                          return;
+                        }
+                        var nextAttempt = attempt + 1;
+                        e.currentTarget.setAttribute("data-fallback-attempt", String(nextAttempt));
+                        e.currentTarget.src = withFallbackLogoSrc(d.logo, nextAttempt);
+                      }
+                    }) : null
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                     className: "am-dept-name",
                     children: d.name
@@ -87176,7 +87233,7 @@ function Login() {
           children: error
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
           onSubmit: handleSubmit,
-          className: "login-form",
+          className: "auth-form",
           noValidate: true,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "field",
@@ -87443,7 +87500,7 @@ function Register() {
           children: error
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
           onSubmit: handleSubmit,
-          className: "login-form",
+          className: "auth-form",
           noValidate: true,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "field",

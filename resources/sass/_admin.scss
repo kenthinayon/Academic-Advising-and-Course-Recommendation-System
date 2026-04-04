@@ -166,7 +166,7 @@
 }
 
 .am-stat-value--purple {
-    color: #7c3aed;
+    color: var(--brand-teal);
 }
 
 .am-stat-icon {
@@ -201,33 +201,41 @@
     gap: 10px;
     padding: 12px;
     border-radius: 14px;
-    background: #ffffff;
-    box-shadow: 0 10px 25px rgba(17, 24, 39, 0.06);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
     margin-bottom: 12px;
     flex-wrap: wrap;
 }
 
 .am-tab {
-    border: 1px solid #e5e7eb;
-    background: #f9fafb;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--brand-teal-2) 6%, var(--surface));
     padding: 10px 12px;
     border-radius: 12px;
     font-weight: 800;
-    color: #374151;
+    color: color-mix(in srgb, var(--text) 82%, transparent);
     cursor: pointer;
 }
 
+.am-tab:hover {
+    border-color: color-mix(in srgb, var(--brand-teal-2) 28%, var(--border));
+    background: color-mix(in srgb, var(--brand-teal-2) 10%, var(--surface));
+}
+
 .am-tab--active {
-    background: #111827;
-    border-color: #111827;
+    background: linear-gradient(135deg, var(--brand-teal), var(--brand-teal-2));
+    border-color: transparent;
     color: #ffffff;
+    box-shadow: 0 10px 22px color-mix(in srgb, var(--brand-teal-2) 20%, transparent);
 }
 
 .am-panel {
-    background: #ffffff;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 14px;
     padding: 14px;
-    box-shadow: 0 10px 25px rgba(17, 24, 39, 0.06);
+    box-shadow: var(--shadow-sm);
 }
 
 .am-panel-head {
@@ -257,10 +265,10 @@
 }
 
 .am-dept {
-    border: 1px solid #eef2f7;
+    border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
-    background: #f9fafb;
+    background: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
 }
 
 .am-dept-summary {
@@ -287,12 +295,27 @@
     width: 36px;
     height: 36px;
     border-radius: 12px;
-    background: rgba(59, 130, 246, 0.15);
+    background: color-mix(in srgb, var(--brand-teal-2) 14%, var(--surface));
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.am-dept-logo {
+    width: 28px;
+    height: 28px;
+    display: block;
+    object-fit: contain;
+    border-radius: 999px;
+    background: var(--surface);
+    cursor: pointer;
 }
 
 .am-dept-name {
     font-weight: 900;
-    color: #111827;
+    color: var(--text);
 }
 
 .am-dept-right {
@@ -304,8 +327,9 @@
 .am-badge {
     padding: 5px 10px;
     border-radius: 999px;
-    background: #e5e7eb;
-    color: #111827;
+    background: color-mix(in srgb, var(--surface-2) 82%, var(--surface));
+    border: 1px solid var(--border);
+    color: var(--text);
     font-weight: 800;
     font-size: 12px;
 }
@@ -313,8 +337,8 @@
 .am-chevron {
     width: 10px;
     height: 10px;
-    border-right: 2px solid #6b7280;
-    border-bottom: 2px solid #6b7280;
+    border-right: 2px solid color-mix(in srgb, var(--text) 40%, transparent);
+    border-bottom: 2px solid color-mix(in srgb, var(--text) 40%, transparent);
     transform: rotate(-45deg);
 }
 
@@ -333,18 +357,18 @@ details[open] .am-chevron {
 
 .am-prog {
     padding: 4px 0;
-    color: #374151;
+    color: color-mix(in srgb, var(--text) 86%, transparent);
     font-weight: 650;
 }
 
 .am-prog-title {
-    color: #111827;
+    color: var(--text);
     font-weight: 900;
 }
 
 .am-prog-desc {
     margin-top: 2px;
-    color: #6b7280;
+    color: var(--muted);
     font-weight: 650;
     font-size: 12.5px;
     line-height: 1.35;
@@ -369,7 +393,7 @@ details[open] .am-chevron {
 }
 
 .am-metric-label {
-    color: #6b7280;
+    color: var(--muted);
     font-weight: 800;
     font-size: 13px;
 }
@@ -382,7 +406,7 @@ details[open] .am-chevron {
 
 .am-divider {
     height: 1px;
-    background: #eef2f7;
+    background: var(--border);
 }
 
 .am-top {
@@ -397,19 +421,20 @@ details[open] .am-chevron {
     gap: 10px;
     padding: 10px 12px;
     border-radius: 12px;
-    background: #f9fafb;
-    border: 1px solid #eef2f7;
+    background: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
+    border: 1px solid var(--border);
 }
 
 .am-top-name {
     font-weight: 900;
-    color: #111827;
+    color: var(--text);
 }
 
 .am-top-count {
     font-weight: 900;
-    color: #111827;
-    background: #e5e7eb;
+    color: var(--text);
+    background: color-mix(in srgb, var(--surface-2) 82%, var(--surface));
+    border: 1px solid var(--border);
     padding: 4px 10px;
     border-radius: 999px;
 }
@@ -434,24 +459,25 @@ details[open] .am-chevron {
 
 .am-search input {
     width: 100%;
-    border: 1px solid #e5e7eb;
-    background: #f9fafb;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
     padding: 10px 12px;
     border-radius: 12px;
     font-weight: 700;
     outline: none;
+    color: var(--text);
 }
 
 .am-search input:focus {
-    border-color: rgba(59, 130, 246, 0.45);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    border-color: color-mix(in srgb, var(--brand-teal-2) 48%, var(--border));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-teal-2) 14%, transparent);
 }
 
 .am-btn {
     border: 0;
     border-radius: 12px;
     padding: 10px 12px;
-    background: #111827;
+    background: var(--brand-navy-2);
     color: #ffffff;
     font-weight: 900;
     cursor: pointer;
@@ -462,9 +488,9 @@ details[open] .am-chevron {
 }
 
 .am-btn--ghost {
-    background: #f3f4f6;
-    color: #111827;
-    border: 1px solid #e5e7eb;
+    background: color-mix(in srgb, var(--surface-2) 82%, var(--surface));
+    color: var(--text);
+    border: 1px solid var(--border);
 }
 
 .am-filters {
@@ -477,46 +503,46 @@ details[open] .am-chevron {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    border: 1px solid #e5e7eb;
-    background: #f9fafb;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
     padding: 8px 10px;
     border-radius: 12px;
 }
 
 .am-filterbox-label {
     font-weight: 900;
-    color: #6b7280;
+    color: var(--muted);
     font-size: 12px;
 }
 
 .am-filterbox-select {
-    border: 1px solid #e5e7eb;
-    background: #ffffff;
+    border: 1px solid var(--border);
+    background: var(--surface);
     padding: 8px 10px;
     border-radius: 10px;
     font-weight: 900;
-    color: #111827;
+    color: var(--text);
     outline: none;
 }
 
 .am-filterbox-select:focus {
-    border-color: rgba(59, 130, 246, 0.45);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    border-color: color-mix(in srgb, var(--brand-teal-2) 48%, var(--border));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-teal-2) 14%, transparent);
 }
 
 .am-filter {
-    border: 1px solid #e5e7eb;
-    background: #f9fafb;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
     padding: 8px 10px;
     border-radius: 999px;
     font-weight: 900;
-    color: #374151;
+    color: color-mix(in srgb, var(--text) 86%, transparent);
     cursor: pointer;
 }
 
 .am-filter--active {
-    background: #111827;
-    border-color: #111827;
+    background: linear-gradient(135deg, var(--brand-teal), var(--brand-teal-2));
+    border-color: transparent;
     color: #ffffff;
 }
 
@@ -526,7 +552,7 @@ details[open] .am-chevron {
     justify-content: space-between;
     gap: 12px;
     padding: 12px 0;
-    border-top: 1px solid #eef2f7;
+    border-top: 1px solid var(--border);
     margin-top: 6px;
 }
 
@@ -542,8 +568,8 @@ details[open] .am-chevron {
     align-items: center;
     padding: 12px;
     border-radius: 14px;
-    background: #f9fafb;
-    border: 1px solid #eef2f7;
+    background: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
+    border: 1px solid var(--border);
 }
 
 @media (max-width: 900px) {
@@ -559,18 +585,18 @@ details[open] .am-chevron {
 
 .am-student-name {
     font-weight: 900;
-    color: #111827;
+    color: var(--text);
 }
 
 .am-student-email {
-    color: #6b7280;
+    color: var(--muted);
     font-weight: 700;
     font-size: 12.5px;
     margin-top: 2px;
 }
 
 .am-student-meta {
-    color: #6b7280;
+    color: var(--muted);
     font-weight: 700;
     font-size: 12.5px;
     margin-top: 6px;
@@ -586,8 +612,9 @@ details[open] .am-chevron {
 .am-pill {
     padding: 7px 10px;
     border-radius: 999px;
-    background: #e5e7eb;
-    color: #111827;
+    background: color-mix(in srgb, var(--surface-2) 82%, var(--surface));
+    border: 1px solid var(--border);
+    color: var(--text);
     font-weight: 900;
     font-size: 12px;
     white-space: nowrap;

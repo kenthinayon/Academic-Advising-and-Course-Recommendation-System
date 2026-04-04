@@ -111,7 +111,7 @@ export default function Register() {
 
                     {error && <div className="alert-error">{error}</div>}
 
-                    <form onSubmit={handleSubmit} className="login-form" noValidate>
+                    <form onSubmit={handleSubmit} className="auth-form" noValidate>
                         <div className="field">
                             <label htmlFor="role">Register as</label>
                             <select id="role" value={form.role} onChange={onChange("role")}>
