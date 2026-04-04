@@ -59,6 +59,24 @@ export default function Register() {
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("userRole", user.role || "student");
 
+            // Greeting variant (first login vs returning) – UI-only
+            try {
+                const userKey = String(user?.id ?? user?.email ?? "").trim();
+                if (userKey) {
+                    const seenKey = `welcome_seen_${userKey}`;
+                    const onceKey = `welcome_once_${userKey}`;
+                    const hasSeen = localStorage.getItem(seenKey) === "1";
+                    if (!hasSeen) {
+                        localStorage.setItem(onceKey, "1");
+                        localStorage.setItem(seenKey, "1");
+                    } else {
+                        localStorage.removeItem(onceKey);
+                    }
+                }
+            } catch {
+                // ignore
+            }
+
             const actualRole = user?.role || payload.role || "student";
 
             if (actualRole === "advisor" || actualRole === "admin") {

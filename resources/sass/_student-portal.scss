@@ -189,3 +189,377 @@
   font-size: 12px;
   color: color-mix(in srgb, var(--surface) 85%, transparent);
 }
+
+// ---------------------------------------------------------------------------
+// Student portal layout refresh (scoped overrides)
+.student-portal .sp-pagehead {
+  margin: 10px 0 18px;
+}
+
+.student-portal .sp-greeting {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 1000;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--warning) 80%, var(--muted));
+  text-transform: uppercase;
+}
+
+.student-portal .sp-greeting-ico {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--warning) 14%, var(--surface));
+}
+
+.student-portal .sp-pagehead-title {
+  margin-top: 10px;
+}
+
+.student-portal .sp-pagehead-title {
+  font-size: 44px;
+  font-weight: 1100;
+  margin: 0;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.student-portal .sp-pagehead-sub {
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.student-portal .sp-overview {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.student-portal .sp-progress--card,
+.student-portal .sp-upcoming,
+.student-portal .sp-mini-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.student-portal .sp-progress--card {
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.student-portal .sp-progress-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.student-portal .sp-progress-title {
+  font-weight: 1000;
+  color: var(--text);
+}
+
+.student-portal .sp-progress-meta {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.student-portal .sp-progress-pct {
+  font-size: 44px;
+  font-weight: 1100;
+  color: var(--brand-navy-2);
+  line-height: 1;
+}
+
+.student-portal .sp-bar {
+  height: 10px;
+  background: var(--surface-2);
+}
+
+.student-portal .sp-bar-fill {
+  background: linear-gradient(90deg, var(--brand-navy-2), var(--warning));
+}
+
+.student-portal .sp-next {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.student-portal .sp-next-k {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.student-portal .sp-next-v {
+  margin-top: 6px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.student-portal .sp-overview-right {
+  display: grid;
+  gap: 14px;
+}
+
+.student-portal .sp-upcoming {
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.student-portal .sp-upcoming-title {
+  font-weight: 1000;
+  color: var(--text);
+}
+
+.student-portal .sp-upcoming-sub {
+  margin-top: 6px;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.student-portal .sp-btn--wide {
+  width: 100%;
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.student-portal .sp-upcoming-item {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: color-mix(in srgb, var(--text) 2%, transparent);
+}
+
+.student-portal .sp-link--center {
+  text-align: center;
+}
+
+.student-portal .sp-mini-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.student-portal .sp-mini-stat {
+  border-radius: 18px;
+  padding: 16px;
+  text-align: center;
+}
+
+.student-portal .sp-mini-stat-value {
+  font-size: 34px;
+  font-weight: 1100;
+  color: var(--brand-navy-2);
+  line-height: 1;
+}
+
+.student-portal .sp-mini-stat-label {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.student-portal .sp-journey {
+  margin-top: 22px;
+}
+
+.student-portal .sp-journey-title {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 1100;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.student-portal .sp-journey-head {
+  margin-bottom: 14px;
+}
+
+.student-portal .sp-grid--4 {
+  margin-top: 16px;
+}
+
+// Step cards (Your Journey)
+.student-portal .sp-journey .sp-card {
+  position: relative;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface);
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.student-portal .sp-journey .sp-card--done {
+  background: color-mix(in srgb, var(--warning) 6%, var(--surface));
+  border-color: color-mix(in srgb, var(--warning) 35%, var(--border));
+}
+
+body[data-theme="dark"] .student-portal .sp-journey .sp-card--done {
+  background: color-mix(in srgb, var(--surface) 94%, var(--warning));
+}
+
+.student-portal .sp-journey .sp-card--locked {
+  opacity: 0.85;
+}
+
+.student-portal .sp-journey .sp-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.student-portal .sp-journey .sp-card-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: color-mix(in srgb, var(--warning) 14%, var(--surface));
+  color: color-mix(in srgb, var(--text) 82%, var(--brand-navy-2));
+}
+
+body[data-theme="dark"] .student-portal .sp-journey .sp-card-icon {
+  background: color-mix(in srgb, var(--surface) 90%, var(--warning));
+}
+
+.student-portal .sp-journey .sp-card-check {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 1000;
+  font-size: 13px;
+  line-height: 1;
+  border: 2px solid color-mix(in srgb, var(--warning) 55%, var(--border));
+  color: color-mix(in srgb, var(--warning) 78%, var(--text));
+  background: color-mix(in srgb, var(--surface) 75%, transparent);
+}
+
+.student-portal .sp-journey .sp-card-check--faded {
+  opacity: 0.45;
+  border-color: color-mix(in srgb, var(--text) 18%, var(--border));
+  color: color-mix(in srgb, var(--text) 45%, var(--brand-navy-2));
+}
+
+.student-portal .sp-journey .sp-card-title {
+  font-weight: 1100;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+.student-portal .sp-journey .sp-card-sub {
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.student-portal .sp-journey .sp-card-divider {
+  height: 1px;
+  width: 100%;
+  background: color-mix(in srgb, var(--border) 70%, transparent);
+  margin-top: 10px;
+}
+
+.student-portal .sp-journey .sp-card-bottom {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.student-portal .sp-journey .sp-card-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--text) 6%, var(--surface));
+  border: 1px solid var(--border);
+  color: color-mix(in srgb, var(--text) 65%, var(--brand-navy-2));
+}
+
+// Status pill tweaks (scoped)
+.student-portal .sp-journey .sp-pill {
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.student-portal .sp-journey .sp-pill--done {
+  background: color-mix(in srgb, var(--warning) 16%, var(--surface));
+  border-color: color-mix(in srgb, var(--warning) 30%, var(--border));
+  color: color-mix(in srgb, var(--warning) 70%, var(--text));
+}
+
+.student-portal .sp-journey .sp-pill--pending {
+  background: color-mix(in srgb, var(--text) 4%, var(--surface));
+}
+
+.student-portal .sp-journey .sp-pill--ready {
+  background: color-mix(in srgb, var(--text) 5%, var(--surface));
+  border-color: color-mix(in srgb, var(--text) 10%, var(--border));
+  color: color-mix(in srgb, var(--text) 55%, var(--brand-navy-2));
+}
+
+.student-portal .sp-journey .sp-pill--info {
+  background: color-mix(in srgb, var(--brand-teal) 10%, var(--surface));
+  border-color: color-mix(in srgb, var(--brand-teal) 22%, var(--border));
+  color: color-mix(in srgb, var(--brand-teal) 55%, var(--brand-navy-2));
+}
+
+.student-portal .sp-journey .sp-card--button:hover {
+  border-color: color-mix(in srgb, var(--brand-teal) 45%, var(--border));
+}
+
+@media (max-width: 980px) {
+  .student-portal .sp-pagehead-title {
+    font-size: 34px;
+  }
+
+  .student-portal .sp-overview {
+    grid-template-columns: 1fr;
+  }
+}

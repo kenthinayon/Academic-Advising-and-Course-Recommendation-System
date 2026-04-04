@@ -1,6 +1,7 @@
 // Student appointments UI (inside Student Portal)
 
 
+
 .sp-appt-controls {
   margin: 10px 0 18px;
   display: flex;
@@ -40,7 +41,7 @@
 }
 
 /* Appointments page */
-.sp-pagehead {
+.student-appointments .sp-pagehead {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;

@@ -48,6 +48,24 @@ export default function Login() {
             const actualRole = user?.role || "student";
             localStorage.setItem("userRole", actualRole);
 
+            // Greeting variant (first login vs returning) – UI-only
+            try {
+                const userKey = String(user?.id ?? user?.email ?? "").trim();
+                if (userKey) {
+                    const seenKey = `welcome_seen_${userKey}`;
+                    const onceKey = `welcome_once_${userKey}`;
+                    const hasSeen = localStorage.getItem(seenKey) === "1";
+                    if (!hasSeen) {
+                        localStorage.setItem(onceKey, "1");
+                        localStorage.setItem(seenKey, "1");
+                    } else {
+                        localStorage.removeItem(onceKey);
+                    }
+                }
+            } catch {
+                // ignore
+            }
+
             if (actualRole === "admin") {
                 navigate("/admin");
             } else if (actualRole === "advisor") {

@@ -84187,12 +84187,12 @@ function statusPill(status) {
     cls: "ad-pill ad-pill--bad"
   };
   if (s === "interview") return {
-    label: "Interview",
+    label: "Interview Required",
     cls: "ad-pill"
   };
   // Default/pending state: show as an indicator (not a button)
   return {
-    label: "Awaiting Review",
+    label: "Pending Review",
     cls: "ad-pill"
   };
 }
@@ -84923,6 +84923,19 @@ function AdvisorDashboard() {
       })]
     }), "Appointments"]
   });
+  var displayName = String((user === null || user === void 0 ? void 0 : user.name) || "Academic Advisor");
+  var welcomeKicker = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var _ref10, _user$id;
+    var userKey = String((_ref10 = (_user$id = user === null || user === void 0 ? void 0 : user.id) !== null && _user$id !== void 0 ? _user$id : user === null || user === void 0 ? void 0 : user.email) !== null && _ref10 !== void 0 ? _ref10 : "").trim();
+    if (!userKey) return "WELCOME BACK";
+    try {
+      var onceKey = "welcome_once_".concat(userKey);
+      var isOnce = localStorage.getItem(onceKey) === "1";
+      return isOnce ? "WELCOME" : "WELCOME BACK";
+    } catch (_unused13) {
+      return "WELCOME BACK";
+    }
+  }, [user === null || user === void 0 ? void 0 : user.id, user === null || user === void 0 ? void 0 : user.email]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "advisor",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("header", {
@@ -85024,7 +85037,7 @@ function AdvisorDashboard() {
                 var when = "—";
                 try {
                   when = whenIso ? new Date(whenIso).toLocaleString() : "—";
-                } catch (_unused13) {
+                } catch (_unused14) {
                   when = whenIso || "—";
                 }
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -85521,86 +85534,121 @@ function AdvisorDashboard() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "ad-hero",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "ad-hero-bar",
+          className: "ad-dash-head",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "ad-hero-text",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
-              children: "Welcome, Academic Advisor!"
+            className: "ad-dash-title",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "ad-dash-kicker",
+              children: welcomeKicker
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+              children: displayName
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
               children: "Review and approve student course recommendations"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "ad-hero-actions",
+            className: "ad-dash-actions",
             children: AppointmentsButton
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "ad-stats",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "ad-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "ad-stat-label",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "ad-stat-icon",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "ad-stat-top",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "ad-stat-iconBubble",
               "aria-hidden": "true",
               children: "\uD83D\uDC65"
-            }), " Total Students"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "ad-stat-value",
-            children: stats.totalStudents
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "ad-stat-meta",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-stat-label",
+                children: "Total Students"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-stat-value",
+                children: stats.totalStudents
+              })]
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "ad-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "ad-stat-label",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "ad-stat-icon",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "ad-stat-top",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "ad-stat-iconBubble",
               "aria-hidden": "true",
               children: "\u23F3"
-            }), " Pending Review"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "ad-stat-value ad-stat-value--warn",
-            children: stats.pending
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "ad-stat-meta",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-stat-label",
+                children: "Pending Review"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-stat-value ad-stat-value--warn",
+                children: stats.pending
+              })]
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "ad-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "ad-stat-label",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "ad-stat-icon",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "ad-stat-top",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "ad-stat-iconBubble",
               "aria-hidden": "true",
               children: "\uD83C\uDFA4"
-            }), " Interview"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "ad-stat-value ad-stat-value--warn",
-            children: stats.interview
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "ad-stat-meta",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-stat-label",
+                children: "Interview"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-stat-value ad-stat-value--warn",
+                children: stats.interview
+              })]
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "ad-stat",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "ad-stat-label",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-              className: "ad-stat-icon",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "ad-stat-top",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "ad-stat-iconBubble",
               "aria-hidden": "true",
               children: "\u2705"
-            }), " Approved"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "ad-stat-value ad-stat-value--good",
-            children: stats.approved
-          })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "ad-stat-meta",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-stat-label",
+                children: "Approved"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-stat-value ad-stat-value--good",
+                children: stats.approved
+              })]
+            })]
+          })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "ad-search",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-          value: q,
-          placeholder: "Search students by name or email...",
-          onChange: function onChange(e) {
-            return setQ(e.target.value);
-          },
-          list: "ad-student-suggestions",
-          onKeyDown: function onKeyDown(e) {
-            if (e.key === "Enter") load(q);
-          }
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "ad-search-field",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "ad-search-icon",
+            "aria-hidden": "true",
+            children: "\uD83D\uDD0E"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            className: "ad-search-input",
+            value: q,
+            placeholder: "Search students by name or email...",
+            onChange: function onChange(e) {
+              return setQ(e.target.value);
+            },
+            list: "ad-student-suggestions",
+            onKeyDown: function onKeyDown(e) {
+              if (e.key === "Enter") load(q);
+            }
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("datalist", {
           id: "ad-student-suggestions",
           children: (Array.isArray(suggestions) ? suggestions : []).slice(0, 30).flatMap(function (s) {
@@ -85641,52 +85689,88 @@ function AdvisorDashboard() {
       }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "ad-list",
         children: [students.map(function (s) {
-          var _s$advisor_recommende, _rec$, _rec$2, _rec$3, _s$assessment_score_p;
+          var _s$advisor_recommende, _rec$, _rec$2, _rec$3;
           var pill = statusPill(s.advisor_status);
           var rec = ((_s$advisor_recommende = s.advisor_recommended_degrees) !== null && _s$advisor_recommende !== void 0 && _s$advisor_recommende.length ? s.advisor_recommended_degrees : s.recommended_degrees) || [];
           var headline = (rec === null || rec === void 0 || (_rec$ = rec[0]) === null || _rec$ === void 0 ? void 0 : _rec$.name) || (rec === null || rec === void 0 || (_rec$2 = rec[0]) === null || _rec$2 === void 0 ? void 0 : _rec$2.code) || "No recommendation yet";
           var body = rec !== null && rec !== void 0 && (_rec$3 = rec[0]) !== null && _rec$3 !== void 0 && _rec$3.track ? "Track: ".concat(rec[0].track) : s.strand ? "Strand: ".concat(s.strand) : "";
+          var rawPct = s.assessment_score_preview;
+          var pctNum = Number(rawPct);
+          var hasPct = Number.isFinite(pctNum);
+          var pct = hasPct ? Math.max(0, Math.min(100, Math.round(pctNum))) : 0;
+          var pctLabel = hasPct ? "".concat(pct, "%") : "—";
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "ad-card",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-              className: "ad-card-head",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "ad-student-name",
-                  children: s.name
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "ad-student-email",
-                  children: s.email
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  className: "ad-student-meta",
-                  children: [s.strand ? "".concat(s.strand, " \u2022 ") : "", s.gwa ? "GPA: ".concat(s.gwa) : "GPA: —"]
+              className: "ad-card-left",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-card-head",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "ad-student-name",
+                    children: s.name
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "ad-student-email",
+                    children: s.email
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "ad-student-meta",
+                    children: [s.strand ? "".concat(s.strand, " \u2022 ") : "", s.gwa ? "GPA: ".concat(s.gwa) : "GPA: —"]
+                  })]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "ad-rec",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "ad-rec-title",
+                  children: ["Recommended: ", clampText(headline, 60)]
+                }), body ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "ad-rec-sub",
+                  children: body
+                }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "ad-rec-sub",
+                  children: ["Match Score: \u2014 \xA0\u2022\xA0 Assessment: ", rawPct !== null && rawPct !== void 0 ? rawPct : "—", "%"]
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: pill.cls,
-                children: pill.label
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "ad-progress",
+                "aria-label": "Assessment score ".concat(pctLabel),
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "ad-progress-top",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "ad-progress-label",
+                    children: "Assessment"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "ad-progress-value",
+                    children: pctLabel
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: hasPct ? "ad-progress-bar" : "ad-progress-bar ad-progress-bar--empty",
+                  role: "progressbar",
+                  "aria-valuenow": hasPct ? pct : undefined,
+                  "aria-valuemin": 0,
+                  "aria-valuemax": 100,
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "ad-progress-fill",
+                    style: {
+                      width: "".concat(pct, "%")
+                    }
+                  })
+                })]
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-              className: "ad-rec",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "ad-rec-title",
-                children: ["Recommended: ", clampText(headline, 60)]
-              }), body ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "ad-rec-sub",
-                children: body
-              }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "ad-rec-sub",
-                children: ["Match Score: \u2014 \xA0\u2022\xA0 Assessment: ", (_s$assessment_score_p = s.assessment_score_preview) !== null && _s$assessment_score_p !== void 0 ? _s$assessment_score_p : "—", "%"]
+              className: "ad-card-right",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: pill.cls,
+                children: pill.label
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-actions",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                  type: "button",
+                  className: "ad-btn ad-btn--ghost",
+                  onClick: function onClick() {
+                    return navigate("/advisor/students/".concat(s.id));
+                  },
+                  children: "View Details"
+                })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              className: "ad-actions",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                type: "button",
-                className: "ad-btn ad-btn--ghost",
-                onClick: function onClick() {
-                  return navigate("/advisor/students/".concat(s.id));
-                },
-                children: "View Details"
-              })
             })]
           }, s.id);
         }), !loading && !students.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -86926,7 +87010,7 @@ function Login() {
   }();
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(e) {
-      var toastId, response, _response$data, token, user, actualRole, _err$response, msg, _err$response2, code, _err$response3, _actualRole, _msg, _err$response4, _msg2, _t2;
+      var toastId, response, _response$data, token, user, actualRole, _ref3, _user$id, userKey, seenKey, onceKey, hasSeen, _err$response, msg, _err$response2, code, _err$response3, _actualRole, _msg, _err$response4, _msg2, _t2;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
           case 0:
@@ -86967,6 +87051,24 @@ function Login() {
             // Always trust the server role (not the UI tab) for routing/guards
             actualRole = (user === null || user === void 0 ? void 0 : user.role) || "student";
             localStorage.setItem("userRole", actualRole);
+
+            // Greeting variant (first login vs returning) – UI-only
+            try {
+              userKey = String((_ref3 = (_user$id = user === null || user === void 0 ? void 0 : user.id) !== null && _user$id !== void 0 ? _user$id : user === null || user === void 0 ? void 0 : user.email) !== null && _ref3 !== void 0 ? _ref3 : "").trim();
+              if (userKey) {
+                seenKey = "welcome_seen_".concat(userKey);
+                onceKey = "welcome_once_".concat(userKey);
+                hasSeen = localStorage.getItem(seenKey) === "1";
+                if (!hasSeen) {
+                  localStorage.setItem(onceKey, "1");
+                  localStorage.setItem(seenKey, "1");
+                } else {
+                  localStorage.removeItem(onceKey);
+                }
+              }
+            } catch (_unused) {
+              // ignore
+            }
             if (actualRole === "admin") {
               navigate("/admin");
             } else if (actualRole === "advisor") {
@@ -87246,7 +87348,7 @@ function Register() {
   }();
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(e) {
-      var payload, response, _response$data, token, user, actualRole, _err$response, _err$response2, _t;
+      var payload, response, _response$data, token, user, _ref3, _user$id, userKey, seenKey, onceKey, hasSeen, actualRole, _err$response, _err$response2, _t;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
           case 0:
@@ -87273,6 +87375,24 @@ function Register() {
             localStorage.setItem("authToken", token);
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("userRole", user.role || "student");
+
+            // Greeting variant (first login vs returning) – UI-only
+            try {
+              userKey = String((_ref3 = (_user$id = user === null || user === void 0 ? void 0 : user.id) !== null && _user$id !== void 0 ? _user$id : user === null || user === void 0 ? void 0 : user.email) !== null && _ref3 !== void 0 ? _ref3 : "").trim();
+              if (userKey) {
+                seenKey = "welcome_seen_".concat(userKey);
+                onceKey = "welcome_once_".concat(userKey);
+                hasSeen = localStorage.getItem(seenKey) === "1";
+                if (!hasSeen) {
+                  localStorage.setItem(onceKey, "1");
+                  localStorage.setItem(seenKey, "1");
+                } else {
+                  localStorage.removeItem(onceKey);
+                }
+              }
+            } catch (_unused) {
+              // ignore
+            }
             actualRole = (user === null || user === void 0 ? void 0 : user.role) || payload.role || "student";
             if (actualRole === "advisor" || actualRole === "admin") {
               navigate("/advisor");
@@ -88650,7 +88770,7 @@ function StudentAppointments() {
     };
   }();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "student-portal",
+    className: "student-portal student-appointments",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("header", {
       className: "sp-topbar",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -90620,6 +90740,7 @@ function formatInterviewWhen(item) {
   return "—";
 }
 function StudentPortal() {
+  var _upcoming$, _upcoming$2, _upcoming$3, _upcoming$4;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -90694,12 +90815,24 @@ function StudentPortal() {
     _useState28 = _slicedToArray(_useState27, 2),
     notifDismissedIds = _useState28[0],
     setNotifDismissedIds = _useState28[1];
+  var welcomeKicker = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var _ref, _user$id;
+    var userKey = String((_ref = (_user$id = user === null || user === void 0 ? void 0 : user.id) !== null && _user$id !== void 0 ? _user$id : user === null || user === void 0 ? void 0 : user.email) !== null && _ref !== void 0 ? _ref : "").trim();
+    if (!userKey) return "WELCOME BACK";
+    try {
+      var onceKey = "welcome_once_".concat(userKey);
+      var isOnce = localStorage.getItem(onceKey) === "1";
+      return isOnce ? "WELCOME" : "WELCOME BACK";
+    } catch (_unused3) {
+      return "WELCOME BACK";
+    }
+  }, [user === null || user === void 0 ? void 0 : user.id, user === null || user === void 0 ? void 0 : user.email]);
   var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
       try {
         var raw = localStorage.getItem("studentNotifLastSeenTs");
         var n = raw ? Number(raw) : 0;
         return Number.isFinite(n) ? n : 0;
-      } catch (_unused3) {
+      } catch (_unused4) {
         return 0;
       }
     }),
@@ -90726,7 +90859,7 @@ function StudentPortal() {
   var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
       try {
         return localStorage.getItem("theme") === "dark";
-      } catch (_unused4) {
+      } catch (_unused5) {
         return false;
       }
     }),
@@ -90768,7 +90901,7 @@ function StudentPortal() {
     }
     try {
       setUser(JSON.parse(stored));
-    } catch (_unused5) {
+    } catch (_unused6) {
       localStorage.removeItem("user");
       navigate("/login");
     }
@@ -90777,7 +90910,7 @@ function StudentPortal() {
     try {
       document.body.dataset.theme = darkMode ? "dark" : "light";
       localStorage.setItem("theme", darkMode ? "dark" : "light");
-    } catch (_unused6) {
+    } catch (_unused7) {
       // ignore
     }
   }, [darkMode]);
@@ -90788,7 +90921,7 @@ function StudentPortal() {
       return;
     }
     var fetchProfile = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
         var _res$data, _res$data2, res, serverUser, avatarUrl, cacheBusted, nextUser, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
@@ -90815,7 +90948,7 @@ function StudentPortal() {
                 setUser(nextUser);
                 try {
                   localStorage.setItem("user", JSON.stringify(nextUser));
-                } catch (_unused7) {
+                } catch (_unused8) {
                   // ignore
                 }
               }
@@ -90837,7 +90970,7 @@ function StudentPortal() {
         }, _callee, null, [[1, 3, 4, 5]]);
       }));
       return function fetchProfile() {
-        return _ref.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       };
     }();
     fetchProfile();
@@ -90846,7 +90979,7 @@ function StudentPortal() {
     var token = localStorage.getItem("authToken");
     if (!token) return;
     var fetchUpcoming = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
         var _res$data3, res, _t2;
         return _regenerator().w(function (_context2) {
           while (1) switch (_context2.p = _context2.n) {
@@ -90875,7 +91008,7 @@ function StudentPortal() {
         }, _callee2, null, [[0, 2]]);
       }));
       return function fetchUpcoming() {
-        return _ref2.apply(this, arguments);
+        return _ref3.apply(this, arguments);
       };
     }();
     fetchUpcoming();
@@ -90913,8 +91046,8 @@ function StudentPortal() {
     return "Next appointment: ".concat(when);
   }, [nextUpcoming]);
   var fetchNotifications = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-      var _ref4,
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+      var _ref5,
         showLoading,
         token,
         _res$data4,
@@ -90924,9 +91057,9 @@ function StudentPortal() {
       return _regenerator().w(function (_context3) {
         while (1) switch (_context3.p = _context3.n) {
           case 0:
-            _ref4 = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {
+            _ref5 = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {
               showLoading: false
-            }, showLoading = _ref4.showLoading;
+            }, showLoading = _ref5.showLoading;
             token = localStorage.getItem("authToken");
             if (token) {
               _context3.n = 1;
@@ -90963,11 +91096,11 @@ function StudentPortal() {
       }, _callee3, null, [[2, 4, 5, 6]]);
     }));
     return function fetchNotifications() {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
   var loadNotifications = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
       return _regenerator().w(function (_context4) {
         while (1) switch (_context4.n) {
           case 0:
@@ -90978,7 +91111,7 @@ function StudentPortal() {
       }, _callee4);
     }));
     return function loadNotifications() {
-      return _ref5.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }();
 
@@ -90988,7 +91121,7 @@ function StudentPortal() {
     if (!token) return;
     var stopped = false;
     var tick = /*#__PURE__*/function () {
-      var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+      var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
         return _regenerator().w(function (_context5) {
           while (1) switch (_context5.n) {
             case 0:
@@ -91014,7 +91147,7 @@ function StudentPortal() {
         }, _callee5);
       }));
       return function tick() {
-        return _ref6.apply(this, arguments);
+        return _ref7.apply(this, arguments);
       };
     }();
 
@@ -91068,7 +91201,7 @@ function StudentPortal() {
       var next = Array.from(new Set([id].concat(_toConsumableArray(cur)))).slice(0, 200);
       try {
         localStorage.setItem("studentNotifDismissedIds", JSON.stringify(next));
-      } catch (_unused1) {
+      } catch (_unused10) {
         // ignore
       }
       return next;
@@ -91079,7 +91212,7 @@ function StudentPortal() {
     setNotifLastSeenTs(now);
     try {
       localStorage.setItem("studentNotifLastSeenTs", String(now));
-    } catch (_unused10) {
+    } catch (_unused11) {
       // ignore
     }
   };
@@ -91104,6 +91237,7 @@ function StudentPortal() {
     var done = [step1, step2, step3, step4, step5].filter(Boolean).length;
     var total = 5;
     var remaining = total - done;
+
     // If student finished the recommendation step but is awaiting advisor approval,
     // keep the progress from showing as fully complete.
     var percent = step4 && !step5 ? Math.round(4 / total * 100) : Math.round(done / total * 100);
@@ -91154,16 +91288,59 @@ function StudentPortal() {
   var pillClass = function pillClass(isComplete) {
     return "sp-pill ".concat(isComplete ? "sp-pill--done" : "sp-pill--pending");
   };
-  var doneMark = function doneMark(isComplete) {
-    return isComplete ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-      className: "sp-done",
-      "aria-label": "Completed",
-      title: "Completed",
+  var doneMark = function doneMark(mode) {
+    if (!mode) return null;
+    var isFaded = mode === "faded";
+    var label = isFaded ? "In progress" : "Completed";
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+      className: "sp-card-check ".concat(isFaded ? "sp-card-check--faded" : ""),
+      "aria-label": label,
+      title: label,
       children: "\u2713"
-    }) : null;
+    });
   };
+  var recommendationCardStatus = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    if (!isCourseRecommendationUnlocked) {
+      return {
+        text: "Locked",
+        cls: "sp-pill--pending",
+        check: null
+      };
+    }
+    var advisor = String(completion.advisorStatus || "pending").toLowerCase();
+    if (advisor === "interview") {
+      // Student is actively in the advisor interview stage.
+      // Show status instead of "Completed" even if recommendations were generated.
+      return {
+        text: "Interview",
+        cls: "sp-pill--info",
+        check: completion.step4 ? "faded" : null
+      };
+    }
+    if (completion.step4 && !completion.step5) {
+      return {
+        text: "Pending Approval",
+        cls: "sp-pill--pending",
+        check: "faded"
+      };
+    }
+    if (completion.step5) {
+      return {
+        text: "Approved",
+        cls: "sp-pill--done",
+        check: "done"
+      };
+    }
+
+    // Unlocked but not completed yet.
+    return {
+      text: "Ready",
+      cls: "sp-pill--ready",
+      check: completion.step4 ? "done" : null
+    };
+  }, [completion.advisorStatus, completion.step4, completion.step5, isCourseRecommendationUnlocked]);
   var handleLogout = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
       var token;
       return _regenerator().w(function (_context6) {
         while (1) switch (_context6.p = _context6.n) {
@@ -91195,7 +91372,7 @@ function StudentPortal() {
       }, _callee6, null, [[1,, 2, 3]]);
     }));
     return function handleLogout() {
-      return _ref7.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }();
   var roleLabel = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
@@ -91256,14 +91433,14 @@ function StudentPortal() {
       if (avatarPreview) {
         try {
           URL.revokeObjectURL(avatarPreview);
-        } catch (_unused11) {
+        } catch (_unused12) {
           // ignore
         }
       }
     };
   }, [avatarPreview]);
   var saveAvatar = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+    var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
       var token, _res$data7, form, res, _me$data, _res$data5, me, serverUser, avatarUrl, cacheBusted, _me$data2, next, _res$data6, _avatarUrl, _cacheBusted, _e$response, msg, _t4, _t5;
       return _regenerator().w(function (_context7) {
         while (1) switch (_context7.p = _context7.n) {
@@ -91320,7 +91497,7 @@ function StudentPortal() {
               setProfile(((_me$data2 = me.data) === null || _me$data2 === void 0 ? void 0 : _me$data2.profile) || null);
               try {
                 localStorage.setItem("user", JSON.stringify(next));
-              } catch (_unused12) {
+              } catch (_unused13) {
                 // ignore
               }
             } else if (avatarUrl) {
@@ -91330,7 +91507,7 @@ function StudentPortal() {
                 });
                 try {
                   localStorage.setItem("user", JSON.stringify(next));
-                } catch (_unused13) {
+                } catch (_unused14) {
                   // ignore
                 }
                 return next;
@@ -91350,7 +91527,7 @@ function StudentPortal() {
                 });
                 try {
                   localStorage.setItem("user", JSON.stringify(next));
-                } catch (_unused15) {
+                } catch (_unused16) {
                   // ignore
                 }
                 return next;
@@ -91376,11 +91553,11 @@ function StudentPortal() {
       }, _callee7, null, [[4, 6], [2, 8, 9, 10]]);
     }));
     return function saveAvatar() {
-      return _ref8.apply(this, arguments);
+      return _ref9.apply(this, arguments);
     };
   }();
   var changePassword = /*#__PURE__*/function () {
-    var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
+    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
       var token, _res$data8, res, _e$response2, msg, _t6;
       return _regenerator().w(function (_context8) {
         while (1) switch (_context8.p = _context8.n) {
@@ -91456,11 +91633,11 @@ function StudentPortal() {
       }, _callee8, null, [[5, 7, 8, 9]]);
     }));
     return function changePassword() {
-      return _ref9.apply(this, arguments);
+      return _ref0.apply(this, arguments);
     };
   }();
   var saveProfile = /*#__PURE__*/function () {
-    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9() {
+    var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9() {
       var token, _res$data9, _res$data0, _res$data1, payload, res, newUser, newProfile, _e$response3, msg, _t7;
       return _regenerator().w(function (_context9) {
         while (1) switch (_context9.p = _context9.n) {
@@ -91517,11 +91694,11 @@ function StudentPortal() {
       }, _callee9, null, [[2, 4, 5, 6]]);
     }));
     return function saveProfile() {
-      return _ref0.apply(this, arguments);
+      return _ref1.apply(this, arguments);
     };
   }();
   var submitRequest = /*#__PURE__*/function () {
-    var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
+    var _ref10 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
       var token, date, time, preferredAt, _res$data10, _list$data, res, list, _e$response4, msg, _t8;
       return _regenerator().w(function (_context0) {
         while (1) switch (_context0.p = _context0.n) {
@@ -91604,7 +91781,7 @@ function StudentPortal() {
       }, _callee0, null, [[4, 7, 8, 9]]);
     }));
     return function submitRequest() {
-      return _ref1.apply(this, arguments);
+      return _ref10.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -91870,229 +92047,279 @@ function StudentPortal() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("main", {
       className: "sp-main",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        className: "sp-hero",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
-          className: "sp-hero-left",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h1", {
-            className: "sp-welcome",
-            children: ["Welcome, ", fullName, "!"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-            className: "sp-caption",
-            children: "Complete the following steps to get your personalized course recommendation"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
-            className: "sp-progress",
+        className: "sp-pagehead",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "sp-greeting",
+          "aria-label": welcomeKicker === "WELCOME" ? "Welcome" : "Welcome back",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+            className: "sp-greeting-ico",
+            "aria-hidden": "true",
+            children: "\u2728"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+            className: "sp-greeting-text",
+            children: welcomeKicker
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
+          className: "sp-pagehead-title",
+          children: fullName
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "sp-pagehead-sub",
+          children: "Your personalized academic pathway awaits"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
+        className: "sp-overview",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "sp-progress sp-progress--card",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "sp-progress-head",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-progress-title",
+                children: "Recommendation Progress"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-progress-meta",
+                children: progressMetaText
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "sp-progress-pct",
+              children: [completion.percent, "%"]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "sp-bar",
+            "aria-hidden": "true",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-bar-fill",
+              style: {
+                width: "".concat(completion.percent, "%")
+              }
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "sp-bar-labels",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              children: "Getting Started"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              children: "Ready for Review"
+            })]
+          }), interviewSchedule ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "sp-note",
+            style: {
+              marginTop: 12
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("strong", {
+              children: "Interview scheduled"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              style: {
+                marginTop: 6
+              },
+              children: ["Date: ", interviewSchedule.date, " \xA0\u2022\xA0 Time: ", interviewSchedule.time]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              style: {
+                marginTop: 4
+              },
+              children: ["Venue: ", interviewSchedule.venue]
+            })]
+          }) : null]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("aside", {
+          className: "sp-overview-right",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "sp-upcoming",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "sp-progress-head",
+              className: "sp-upcoming-head",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                  className: "sp-progress-title",
-                  children: "Your Progress"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                  className: "sp-progress-meta",
-                  children: progressMetaText
-                })]
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "sp-bar",
-              "aria-hidden": "true",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                className: "sp-bar-fill",
-                style: {
-                  width: "".concat(completion.percent, "%")
-                }
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-              className: "sp-bar-labels",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                children: "Getting Started"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                children: "Recommendation Ready"
-              })]
-            }), interviewSchedule ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-              className: "sp-note",
-              style: {
-                marginTop: 12
-              },
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("strong", {
-                children: "Interview scheduled"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                style: {
-                  marginTop: 6
-                },
-                children: ["Date: ", interviewSchedule.date, " \xA0\u2022\xA0 Time: ", interviewSchedule.time]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                style: {
-                  marginTop: 4
-                },
-                children: ["Venue: ", interviewSchedule.venue]
-              })]
-            }) : null]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("aside", {
-          className: "sp-hero-right",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "sp-widget",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-              className: "sp-widget-head",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                  className: "sp-widget-title",
-                  children: "Appointments"
+                  className: "sp-upcoming-title",
+                  children: "Upcoming"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                  className: "sp-widget-sub",
-                  children: [upcoming.length, " upcoming"]
+                  className: "sp-upcoming-sub",
+                  children: [upcoming.length, " appointment", upcoming.length === 1 ? "" : "s", " scheduled"]
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-                type: "button",
-                className: "sp-btn sp-btn--primary",
-                onClick: function onClick() {
-                  return setBookOpen(true);
-                },
-                children: "+ Book"
-              })]
-            }), upcoming.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-              className: "sp-widget-empty",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                className: "sp-calendar",
-                "aria-hidden": "true",
-                children: "\uD83D\uDDD3"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                className: "sp-muted",
-                children: "No upcoming appointments"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-                type: "button",
-                className: "sp-btn sp-btn--ghost",
-                onClick: function onClick() {
-                  return setBookOpen(true);
-                },
-                children: "Schedule Your First Session"
-              })]
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "sp-widget-list",
-              children: upcoming.map(function (a) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                  className: "sp-widget-item",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                      className: "sp-strong",
-                      children: String((a === null || a === void 0 ? void 0 : a.status) || "").toLowerCase() === "interview" ? formatInterviewWhen(a) : a.scheduled_at ? "".concat(formatApptDate(a.scheduled_at), " \u2022 ").concat(formatApptTime(a.scheduled_at)) : "Awaiting schedule"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                      className: "sp-muted",
-                      children: a.session_type || "Advising Session"
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                    className: "sp-badge sp-badge--info",
-                    children: String(a.status || "requested")
-                  })]
-                }, a.id);
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
               type: "button",
-              className: "sp-link",
+              className: "sp-btn sp-btn--primary sp-btn--wide",
+              onClick: function onClick() {
+                return setBookOpen(true);
+              },
+              children: "Book Appointment"
+            }), upcoming.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "sp-upcoming-item",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  className: "sp-strong",
+                  children: String(((_upcoming$ = upcoming[0]) === null || _upcoming$ === void 0 ? void 0 : _upcoming$.status) || "").toLowerCase() === "interview" ? formatInterviewWhen(upcoming[0]) : (_upcoming$2 = upcoming[0]) !== null && _upcoming$2 !== void 0 && _upcoming$2.scheduled_at ? "".concat(formatApptFull(upcoming[0].scheduled_at)) : "Awaiting schedule"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  className: "sp-muted",
+                  children: ((_upcoming$3 = upcoming[0]) === null || _upcoming$3 === void 0 ? void 0 : _upcoming$3.session_type) || "Advising Session"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: "sp-badge",
+                children: String(((_upcoming$4 = upcoming[0]) === null || _upcoming$4 === void 0 ? void 0 : _upcoming$4.status) || "requested")
+              })]
+            }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+              type: "button",
+              className: "sp-link sp-link--center",
               onClick: function onClick() {
                 return navigate("/student/appointments");
               },
-              children: "View All Appointments"
+              children: "View All \u2192"
             })]
-          })
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
-        className: "sp-grid sp-grid--4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-          type: "button",
-          className: "sp-card sp-card--button",
-          onClick: function onClick() {
-            return navigate("/student/basic-information");
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-            className: "sp-card-icon",
-            "aria-hidden": "true",
-            children: "\uD83D\uDC64"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "sp-card-body",
+            className: "sp-mini-stats",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "sp-mini-stat",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-mini-stat-value",
+                children: completion.done
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-mini-stat-label",
+                children: "STEPS COMPLETED"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "sp-mini-stat",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-mini-stat-value",
+                children: completion.step4 && !completion.step5 ? 1 : 0
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-mini-stat-label",
+                children: "PENDING APPROVAL"
+              })]
+            })]
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_HighlightsCarousel__WEBPACK_IMPORTED_MODULE_4__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
+        className: "sp-journey",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "sp-journey-head",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+            className: "sp-journey-title",
+            children: "Your Journey"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "sp-muted",
+            children: "Track your progress through the recommendation process"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
+          className: "sp-grid sp-grid--4",
+          "aria-label": "Student progress steps",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+            type: "button",
+            className: "sp-card sp-card--button ".concat(completion.step1 ? "sp-card--done" : ""),
+            onClick: function onClick() {
+              return navigate("/student/basic-information");
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "sp-card-top",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-card-icon",
+                "aria-hidden": "true",
+                children: "\uD83D\uDC64"
+              }), doneMark(completion.step1 ? "done" : null)]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-card-title",
-              children: ["Basic Information ", doneMark(completion.step1)]
+              children: "Basic Information"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-card-sub",
               children: "Complete your profile"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: pillClass(completion.step1),
-              children: pillText(completion.step1)
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-card-divider",
+              "aria-hidden": "true"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-card-bottom",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: pillClass(completion.step1),
+                children: pillText(completion.step1)
+              })
             })]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-          type: "button",
-          className: "sp-card sp-card--button",
-          onClick: function onClick() {
-            return navigate("/student/academic-credentials");
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-            className: "sp-card-icon",
-            "aria-hidden": "true",
-            children: "\uD83D\uDCC4"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "sp-card-body",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+            type: "button",
+            className: "sp-card sp-card--button ".concat(completion.step2 ? "sp-card--done" : ""),
+            onClick: function onClick() {
+              return navigate("/student/academic-credentials");
+            },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "sp-card-top",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-card-icon",
+                "aria-hidden": "true",
+                children: "\uD83D\uDCC4"
+              }), doneMark(completion.step2 ? "done" : null)]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-card-title",
-              children: ["Academic Credentials ", doneMark(completion.step2)]
+              children: "Academic Credentials"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-card-sub",
               children: "Add grades, skills & interests"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: pillClass(completion.step2),
-              children: pillText(completion.step2)
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-card-divider",
+              "aria-hidden": "true"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-card-bottom",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: pillClass(completion.step2),
+                children: pillText(completion.step2)
+              })
             })]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-          type: "button",
-          className: "sp-card sp-card--button",
-          onClick: function onClick() {
-            return navigate("/student/assessment-quiz");
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-            className: "sp-card-icon",
-            "aria-hidden": "true",
-            children: "\uD83E\uDDFE"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "sp-card-body",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+            type: "button",
+            className: "sp-card sp-card--button ".concat(completion.step3 ? "sp-card--done" : ""),
+            onClick: function onClick() {
+              return navigate("/student/assessment-quiz");
+            },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "sp-card-top",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-card-icon",
+                "aria-hidden": "true",
+                children: "\uD83E\uDDFE"
+              }), doneMark(completion.step3 ? "done" : null)]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-card-title",
-              children: ["Assessment Quiz ", doneMark(completion.step3)]
+              children: "Assessment"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-card-sub",
-              children: "Complete the general assessment"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: pillClass(completion.step3),
-              children: pillText(completion.step3)
+              children: "General academic assessment"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-card-divider",
+              "aria-hidden": "true"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-card-bottom",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: pillClass(completion.step3),
+                children: pillText(completion.step3)
+              })
             })]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-          type: "button",
-          className: "sp-card sp-card--button",
-          onClick: openCourseRecommendation,
-          disabled: !isCourseRecommendationUnlocked,
-          "aria-disabled": !isCourseRecommendationUnlocked,
-          title: !isCourseRecommendationUnlocked ? "Locked until Steps 1 to 3 are completed" : "Open Course Recommendation",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-            className: "sp-card-icon",
-            "aria-hidden": "true",
-            children: "\uD83C\uDFAF"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "sp-card-body",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+            type: "button",
+            className: "sp-card sp-card--button ".concat(completion.step4 ? "sp-card--done" : "", " ").concat(!isCourseRecommendationUnlocked ? "sp-card--locked" : ""),
+            onClick: openCourseRecommendation,
+            disabled: !isCourseRecommendationUnlocked,
+            "aria-disabled": !isCourseRecommendationUnlocked,
+            title: !isCourseRecommendationUnlocked ? "Locked until Steps 1 to 3 are completed" : "Open Course Recommendation",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "sp-card-top",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                className: "sp-card-icon",
+                "aria-hidden": "true",
+                children: "\uD83C\uDFAF"
+              }), doneMark(recommendationCardStatus.check)]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-card-title",
-              children: ["Course Recommendation ", doneMark(completion.step4)]
+              children: "Recommendations"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-card-sub",
-              children: isCourseRecommendationUnlocked ? "View your recommended programs" : "Complete Steps 1 to 3 to unlock"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              className: pillClass(isCourseRecommendationUnlocked && completion.step4),
-              children: isCourseRecommendationUnlocked ? pillText(completion.step4) : "Locked"
+              children: "View your programs"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-card-divider",
+              "aria-hidden": "true"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-card-bottom",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: "sp-pill ".concat(recommendationCardStatus.cls),
+                children: recommendationCardStatus.text
+              })
             })]
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_HighlightsCarousel__WEBPACK_IMPORTED_MODULE_4__["default"], {}), editOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      }), editOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "sp-modal",
         role: "dialog",
         "aria-modal": "true",

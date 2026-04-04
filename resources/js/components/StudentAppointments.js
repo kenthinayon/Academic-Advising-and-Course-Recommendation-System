@@ -158,6 +158,7 @@ export default function StudentAppointments() {
         return (Array.isArray(appts) ? appts : []).filter((a) => withinTab(a) && withinStatus(a) && withinDismissed(a));
     }, [appts, dismissedApptIds, statusFilter, tab]);
 
+
     const dismissAppointment = (a) => {
         const st = String(a?.status || "requested").toLowerCase();
         if (st !== "completed") return;
@@ -221,7 +222,7 @@ export default function StudentAppointments() {
     };
 
     return (
-        <div className="student-portal">
+        <div className="student-portal student-appointments">
             <header className="sp-topbar">
                 <div className="sp-brand" role="button" tabIndex={0} onClick={() => navigate("/student")}
                     onKeyDown={(e) => (e.key === "Enter" ? navigate("/student") : null)}>

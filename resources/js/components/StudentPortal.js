@@ -125,6 +125,18 @@ export default function StudentPortal() {
             return [];
         }
     });
+
+    const welcomeKicker = useMemo(() => {
+        const userKey = String(user?.id ?? user?.email ?? "").trim();
+        if (!userKey) return "WELCOME BACK";
+        try {
+            const onceKey = `welcome_once_${userKey}`;
+            const isOnce = localStorage.getItem(onceKey) === "1";
+            return isOnce ? "WELCOME" : "WELCOME BACK";
+        } catch {
+            return "WELCOME BACK";
+        }
+    }, [user?.id, user?.email]);
     const [notifLastSeenTs, setNotifLastSeenTs] = useState(() => {
         try {
             const raw = localStorage.getItem("studentNotifLastSeenTs");
@@ -432,9 +444,10 @@ export default function StudentPortal() {
         const done = [step1, step2, step3, step4, step5].filter(Boolean).length;
         const total = 5;
         const remaining = total - done;
-    // If student finished the recommendation step but is awaiting advisor approval,
-    // keep the progress from showing as fully complete.
-    const percent = step4 && !step5 ? Math.round((4 / total) * 100) : Math.round((done / total) * 100);
+
+        // If student finished the recommendation step but is awaiting advisor approval,
+        // keep the progress from showing as fully complete.
+        const percent = step4 && !step5 ? Math.round((4 / total) * 100) : Math.round((done / total) * 100);
 
         return {
             step1,
@@ -489,12 +502,61 @@ export default function StudentPortal() {
     const pillClass = (isComplete) =>
         `sp-pill ${isComplete ? "sp-pill--done" : "sp-pill--pending"}`;
 
-    const doneMark = (isComplete) =>
-        isComplete ? (
-            <span className="sp-done" aria-label="Completed" title="Completed">
+    const doneMark = (mode) => {
+        if (!mode) return null;
+        const isFaded = mode === "faded";
+        const label = isFaded ? "In progress" : "Completed";
+        return (
+            <span
+                className={`sp-card-check ${isFaded ? "sp-card-check--faded" : ""}`}
+                aria-label={label}
+                title={label}
+            >
                 ✓
             </span>
-        ) : null;
+        );
+    };
+
+    const recommendationCardStatus = useMemo(() => {
+        if (!isCourseRecommendationUnlocked) {
+            return { text: "Locked", cls: "sp-pill--pending", check: null };
+        }
+
+        const advisor = String(completion.advisorStatus || "pending").toLowerCase();
+
+        if (advisor === "interview") {
+            // Student is actively in the advisor interview stage.
+            // Show status instead of "Completed" even if recommendations were generated.
+            return {
+                text: "Interview",
+                cls: "sp-pill--info",
+                check: completion.step4 ? "faded" : null,
+            };
+        }
+
+        if (completion.step4 && !completion.step5) {
+            return {
+                text: "Pending Approval",
+                cls: "sp-pill--pending",
+                check: "faded",
+            };
+        }
+
+        if (completion.step5) {
+            return {
+                text: "Approved",
+                cls: "sp-pill--done",
+                check: "done",
+            };
+        }
+
+        // Unlocked but not completed yet.
+        return {
+            text: "Ready",
+            cls: "sp-pill--ready",
+            check: completion.step4 ? "done" : null,
+        };
+    }, [completion.advisorStatus, completion.step4, completion.step5, isCourseRecommendationUnlocked]);
 
     const handleLogout = async () => {
         const token = localStorage.getItem("authToken");
@@ -984,176 +1046,203 @@ export default function StudentPortal() {
             </header>
 
             <main className="sp-main">
-                <div className="sp-hero">
-                    <section className="sp-hero-left">
-                        <h1 className="sp-welcome">Welcome, {fullName}!</h1>
-                        <p className="sp-caption">
-                            Complete the following steps to get your personalized course recommendation
-                        </p>
-
-                        <section className="sp-progress">
-                            <div className="sp-progress-head">
-                                <div>
-                                    <div className="sp-progress-title">Your Progress</div>
-                                    <div className="sp-progress-meta">{progressMetaText}</div>
-                                </div>
-                            </div>
-                            <div className="sp-bar" aria-hidden="true">
-                                <div className="sp-bar-fill" style={{ width: `${completion.percent}%` }} />
-                            </div>
-                            <div className="sp-bar-labels">
-                                <span>Getting Started</span>
-                                <span>Recommendation Ready</span>
-                            </div>
-
-                            {interviewSchedule ? (
-                                <div className="sp-note" style={{ marginTop: 12 }}>
-                                    <strong>Interview scheduled</strong>
-                                    <div style={{ marginTop: 6 }}>
-                                        Date: {interviewSchedule.date} &nbsp;•&nbsp; Time: {interviewSchedule.time}
-                                    </div>
-                                    <div style={{ marginTop: 4 }}>
-                                        Venue: {interviewSchedule.venue}
-                                    </div>
-                                </div>
-                            ) : null}
-                        </section>
-                    </section>
-
-                    <aside className="sp-hero-right">
-                        <div className="sp-widget">
-                            <div className="sp-widget-head">
-                                <div>
-                                    <div className="sp-widget-title">Appointments</div>
-                                    <div className="sp-widget-sub">{upcoming.length} upcoming</div>
-                                </div>
-                                <button type="button" className="sp-btn sp-btn--primary" onClick={() => setBookOpen(true)}>
-                                    + Book
-                                </button>
-                            </div>
-
-                            {upcoming.length === 0 ? (
-                                <div className="sp-widget-empty">
-                                    <div className="sp-calendar" aria-hidden="true">🗓</div>
-                                    <div className="sp-muted">No upcoming appointments</div>
-                                    <button type="button" className="sp-btn sp-btn--ghost" onClick={() => setBookOpen(true)}>
-                                        Schedule Your First Session
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className="sp-widget-list">
-                                    {upcoming.map((a) => (
-                                        <div key={a.id} className="sp-widget-item">
-                                            <div>
-                                                <div className="sp-strong">
-                                                    {String(a?.status || "").toLowerCase() === "interview"
-                                                        ? formatInterviewWhen(a)
-                                                        : a.scheduled_at
-                                                            ? `${formatApptDate(a.scheduled_at)} • ${formatApptTime(a.scheduled_at)}`
-                                                            : "Awaiting schedule"}
-                                                </div>
-                                                <div className="sp-muted">{a.session_type || "Advising Session"}</div>
-                                            </div>
-                                            <span className="sp-badge sp-badge--info">{String(a.status || "requested")}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            <button type="button" className="sp-link" onClick={() => navigate("/student/appointments")}
-                            >
-                                View All Appointments
-                            </button>
-                        </div>
-                    </aside>
+                <div className="sp-pagehead">
+                    <div
+                        className="sp-greeting"
+                        aria-label={welcomeKicker === "WELCOME" ? "Welcome" : "Welcome back"}
+                    >
+                        <span className="sp-greeting-ico" aria-hidden="true">✨</span>
+                        <span className="sp-greeting-text">{welcomeKicker}</span>
+                    </div>
+                    <h1 className="sp-pagehead-title">{fullName}</h1>
+                    <div className="sp-pagehead-sub">Your personalized academic pathway awaits</div>
                 </div>
 
-                <section className="sp-grid sp-grid--4">
-                    <button
-                        type="button"
-                        className="sp-card sp-card--button"
-                        onClick={() => navigate("/student/basic-information")}
-                    >
-                        <div className="sp-card-icon" aria-hidden="true">
-                            👤
-                        </div>
-                        <div className="sp-card-body">
-                            <div className="sp-card-title">
-                                Basic Information {doneMark(completion.step1)}
+                <section className="sp-overview">
+                    <div className="sp-progress sp-progress--card">
+                        <div className="sp-progress-head">
+                            <div>
+                                <div className="sp-progress-title">Recommendation Progress</div>
+                                <div className="sp-progress-meta">{progressMetaText}</div>
                             </div>
-                            <div className="sp-card-sub">Complete your profile</div>
-                            <span className={pillClass(completion.step1)}>
-                                {pillText(completion.step1)}
-                            </span>
+                            <div className="sp-progress-pct">{completion.percent}%</div>
                         </div>
-                    </button>
 
-                    <button
-                        type="button"
-                        className="sp-card sp-card--button"
-                        onClick={() => navigate("/student/academic-credentials")}
-                    >
-                        <div className="sp-card-icon" aria-hidden="true">
-                            📄
+                        <div className="sp-bar" aria-hidden="true">
+                            <div className="sp-bar-fill" style={{ width: `${completion.percent}%` }} />
                         </div>
-                        <div className="sp-card-body">
-                            <div className="sp-card-title">
-                                Academic Credentials {doneMark(completion.step2)}
-                            </div>
-                            <div className="sp-card-sub">Add grades, skills &amp; interests</div>
-                            <span className={pillClass(completion.step2)}>
-                                {pillText(completion.step2)}
-                            </span>
-                        </div>
-                    </button>
 
-                    <button
-                        type="button"
-                        className="sp-card sp-card--button"
-                        onClick={() => navigate("/student/assessment-quiz")}
-                    >
-                        <div className="sp-card-icon" aria-hidden="true">
-                            🧾
+                        <div className="sp-bar-labels">
+                            <span>Getting Started</span>
+                            <span>Ready for Review</span>
                         </div>
-                        <div className="sp-card-body">
-                            <div className="sp-card-title">
-                                Assessment Quiz {doneMark(completion.step3)}
-                            </div>
-                            <div className="sp-card-sub">Complete the general assessment</div>
-                            <span className={pillClass(completion.step3)}>
-                                {pillText(completion.step3)}
-                            </span>
-                        </div>
-                    </button>
 
-                    <button
-                        type="button"
-                        className="sp-card sp-card--button"
-                        onClick={openCourseRecommendation}
-                        disabled={!isCourseRecommendationUnlocked}
-                        aria-disabled={!isCourseRecommendationUnlocked}
-                        title={!isCourseRecommendationUnlocked ? "Locked until Steps 1 to 3 are completed" : "Open Course Recommendation"}
-                    >
-                        <div className="sp-card-icon" aria-hidden="true">
-                            🎯
-                        </div>
-                        <div className="sp-card-body">
-                            <div className="sp-card-title">
-                                Course Recommendation {doneMark(completion.step4)}
+                        {interviewSchedule ? (
+                            <div className="sp-note" style={{ marginTop: 12 }}>
+                                <strong>Interview scheduled</strong>
+                                <div style={{ marginTop: 6 }}>
+                                    Date: {interviewSchedule.date} &nbsp;•&nbsp; Time: {interviewSchedule.time}
+                                </div>
+                                <div style={{ marginTop: 4 }}>
+                                    Venue: {interviewSchedule.venue}
+                                </div>
                             </div>
-                            <div className="sp-card-sub">
-                                {isCourseRecommendationUnlocked
-                                    ? "View your recommended programs"
-                                    : "Complete Steps 1 to 3 to unlock"}
+                        ) : null}
+                    </div>
+
+                    <aside className="sp-overview-right">
+                        <div className="sp-upcoming">
+                            <div className="sp-upcoming-head">
+                                <div>
+                                    <div className="sp-upcoming-title">Upcoming</div>
+                                    <div className="sp-upcoming-sub">
+                                        {upcoming.length} appointment{upcoming.length === 1 ? "" : "s"} scheduled
+                                    </div>
+                                </div>
                             </div>
-                            <span className={pillClass(isCourseRecommendationUnlocked && completion.step4)}>
-                                {isCourseRecommendationUnlocked ? pillText(completion.step4) : "Locked"}
-                            </span>
+
+                            <button type="button" className="sp-btn sp-btn--primary sp-btn--wide" onClick={() => setBookOpen(true)}>
+                                Book Appointment
+                            </button>
+
+                            {upcoming.length ? (
+                                <div className="sp-upcoming-item">
+                                    <div>
+                                        <div className="sp-strong">
+                                            {String(upcoming[0]?.status || "").toLowerCase() === "interview"
+                                                ? formatInterviewWhen(upcoming[0])
+                                                : upcoming[0]?.scheduled_at
+                                                    ? `${formatApptFull(upcoming[0].scheduled_at)}`
+                                                    : "Awaiting schedule"}
+                                        </div>
+                                        <div className="sp-muted">{upcoming[0]?.session_type || "Advising Session"}</div>
+                                    </div>
+                                    <span className="sp-badge">{String(upcoming[0]?.status || "requested")}</span>
+                                </div>
+                            ) : null}
+
+                            <button type="button" className="sp-link sp-link--center" onClick={() => navigate("/student/appointments")}
+                            >
+                                View All →
+                            </button>
                         </div>
-                    </button>
+
+                        <div className="sp-mini-stats">
+                            <div className="sp-mini-stat">
+                                <div className="sp-mini-stat-value">{completion.done}</div>
+                                <div className="sp-mini-stat-label">STEPS COMPLETED</div>
+                            </div>
+                            <div className="sp-mini-stat">
+                                <div className="sp-mini-stat-value">{completion.step4 && !completion.step5 ? 1 : 0}</div>
+                                <div className="sp-mini-stat-label">PENDING APPROVAL</div>
+                            </div>
+                        </div>
+                    </aside>
                 </section>
 
                 <HighlightsCarousel />
+
+                <section className="sp-journey">
+                    <div className="sp-journey-head">
+                        <h2 className="sp-journey-title">Your Journey</h2>
+                        <div className="sp-muted">Track your progress through the recommendation process</div>
+                    </div>
+
+                    <section className="sp-grid sp-grid--4" aria-label="Student progress steps">
+                        <button
+                            type="button"
+                            className={`sp-card sp-card--button ${completion.step1 ? "sp-card--done" : ""}`}
+                            onClick={() => navigate("/student/basic-information")}
+                        >
+                            <div className="sp-card-top">
+                                <div className="sp-card-icon" aria-hidden="true">
+                                    👤
+                                </div>
+                                {doneMark(completion.step1 ? "done" : null)}
+                            </div>
+
+                            <div className="sp-card-title">Basic Information</div>
+                            <div className="sp-card-sub">Complete your profile</div>
+                            <div className="sp-card-divider" aria-hidden="true" />
+
+                            <div className="sp-card-bottom">
+                                <span className={pillClass(completion.step1)}>{pillText(completion.step1)}</span>
+                            </div>
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`sp-card sp-card--button ${completion.step2 ? "sp-card--done" : ""}`}
+                            onClick={() => navigate("/student/academic-credentials")}
+                        >
+                            <div className="sp-card-top">
+                                <div className="sp-card-icon" aria-hidden="true">
+                                    📄
+                                </div>
+                                {doneMark(completion.step2 ? "done" : null)}
+                            </div>
+
+                            <div className="sp-card-title">Academic Credentials</div>
+                            <div className="sp-card-sub">Add grades, skills &amp; interests</div>
+                            <div className="sp-card-divider" aria-hidden="true" />
+
+                            <div className="sp-card-bottom">
+                                <span className={pillClass(completion.step2)}>{pillText(completion.step2)}</span>
+                            </div>
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`sp-card sp-card--button ${completion.step3 ? "sp-card--done" : ""}`}
+                            onClick={() => navigate("/student/assessment-quiz")}
+                        >
+                            <div className="sp-card-top">
+                                <div className="sp-card-icon" aria-hidden="true">
+                                    🧾
+                                </div>
+                                {doneMark(completion.step3 ? "done" : null)}
+                            </div>
+
+                            <div className="sp-card-title">Assessment</div>
+                            <div className="sp-card-sub">General academic assessment</div>
+                            <div className="sp-card-divider" aria-hidden="true" />
+
+                            <div className="sp-card-bottom">
+                                <span className={pillClass(completion.step3)}>{pillText(completion.step3)}</span>
+                            </div>
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`sp-card sp-card--button ${completion.step4 ? "sp-card--done" : ""} ${
+                                !isCourseRecommendationUnlocked ? "sp-card--locked" : ""
+                            }`}
+                            onClick={openCourseRecommendation}
+                            disabled={!isCourseRecommendationUnlocked}
+                            aria-disabled={!isCourseRecommendationUnlocked}
+                            title={!isCourseRecommendationUnlocked ? "Locked until Steps 1 to 3 are completed" : "Open Course Recommendation"}
+                        >
+                            <div className="sp-card-top">
+                                <div className="sp-card-icon" aria-hidden="true">
+                                    🎯
+                                </div>
+                                {doneMark(recommendationCardStatus.check)}
+                            </div>
+
+                            <div className="sp-card-title">Recommendations</div>
+                            <div className="sp-card-sub">View your programs</div>
+                            <div className="sp-card-divider" aria-hidden="true" />
+
+                            <div className="sp-card-bottom">
+                                <span
+                                    className={`sp-pill ${recommendationCardStatus.cls}`}
+                                >
+                                    {recommendationCardStatus.text}
+                                </span>
+                            </div>
+                        </button>
+                    </section>
+                </section>
 
                 {editOpen ? (
                     <div className="sp-modal" role="dialog" aria-modal="true">

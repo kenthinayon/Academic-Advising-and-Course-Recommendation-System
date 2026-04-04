@@ -12920,7 +12920,11 @@ textarea {
    they can coexist with the previous enhanced login theme above.
 */
 .nav-login {
-  background: #eef5ff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
   padding: 48px 18px;
 }
 
@@ -13013,7 +13017,7 @@ textarea {
 .nav-login .role-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  background: #f1f5f9;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
   border-radius: 999px;
   padding: 4px;
   gap: 4px;
@@ -13026,15 +13030,19 @@ textarea {
   padding: 10px 10px;
   border-radius: 999px;
   font-weight: 700;
-  color: #334155;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
   cursor: pointer;
   transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
 }
 
+.nav-login .role-tab:hover {
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+}
+
 .nav-login .role-tab.active {
-  background: #ffffff;
-  color: #0f172a;
-  box-shadow: 0 10px 20px rgba(2, 6, 23, 0.1);
+  background: linear-gradient(180deg, var(--brand-navy-2), var(--brand-navy));
+  color: #ffffff;
+  box-shadow: 0 16px 30px rgba(2, 6, 23, 0.22);
 }
 
 .nav-login .alert-error {
@@ -13064,10 +13072,11 @@ textarea {
   margin-bottom: 6px;
 }
 
-.nav-login .field input {
+.nav-login .field input,
+.nav-login .field select {
   width: 100%;
   border: 1px solid rgba(15, 23, 42, 0.12);
-  background: #f8fafc;
+  background: color-mix(in srgb, var(--surface) 35%, var(--surface-2));
   border-radius: 12px;
   padding: 12px 12px;
   font-size: 14px;
@@ -13075,16 +13084,17 @@ textarea {
   transition: box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
-.nav-login .field input:focus {
+.nav-login .field input:focus,
+.nav-login .field select:focus {
   background: #ffffff;
-  border-color: color-mix(in srgb, var(--brand-teal) 65%, transparent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-teal) 20%, transparent);
+  border-color: color-mix(in srgb, var(--brand-navy-2) 45%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-navy-2) 12%, transparent);
 }
 
 .nav-login .btn-primary {
   width: 100%;
   border: 0;
-  border-radius: 12px;
+  border-radius: 999px;
   padding: 12px 14px;
   font-weight: 800;
   font-size: 15px;
@@ -13105,8 +13115,8 @@ textarea {
 
 .nav-login .demo-box {
   margin-top: 16px;
-  background: color-mix(in srgb, var(--brand-teal) 10%, #ffffff);
-  border: 1px solid color-mix(in srgb, var(--brand-teal) 16%, transparent);
+  background: color-mix(in srgb, var(--warning) 12%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--warning) 18%, transparent);
   border-radius: 14px;
   padding: 14px 14px;
 }
@@ -13143,7 +13153,7 @@ textarea {
   border: 0;
   background: transparent;
   padding: 0;
-  color: var(--brand-teal);
+  color: var(--brand-navy-2);
   font-weight: 800;
   cursor: pointer;
 }
@@ -14965,6 +14975,374 @@ body[data-theme=dark] .aq-actions {
   color: color-mix(in srgb, var(--surface) 85%, transparent);
 }
 
+.student-portal .sp-pagehead {
+  margin: 10px 0 18px;
+}
+
+.student-portal .sp-greeting {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 1000;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--warning) 80%, var(--muted));
+  text-transform: uppercase;
+}
+
+.student-portal .sp-greeting-ico {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--warning) 14%, var(--surface));
+}
+
+.student-portal .sp-pagehead-title {
+  margin-top: 10px;
+}
+
+.student-portal .sp-pagehead-title {
+  font-size: 44px;
+  font-weight: 1100;
+  margin: 0;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.student-portal .sp-pagehead-sub {
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.student-portal .sp-overview {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.student-portal .sp-progress--card,
+.student-portal .sp-upcoming,
+.student-portal .sp-mini-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.student-portal .sp-progress--card {
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.student-portal .sp-progress-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.student-portal .sp-progress-title {
+  font-weight: 1000;
+  color: var(--text);
+}
+
+.student-portal .sp-progress-meta {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.student-portal .sp-progress-pct {
+  font-size: 44px;
+  font-weight: 1100;
+  color: var(--brand-navy-2);
+  line-height: 1;
+}
+
+.student-portal .sp-bar {
+  height: 10px;
+  background: var(--surface-2);
+}
+
+.student-portal .sp-bar-fill {
+  background: linear-gradient(90deg, var(--brand-navy-2), var(--warning));
+}
+
+.student-portal .sp-next {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.student-portal .sp-next-k {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.student-portal .sp-next-v {
+  margin-top: 6px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.student-portal .sp-overview-right {
+  display: grid;
+  gap: 14px;
+}
+
+.student-portal .sp-upcoming {
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.student-portal .sp-upcoming-title {
+  font-weight: 1000;
+  color: var(--text);
+}
+
+.student-portal .sp-upcoming-sub {
+  margin-top: 6px;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.student-portal .sp-btn--wide {
+  width: 100%;
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.student-portal .sp-upcoming-item {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: color-mix(in srgb, var(--text) 2%, transparent);
+}
+
+.student-portal .sp-link--center {
+  text-align: center;
+}
+
+.student-portal .sp-mini-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.student-portal .sp-mini-stat {
+  border-radius: 18px;
+  padding: 16px;
+  text-align: center;
+}
+
+.student-portal .sp-mini-stat-value {
+  font-size: 34px;
+  font-weight: 1100;
+  color: var(--brand-navy-2);
+  line-height: 1;
+}
+
+.student-portal .sp-mini-stat-label {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.student-portal .sp-journey {
+  margin-top: 22px;
+}
+
+.student-portal .sp-journey-title {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 1100;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.student-portal .sp-journey-head {
+  margin-bottom: 14px;
+}
+
+.student-portal .sp-grid--4 {
+  margin-top: 16px;
+}
+
+.student-portal .sp-journey .sp-card {
+  position: relative;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface);
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.student-portal .sp-journey .sp-card--done {
+  background: color-mix(in srgb, var(--warning) 6%, var(--surface));
+  border-color: color-mix(in srgb, var(--warning) 35%, var(--border));
+}
+
+body[data-theme=dark] .student-portal .sp-journey .sp-card--done {
+  background: color-mix(in srgb, var(--surface) 94%, var(--warning));
+}
+
+.student-portal .sp-journey .sp-card--locked {
+  opacity: 0.85;
+}
+
+.student-portal .sp-journey .sp-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.student-portal .sp-journey .sp-card-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: color-mix(in srgb, var(--warning) 14%, var(--surface));
+  color: color-mix(in srgb, var(--text) 82%, var(--brand-navy-2));
+}
+
+body[data-theme=dark] .student-portal .sp-journey .sp-card-icon {
+  background: color-mix(in srgb, var(--surface) 90%, var(--warning));
+}
+
+.student-portal .sp-journey .sp-card-check {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 1000;
+  font-size: 13px;
+  line-height: 1;
+  border: 2px solid color-mix(in srgb, var(--warning) 55%, var(--border));
+  color: color-mix(in srgb, var(--warning) 78%, var(--text));
+  background: color-mix(in srgb, var(--surface) 75%, transparent);
+}
+
+.student-portal .sp-journey .sp-card-check--faded {
+  opacity: 0.45;
+  border-color: color-mix(in srgb, var(--text) 18%, var(--border));
+  color: color-mix(in srgb, var(--text) 45%, var(--brand-navy-2));
+}
+
+.student-portal .sp-journey .sp-card-title {
+  font-weight: 1100;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+.student-portal .sp-journey .sp-card-sub {
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.student-portal .sp-journey .sp-card-divider {
+  height: 1px;
+  width: 100%;
+  background: color-mix(in srgb, var(--border) 70%, transparent);
+  margin-top: 10px;
+}
+
+.student-portal .sp-journey .sp-card-bottom {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.student-portal .sp-journey .sp-card-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--text) 6%, var(--surface));
+  border: 1px solid var(--border);
+  color: color-mix(in srgb, var(--text) 65%, var(--brand-navy-2));
+}
+
+.student-portal .sp-journey .sp-pill {
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.student-portal .sp-journey .sp-pill--done {
+  background: color-mix(in srgb, var(--warning) 16%, var(--surface));
+  border-color: color-mix(in srgb, var(--warning) 30%, var(--border));
+  color: color-mix(in srgb, var(--warning) 70%, var(--text));
+}
+
+.student-portal .sp-journey .sp-pill--pending {
+  background: color-mix(in srgb, var(--text) 4%, var(--surface));
+}
+
+.student-portal .sp-journey .sp-pill--ready {
+  background: color-mix(in srgb, var(--text) 5%, var(--surface));
+  border-color: color-mix(in srgb, var(--text) 10%, var(--border));
+  color: color-mix(in srgb, var(--text) 55%, var(--brand-navy-2));
+}
+
+.student-portal .sp-journey .sp-pill--info {
+  background: color-mix(in srgb, var(--brand-teal) 10%, var(--surface));
+  border-color: color-mix(in srgb, var(--brand-teal) 22%, var(--border));
+  color: color-mix(in srgb, var(--brand-teal) 55%, var(--brand-navy-2));
+}
+
+.student-portal .sp-journey .sp-card--button:hover {
+  border-color: color-mix(in srgb, var(--brand-teal) 45%, var(--border));
+}
+
+@media (max-width: 980px) {
+  .student-portal .sp-pagehead-title {
+    font-size: 34px;
+  }
+  .student-portal .sp-overview {
+    grid-template-columns: 1fr;
+  }
+}
 .sp-appt-controls {
   margin: 10px 0 18px;
   display: flex;
@@ -15004,7 +15382,7 @@ body[data-theme=dark] .aq-actions {
 }
 
 /* Appointments page */
-.sp-pagehead {
+.student-appointments .sp-pagehead {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -15269,7 +15647,7 @@ body[data-theme=dark] .aq-actions {
   height: 18px;
   padding: 0 5px;
   border-radius: 999px;
-  background: var(--brand-teal);
+  background: var(--brand-navy-2);
   color: white;
   font-size: 11px;
   font-weight: 900;
@@ -15306,7 +15684,7 @@ body[data-theme=dark] .aq-actions {
 .ad-link {
   border: none;
   background: transparent;
-  color: var(--brand-teal);
+  color: var(--brand-navy-2);
   font-weight: 800;
   padding: 0;
 }
@@ -15361,8 +15739,8 @@ body[data-theme=dark] .aq-actions {
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  color: var(--brand-teal);
-  background: color-mix(in srgb, var(--brand-teal) 10%, transparent);
+  color: var(--brand-navy-2);
+  background: color-mix(in srgb, var(--brand-navy-2) 10%, transparent);
 }
 
 .ad-profile-menu {
@@ -15399,9 +15777,9 @@ body[data-theme=dark] .aq-actions {
   font-weight: 900;
   border-radius: 999px;
   padding: 4px 10px;
-  border: 1px solid color-mix(in srgb, var(--brand-teal) 25%, transparent);
-  background: color-mix(in srgb, var(--brand-teal) 12%, transparent);
-  color: var(--brand-teal);
+  border: 1px solid color-mix(in srgb, var(--brand-navy-2) 18%, transparent);
+  background: color-mix(in srgb, var(--brand-navy-2) 8%, transparent);
+  color: var(--brand-navy-2);
 }
 
 .ad-profile-sep {
@@ -15529,9 +15907,9 @@ body[data-theme=dark] .aq-actions {
   justify-content: center;
   font-size: 32px;
   font-weight: 900;
-  color: var(--brand-teal);
-  border: 1px solid color-mix(in srgb, var(--brand-teal) 25%, transparent);
-  background: color-mix(in srgb, var(--brand-teal) 12%, transparent);
+  color: var(--brand-navy-2);
+  border: 1px solid color-mix(in srgb, var(--brand-navy-2) 18%, transparent);
+  background: color-mix(in srgb, var(--brand-navy-2) 8%, transparent);
 }
 
 .ad-profile-edit__avatarActions {
@@ -15632,8 +16010,8 @@ body[data-theme=dark] .aq-actions {
 }
 
 .ad-switch input:checked + .ad-switch__track {
-  background: color-mix(in srgb, var(--brand-teal) 35%, transparent);
-  border-color: color-mix(in srgb, var(--brand-teal) 40%, var(--border));
+  background: color-mix(in srgb, var(--brand-navy-2) 22%, transparent);
+  border-color: color-mix(in srgb, var(--brand-navy-2) 26%, var(--border));
 }
 
 .ad-switch input:checked + .ad-switch__track .ad-switch__thumb {
@@ -15688,18 +16066,26 @@ body[data-theme=dark] .aq-actions {
   font-weight: 800;
 }
 
-.ad-hero-bar {
+.ad-dash-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
 }
 
-.ad-hero-text {
+.ad-dash-title {
   min-width: 0;
 }
 
-.ad-hero-actions {
+.ad-dash-kicker {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  margin-bottom: 6px;
+}
+
+.ad-dash-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -15726,12 +16112,31 @@ body[data-theme=dark] .aq-actions {
   padding: 16px 18px;
 }
 
+.ad-stat-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ad-stat-iconBubble {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: color-mix(in srgb, var(--brand-navy-2) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-navy-2) 14%, transparent);
+}
+
+.ad-stat-meta {
+  min-width: 0;
+}
+
 .ad-stat-label {
   font-size: 13px;
   color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .ad-stat-icon {
@@ -15763,13 +16168,33 @@ body[data-theme=dark] .aq-actions {
   gap: 10px;
 }
 
-.ad-search input {
+.ad-search-field {
+  position: relative;
+}
+
+.ad-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+  pointer-events: none;
+}
+
+.ad-search-input {
+  width: 100%;
   height: 44px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  padding: 0 14px;
+  padding: 0 14px 0 42px;
   outline: none;
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 35%, var(--surface-2));
+  color: var(--text);
+}
+
+.ad-search-input:focus {
+  border-color: color-mix(in srgb, var(--brand-navy-2) 40%, var(--border));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-navy-2) 10%, transparent);
 }
 
 .ad-section-title {
@@ -15791,6 +16216,20 @@ body[data-theme=dark] .aq-actions {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: start;
+}
+
+.ad-card-left {
+  min-width: 0;
+}
+
+.ad-card-right {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
 }
 
 .ad-card-head {
@@ -15846,7 +16285,7 @@ body[data-theme=dark] .aq-actions {
 .ad-rec {
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-top: 1px solid color-mix(in srgb, var(--text) 6%, transparent);
 }
 
 .ad-rec-title {
@@ -15857,6 +16296,48 @@ body[data-theme=dark] .aq-actions {
   margin-top: 6px;
   font-size: 13px;
   color: rgba(15, 23, 42, 0.72);
+}
+
+.ad-progress {
+  margin-top: 12px;
+}
+
+.ad-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ad-progress-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--text) 65%, transparent);
+}
+
+.ad-progress-value {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--warning);
+}
+
+.ad-progress-bar {
+  margin-top: 8px;
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  overflow: hidden;
+}
+
+.ad-progress-bar--empty {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+
+.ad-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-navy-2), var(--warning));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--brand-navy-2) 18%, transparent);
 }
 
 .ad-actions {
@@ -15870,8 +16351,8 @@ body[data-theme=dark] .aq-actions {
   height: 40px;
   padding: 0 14px;
   border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--brand-teal) 35%, transparent);
-  background: var(--brand-teal);
+  border: 1px solid color-mix(in srgb, #4f46e5 35%, transparent);
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
   color: #fff;
   font-weight: 700;
   /* Keep button labels (e.g., "+ Add degree") visually centered and aligned */
@@ -15885,7 +16366,8 @@ body[data-theme=dark] .aq-actions {
 
 .ad-btn--ghost {
   background: var(--surface);
-  color: var(--brand-teal);
+  color: var(--brand-navy-2);
+  border-color: var(--border);
 }
 
 /* Topbar primary action (Appointments) */
@@ -15893,10 +16375,10 @@ body[data-theme=dark] .aq-actions {
   height: 40px;
   padding: 0 16px;
   border-radius: 999px;
-  border: 1px solid rgba(22, 163, 74, 0.35);
-  background: #16a34a;
+  border: 1px solid color-mix(in srgb, #4f46e5 35%, transparent);
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
   color: #fff;
-  box-shadow: 0 8px 18px rgba(22, 163, 74, 0.18);
+  box-shadow: 0 8px 18px color-mix(in srgb, #2563eb 22%, transparent);
 }
 
 .ad-btn--appointments:hover {
@@ -16097,6 +16579,12 @@ body[data-theme=dark] .aq-actions {
     flex-direction: column;
     align-items: stretch;
   }
+  .ad-card {
+    grid-template-columns: 1fr;
+  }
+  .ad-card-right {
+    justify-items: start;
+  }
 }
 .ad-topbar-actions {
   display: flex;
@@ -16142,8 +16630,8 @@ body[data-theme=dark] .aq-actions {
 
 .ad-filter select:focus {
   background: #ffffff;
-  border-color: color-mix(in srgb, var(--brand-teal) 55%, transparent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-teal) 18%, transparent);
+  border-color: color-mix(in srgb, var(--brand-navy-2) 45%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-navy-2) 12%, transparent);
 }
 
 .ad-appt-list {

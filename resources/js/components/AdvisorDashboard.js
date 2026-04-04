@@ -11,9 +11,9 @@ function statusPill(status) {
     const s = (status || "pending").toLowerCase();
     if (s === "approved") return { label: "Approved", cls: "ad-pill ad-pill--good" };
     if (s === "rejected") return { label: "Rejected", cls: "ad-pill ad-pill--bad" };
-    if (s === "interview") return { label: "Interview", cls: "ad-pill" };
+    if (s === "interview") return { label: "Interview Required", cls: "ad-pill" };
     // Default/pending state: show as an indicator (not a button)
-    return { label: "Awaiting Review", cls: "ad-pill" };
+    return { label: "Pending Review", cls: "ad-pill" };
 }
 
 export default function AdvisorDashboard() {
@@ -441,6 +441,19 @@ export default function AdvisorDashboard() {
             Appointments
         </button>
     );
+
+    const displayName = String(user?.name || "Academic Advisor");
+    const welcomeKicker = useMemo(() => {
+        const userKey = String(user?.id ?? user?.email ?? "").trim();
+        if (!userKey) return "WELCOME BACK";
+        try {
+            const onceKey = `welcome_once_${userKey}`;
+            const isOnce = localStorage.getItem(onceKey) === "1";
+            return isOnce ? "WELCOME" : "WELCOME BACK";
+        } catch {
+            return "WELCOME BACK";
+        }
+    }, [user?.id, user?.email]);
 
     return (
         <div className="advisor">
@@ -921,45 +934,72 @@ export default function AdvisorDashboard() {
 
             <main className="ad-main">
                 <div className="ad-hero">
-                    <div className="ad-hero-bar">
-                        <div className="ad-hero-text">
-                            <h1>Welcome, Academic Advisor!</h1>
+                    <div className="ad-dash-head">
+                        <div className="ad-dash-title">
+                            <div className="ad-dash-kicker">{welcomeKicker}</div>
+                            <h1>{displayName}</h1>
                             <p>Review and approve student course recommendations</p>
                         </div>
 
-                        <div className="ad-hero-actions">{AppointmentsButton}</div>
+                        <div className="ad-dash-actions">{AppointmentsButton}</div>
                     </div>
                 </div>
 
                 <div className="ad-stats">
                     <div className="ad-stat">
-                        <div className="ad-stat-label"><span className="ad-stat-icon" aria-hidden="true">👥</span> Total Students</div>
-                        <div className="ad-stat-value">{stats.totalStudents}</div>
+                        <div className="ad-stat-top">
+                            <div className="ad-stat-iconBubble" aria-hidden="true">👥</div>
+                            <div className="ad-stat-meta">
+                                <div className="ad-stat-label">Total Students</div>
+                                <div className="ad-stat-value">{stats.totalStudents}</div>
+                            </div>
+                        </div>
                     </div>
                     <div className="ad-stat">
-                        <div className="ad-stat-label"><span className="ad-stat-icon" aria-hidden="true">⏳</span> Pending Review</div>
-                        <div className="ad-stat-value ad-stat-value--warn">{stats.pending}</div>
+                        <div className="ad-stat-top">
+                            <div className="ad-stat-iconBubble" aria-hidden="true">⏳</div>
+                            <div className="ad-stat-meta">
+                                <div className="ad-stat-label">Pending Review</div>
+                                <div className="ad-stat-value ad-stat-value--warn">{stats.pending}</div>
+                            </div>
+                        </div>
                     </div>
                     <div className="ad-stat">
-                        <div className="ad-stat-label"><span className="ad-stat-icon" aria-hidden="true">🎤</span> Interview</div>
-                        <div className="ad-stat-value ad-stat-value--warn">{stats.interview}</div>
+                        <div className="ad-stat-top">
+                            <div className="ad-stat-iconBubble" aria-hidden="true">🎤</div>
+                            <div className="ad-stat-meta">
+                                <div className="ad-stat-label">Interview</div>
+                                <div className="ad-stat-value ad-stat-value--warn">{stats.interview}</div>
+                            </div>
+                        </div>
                     </div>
                     <div className="ad-stat">
-                        <div className="ad-stat-label"><span className="ad-stat-icon" aria-hidden="true">✅</span> Approved</div>
-                        <div className="ad-stat-value ad-stat-value--good">{stats.approved}</div>
+                        <div className="ad-stat-top">
+                            <div className="ad-stat-iconBubble" aria-hidden="true">✅</div>
+                            <div className="ad-stat-meta">
+                                <div className="ad-stat-label">Approved</div>
+                                <div className="ad-stat-value ad-stat-value--good">{stats.approved}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div className="ad-search">
-                    <input
-                        value={q}
-                        placeholder="Search students by name or email..."
-                        onChange={(e) => setQ(e.target.value)}
-                        list="ad-student-suggestions"
-                        onKeyDown={(e) => {
-                            if (e.key === "Enter") load(q);
-                        }}
-                    />
+                    <div className="ad-search-field">
+                        <span className="ad-search-icon" aria-hidden="true">
+                            🔎
+                        </span>
+                        <input
+                            className="ad-search-input"
+                            value={q}
+                            placeholder="Search students by name or email..."
+                            onChange={(e) => setQ(e.target.value)}
+                            list="ad-student-suggestions"
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") load(q);
+                            }}
+                        />
+                    </div>
                     <datalist id="ad-student-suggestions">
                         {(Array.isArray(suggestions) ? suggestions : []).slice(0, 30).flatMap((s) => {
                             const name = String(s?.name || "").trim();
@@ -991,38 +1031,66 @@ export default function AdvisorDashboard() {
                         const headline = rec?.[0]?.name || rec?.[0]?.code || "No recommendation yet";
                         const body = rec?.[0]?.track ? `Track: ${rec[0].track}` : s.strand ? `Strand: ${s.strand}` : "";
 
+                        const rawPct = s.assessment_score_preview;
+                        const pctNum = Number(rawPct);
+                        const hasPct = Number.isFinite(pctNum);
+                        const pct = hasPct ? Math.max(0, Math.min(100, Math.round(pctNum))) : 0;
+                        const pctLabel = hasPct ? `${pct}%` : "—";
+
                         return (
                             <div key={s.id} className="ad-card">
-                                <div className="ad-card-head">
-                                    <div>
-                                        <div className="ad-student-name">{s.name}</div>
-                                        <div className="ad-student-email">{s.email}</div>
-                                        <div className="ad-student-meta">
-                                            {s.strand ? `${s.strand} • ` : ""}
-                                            {s.gwa ? `GPA: ${s.gwa}` : "GPA: —"}
+                                <div className="ad-card-left">
+                                    <div className="ad-card-head">
+                                        <div>
+                                            <div className="ad-student-name">{s.name}</div>
+                                            <div className="ad-student-email">{s.email}</div>
+                                            <div className="ad-student-meta">
+                                                {s.strand ? `${s.strand} • ` : ""}
+                                                {s.gwa ? `GPA: ${s.gwa}` : "GPA: —"}
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <div className="ad-rec">
+                                        <div className="ad-rec-title">Recommended: {clampText(headline, 60)}</div>
+                                        {body ? <div className="ad-rec-sub">{body}</div> : null}
+                                        <div className="ad-rec-sub">
+                                            Match Score: — &nbsp;•&nbsp; Assessment: {rawPct ?? "—"}%
+                                        </div>
+                                    </div>
+
+                                    <div className="ad-progress" aria-label={`Assessment score ${pctLabel}`}>
+                                        <div className="ad-progress-top">
+                                            <div className="ad-progress-label">Assessment</div>
+                                            <div className="ad-progress-value">{pctLabel}</div>
+                                        </div>
+                                        <div
+                                            className={
+                                                hasPct
+                                                    ? "ad-progress-bar"
+                                                    : "ad-progress-bar ad-progress-bar--empty"
+                                            }
+                                            role="progressbar"
+                                            aria-valuenow={hasPct ? pct : undefined}
+                                            aria-valuemin={0}
+                                            aria-valuemax={100}
+                                        >
+                                            <div className="ad-progress-fill" style={{ width: `${pct}%` }} />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="ad-card-right">
                                     <div className={pill.cls}>{pill.label}</div>
-                                </div>
-
-                                <div className="ad-rec">
-                                    <div className="ad-rec-title">
-                                        Recommended: {clampText(headline, 60)}
+                                    <div className="ad-actions">
+                                        <button
+                                            type="button"
+                                            className="ad-btn ad-btn--ghost"
+                                            onClick={() => navigate(`/advisor/students/${s.id}`)}
+                                        >
+                                            View Details
+                                        </button>
                                     </div>
-                                    {body ? <div className="ad-rec-sub">{body}</div> : null}
-                                    <div className="ad-rec-sub">
-                                        Match Score: — &nbsp;•&nbsp; Assessment: {s.assessment_score_preview ?? "—"}%
-                                    </div>
-                                </div>
-
-                                <div className="ad-actions">
-                                    <button
-                                        type="button"
-                                        className="ad-btn ad-btn--ghost"
-                                        onClick={() => navigate(`/advisor/students/${s.id}`)}
-                                    >
-                                        View Details
-                                    </button>
                                 </div>
                             </div>
                         );

@@ -47,7 +47,7 @@
   height: 18px;
   padding: 0 5px;
   border-radius: 999px;
-  background: var(--brand-teal);
+  background: var(--brand-navy-2);
   color: white;
   font-size: 11px;
   font-weight: 900;
@@ -84,7 +84,7 @@
 .ad-link {
   border: none;
   background: transparent;
-  color: var(--brand-teal);
+  color: var(--brand-navy-2);
   font-weight: 800;
   padding: 0;
 }
@@ -138,8 +138,8 @@
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  color: var(--brand-teal);
-  background: color-mix(in srgb, var(--brand-teal) 10%, transparent);
+  color: var(--brand-navy-2);
+  background: color-mix(in srgb, var(--brand-navy-2) 10%, transparent);
 }
 
 .ad-profile-menu {
@@ -176,9 +176,9 @@
   font-weight: 900;
   border-radius: 999px;
   padding: 4px 10px;
-  border: 1px solid color-mix(in srgb, var(--brand-teal) 25%, transparent);
-  background: color-mix(in srgb, var(--brand-teal) 12%, transparent);
-  color: var(--brand-teal);
+  border: 1px solid color-mix(in srgb, var(--brand-navy-2) 18%, transparent);
+  background: color-mix(in srgb, var(--brand-navy-2) 8%, transparent);
+  color: var(--brand-navy-2);
 }
 
 .ad-profile-sep {
@@ -305,9 +305,9 @@
   justify-content: center;
   font-size: 32px;
   font-weight: 900;
-  color: var(--brand-teal);
-  border: 1px solid color-mix(in srgb, var(--brand-teal) 25%, transparent);
-  background: color-mix(in srgb, var(--brand-teal) 12%, transparent);
+  color: var(--brand-navy-2);
+  border: 1px solid color-mix(in srgb, var(--brand-navy-2) 18%, transparent);
+  background: color-mix(in srgb, var(--brand-navy-2) 8%, transparent);
 }
 
 .ad-profile-edit__avatarActions {
@@ -408,8 +408,8 @@
 }
 
 .ad-switch input:checked + .ad-switch__track {
-  background: color-mix(in srgb, var(--brand-teal) 35%, transparent);
-  border-color: color-mix(in srgb, var(--brand-teal) 40%, var(--border));
+  background: color-mix(in srgb, var(--brand-navy-2) 22%, transparent);
+  border-color: color-mix(in srgb, var(--brand-navy-2) 26%, var(--border));
 }
 
 .ad-switch input:checked + .ad-switch__track .ad-switch__thumb {
@@ -465,18 +465,26 @@
   font-weight: 800;
 }
 
-.ad-hero-bar {
+.ad-dash-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
 }
 
-.ad-hero-text {
+.ad-dash-title {
   min-width: 0;
 }
 
-.ad-hero-actions {
+.ad-dash-kicker {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  margin-bottom: 6px;
+}
+
+.ad-dash-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -503,12 +511,31 @@
   padding: 16px 18px;
 }
 
+.ad-stat-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ad-stat-iconBubble {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: color-mix(in srgb, var(--brand-navy-2) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-navy-2) 14%, transparent);
+}
+
+.ad-stat-meta {
+  min-width: 0;
+}
+
 .ad-stat-label {
   font-size: 13px;
   color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .ad-stat-icon {
@@ -535,13 +562,33 @@
   gap: 10px;
 }
 
-.ad-search input {
+.ad-search-field {
+  position: relative;
+}
+
+.ad-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+  pointer-events: none;
+}
+
+.ad-search-input {
+  width: 100%;
   height: 44px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  padding: 0 14px;
+  padding: 0 14px 0 42px;
   outline: none;
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 35%, var(--surface-2));
+  color: var(--text);
+}
+
+.ad-search-input:focus {
+  border-color: color-mix(in srgb, var(--brand-navy-2) 40%, var(--border));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-navy-2) 10%, transparent);
 }
 
 .ad-section-title {
@@ -563,6 +610,21 @@
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 16px 18px;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: start;
+}
+
+.ad-card-left {
+  min-width: 0;
+}
+
+.ad-card-right {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
 }
 
 .ad-card-head {
@@ -588,9 +650,51 @@
 .ad-pill--good { border-color: rgba(22, 163, 74, 0.25); background: rgba(22, 163, 74, 0.08); color: #166534; }
 .ad-pill--bad { border-color: rgba(220, 38, 38, 0.25); background: rgba(220, 38, 38, 0.08); color: #991b1b; }
 
-.ad-rec { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(15, 23, 42, 0.06); }
+.ad-rec { margin-top: 12px; padding-top: 12px; border-top: 1px solid color-mix(in srgb, var(--text) 6%, transparent); }
 .ad-rec-title { font-weight: 800; }
 .ad-rec-sub { margin-top: 6px; font-size: 13px; color: rgba(15, 23, 42, 0.72); }
+
+.ad-progress {
+  margin-top: 12px;
+}
+
+.ad-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ad-progress-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--text) 65%, transparent);
+}
+
+.ad-progress-value {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--warning);
+}
+
+.ad-progress-bar {
+  margin-top: 8px;
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  overflow: hidden;
+}
+
+.ad-progress-bar--empty {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+
+.ad-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-navy-2), var(--warning));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--brand-navy-2) 18%, transparent);
+}
 
 .ad-actions {
   margin-top: 12px;
@@ -603,8 +707,8 @@
   height: 40px;
   padding: 0 14px;
   border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--brand-teal) 35%, transparent);
-  background: var(--brand-teal);
+  border: 1px solid color-mix(in srgb, #4f46e5 35%, transparent);
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
   color: #fff;
   font-weight: 700;
 
@@ -619,7 +723,8 @@
 
 .ad-btn--ghost {
   background: var(--surface);
-  color: var(--brand-teal);
+  color: var(--brand-navy-2);
+  border-color: var(--border);
 }
 
 /* Topbar primary action (Appointments) */
@@ -627,10 +732,10 @@
   height: 40px;
   padding: 0 16px;
   border-radius: 999px;
-  border: 1px solid rgba(22, 163, 74, 0.35);
-  background: #16a34a;
+  border: 1px solid color-mix(in srgb, #4f46e5 35%, transparent);
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
   color: #fff;
-  box-shadow: 0 8px 18px rgba(22, 163, 74, 0.18);
+  box-shadow: 0 8px 18px color-mix(in srgb, #2563eb 22%, transparent);
 }
 
 .ad-btn--appointments:hover {
@@ -753,4 +858,7 @@
   .ad-grid { grid-template-columns: 1fr; }
   .ad-kv { grid-template-columns: 1fr; }
   .ad-degree-row { flex-direction: column; align-items: stretch; }
+
+  .ad-card { grid-template-columns: 1fr; }
+  .ad-card-right { justify-items: start; }
 }
