@@ -86935,9 +86935,9 @@ function HighlightsCarousel() {
       "aria-label": "".concat(idx + 1, " of ").concat(slides.length),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "sp-highlights-media",
-        style: {
-          backgroundImage: currentImage ? "url(".concat(currentImage, ")") : undefined
-        },
+        style: currentImage ? {
+          "--sp-hi-img": "url(".concat(currentImage, ")")
+        } : undefined,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "sp-highlights-overlay",
           children: [current.badge ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -91383,50 +91383,62 @@ function StudentPortal() {
     setMenuOpen = _useState8[1];
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
-    editOpen = _useState0[0],
-    setEditOpen = _useState0[1];
+    drawerOpen = _useState0[0],
+    setDrawerOpen = _useState0[1];
   var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState10 = _slicedToArray(_useState1, 2),
-    accountOpen = _useState10[0],
-    setAccountOpen = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    drawerResourcesOpen = _useState10[0],
+    setDrawerResourcesOpen = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("dashboards"),
     _useState12 = _slicedToArray(_useState11, 2),
-    saving = _useState12[0],
-    setSaving = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    activeNav = _useState12[0],
+    setActiveNav = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    upcoming = _useState14[0],
-    setUpcoming = _useState14[1];
+    editOpen = _useState14[0],
+    setEditOpen = _useState14[1];
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    bookOpen = _useState16[0],
-    setBookOpen = _useState16[1];
+    accountOpen = _useState16[0],
+    setAccountOpen = _useState16[1];
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    bookSubmitting = _useState18[0],
-    setBookSubmitting = _useState18[1];
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    saving = _useState18[0],
+    setSaving = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState20 = _slicedToArray(_useState19, 2),
+    upcoming = _useState20[0],
+    setUpcoming = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    bookOpen = _useState22[0],
+    setBookOpen = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    bookSubmitting = _useState24[0],
+    setBookSubmitting = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       session_type: "Initial Consultation",
       date: "",
       time: "",
       notes: ""
     }),
-    _useState20 = _slicedToArray(_useState19, 2),
-    bookForm = _useState20[0],
-    setBookForm = _useState20[1];
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState22 = _slicedToArray(_useState21, 2),
-    notifOpen = _useState22[0],
-    setNotifOpen = _useState22[1];
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState24 = _slicedToArray(_useState23, 2),
-    notifs = _useState24[0],
-    setNotifs = _useState24[1];
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState26 = _slicedToArray(_useState25, 2),
-    notifLoading = _useState26[0],
-    setNotifLoading = _useState26[1];
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+    bookForm = _useState26[0],
+    setBookForm = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState28 = _slicedToArray(_useState27, 2),
+    notifOpen = _useState28[0],
+    setNotifOpen = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState30 = _slicedToArray(_useState29, 2),
+    notifs = _useState30[0],
+    setNotifs = _useState30[1];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState32 = _slicedToArray(_useState31, 2),
+    notifLoading = _useState32[0],
+    setNotifLoading = _useState32[1];
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
       try {
         var raw = localStorage.getItem("studentNotifDismissedIds");
         var parsed = raw ? JSON.parse(raw) : [];
@@ -91435,9 +91447,9 @@ function StudentPortal() {
         return [];
       }
     }),
-    _useState28 = _slicedToArray(_useState27, 2),
-    notifDismissedIds = _useState28[0],
-    setNotifDismissedIds = _useState28[1];
+    _useState34 = _slicedToArray(_useState33, 2),
+    notifDismissedIds = _useState34[0],
+    setNotifDismissedIds = _useState34[1];
   var welcomeKicker = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var _ref, _user$id;
     var userKey = String((_ref = (_user$id = user === null || user === void 0 ? void 0 : user.id) !== null && _user$id !== void 0 ? _user$id : user === null || user === void 0 ? void 0 : user.email) !== null && _ref !== void 0 ? _ref : "").trim();
@@ -91450,7 +91462,7 @@ function StudentPortal() {
       return "WELCOME BACK";
     }
   }, [user === null || user === void 0 ? void 0 : user.id, user === null || user === void 0 ? void 0 : user.email]);
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
       try {
         var raw = localStorage.getItem("studentNotifLastSeenTs");
         var n = raw ? Number(raw) : 0;
@@ -91459,49 +91471,53 @@ function StudentPortal() {
         return 0;
       }
     }),
-    _useState30 = _slicedToArray(_useState29, 2),
-    notifLastSeenTs = _useState30[0],
-    setNotifLastSeenTs = _useState30[1];
-  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState32 = _slicedToArray(_useState31, 2),
-    schoolCalOpen = _useState32[0],
-    setSchoolCalOpen = _useState32[1];
-  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    _useState34 = _slicedToArray(_useState33, 2),
-    avatarFile = _useState34[0],
-    setAvatarFile = _useState34[1];
-  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState36 = _slicedToArray(_useState35, 2),
-    avatarPreview = _useState36[0],
-    setAvatarPreview = _useState36[1];
+    notifLastSeenTs = _useState36[0],
+    setNotifLastSeenTs = _useState36[1];
   var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState38 = _slicedToArray(_useState37, 2),
-    avatarSaving = _useState38[0],
-    setAvatarSaving = _useState38[1];
+    schoolCalOpen = _useState38[0],
+    setSchoolCalOpen = _useState38[1];
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState40 = _slicedToArray(_useState39, 2),
+    avatarFile = _useState40[0],
+    setAvatarFile = _useState40[1];
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState42 = _slicedToArray(_useState41, 2),
+    avatarPreview = _useState42[0],
+    setAvatarPreview = _useState42[1];
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState44 = _slicedToArray(_useState43, 2),
+    avatarSaving = _useState44[0],
+    setAvatarSaving = _useState44[1];
   var avatarInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+  var drawerFirstLinkRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var drawerPrevFocusRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var apptSectionRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var journeySectionRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
       try {
         return localStorage.getItem("theme") === "dark";
       } catch (_unused5) {
         return false;
       }
     }),
-    _useState40 = _slicedToArray(_useState39, 2),
-    darkMode = _useState40[0],
-    setDarkMode = _useState40[1];
-  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    _useState46 = _slicedToArray(_useState45, 2),
+    darkMode = _useState46[0],
+    setDarkMode = _useState46[1];
+  var _useState47 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       current_password: "",
       password: "",
       password_confirmation: ""
     }),
-    _useState42 = _slicedToArray(_useState41, 2),
-    pwForm = _useState42[0],
-    setPwForm = _useState42[1];
-  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState44 = _slicedToArray(_useState43, 2),
-    pwSaving = _useState44[0],
-    setPwSaving = _useState44[1];
-  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    _useState48 = _slicedToArray(_useState47, 2),
+    pwForm = _useState48[0],
+    setPwForm = _useState48[1];
+  var _useState49 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState50 = _slicedToArray(_useState49, 2),
+    pwSaving = _useState50[0],
+    setPwSaving = _useState50[1];
+  var _useState51 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       name: "",
       email: "",
       age: "",
@@ -91509,9 +91525,9 @@ function StudentPortal() {
       contact_number: "",
       high_school: ""
     }),
-    _useState46 = _slicedToArray(_useState45, 2),
-    editForm = _useState46[0],
-    setEditForm = _useState46[1];
+    _useState52 = _slicedToArray(_useState51, 2),
+    editForm = _useState52[0],
+    setEditForm = _useState52[1];
   var fullName = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     if (!(user !== null && user !== void 0 && user.name)) return "Student";
     return user.name;
@@ -92035,6 +92051,69 @@ function StudentPortal() {
     }
     navigate("/student/course-recommendation");
   };
+  var openDrawer = function openDrawer() {
+    if (typeof document !== "undefined") {
+      drawerPrevFocusRef.current = document.activeElement;
+    }
+    setMenuOpen(false);
+    setNotifOpen(false);
+    setDrawerResourcesOpen(false);
+    setDrawerOpen(true);
+  };
+  var closeDrawer = function closeDrawer() {
+    setDrawerOpen(false);
+    setDrawerResourcesOpen(false);
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!drawerOpen) return;
+    if (typeof window === "undefined" || typeof document === "undefined") return;
+    var prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    var onKeyDown = function onKeyDown(e) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeDrawer();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    var focusFirst = function focusFirst() {
+      try {
+        var _drawerFirstLinkRef$c, _drawerFirstLinkRef$c2;
+        (_drawerFirstLinkRef$c = drawerFirstLinkRef.current) === null || _drawerFirstLinkRef$c === void 0 || (_drawerFirstLinkRef$c2 = _drawerFirstLinkRef$c.focus) === null || _drawerFirstLinkRef$c2 === void 0 || _drawerFirstLinkRef$c2.call(_drawerFirstLinkRef$c);
+      } catch (_unused12) {
+        // ignore
+      }
+    };
+    if (typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(focusFirst);
+    } else {
+      setTimeout(focusFirst, 0);
+    }
+    return function () {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+      var prev = drawerPrevFocusRef.current;
+      if (prev && typeof prev.focus === "function") {
+        try {
+          prev.focus();
+        } catch (_unused13) {
+          // ignore
+        }
+      }
+    };
+  }, [drawerOpen]);
+  var scrollToRef = function scrollToRef(ref) {
+    var el = ref === null || ref === void 0 ? void 0 : ref.current;
+    if (!el) return;
+    if (typeof window === "undefined") return;
+    var topbar = typeof document !== "undefined" ? document.querySelector(".sp-topbar") : null;
+    var offset = ((topbar === null || topbar === void 0 ? void 0 : topbar.offsetHeight) || 0) + 14;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({
+      top: Math.max(0, y),
+      behavior: "smooth"
+    });
+  };
   var onPickAvatar = function onPickAvatar(file) {
     if (!file) {
       setAvatarFile(null);
@@ -92056,7 +92135,7 @@ function StudentPortal() {
       if (avatarPreview) {
         try {
           URL.revokeObjectURL(avatarPreview);
-        } catch (_unused12) {
+        } catch (_unused14) {
           // ignore
         }
       }
@@ -92120,7 +92199,7 @@ function StudentPortal() {
               setProfile(((_me$data2 = me.data) === null || _me$data2 === void 0 ? void 0 : _me$data2.profile) || null);
               try {
                 localStorage.setItem("user", JSON.stringify(next));
-              } catch (_unused13) {
+              } catch (_unused15) {
                 // ignore
               }
             } else if (avatarUrl) {
@@ -92130,7 +92209,7 @@ function StudentPortal() {
                 });
                 try {
                   localStorage.setItem("user", JSON.stringify(next));
-                } catch (_unused14) {
+                } catch (_unused16) {
                   // ignore
                 }
                 return next;
@@ -92150,7 +92229,7 @@ function StudentPortal() {
                 });
                 try {
                   localStorage.setItem("user", JSON.stringify(next));
-                } catch (_unused16) {
+                } catch (_unused18) {
                   // ignore
                 }
                 return next;
@@ -92426,6 +92505,37 @@ function StudentPortal() {
             children: "Student Portal"
           })]
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("nav", {
+        className: "sp-nav",
+        "aria-label": "Student portal navigation",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+          type: "button",
+          className: "sp-navlink ".concat(activeNav === "dashboards" ? "is-active" : ""),
+          onClick: function onClick() {
+            setActiveNav("dashboards");
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          },
+          children: "Home"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+          type: "button",
+          className: "sp-navlink ".concat(activeNav === "resources" ? "is-active" : ""),
+          onClick: function onClick() {
+            setActiveNav("resources");
+            scrollToRef(journeySectionRef);
+          },
+          children: "Resources"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+          type: "button",
+          className: "sp-navlink ".concat(activeNav === "appointments" ? "is-active" : ""),
+          onClick: function onClick() {
+            setActiveNav("appointments");
+            scrollToRef(apptSectionRef);
+          },
+          children: "Appointments"
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "sp-actions",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -92667,20 +92777,155 @@ function StudentPortal() {
           }) : null]
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("main", {
+    }), drawerOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "sp-drawer-layer",
+      role: "presentation",
+      onClick: function onClick() {
+        return closeDrawer();
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("aside", {
+        id: "sp-student-drawer",
+        className: "sp-drawer",
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": "Student menu",
+        onClick: function onClick(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "sp-drawer-head",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-drawer-title",
+              children: "Menu"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "sp-drawer-sub",
+              children: "Quick navigation"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            type: "button",
+            className: "sp-iconbtn",
+            onClick: closeDrawer,
+            "aria-label": "Close menu",
+            title: "Close",
+            children: "\u2715"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("nav", {
+          className: "sp-drawer-nav",
+          "aria-label": "Student navigation",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            ref: drawerFirstLinkRef,
+            type: "button",
+            className: "sp-drawer-link",
+            onClick: function onClick() {
+              closeDrawer();
+              setActiveNav("dashboards");
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+              });
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              children: "Home"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+            type: "button",
+            className: "sp-drawer-link sp-drawer-link--toggle ".concat(drawerResourcesOpen ? "is-open" : ""),
+            "aria-expanded": drawerResourcesOpen,
+            "aria-controls": "sp-drawer-resources",
+            onClick: function onClick() {
+              return setDrawerResourcesOpen(function (v) {
+                return !v;
+              });
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              children: "Resources"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              className: "sp-drawer-chev",
+              "aria-hidden": "true",
+              children: "\u203A"
+            })]
+          }), drawerResourcesOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            id: "sp-drawer-resources",
+            className: "sp-drawer-subnav",
+            role: "group",
+            "aria-label": "Resources",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+              type: "button",
+              className: "sp-drawer-sublink",
+              onClick: function onClick() {
+                closeDrawer();
+                setActiveNav("resources");
+                navigate("/student/basic-information");
+              },
+              children: "Basic Information"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+              type: "button",
+              className: "sp-drawer-sublink",
+              onClick: function onClick() {
+                closeDrawer();
+                setActiveNav("resources");
+                navigate("/student/academic-credentials");
+              },
+              children: "Academic Credentials"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+              type: "button",
+              className: "sp-drawer-sublink",
+              onClick: function onClick() {
+                closeDrawer();
+                setActiveNav("resources");
+                navigate("/student/assessment-quiz");
+              },
+              children: "Assessment"
+            })]
+          }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+            type: "button",
+            className: "sp-drawer-link",
+            onClick: function onClick() {
+              closeDrawer();
+              setActiveNav("appointments");
+              navigate("/student/appointments");
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              children: "Appointments"
+            })
+          })]
+        })]
+      })
+    }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("main", {
       className: "sp-main",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "sp-pagehead",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "sp-greeting",
-          "aria-label": welcomeKicker === "WELCOME" ? "Welcome" : "Welcome back",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-            className: "sp-greeting-ico",
-            "aria-hidden": "true",
-            children: "\u2728"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-            className: "sp-greeting-text",
-            children: welcomeKicker
+          className: "sp-pagehead-top",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "sp-greeting",
+            "aria-label": welcomeKicker === "WELCOME" ? "Welcome" : "Welcome back",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              className: "sp-greeting-ico",
+              "aria-hidden": "true",
+              children: "\u2728"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              className: "sp-greeting-text",
+              children: welcomeKicker
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+            type: "button",
+            className: "sp-menubtn",
+            onClick: openDrawer,
+            "aria-haspopup": "dialog",
+            "aria-expanded": drawerOpen,
+            "aria-controls": "sp-student-drawer",
+            title: "Open menu",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              className: "sp-menubtn-ico",
+              "aria-hidden": "true",
+              children: "\u2261"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              className: "sp-menubtn-txt",
+              children: "Menu"
+            })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
           className: "sp-pagehead-title",
@@ -92746,6 +92991,7 @@ function StudentPortal() {
           className: "sp-overview-right",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "sp-upcoming",
+            ref: apptSectionRef,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "sp-upcoming-head",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -92811,6 +93057,7 @@ function StudentPortal() {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
         className: "sp-journey",
+        ref: journeySectionRef,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "sp-journey-head",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {

@@ -100,6 +100,9 @@ export default function StudentPortal() {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [drawerResourcesOpen, setDrawerResourcesOpen] = useState(false);
+    const [activeNav, setActiveNav] = useState("dashboards");
     const [editOpen, setEditOpen] = useState(false);
     const [accountOpen, setAccountOpen] = useState(false);
     const [saving, setSaving] = useState(false);
@@ -153,6 +156,12 @@ export default function StudentPortal() {
     const [avatarPreview, setAvatarPreview] = useState("");
     const [avatarSaving, setAvatarSaving] = useState(false);
     const avatarInputRef = useRef(null);
+
+    const drawerFirstLinkRef = useRef(null);
+    const drawerPrevFocusRef = useRef(null);
+
+    const apptSectionRef = useRef(null);
+    const journeySectionRef = useRef(null);
 
     const [darkMode, setDarkMode] = useState(() => {
         try {
@@ -615,6 +624,77 @@ export default function StudentPortal() {
         navigate("/student/course-recommendation");
     };
 
+    const openDrawer = () => {
+        if (typeof document !== "undefined") {
+            drawerPrevFocusRef.current = document.activeElement;
+        }
+        setMenuOpen(false);
+        setNotifOpen(false);
+        setDrawerResourcesOpen(false);
+        setDrawerOpen(true);
+    };
+
+    const closeDrawer = () => {
+        setDrawerOpen(false);
+        setDrawerResourcesOpen(false);
+    };
+
+    useEffect(() => {
+        if (!drawerOpen) return;
+        if (typeof window === "undefined" || typeof document === "undefined") return;
+
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        const onKeyDown = (e) => {
+            if (e.key === "Escape") {
+                e.preventDefault();
+                closeDrawer();
+            }
+        };
+
+        window.addEventListener("keydown", onKeyDown);
+
+        const focusFirst = () => {
+            try {
+                drawerFirstLinkRef.current?.focus?.();
+            } catch {
+                // ignore
+            }
+        };
+
+        if (typeof window.requestAnimationFrame === "function") {
+            window.requestAnimationFrame(focusFirst);
+        } else {
+            setTimeout(focusFirst, 0);
+        }
+
+        return () => {
+            window.removeEventListener("keydown", onKeyDown);
+            document.body.style.overflow = prevOverflow;
+            const prev = drawerPrevFocusRef.current;
+            if (prev && typeof prev.focus === "function") {
+                try {
+                    prev.focus();
+                } catch {
+                    // ignore
+                }
+            }
+        };
+    }, [drawerOpen]);
+
+    const scrollToRef = (ref) => {
+        const el = ref?.current;
+        if (!el) return;
+
+        if (typeof window === "undefined") return;
+
+        const topbar = typeof document !== "undefined" ? document.querySelector(".sp-topbar") : null;
+        const offset = (topbar?.offsetHeight || 0) + 14;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    };
+
     const onPickAvatar = (file) => {
         if (!file) {
             setAvatarFile(null);
@@ -876,6 +956,39 @@ export default function StudentPortal() {
                     </div>
                 </div>
 
+                <nav className="sp-nav" aria-label="Student portal navigation">
+                    <button
+                        type="button"
+                        className={`sp-navlink ${activeNav === "dashboards" ? "is-active" : ""}`}
+                        onClick={() => {
+                            setActiveNav("dashboards");
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                    >
+                        Home
+                    </button>
+                    <button
+                        type="button"
+                        className={`sp-navlink ${activeNav === "resources" ? "is-active" : ""}`}
+                        onClick={() => {
+                            setActiveNav("resources");
+                            scrollToRef(journeySectionRef);
+                        }}
+                    >
+                        Resources
+                    </button>
+                    <button
+                        type="button"
+                        className={`sp-navlink ${activeNav === "appointments" ? "is-active" : ""}`}
+                        onClick={() => {
+                            setActiveNav("appointments");
+                            scrollToRef(apptSectionRef);
+                        }}
+                    >
+                        Appointments
+                    </button>
+                </nav>
+
                 <div className="sp-actions">
                     <div className="sp-profile" style={{ position: "relative" }}>
                         <button
@@ -1045,15 +1158,143 @@ export default function StudentPortal() {
                 </div>
             </header>
 
+            {drawerOpen ? (
+                <div
+                    className="sp-drawer-layer"
+                    role="presentation"
+                    onClick={() => closeDrawer()}
+                >
+                    <aside
+                        id="sp-student-drawer"
+                        className="sp-drawer"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Student menu"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }}
+                    >
+                        <div className="sp-drawer-head">
+                            <div>
+                                <div className="sp-drawer-title">Menu</div>
+                                <div className="sp-drawer-sub">Quick navigation</div>
+                            </div>
+                            <button
+                                type="button"
+                                className="sp-iconbtn"
+                                onClick={closeDrawer}
+                                aria-label="Close menu"
+                                title="Close"
+                            >
+                                ✕
+                            </button>
+                        </div>
+
+                        <nav className="sp-drawer-nav" aria-label="Student navigation">
+                            <button
+                                ref={drawerFirstLinkRef}
+                                type="button"
+                                className="sp-drawer-link"
+                                onClick={() => {
+                                    closeDrawer();
+                                    setActiveNav("dashboards");
+                                    window.scrollTo({ top: 0, behavior: "smooth" });
+                                }}
+                            >
+                                <span>Home</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                className={`sp-drawer-link sp-drawer-link--toggle ${drawerResourcesOpen ? "is-open" : ""}`}
+                                aria-expanded={drawerResourcesOpen}
+                                aria-controls="sp-drawer-resources"
+                                onClick={() => setDrawerResourcesOpen((v) => !v)}
+                            >
+                                <span>Resources</span>
+                                <span className="sp-drawer-chev" aria-hidden="true">›</span>
+                            </button>
+
+                            {drawerResourcesOpen ? (
+                                <div id="sp-drawer-resources" className="sp-drawer-subnav" role="group" aria-label="Resources">
+                                    <button
+                                        type="button"
+                                        className="sp-drawer-sublink"
+                                        onClick={() => {
+                                            closeDrawer();
+                                            setActiveNav("resources");
+                                            navigate("/student/basic-information");
+                                        }}
+                                    >
+                                        Basic Information
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="sp-drawer-sublink"
+                                        onClick={() => {
+                                            closeDrawer();
+                                            setActiveNav("resources");
+                                            navigate("/student/academic-credentials");
+                                        }}
+                                    >
+                                        Academic Credentials
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="sp-drawer-sublink"
+                                        onClick={() => {
+                                            closeDrawer();
+                                            setActiveNav("resources");
+                                            navigate("/student/assessment-quiz");
+                                        }}
+                                    >
+                                        Assessment
+                                    </button>
+                                </div>
+                            ) : null}
+
+                            <button
+                                type="button"
+                                className="sp-drawer-link"
+                                onClick={() => {
+                                    closeDrawer();
+                                    setActiveNav("appointments");
+                                    navigate("/student/appointments");
+                                }}
+                            >
+                                <span>Appointments</span>
+                            </button>
+                        </nav>
+                    </aside>
+                </div>
+            ) : null}
+
             <main className="sp-main">
                 <div className="sp-pagehead">
-                    <div
-                        className="sp-greeting"
-                        aria-label={welcomeKicker === "WELCOME" ? "Welcome" : "Welcome back"}
-                    >
-                        <span className="sp-greeting-ico" aria-hidden="true">✨</span>
-                        <span className="sp-greeting-text">{welcomeKicker}</span>
+                    <div className="sp-pagehead-top">
+                        <div
+                            className="sp-greeting"
+                            aria-label={welcomeKicker === "WELCOME" ? "Welcome" : "Welcome back"}
+                        >
+                            <span className="sp-greeting-ico" aria-hidden="true">✨</span>
+                            <span className="sp-greeting-text">{welcomeKicker}</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            className="sp-menubtn"
+                            onClick={openDrawer}
+                            aria-haspopup="dialog"
+                            aria-expanded={drawerOpen}
+                            aria-controls="sp-student-drawer"
+                            title="Open menu"
+                        >
+                            <span className="sp-menubtn-ico" aria-hidden="true">≡</span>
+                            <span className="sp-menubtn-txt">Menu</span>
+                        </button>
                     </div>
+
                     <h1 className="sp-pagehead-title">{fullName}</h1>
                     <div className="sp-pagehead-sub">Your personalized academic pathway awaits</div>
                 </div>
@@ -1093,7 +1334,7 @@ export default function StudentPortal() {
                     </div>
 
                     <aside className="sp-overview-right">
-                        <div className="sp-upcoming">
+                        <div className="sp-upcoming" ref={apptSectionRef}>
                             <div className="sp-upcoming-head">
                                 <div>
                                     <div className="sp-upcoming-title">Upcoming</div>
@@ -1142,7 +1383,7 @@ export default function StudentPortal() {
                     </aside>
                 </section>
 
-                <section className="sp-journey">
+                <section className="sp-journey" ref={journeySectionRef}>
                     <div className="sp-journey-head">
                         <h2 className="sp-journey-title">Your Journey</h2>
                         <div className="sp-muted">Track your progress through the recommendation process</div>

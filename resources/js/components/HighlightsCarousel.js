@@ -166,9 +166,11 @@ export default function HighlightsCarousel() {
             <div className="sp-highlights-card" role="group" aria-roledescription="slide" aria-label={`${idx + 1} of ${slides.length}`}>
                 <div
                     className="sp-highlights-media"
-                    style={{
-                        backgroundImage: currentImage ? `url(${currentImage})` : undefined,
-                    }}
+                    style={
+                        currentImage
+                            ? { "--sp-hi-img": `url(${currentImage})` }
+                            : undefined
+                    }
                 >
                     <div className="sp-highlights-overlay">
                         {current.badge ? (

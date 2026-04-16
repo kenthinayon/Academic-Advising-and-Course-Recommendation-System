@@ -110,12 +110,43 @@
   position: relative;
   background: var(--surface-2);
   height: clamp(190px, 26vw, 260px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/*
+  Alternative carousel image rendering:
+  - ::before = blurred full-bleed cover backdrop
+  - ::after  = crisp contain layer (shows the full image without cropping)
+  The image is passed from React as a CSS variable: --sp-hi-img: url(...)
+*/
+.sp-highlights-media::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  background-image: var(--sp-hi-img);
   background-size: cover;
   background-position: center;
+  filter: blur(22px) saturate(1.1);
+  transform: scale(1.08);
+  opacity: 0.75;
+  z-index: 0;
+}
+
+.sp-highlights-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--sp-hi-img);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
 }
 
 .sp-highlights-overlay {
   position: absolute;
+  z-index: 2;
   left: 0;
   top: 0;
   bottom: 0;
@@ -216,6 +247,20 @@
 // Student portal layout refresh (scoped overrides)
 .student-portal .sp-pagehead {
   margin: 10px 0 18px;
+}
+
+.student-portal .sp-pagehead-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+@media (max-width: 720px) {
+  .student-portal .sp-pagehead-top {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
 }
 
 .student-portal .sp-greeting {

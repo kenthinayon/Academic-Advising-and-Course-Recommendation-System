@@ -126,7 +126,6 @@ export default function StudentBasicInformation() {
                     <div className="sb-subtitle">Complete your profile details</div>
                 </div>
             </header>
-
             <main className="sb-main">
                 <section className="sb-card">
                     {loading ? (
