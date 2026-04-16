@@ -558,8 +558,9 @@
 .ad-search {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   gap: 10px;
+  align-items: center;
 }
 
 .ad-search-field {
@@ -589,6 +590,98 @@
 .ad-search-input:focus {
   border-color: color-mix(in srgb, var(--brand-navy-2) 40%, var(--border));
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-navy-2) 10%, transparent);
+}
+
+.ad-filter {
+  position: relative;
+}
+
+.ad-filterbtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--surface) 35%, var(--surface-2));
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-filterbtn:hover {
+  border-color: color-mix(in srgb, var(--brand-teal) 35%, var(--border));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.ad-filterbtn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 10px 22px color-mix(in srgb, var(--text) 10%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--brand-teal) 22%, transparent);
+}
+
+.ad-filterbtn.has-filter::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--brand-teal);
+  border: 2px solid var(--surface);
+}
+
+.ad-filtermenu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  padding: 8px;
+  z-index: 30;
+}
+
+.ad-filter-title {
+  padding: 8px 10px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ad-filteropt {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  border-radius: 12px;
+  padding: 10px 10px;
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ad-filteropt:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.ad-filteropt.is-active {
+  background: color-mix(in srgb, var(--brand-teal) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-teal) 20%, transparent);
+}
+
+.ad-filter-check {
+  font-weight: 1000;
+  color: color-mix(in srgb, var(--brand-teal) 80%, var(--text));
 }
 
 .ad-section-title {

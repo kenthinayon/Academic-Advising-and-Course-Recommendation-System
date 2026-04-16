@@ -38,6 +38,8 @@ export default function AdvisorDashboard() {
 
     const [stats, setStats] = useState({ totalStudents: 0, pending: 0, interview: 0, approved: 0 });
     const [q, setQ] = useState("");
+    const [statusFilter, setStatusFilter] = useState("all");
+    const [statusFilterOpen, setStatusFilterOpen] = useState(false);
     const [loading, setLoading] = useState(true);
     const [students, setStudents] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
@@ -45,6 +47,8 @@ export default function AdvisorDashboard() {
 
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
     const profileMenuRef = useRef(null);
+    const statusFilterBtnRef = useRef(null);
+    const statusFilterMenuRef = useRef(null);
 
     const [notifOpen, setNotifOpen] = useState(false);
     const [notifLoading, setNotifLoading] = useState(false);
@@ -106,14 +110,38 @@ export default function AdvisorDashboard() {
         const onDocMouseDown = (e) => {
             const hitProfile = profileMenuRef.current?.contains?.(e.target);
             const hitNotif = notifMenuRef.current?.contains?.(e.target);
+            const hitFilter =
+                statusFilterBtnRef.current?.contains?.(e.target) ||
+                statusFilterMenuRef.current?.contains?.(e.target);
 
             if (!hitProfile) setProfileMenuOpen(false);
             if (!hitNotif) setNotifOpen(false);
+            if (!hitFilter) setStatusFilterOpen(false);
         };
 
         document.addEventListener("mousedown", onDocMouseDown);
         return () => document.removeEventListener("mousedown", onDocMouseDown);
     }, []);
+
+    useEffect(() => {
+        if (!statusFilterOpen) return;
+        if (typeof window === "undefined") return;
+
+        const onKeyDown = (e) => {
+            if (e.key === "Escape") {
+                e.preventDefault();
+                setStatusFilterOpen(false);
+                try {
+                    statusFilterBtnRef.current?.focus?.();
+                } catch {
+                    // ignore
+                }
+            }
+        };
+
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [statusFilterOpen]);
 
     const notifMenuRef = useRef(null);
 
@@ -454,6 +482,16 @@ export default function AdvisorDashboard() {
             return "WELCOME BACK";
         }
     }, [user?.id, user?.email]);
+
+    const filteredStudents = useMemo(() => {
+        const f = String(statusFilter || "all").toLowerCase();
+        const rows = Array.isArray(students) ? students : [];
+        if (f === "all") return rows;
+        return rows.filter((s) => {
+            const st = String(s?.advisor_status || "pending").toLowerCase();
+            return st === f;
+        });
+    }, [students, statusFilter]);
 
     return (
         <div className="advisor">
@@ -1012,6 +1050,114 @@ export default function AdvisorDashboard() {
                             <option key={o.k} value={o.v} />
                         ))}
                     </datalist>
+
+                    <div className="ad-filter">
+                        <button
+                            ref={statusFilterBtnRef}
+                            type="button"
+                            className={`ad-filterbtn ${statusFilter !== "all" ? "has-filter" : ""}`}
+                            aria-label="Filter students by status"
+                            title="Filter by student status"
+                            aria-haspopup="menu"
+                            aria-expanded={statusFilterOpen}
+                            aria-controls="ad-status-filter"
+                            onClick={() => {
+                                setProfileMenuOpen(false);
+                                setNotifOpen(false);
+                                setStatusFilterOpen((v) => !v);
+                            }}
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M3 5h18l-7 8v6l-4 2v-8L3 5z"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        </button>
+
+                        {statusFilterOpen ? (
+                            <div
+                                ref={statusFilterMenuRef}
+                                id="ad-status-filter"
+                                className="ad-filtermenu"
+                                role="menu"
+                                aria-label="Student status filter"
+                            >
+                                <div className="ad-filter-title">Status</div>
+
+                                <button
+                                    type="button"
+                                    className={`ad-filteropt ${statusFilter === "all" ? "is-active" : ""}`}
+                                    role="menuitem"
+                                    onClick={() => {
+                                        setStatusFilter("all");
+                                        setStatusFilterOpen(false);
+                                    }}
+                                >
+                                    <span>All</span>
+                                    {statusFilter === "all" ? <span className="ad-filter-check">✓</span> : null}
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`ad-filteropt ${statusFilter === "pending" ? "is-active" : ""}`}
+                                    role="menuitem"
+                                    onClick={() => {
+                                        setStatusFilter("pending");
+                                        setStatusFilterOpen(false);
+                                    }}
+                                >
+                                    <span>Pending</span>
+                                    {statusFilter === "pending" ? <span className="ad-filter-check">✓</span> : null}
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`ad-filteropt ${statusFilter === "interview" ? "is-active" : ""}`}
+                                    role="menuitem"
+                                    onClick={() => {
+                                        setStatusFilter("interview");
+                                        setStatusFilterOpen(false);
+                                    }}
+                                >
+                                    <span>Interview</span>
+                                    {statusFilter === "interview" ? <span className="ad-filter-check">✓</span> : null}
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`ad-filteropt ${statusFilter === "approved" ? "is-active" : ""}`}
+                                    role="menuitem"
+                                    onClick={() => {
+                                        setStatusFilter("approved");
+                                        setStatusFilterOpen(false);
+                                    }}
+                                >
+                                    <span>Approved</span>
+                                    {statusFilter === "approved" ? <span className="ad-filter-check">✓</span> : null}
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`ad-filteropt ${statusFilter === "rejected" ? "is-active" : ""}`}
+                                    role="menuitem"
+                                    onClick={() => {
+                                        setStatusFilter("rejected");
+                                        setStatusFilterOpen(false);
+                                    }}
+                                >
+                                    <span>Rejected</span>
+                                    {statusFilter === "rejected" ? <span className="ad-filter-check">✓</span> : null}
+                                </button>
+                            </div>
+                        ) : null}
+                    </div>
+
                     <button type="button" className="ad-btn" onClick={() => load(q)}>
                         Search
                     </button>
@@ -1023,7 +1169,7 @@ export default function AdvisorDashboard() {
                 {loading ? <div className="ad-muted">Loading…</div> : null}
 
                 <div className="ad-list">
-                    {students.map((s) => {
+                    {filteredStudents.map((s) => {
                         const pill = statusPill(s.advisor_status);
                         const rec = (s.advisor_recommended_degrees?.length
                             ? s.advisor_recommended_degrees

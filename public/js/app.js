@@ -84290,90 +84290,100 @@ function AdvisorDashboard() {
     _useState8 = _slicedToArray(_useState7, 2),
     q = _useState8[0],
     setQ = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
     _useState0 = _slicedToArray(_useState9, 2),
-    loading = _useState0[0],
-    setLoading = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    statusFilter = _useState0[0],
+    setStatusFilter = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState10 = _slicedToArray(_useState1, 2),
-    students = _useState10[0],
-    setStudents = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    statusFilterOpen = _useState10[0],
+    setStatusFilterOpen = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
     _useState12 = _slicedToArray(_useState11, 2),
-    suggestions = _useState12[0],
-    setSuggestions = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    loading = _useState12[0],
+    setLoading = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState14 = _slicedToArray(_useState13, 2),
-    error = _useState14[0],
-    setError = _useState14[1];
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    students = _useState14[0],
+    setStudents = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState16 = _slicedToArray(_useState15, 2),
-    profileMenuOpen = _useState16[0],
-    setProfileMenuOpen = _useState16[1];
-  var profileMenuRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    suggestions = _useState16[0],
+    setSuggestions = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState18 = _slicedToArray(_useState17, 2),
-    notifOpen = _useState18[0],
-    setNotifOpen = _useState18[1];
+    error = _useState18[0],
+    setError = _useState18[1];
   var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    notifLoading = _useState20[0],
-    setNotifLoading = _useState20[1];
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    profileMenuOpen = _useState20[0],
+    setProfileMenuOpen = _useState20[1];
+  var profileMenuRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var statusFilterBtnRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var statusFilterMenuRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState22 = _slicedToArray(_useState21, 2),
-    notifs = _useState22[0],
-    setNotifs = _useState22[1];
+    notifOpen = _useState22[0],
+    setNotifOpen = _useState22[1];
   var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState24 = _slicedToArray(_useState23, 2),
-    schoolCalOpen = _useState24[0],
-    setSchoolCalOpen = _useState24[1];
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    notifLoading = _useState24[0],
+    setNotifLoading = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState26 = _slicedToArray(_useState25, 2),
-    profileSettingsOpen = _useState26[0],
-    setProfileSettingsOpen = _useState26[1];
+    notifs = _useState26[0],
+    setNotifs = _useState26[1];
   var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState28 = _slicedToArray(_useState27, 2),
-    accountSettingsOpen = _useState28[0],
-    setAccountSettingsOpen = _useState28[1];
+    schoolCalOpen = _useState28[0],
+    setSchoolCalOpen = _useState28[1];
   var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState30 = _slicedToArray(_useState29, 2),
-    profileSaving = _useState30[0],
-    setProfileSaving = _useState30[1];
+    profileSettingsOpen = _useState30[0],
+    setProfileSettingsOpen = _useState30[1];
   var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState32 = _slicedToArray(_useState31, 2),
-    avatarSaving = _useState32[0],
-    setAvatarSaving = _useState32[1];
+    accountSettingsOpen = _useState32[0],
+    setAccountSettingsOpen = _useState32[1];
   var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState34 = _slicedToArray(_useState33, 2),
-    pwSaving = _useState34[0],
-    setPwSaving = _useState34[1];
-  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    profileSaving = _useState34[0],
+    setProfileSaving = _useState34[1];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState36 = _slicedToArray(_useState35, 2),
+    avatarSaving = _useState36[0],
+    setAvatarSaving = _useState36[1];
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState38 = _slicedToArray(_useState37, 2),
+    pwSaving = _useState38[0],
+    setPwSaving = _useState38[1];
+  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       name: "",
       email: "",
       age: "",
       gender: "",
       contact_number: ""
     }),
-    _useState36 = _slicedToArray(_useState35, 2),
-    editForm = _useState36[0],
-    setEditForm = _useState36[1];
-  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    _useState40 = _slicedToArray(_useState39, 2),
+    editForm = _useState40[0],
+    setEditForm = _useState40[1];
+  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       current_password: "",
       password: "",
       password_confirmation: ""
     }),
-    _useState38 = _slicedToArray(_useState37, 2),
-    pwForm = _useState38[0],
-    setPwForm = _useState38[1];
-  var avatarInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var _useState39 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    _useState40 = _slicedToArray(_useState39, 2),
-    avatarFile = _useState40[0],
-    setAvatarFile = _useState40[1];
-  var _useState41 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState42 = _slicedToArray(_useState41, 2),
-    avatarPreview = _useState42[0],
-    setAvatarPreview = _useState42[1];
+    pwForm = _useState42[0],
+    setPwForm = _useState42[1];
+  var avatarInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var _useState43 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState44 = _slicedToArray(_useState43, 2),
+    avatarFile = _useState44[0],
+    setAvatarFile = _useState44[1];
+  var _useState45 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState46 = _slicedToArray(_useState45, 2),
+    avatarPreview = _useState46[0],
+    setAvatarPreview = _useState46[1];
   var headers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return {
       Authorization: "Bearer ".concat(token),
@@ -84400,17 +84410,39 @@ function AdvisorDashboard() {
   }, [navigate, role, token]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var onDocMouseDown = function onDocMouseDown(e) {
-      var _profileMenuRef$curre, _profileMenuRef$curre2, _notifMenuRef$current, _notifMenuRef$current2;
+      var _profileMenuRef$curre, _profileMenuRef$curre2, _notifMenuRef$current, _notifMenuRef$current2, _statusFilterBtnRef$c, _statusFilterBtnRef$c2, _statusFilterMenuRef$, _statusFilterMenuRef$2;
       var hitProfile = (_profileMenuRef$curre = profileMenuRef.current) === null || _profileMenuRef$curre === void 0 || (_profileMenuRef$curre2 = _profileMenuRef$curre.contains) === null || _profileMenuRef$curre2 === void 0 ? void 0 : _profileMenuRef$curre2.call(_profileMenuRef$curre, e.target);
       var hitNotif = (_notifMenuRef$current = notifMenuRef.current) === null || _notifMenuRef$current === void 0 || (_notifMenuRef$current2 = _notifMenuRef$current.contains) === null || _notifMenuRef$current2 === void 0 ? void 0 : _notifMenuRef$current2.call(_notifMenuRef$current, e.target);
+      var hitFilter = ((_statusFilterBtnRef$c = statusFilterBtnRef.current) === null || _statusFilterBtnRef$c === void 0 || (_statusFilterBtnRef$c2 = _statusFilterBtnRef$c.contains) === null || _statusFilterBtnRef$c2 === void 0 ? void 0 : _statusFilterBtnRef$c2.call(_statusFilterBtnRef$c, e.target)) || ((_statusFilterMenuRef$ = statusFilterMenuRef.current) === null || _statusFilterMenuRef$ === void 0 || (_statusFilterMenuRef$2 = _statusFilterMenuRef$.contains) === null || _statusFilterMenuRef$2 === void 0 ? void 0 : _statusFilterMenuRef$2.call(_statusFilterMenuRef$, e.target));
       if (!hitProfile) setProfileMenuOpen(false);
       if (!hitNotif) setNotifOpen(false);
+      if (!hitFilter) setStatusFilterOpen(false);
     };
     document.addEventListener("mousedown", onDocMouseDown);
     return function () {
       return document.removeEventListener("mousedown", onDocMouseDown);
     };
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!statusFilterOpen) return;
+    if (typeof window === "undefined") return;
+    var onKeyDown = function onKeyDown(e) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setStatusFilterOpen(false);
+        try {
+          var _statusFilterBtnRef$c3, _statusFilterBtnRef$c4;
+          (_statusFilterBtnRef$c3 = statusFilterBtnRef.current) === null || _statusFilterBtnRef$c3 === void 0 || (_statusFilterBtnRef$c4 = _statusFilterBtnRef$c3.focus) === null || _statusFilterBtnRef$c4 === void 0 || _statusFilterBtnRef$c4.call(_statusFilterBtnRef$c3);
+        } catch (_unused4) {
+          // ignore
+        }
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return function () {
+      return window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [statusFilterOpen]);
   var notifMenuRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var loadNotifications = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
@@ -84731,7 +84763,7 @@ function AdvisorDashboard() {
       if (avatarPreview) {
         try {
           URL.revokeObjectURL(avatarPreview);
-        } catch (_unused8) {
+        } catch (_unused9) {
           // ignore
         }
       }
@@ -84785,7 +84817,7 @@ function AdvisorDashboard() {
               setUser(next);
               try {
                 localStorage.setItem("user", JSON.stringify(next));
-              } catch (_unused9) {
+              } catch (_unused0) {
                 // ignore
               }
             }
@@ -84803,7 +84835,7 @@ function AdvisorDashboard() {
                 });
                 try {
                   localStorage.setItem("user", JSON.stringify(next));
-                } catch (_unused1) {
+                } catch (_unused10) {
                   // ignore
                 }
                 return next;
@@ -84863,7 +84895,7 @@ function AdvisorDashboard() {
             setUser(newUser);
             try {
               localStorage.setItem("user", JSON.stringify(newUser));
-            } catch (_unused10) {
+            } catch (_unused11) {
               // ignore
             }
             setProfileSettingsOpen(false);
@@ -84985,10 +85017,19 @@ function AdvisorDashboard() {
       var onceKey = "welcome_once_".concat(userKey);
       var isOnce = localStorage.getItem(onceKey) === "1";
       return isOnce ? "WELCOME" : "WELCOME BACK";
-    } catch (_unused13) {
+    } catch (_unused14) {
       return "WELCOME BACK";
     }
   }, [user === null || user === void 0 ? void 0 : user.id, user === null || user === void 0 ? void 0 : user.email]);
+  var filteredStudents = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var f = String(statusFilter || "all").toLowerCase();
+    var rows = Array.isArray(students) ? students : [];
+    if (f === "all") return rows;
+    return rows.filter(function (s) {
+      var st = String((s === null || s === void 0 ? void 0 : s.advisor_status) || "pending").toLowerCase();
+      return st === f;
+    });
+  }, [students, statusFilter]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "advisor",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("header", {
@@ -85090,7 +85131,7 @@ function AdvisorDashboard() {
                 var when = "—";
                 try {
                   when = whenIso ? new Date(whenIso).toLocaleString() : "—";
-                } catch (_unused14) {
+                } catch (_unused15) {
                   when = whenIso || "—";
                 }
                 return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -85722,6 +85763,119 @@ function AdvisorDashboard() {
               value: o.v
             }, o.k);
           })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "ad-filter",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            ref: statusFilterBtnRef,
+            type: "button",
+            className: "ad-filterbtn ".concat(statusFilter !== "all" ? "has-filter" : ""),
+            "aria-label": "Filter students by status",
+            title: "Filter by student status",
+            "aria-haspopup": "menu",
+            "aria-expanded": statusFilterOpen,
+            "aria-controls": "ad-status-filter",
+            onClick: function onClick() {
+              setProfileMenuOpen(false);
+              setNotifOpen(false);
+              setStatusFilterOpen(function (v) {
+                return !v;
+              });
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("svg", {
+              viewBox: "0 0 24 24",
+              width: "18",
+              height: "18",
+              fill: "none",
+              xmlns: "http://www.w3.org/2000/svg",
+              "aria-hidden": "true",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("path", {
+                d: "M3 5h18l-7 8v6l-4 2v-8L3 5z",
+                stroke: "currentColor",
+                strokeWidth: "2",
+                strokeLinejoin: "round"
+              })
+            })
+          }), statusFilterOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            ref: statusFilterMenuRef,
+            id: "ad-status-filter",
+            className: "ad-filtermenu",
+            role: "menu",
+            "aria-label": "Student status filter",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "ad-filter-title",
+              children: "Status"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              type: "button",
+              className: "ad-filteropt ".concat(statusFilter === "all" ? "is-active" : ""),
+              role: "menuitem",
+              onClick: function onClick() {
+                setStatusFilter("all");
+                setStatusFilterOpen(false);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: "All"
+              }), statusFilter === "all" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "ad-filter-check",
+                children: "\u2713"
+              }) : null]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              type: "button",
+              className: "ad-filteropt ".concat(statusFilter === "pending" ? "is-active" : ""),
+              role: "menuitem",
+              onClick: function onClick() {
+                setStatusFilter("pending");
+                setStatusFilterOpen(false);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: "Pending"
+              }), statusFilter === "pending" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "ad-filter-check",
+                children: "\u2713"
+              }) : null]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              type: "button",
+              className: "ad-filteropt ".concat(statusFilter === "interview" ? "is-active" : ""),
+              role: "menuitem",
+              onClick: function onClick() {
+                setStatusFilter("interview");
+                setStatusFilterOpen(false);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: "Interview"
+              }), statusFilter === "interview" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "ad-filter-check",
+                children: "\u2713"
+              }) : null]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              type: "button",
+              className: "ad-filteropt ".concat(statusFilter === "approved" ? "is-active" : ""),
+              role: "menuitem",
+              onClick: function onClick() {
+                setStatusFilter("approved");
+                setStatusFilterOpen(false);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: "Approved"
+              }), statusFilter === "approved" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "ad-filter-check",
+                children: "\u2713"
+              }) : null]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+              type: "button",
+              className: "ad-filteropt ".concat(statusFilter === "rejected" ? "is-active" : ""),
+              role: "menuitem",
+              onClick: function onClick() {
+                setStatusFilter("rejected");
+                setStatusFilterOpen(false);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                children: "Rejected"
+              }), statusFilter === "rejected" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                className: "ad-filter-check",
+                children: "\u2713"
+              }) : null]
+            })]
+          }) : null]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
           type: "button",
           className: "ad-btn",
@@ -85741,7 +85895,7 @@ function AdvisorDashboard() {
         children: "Loading\u2026"
       }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "ad-list",
-        children: [students.map(function (s) {
+        children: [filteredStudents.map(function (s) {
           var _s$advisor_recommende, _rec$, _rec$2, _rec$3;
           var pill = statusPill(s.advisor_status);
           var rec = ((_s$advisor_recommende = s.advisor_recommended_degrees) !== null && _s$advisor_recommende !== void 0 && _s$advisor_recommende.length ? s.advisor_recommended_degrees : s.recommended_degrees) || [];
