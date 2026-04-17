@@ -49,7 +49,7 @@ export default function StudentAcademicCredentials() {
         skillsText: "",
         skillFiles: [],
         career_goals: "",
-        ratings: PROGRAMS.reduce((acc, p) => ({ ...acc, [p]: 3 }), {}),
+        ratings: PROGRAMS.reduce((acc, p) => ({ ...acc, [p]: 0 }), {}),
     });
 
     const computedGWA = useMemo(() => {
@@ -216,7 +216,7 @@ export default function StudentAcademicCredentials() {
             const ratingsPayload =
                 form.ratings && typeof form.ratings === "object" && Object.keys(form.ratings).length
                     ? form.ratings
-                    : PROGRAMS.reduce((acc, p) => ({ ...acc, [p]: 3 }), {});
+                    : PROGRAMS.reduce((acc, p) => ({ ...acc, [p]: 0 }), {});
 
             // Send as multipart so we can include attachments
             const fd = new FormData();
@@ -525,20 +525,20 @@ export default function StudentAcademicCredentials() {
 
                                 <div className="sb-row">
                                     <div className="sb-field" style={{ gridColumn: "1 / -1" }}>
-                                        <span className="sb-label">Program Interest Rating (1 = low, 5 = high)</span>
+                                        <span className="sb-label">Program Interest Rating (0 = not set, 5 = high)</span>
                                         <div className="sb-ratings">
                                             {PROGRAMS.map((program) => (
                                                 <div key={program} className="sb-rating-row">
                                                     <div className="sb-rating-name">{program}</div>
                                                     <input
                                                         type="range"
-                                                        min="1"
+                                                        min="0"
                                                         max="5"
                                                         step="1"
-                                                        value={form.ratings[program] ?? 3}
+                                                        value={form.ratings[program] ?? 0}
                                                         onChange={setRating(program)}
                                                     />
-                                                    <div className="sb-rating-value">{form.ratings[program] ?? 3}</div>
+                                                    <div className="sb-rating-value">{form.ratings[program] ?? 0}</div>
                                                 </div>
                                             ))}
                                         </div>

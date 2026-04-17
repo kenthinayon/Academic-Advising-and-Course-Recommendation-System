@@ -392,7 +392,7 @@ class AssessmentController extends Controller
     /**
      * Add soft signals from academic credentials:
      * - SHS strand prior (STEM/ABM/HUMSS/TVL)
-     * - program interest ratings (1-5 sliders)
+    * - program interest ratings (0-5 sliders; 0 = not set)
      * - small grade-based boosts for strong Math/Science performance
      */
     private function applyAcademicBoosts(array $scores, Profile $profile): array
@@ -416,6 +416,12 @@ class AssessmentController extends Controller
                 if ($r === null) {
                     continue;
                 }
+                // UI allows 0..5 where 0 means "not set".
+                // Ignore 0 so defaults don't negatively skew recommendations.
+                if ($r === 0) {
+                    continue;
+                }
+
                 // Convert 1..5 into -2..+2 centered at 3
                 $delta = max(-2, min(2, $r - 3));
                 if ($delta === 0) {

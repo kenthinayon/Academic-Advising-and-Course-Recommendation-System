@@ -87997,7 +87997,7 @@ function StudentAcademicCredentials() {
       skillFiles: [],
       career_goals: "",
       ratings: PROGRAMS.reduce(function (acc, p) {
-        return _objectSpread(_objectSpread({}, acc), {}, _defineProperty({}, p, 3));
+        return _objectSpread(_objectSpread({}, acc), {}, _defineProperty({}, p, 0));
       }, {})
     }),
     _useState0 = _slicedToArray(_useState9, 2),
@@ -88194,7 +88194,7 @@ function StudentAcademicCredentials() {
             // Same idea for program ratings: Step 2 requires at least one rating entry.
             // If for any reason ratings are missing, send defaults so Step 2 can be considered complete.
             ratingsPayload = form.ratings && _typeof(form.ratings) === "object" && Object.keys(form.ratings).length ? form.ratings : PROGRAMS.reduce(function (acc, p) {
-              return _objectSpread(_objectSpread({}, acc), {}, _defineProperty({}, p, 3));
+              return _objectSpread(_objectSpread({}, acc), {}, _defineProperty({}, p, 0));
             }, {}); // Send as multipart so we can include attachments
             fd = new FormData();
             fd.append("shs_strand", form.shs_strand);
@@ -88596,7 +88596,7 @@ function StudentAcademicCredentials() {
                 },
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                   className: "sb-label",
-                  children: "Program Interest Rating (1 = low, 5 = high)"
+                  children: "Program Interest Rating (0 = not set, 5 = high)"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                   className: "sb-ratings",
                   children: PROGRAMS.map(function (program) {
@@ -88608,14 +88608,14 @@ function StudentAcademicCredentials() {
                         children: program
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                         type: "range",
-                        min: "1",
+                        min: "0",
                         max: "5",
                         step: "1",
-                        value: (_form$ratings$program = form.ratings[program]) !== null && _form$ratings$program !== void 0 ? _form$ratings$program : 3,
+                        value: (_form$ratings$program = form.ratings[program]) !== null && _form$ratings$program !== void 0 ? _form$ratings$program : 0,
                         onChange: setRating(program)
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                         className: "sb-rating-value",
-                        children: (_form$ratings$program2 = form.ratings[program]) !== null && _form$ratings$program2 !== void 0 ? _form$ratings$program2 : 3
+                        children: (_form$ratings$program2 = form.ratings[program]) !== null && _form$ratings$program2 !== void 0 ? _form$ratings$program2 : 0
                       })]
                     }, program);
                   })

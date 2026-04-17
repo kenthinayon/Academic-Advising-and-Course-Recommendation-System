@@ -103,7 +103,7 @@ class ProfileController extends Controller
 
             // { "Nursing": 4, "Law": 2, ... }
             'program_interest_ratings' => ['required', 'array'],
-            'program_interest_ratings.*' => ['integer', 'min:1', 'max:5'],
+            'program_interest_ratings.*' => ['integer', 'min:0', 'max:5'],
 
             // optional uploads
             // Allow any file type (pdf/images/docs/etc). Max is in KB.
