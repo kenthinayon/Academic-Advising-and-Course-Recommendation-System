@@ -35,7 +35,13 @@ function hasAcademicCredentials(profile) {
 
     const hasSkills = Array.isArray(profile?.skills) ? profile.skills.filter(Boolean).length > 0 : false;
     const ratings = profile?.program_interest_ratings;
-    const hasRatings = ratings && typeof ratings === "object" && Object.keys(ratings).length > 0;
+    const hasRatings =
+        ratings &&
+        typeof ratings === "object" &&
+        Object.values(ratings).some((v) => {
+            const n = Number(v);
+            return Number.isFinite(n) && n > 0;
+        });
 
     return Boolean(
         String(profile?.shs_strand || "").trim() &&
@@ -123,6 +129,26 @@ export default function StudentCourseRecommendation() {
     }, [navigate, token]);
 
     const top3 = useMemo(() => {
+        // Prefer advisor's edited recommendation if present
+        const advisorDegrees = profile?.advisor_recommended_degrees;
+        if (Array.isArray(advisorDegrees) && advisorDegrees.length) {
+            return advisorDegrees
+                .slice(0, 3)
+                .map((d, idx) => ({
+                    rank: idx + 1,
+                    code: d?.code || "",
+                    name: d?.name || "",
+                    category: d?.track || d?.category || "",
+                }))
+                .filter((d) => d.code || d.name);
+        }
+
+        // Next: system recommendation saved on the profile
+        const systemDegrees = profile?.recommended_degrees;
+        if (Array.isArray(systemDegrees) && systemDegrees.length) {
+            return systemDegrees;
+        }
+
         const degrees = assessment?.recommended_degrees;
         if (Array.isArray(degrees) && degrees.length) return degrees;
 
@@ -142,7 +168,63 @@ export default function StudentCourseRecommendation() {
         if (Array.isArray(serverTop) && serverTop.length) return serverTop;
 
         return [];
-    }, [assessment]);
+    }, [assessment, profile]);
+
+    const breakdown = useMemo(() => assessment?.breakdown || null, [assessment]);
+
+    const studentSummary = useMemo(() => {
+        if (!breakdown) return null;
+
+        const readiness = breakdown.readiness || {};
+        const readinessBySkill = readiness.by_skill || {};
+        const readinessCorrect = readinessBySkill.correct || {};
+        const readinessTotal = readinessBySkill.total || {};
+
+        const part2 = breakdown.part2_categories || {};
+        const byCategory = part2.by_category || {};
+        const catCorrect = byCategory.correct || {};
+        const catTotal = byCategory.total || {};
+
+        const skillOrder = ["numerical_reasoning", "logical_reasoning", "verbal_reasoning"];
+        const skillLabel = {
+            numerical_reasoning: "Numerical Reasoning",
+            logical_reasoning: "Logical Reasoning",
+            verbal_reasoning: "Verbal Reasoning",
+        };
+
+        const readinessRows = skillOrder.map((k) => ({
+            key: k,
+            label: skillLabel[k] || k,
+            correct: Number(readinessCorrect[k] || 0),
+            total: Number(readinessTotal[k] || 0),
+        }));
+
+        const categories = Array.isArray(part2.selected_categories)
+            ? part2.selected_categories
+            : Object.keys(catTotal || {});
+
+        const categoryRows = categories
+            .slice()
+            .sort()
+            .map((c) => ({
+                category: c,
+                correct: Number(catCorrect[c] || 0),
+                total: Number(catTotal[c] || 0),
+            }));
+
+        return {
+            readiness: {
+                correctTotal: Number(readiness.correct_total || 0),
+                total: Number(readiness.total || 0),
+                rows: readinessRows,
+            },
+            part2: {
+                correctTotal: Number(part2.correct_total || 0),
+                total: Number(part2.total || 0),
+                rows: categoryRows,
+            },
+        };
+    }, [breakdown]);
 
     const isDegreeList = useMemo(() => {
         const first = Array.isArray(top3) ? top3[0] : null;
@@ -259,6 +341,54 @@ export default function StudentCourseRecommendation() {
                                             No assessment result found yet. Please complete the Assessment Quiz first.
                                         </div>
                                     )}
+
+                                    {studentSummary ? (
+                                        <div className="cr-section" style={{ marginTop: 14 }}>
+                                            <div className="cr-section-title">Assessment Summary</div>
+
+                                            <div className="cr-par" style={{ marginTop: 6 }}>
+                                                <strong>Part II (Category Questions):</strong> {studentSummary.part2.correctTotal}/{studentSummary.part2.total}
+                                            </div>
+                                            {studentSummary.part2.rows?.length ? (
+                                                <div className="cr-table" style={{ marginTop: 8 }}>
+                                                    <div className="cr-tr cr-th">
+                                                        <div>Category</div>
+                                                        <div>Correct</div>
+                                                    </div>
+                                                    {studentSummary.part2.rows.map((r) => (
+                                                        <div key={r.category} className="cr-tr">
+                                                            <div>{r.category}</div>
+                                                            <div>
+                                                                {r.correct}/{r.total}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <div className="aq-muted" style={{ marginTop: 6 }}>
+                                                    No Part II category breakdown available.
+                                                </div>
+                                            )}
+
+                                            <div className="cr-par" style={{ marginTop: 12 }}>
+                                                <strong>Readiness (Skill-Based):</strong> {studentSummary.readiness.correctTotal}/{studentSummary.readiness.total}
+                                            </div>
+                                            <div className="cr-table" style={{ marginTop: 8 }}>
+                                                <div className="cr-tr cr-th">
+                                                    <div>Skill</div>
+                                                    <div>Correct</div>
+                                                </div>
+                                                {studentSummary.readiness.rows.map((r) => (
+                                                    <div key={r.key} className="cr-tr">
+                                                        <div>{r.label}</div>
+                                                        <div>
+                                                            {r.correct}/{r.total}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ) : null}
 
                                     <div className="cr-actions">
                                         <button

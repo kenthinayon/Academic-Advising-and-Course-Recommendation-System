@@ -452,6 +452,46 @@ class AppointmentController extends Controller
         // Also include advisor interview schedule as an in-app notification.
         $profile = $user->profile;
         $interviewNotif = null;
+        $reviewNotif = null;
+
+        // Advisor review (approved/rejected) notification.
+        if ($profile) {
+            $advisorStatus = strtolower((string) ($profile->advisor_status ?? 'pending'));
+            if (in_array($advisorStatus, ['approved', 'rejected'], true)) {
+                $advisor = null;
+                if (!empty($profile->advisor_reviewed_by)) {
+                    $advisor = \App\Models\User::query()
+                        ->whereIn('role', ['advisor', 'admin'])
+                        ->find($profile->advisor_reviewed_by, ['id', 'name', 'email', 'role']);
+                }
+
+                $ts = $profile->advisor_reviewed_at ?? $profile->updated_at;
+
+                $tsKey = null;
+                try {
+                    if ($ts instanceof Carbon) {
+                        $tsKey = $ts->timestamp;
+                    } elseif ($ts) {
+                        $tsKey = strtotime((string) $ts);
+                    }
+                } catch (\Throwable $e) {
+                    $tsKey = null;
+                }
+
+                $reviewNotif = (object) [
+                    'id' => 'recommendation-' . $profile->id . '-' . $advisorStatus . '-' . ((string) ($tsKey ?? 0)),
+                    'status' => 'recommendation_' . $advisorStatus,
+                    'session_type' => 'Course Recommendation',
+                    'scheduled_at' => null,
+                    'preferred_at' => null,
+                    'location' => null,
+                    'advisor' => $advisor,
+                    'advisor_comment' => $profile->advisor_comment,
+                    'updated_at' => $ts,
+                ];
+            }
+        }
+
         if ($profile && ($profile->advisor_status === 'interview')) {
             $date = $profile->advisor_interview_date;
             $time = $profile->advisor_interview_time;
@@ -494,6 +534,16 @@ class AppointmentController extends Controller
 
         if ($interviewNotif) {
             $merged = collect([$interviewNotif])->merge($items);
+            $items = $merged
+                ->sortByDesc(function ($n) {
+                    return $n->updated_at ?? null;
+                })
+                ->take($limit)
+                ->values();
+        }
+
+        if ($reviewNotif) {
+            $merged = collect([$reviewNotif])->merge($items);
             $items = $merged
                 ->sortByDesc(function ($n) {
                     return $n->updated_at ?? null;

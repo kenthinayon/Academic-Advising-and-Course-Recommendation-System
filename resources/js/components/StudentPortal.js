@@ -215,50 +215,79 @@ export default function StudentPortal() {
         }
     }, [darkMode]);
 
-    useEffect(() => {
+    const fetchProfile = async ({ showLoading } = { showLoading: false }) => {
         const token = localStorage.getItem("authToken");
         if (!token) {
-            setLoading(false);
+            if (showLoading) setLoading(false);
             return;
         }
 
-        const fetchProfile = async () => {
-            setLoading(true);
-            try {
-                const res = await axios.get("/api/profile", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        Accept: "application/json",
-                    },
-                    withCredentials: true,
-                });
-                const serverUser = res.data?.user || null;
-                const avatarUrl = serverUser?.avatar_url;
-                const cacheBusted = avatarUrl
-                    ? `${avatarUrl}${avatarUrl.includes("?") ? "&" : "?"}t=${Date.now()}`
-                    : null;
+        if (showLoading) setLoading(true);
+        try {
+            const res = await axios.get("/api/profile", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: "application/json",
+                },
+                withCredentials: true,
+            });
+            const serverUser = res.data?.user || null;
+            const avatarUrl = serverUser?.avatar_url;
+            const cacheBusted = avatarUrl
+                ? `${avatarUrl}${avatarUrl.includes("?") ? "&" : "?"}t=${Date.now()}`
+                : null;
 
-                if (serverUser) {
-                    const nextUser = cacheBusted ? { ...serverUser, avatar_url: cacheBusted } : serverUser;
-                    setUser(nextUser);
-                    try {
-                        localStorage.setItem("user", JSON.stringify(nextUser));
-                    } catch {
-                        // ignore
-                    }
+            if (serverUser) {
+                const nextUser = cacheBusted ? { ...serverUser, avatar_url: cacheBusted } : serverUser;
+                setUser(nextUser);
+                try {
+                    localStorage.setItem("user", JSON.stringify(nextUser));
+                } catch {
+                    // ignore
                 }
-
-                setProfile(res.data?.profile || null);
-            } catch {
-                // If token is stale, portal will still render from localStorage user.
-                setProfile(null);
-            } finally {
-                setLoading(false);
             }
+
+            setProfile(res.data?.profile || null);
+        } catch {
+            // If token is stale, portal will still render from localStorage user.
+            setProfile(null);
+        } finally {
+            if (showLoading) setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        // initial load
+        fetchProfile({ showLoading: true });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [navigate]);
+
+    // Keep dashboard progress (advisor status) updated automatically.
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        if (!token) return;
+
+        let stopped = false;
+
+        const tick = async () => {
+            if (stopped) return;
+            if (typeof document !== "undefined" && document.hidden) return;
+            await fetchProfile({ showLoading: false });
         };
 
-        fetchProfile();
-    }, [navigate]);
+        const id = setInterval(tick, 30000);
+        const onVis = () => {
+            if (!document.hidden) tick();
+        };
+        document.addEventListener("visibilitychange", onVis);
+
+        return () => {
+            stopped = true;
+            clearInterval(id);
+            document.removeEventListener("visibilitychange", onVis);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         const token = localStorage.getItem("authToken");
@@ -431,7 +460,13 @@ export default function StudentPortal() {
         const hasSkills = Array.isArray(p?.skills) ? p.skills.filter(Boolean).length > 0 : false;
 
         const ratings = p?.program_interest_ratings;
-        const hasRatings = ratings && typeof ratings === "object" && Object.keys(ratings).length > 0;
+        const hasRatings =
+            ratings &&
+            typeof ratings === "object" &&
+            Object.values(ratings).some((v) => {
+                const n = Number(v);
+                return Number.isFinite(n) && n > 0;
+            });
 
         const step2 = Boolean(
             String(p?.shs_strand || "").trim() &&
@@ -956,39 +991,6 @@ export default function StudentPortal() {
                     </div>
                 </div>
 
-                <nav className="sp-nav" aria-label="Student portal navigation">
-                    <button
-                        type="button"
-                        className={`sp-navlink ${activeNav === "dashboards" ? "is-active" : ""}`}
-                        onClick={() => {
-                            setActiveNav("dashboards");
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                        }}
-                    >
-                        Home
-                    </button>
-                    <button
-                        type="button"
-                        className={`sp-navlink ${activeNav === "resources" ? "is-active" : ""}`}
-                        onClick={() => {
-                            setActiveNav("resources");
-                            scrollToRef(journeySectionRef);
-                        }}
-                    >
-                        Resources
-                    </button>
-                    <button
-                        type="button"
-                        className={`sp-navlink ${activeNav === "appointments" ? "is-active" : ""}`}
-                        onClick={() => {
-                            setActiveNav("appointments");
-                            scrollToRef(apptSectionRef);
-                        }}
-                    >
-                        Appointments
-                    </button>
-                </nav>
-
                 <div className="sp-actions">
                     <div className="sp-profile" style={{ position: "relative" }}>
                         <button
@@ -1035,11 +1037,19 @@ export default function StudentPortal() {
                                             const isCancelled = st === "cancelled";
                                             const isRejected = st === "rejected";
                                             const isCompleted = st === "completed";
+                                            const isRecoApproved = st === "recommendation_approved";
+                                            const isRecoRejected = st === "recommendation_rejected";
+
+                                            const isClickable = isRecoApproved || isRecoRejected;
 
                                             const title = isScheduled
                                                 ? "Appointment confirmed"
                                                 : isInterview
                                                     ? "Interview scheduled"
+                                                : isRecoApproved
+                                                    ? "Recommendation approved"
+                                                    : isRecoRejected
+                                                        ? "Recommendation rejected"
                                                 : isCancelled
                                                     ? "Appointment cancelled"
                                                     : isRejected
@@ -1048,7 +1058,11 @@ export default function StudentPortal() {
                                                             ? "Appointment completed"
                                                             : "Appointment request sent";
 
-                                            const when = isScheduled
+                                            const when = (isRecoApproved || isRecoRejected)
+                                                ? (n.updated_at || n.created_at
+                                                    ? formatApptFull(n.updated_at || n.created_at)
+                                                    : "—")
+                                                : isScheduled
                                                 ? formatApptFull(n.scheduled_at)
                                                 : isInterview
                                                     ? (() => {
@@ -1061,7 +1075,17 @@ export default function StudentPortal() {
                                                     ? `Preferred: ${formatApptFull(n.preferred_at)}`
                                                     : "Preferred: —";
                                             return (
-                                                <div key={n.id} className="sp-menu-item" role="menuitem" style={{ cursor: "default" }}>
+                                                <div
+                                                    key={n.id}
+                                                    className="sp-menu-item"
+                                                    role="menuitem"
+                                                    style={{ cursor: isClickable ? "pointer" : "default" }}
+                                                    onClick={() => {
+                                                        if (!isClickable) return;
+                                                        setNotifOpen(false);
+                                                        navigate("/student/course-recommendation");
+                                                    }}
+                                                >
                                                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
                                                         <div style={{ fontWeight: 900, color: "#0f172a" }}>{title}</div>
                                                         <button
@@ -1082,19 +1106,19 @@ export default function StudentPortal() {
                                                         {n.session_type || "Advising Session"}
                                                     </div>
                                                     <div className="sp-muted" style={{ marginTop: 6 }}>
-                                                        <strong style={{ color: "#0f172a" }}>When:</strong> {when}
+                                                        <strong style={{ color: "#0f172a" }}>{isRecoApproved || isRecoRejected ? "Updated:" : "When:"}</strong> {when}
                                                     </div>
                                                     {(isInterview || isScheduled || isCancelled || isCompleted) && n.location ? (
                                                         <div className="sp-muted" style={{ marginTop: 4 }}>
                                                             <strong style={{ color: "#0f172a" }}>Where:</strong> {n.location}
                                                         </div>
                                                     ) : null}
-                                                    {(isInterview || isScheduled || isCancelled || isRejected || isCompleted) && n.advisor?.name ? (
+                                                    {(isInterview || isScheduled || isCancelled || isRejected || isCompleted || isRecoApproved || isRecoRejected) && n.advisor?.name ? (
                                                         <div className="sp-muted" style={{ marginTop: 4 }}>
                                                             <strong style={{ color: "#0f172a" }}>Advisor:</strong> {n.advisor.name}
                                                         </div>
                                                     ) : null}
-                                                    {((isInterview || isScheduled || isCancelled || isRejected || isCompleted) && n.advisor_comment) ? (
+                                                    {((isInterview || isScheduled || isCancelled || isRejected || isCompleted || isRecoApproved || isRecoRejected) && n.advisor_comment) ? (
                                                         <div className="sp-muted" style={{ marginTop: 8, whiteSpace: "pre-wrap" }}>
                                                             <strong style={{ color: "#0f172a" }}>Note:</strong> {n.advisor_comment}
                                                         </div>

@@ -1,0 +1,189 @@
+ACADEMIC ADVISING & COURSE RECOMMENDATION SYSTEM — FLOW (END-TO-END)
+
+1) Actors / Roles
+- Student: completes profile + academic credentials + assessment; views top 3 recommendations; books appointments.
+- Advisor: reviews students, can approve/reject/interview; can manage appointments.
+- Admin: dashboard/analytics + carousel slides + can view student details.
+
+2) High-level System Flow
+A) Authentication
+- Student registers/logs in.
+- Frontend stores auth token in localStorage as "authToken" and sends it as a Bearer token on API calls.
+- API routes are protected by auth middleware (see routes/api.php).
+
+B) Student Portal (main hub)
+- Route: /student (resources/js/components/StudentPortal.js)
+- On load:
+  - GET /api/profile to fetch current user + profile.
+  - GET /api/appointments?scope=upcoming&limit=3 to show upcoming appointments.
+- The portal calculates completion steps:
+  Step 1: Basic Information
+  Step 2: Academic Credentials
+  Step 3: Assessment Quiz
+  Step 4: Course Recommendation generated
+  Step 5: Advisor Approval
+
+C) Step 1 — Basic Information
+- Route: /student/basic-information (resources/js/components/StudentBasicInformation.js)
+- Data captured:
+  - name, email (User table)
+  - age, gender, high_school, contact_number (Profile table)
+- API:
+  - GET /api/profile (prefill form)
+  - PUT /api/profile/basic-info (save)
+- Backend:
+  - app/Http/Controllers/ProfileController.php::upsertBasicInfo
+
+D) Step 2 — Academic Credentials
+- Route: /student/academic-credentials (resources/js/components/StudentAcademicCredentials.js)
+- Data captured (Profile table):
+  - shs_strand
+  - subject_grades[] (subject + grade)
+  - shs_general_average (auto-computed from subject grades in UI)
+  - skills[]
+  - career_goals
+  - program_interest_ratings{ programName: 0..5 }
+  - optional uploads: report_card, skill_attachments[]
+- API:
+  - GET /api/profile (prefill)
+  - PUT /api/profile/academic-credentials (multipart)
+- Backend:
+  - app/Http/Controllers/ProfileController.php::upsertAcademicCredentials
+  - Validation: program_interest_ratings.* integer 0..5
+
+E) Step 3 — Assessment Quiz
+- Route: /student/assessment-quiz (resources/js/components/StudentAssessmentQuiz.js)
+- Assessment structure:
+  Part I: checklist (statements 1..15)
+  Part II: 20 questions total:
+    - 15 category questions (top 3 categories × 5 questions each)
+    - 5 readiness questions (gen_1..gen_5)
+- API:
+  - GET /api/assessment (load saved answers + server scores + saved recommendations)
+  - PUT /api/assessment (save answers + compute recommendations)
+  - DELETE /api/assessment (reset)
+- Backend:
+  - app/Http/Controllers/AssessmentController.php
+    - show(): returns assessment + computed scores + recommended_top3 + recommended_degrees
+    - upsert(): validates answers, computes scores, applies boosts/thresholds, stores results in Profile
+
+F) Step 4 — Course Recommendation (display)
+- Route: /student/course-recommendation (resources/js/components/StudentCourseRecommendation.js)
+- Lock rules (frontend):
+  - Requires Step 1 + Step 2 + Assessment completed.
+- Data source:
+  - Prefers GET /api/assessment and uses assessment.recommended_degrees (top 3 concrete programs).
+  - Fallback to locally computed scores/top3 if server data is unavailable.
+
+G) Step 5 — Advisor Review (approval / interview / rejection)
+- Advisor routes:
+  - /advisor (AdvisorDashboard) lists students + status
+  - /advisor/students/:userId (AdvisorStudentDetail) reviews a student
+- Backend (advisor):
+  - GET /api/advisor/students
+  - GET /api/advisor/students/{userId}
+  - PUT /api/advisor/students/{userId}/recommendation
+- Advisor may set:
+  - advisor_status: pending | approved | rejected | interview
+  - advisor_comment
+  - advisor_recommended_degrees
+  - interview schedule fields (date/time/venue) if status=interview
+
+
+3) How the System Produces the Top 3 Recommendations (Backend Canonical Logic)
+All final recommendations are computed in:
+- app/Http/Controllers/AssessmentController.php::upsert
+
+3.1 Category score initialization
+The system uses category scores (8 categories):
+- Accountancy
+- Arts & Sciences
+- Business Administration
+- Computer Studies
+- Criminal Justice Education
+- Engineering & Technology
+- Nursing
+- Teacher Education
+
+Initialize all category scores to 0.
+
+3.2 Part I scoring (interest/skills checklist)
+- Mapping is PART1_CATEGORY_MAP.
+- For each category, count how many mapped statement numbers are checked.
+- Add +1 per checked statement.
+
+3.3 Part II scoring (knowledge + readiness)
+- Category questions:
+  - For each correct answer, add +2 to that question’s category.
+- Readiness questions (gen_1..gen_5):
+  - For each readiness question answered correctly, add +1 to ALL categories.
+
+3.4 Academic boosts (adds information from Step 2)
+If the student has a Profile, scoring is adjusted using:
+- applyAcademicBoosts(scores, profile)
+
+A) Strand prior boost
+- Based on shs_strand (STEM/ABM/HUMSS/TVL).
+- Adds soft boosts to certain categories.
+- Effectively: score += (boostValue * WEIGHTS[strand_boost] / 2)
+
+B) Program interest ratings boost (strong signal)
+- Source: profile.program_interest_ratings
+- UI scale: 0..5 where 0 means “not set” (ignored)
+- Convert rating 1..5 to delta centered at 3:
+  delta = clamp(rating - 3, -2..+2)
+- Apply:
+  scores[mappedCategory] += delta * WEIGHTS[program_interest_rating]
+- Current weight:
+  WEIGHTS[program_interest_rating] = 2.5
+- Examples:
+  rating 5 => delta +2 => +5.0
+  rating 4 => delta +1 => +2.5
+  rating 3 => delta  0 => +0.0
+  rating 2 => delta -1 => -2.5
+  rating 1 => delta -2 => -5.0
+
+C) Grade boost (weak signal)
+- If overall GWA >= 88 OR Math/Science subject grade >= 85:
+  add +0.75 to Engineering & Technology and Computer Studies.
+
+3.5 Threshold adjustments (soft disqualification)
+After boosts, applyThresholdAdjustments(scores, profile) enforces minimum expectations.
+Threshold rules exist for: Nursing, Engineering & Technology, Computer Studies, Accountancy.
+
+For each category threshold:
+- If GWA < min_gwa => penalty +3.0
+- If needs_math and no strong math => penalty +1.5
+- If needs_science and no strong science => penalty +1.5
+- Final: scores[category] -= penalty
+
+3.6 Pick Top 3 categories
+- Sort categories by final score (descending)
+- Take top 3 categories => recommended_top3
+
+3.7 Convert Top 3 categories into Top 3 concrete degree programs
+- degreesFromTop(recommended_top3, scores)
+- Each category maps to one or more degree programs (DEGREE_PROGRAMS).
+- The output is a flat list of up to 3 degrees total.
+  Example: if the #1 category has 3 degrees, it can fill all 3 slots.
+
+4) Storage
+All step results are stored on the Profile model:
+- Step 1 fields: age, gender, high_school, contact_number
+- Step 2 fields: shs_strand, subject_grades, shs_general_average, skills, career_goals, program_interest_ratings, report_card_path, skill_attachments
+- Step 3/4 fields: assessment_part1_selected, assessment_part2_answers, recommended_top3, recommended_degrees
+- Advisor fields: advisor_status, advisor_comment, advisor_recommended_degrees, advisor interview schedule fields
+
+5) Key API Endpoints (Student)
+- POST /api/login
+- POST /api/register
+- POST /api/logout
+- GET  /api/profile
+- PUT  /api/profile/basic-info
+- PUT  /api/profile/academic-credentials
+- GET  /api/assessment
+- PUT  /api/assessment
+- DELETE /api/assessment
+- GET  /api/appointments
+- POST /api/appointments
+- GET  /api/notifications

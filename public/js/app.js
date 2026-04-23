@@ -86139,38 +86139,46 @@ function AdvisorStudentDetail() {
     _useState0 = _slicedToArray(_useState9, 2),
     attachments = _useState0[0],
     setAttachments = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("pending"),
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState10 = _slicedToArray(_useState1, 2),
-    status = _useState10[0],
-    setStatus = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    assessment = _useState10[0],
+    setAssessment = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("all"),
     _useState12 = _slicedToArray(_useState11, 2),
-    comment = _useState12[0],
-    setComment = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    breakdownSkillFilter = _useState12[0],
+    setBreakdownSkillFilter = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("pending"),
     _useState14 = _slicedToArray(_useState13, 2),
-    degrees = _useState14[0],
-    setDegrees = _useState14[1];
+    status = _useState14[0],
+    setStatus = _useState14[1];
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState16 = _slicedToArray(_useState15, 2),
-    interviewDate = _useState16[0],
-    setInterviewDate = _useState16[1];
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    comment = _useState16[0],
+    setComment = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState18 = _slicedToArray(_useState17, 2),
-    interviewTime = _useState18[0],
-    setInterviewTime = _useState18[1];
+    degrees = _useState18[0],
+    setDegrees = _useState18[1];
   var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState20 = _slicedToArray(_useState19, 2),
-    interviewVenue = _useState20[0],
-    setInterviewVenue = _useState20[1];
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    interviewDate = _useState20[0],
+    setInterviewDate = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState22 = _slicedToArray(_useState21, 2),
-    saving = _useState22[0],
-    setSaving = _useState22[1];
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    interviewTime = _useState22[0],
+    setInterviewTime = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState24 = _slicedToArray(_useState23, 2),
-    success = _useState24[0],
-    setSuccess = _useState24[1];
+    interviewVenue = _useState24[0],
+    setInterviewVenue = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    saving = _useState26[0],
+    setSaving = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState28 = _slicedToArray(_useState27, 2),
+    success = _useState28[0],
+    setSuccess = _useState28[1];
   var headers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return {
       Authorization: "Bearer ".concat(token),
@@ -86189,7 +86197,7 @@ function AdvisorStudentDetail() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var load = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _res$data, _res$data2, _res$data3, _res$data4, _p$advisor_recommende, res, p, st, cm, base, norm, rawInterviewDate, normInterviewDate, _e$response, _t;
+        var _res$data, _res$data2, _res$data3, _res$data4, _res$data5, _p$advisor_recommende, res, p, st, cm, base, norm, rawInterviewDate, normInterviewDate, _e$response, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -86205,11 +86213,12 @@ function AdvisorStudentDetail() {
               res = _context.v;
               setStudent(((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.student) || null);
               setProfile(((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.profile) || null);
-              setAttachments(((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.attachments) || {
+              setAssessment(((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.assessment) || null);
+              setAttachments(((_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.attachments) || {
                 report_card_url: null,
                 skill_attachment_urls: []
               });
-              p = (_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.profile;
+              p = (_res$data5 = res.data) === null || _res$data5 === void 0 ? void 0 : _res$data5.profile;
               st = (p === null || p === void 0 ? void 0 : p.advisor_status) || "pending";
               cm = (p === null || p === void 0 ? void 0 : p.advisor_comment) || "";
               base = (p !== null && p !== void 0 && (_p$advisor_recommende = p.advisor_recommended_degrees) !== null && _p$advisor_recommende !== void 0 && _p$advisor_recommende.length ? p.advisor_recommended_degrees : p === null || p === void 0 ? void 0 : p.recommended_degrees) || [];
@@ -86243,6 +86252,60 @@ function AdvisorStudentDetail() {
     }();
     load();
   }, [headers, userId]);
+  var breakdown = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return (assessment === null || assessment === void 0 ? void 0 : assessment.breakdown) || null;
+  }, [assessment]);
+  var breakdownSummary = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var _readiness$by_skill, _readiness$by_skill2, _part2$by_category, _part2$by_category2;
+    if (!breakdown) return null;
+    var readiness = breakdown.readiness || {};
+    var part2 = breakdown.part2_categories || {};
+    var skillLabels = {
+      numerical_reasoning: "Numerical Reasoning",
+      logical_reasoning: "Logical Reasoning",
+      verbal_reasoning: "Verbal Reasoning"
+    };
+    var readinessCorrect = (readiness === null || readiness === void 0 || (_readiness$by_skill = readiness.by_skill) === null || _readiness$by_skill === void 0 ? void 0 : _readiness$by_skill.correct) || {};
+    var readinessTotal = (readiness === null || readiness === void 0 || (_readiness$by_skill2 = readiness.by_skill) === null || _readiness$by_skill2 === void 0 ? void 0 : _readiness$by_skill2.total) || {};
+    var readinessRows = Object.keys(skillLabels).map(function (k) {
+      return {
+        key: k,
+        label: skillLabels[k],
+        correct: Number(readinessCorrect[k] || 0),
+        total: Number(readinessTotal[k] || 0)
+      };
+    });
+    var catCorrect = (part2 === null || part2 === void 0 || (_part2$by_category = part2.by_category) === null || _part2$by_category === void 0 ? void 0 : _part2$by_category.correct) || {};
+    var catTotal = (part2 === null || part2 === void 0 || (_part2$by_category2 = part2.by_category) === null || _part2$by_category2 === void 0 ? void 0 : _part2$by_category2.total) || {};
+    var categories = Array.isArray(part2.selected_categories) ? part2.selected_categories : Object.keys(catTotal);
+    var categoryRows = categories.slice().sort().map(function (c) {
+      return {
+        category: c,
+        correct: Number(catCorrect[c] || 0),
+        total: Number(catTotal[c] || 0)
+      };
+    });
+    return {
+      part2: {
+        correctTotal: Number(part2.correct_total || 0),
+        total: Number(part2.total || 0),
+        rows: categoryRows
+      },
+      readiness: {
+        correctTotal: Number(readiness.correct_total || 0),
+        total: Number(readiness.total || 0),
+        rows: readinessRows
+      }
+    };
+  }, [breakdown]);
+  var filteredBreakdownItems = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var items = Array.isArray(breakdown === null || breakdown === void 0 ? void 0 : breakdown.items) ? breakdown.items : [];
+    if (breakdownSkillFilter === "all") return items;
+    return items.filter(function (it) {
+      if ((it === null || it === void 0 ? void 0 : it.type) !== "readiness") return true; // only filter readiness questions
+      return String((it === null || it === void 0 ? void 0 : it.skill) || "") === breakdownSkillFilter;
+    });
+  }, [breakdown, breakdownSkillFilter]);
   var addDegree = function addDegree() {
     setDegrees(function (d) {
       return [].concat(_toConsumableArray(d), [{
@@ -86812,6 +86875,133 @@ function AdvisorStudentDetail() {
                   })]
                 })
               })]
+            }), breakdownSummary ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              style: {
+                marginTop: 18
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+                style: {
+                  marginTop: 0
+                },
+                children: "Part II Breakdown (Advisor)"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "ad-kv",
+                style: {
+                  marginBottom: 14
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "ad-k",
+                    children: "Category questions"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "ad-v",
+                    children: [breakdownSummary.part2.correctTotal, "/", breakdownSummary.part2.total]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "ad-k",
+                    children: "Readiness (skill-based)"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "ad-v",
+                    children: [breakdownSummary.readiness.correctTotal, "/", breakdownSummary.readiness.total]
+                  })]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "ad-review-row",
+                style: {
+                  gridTemplateColumns: "1fr",
+                  marginBottom: 10
+                },
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
+                  className: "ad-field",
+                  style: {
+                    maxWidth: 360
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: "Filter readiness skill"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+                    value: breakdownSkillFilter,
+                    onChange: function onChange(e) {
+                      return setBreakdownSkillFilter(e.target.value);
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                      value: "all",
+                      children: "All"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                      value: "numerical_reasoning",
+                      children: "numerical_reasoning"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                      value: "logical_reasoning",
+                      children: "logical_reasoning"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                      value: "verbal_reasoning",
+                      children: "verbal_reasoning"
+                    })]
+                  })]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "ad-table",
+                style: {
+                  marginTop: 8
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "ad-table-head",
+                  style: {
+                    gridTemplateColumns: "140px 150px 1fr 120px 120px 120px"
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: "Question"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: "Type"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: "Category / Skill"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: "Student"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: "Correct"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                    children: "Result"
+                  })]
+                }), filteredBreakdownItems.map(function (it) {
+                  var qid = String((it === null || it === void 0 ? void 0 : it.qid) || "");
+                  var type = String((it === null || it === void 0 ? void 0 : it.type) || "");
+                  var label = type === "readiness" ? String((it === null || it === void 0 ? void 0 : it.skill) || "") : String((it === null || it === void 0 ? void 0 : it.category) || "");
+                  var userAns = String((it === null || it === void 0 ? void 0 : it.user_answer) || "—");
+                  var correctAns = String((it === null || it === void 0 ? void 0 : it.correct_answer) || "—");
+                  var ok = Boolean(it === null || it === void 0 ? void 0 : it.is_correct);
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "ad-table-row",
+                    style: {
+                      gridTemplateColumns: "140px 150px 1fr 120px 120px 120px"
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                      children: qid
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                      children: type
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                      children: label || "—"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                      children: userAns
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                      children: correctAns
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+                      children: ok ? "Correct" : "Wrong"
+                    })]
+                  }, "".concat(qid, "-").concat(type));
+                }), !filteredBreakdownItems.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "ad-muted",
+                  style: {
+                    marginTop: 8
+                  },
+                  children: "No breakdown items available."
+                }) : null]
+              })]
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "ad-muted",
+              style: {
+                marginTop: 14
+              },
+              children: "No assessment breakdown available yet."
             })]
           })]
         })]
@@ -89359,13 +89549,13 @@ function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArra
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 
 
 
@@ -89374,96 +89564,96 @@ var PART1_STATEMENTS = ["I enjoy working with numbers and financial records.", "
 var PART2_BANK = {
   Accountancy: [{
     id: "acc_1",
-    prompt: "What is the basic accounting equation?",
+    prompt: "You have ₱1,200 and you spend ₱450. How much money is left?",
     options: {
-      A: "Assets = Liabilities – Capital",
-      B: "Assets = Liabilities + Owner’s Equity",
-      C: "Income = Expenses + Assets",
-      D: "Profit = Assets – Liabilities"
+      A: "₱650",
+      B: "₱750",
+      C: "₱850",
+      D: "₱950"
     },
     correct: "B",
     category: "Accountancy"
   }, {
     id: "acc_2",
-    prompt: "In double-entry bookkeeping, every transaction affects:",
+    prompt: "A student lists expenses of ₱120, ₱80, and ₱50. What is the total expense?",
     options: {
-      A: "Only one account",
-      B: "At least two accounts",
-      C: "Only revenue accounts",
-      D: "Only cash accounts"
+      A: "₱200",
+      B: "₱250",
+      C: "₱260",
+      D: "₱280"
     },
     correct: "B",
     category: "Accountancy"
   }, {
     id: "acc_3",
-    prompt: "A trial balance is used mainly to:",
+    prompt: "A store gives a 20% discount on an item that costs ₱500. What is the discounted price?",
     options: {
-      A: "Determine company profit automatically",
-      B: "Check if total debits equal total credits",
-      C: "Record daily transactions",
-      D: "Create marketing plans"
+      A: "₱350",
+      B: "₱400",
+      C: "₱450",
+      D: "₱480"
     },
     correct: "B",
     category: "Accountancy"
   }, {
     id: "acc_4",
-    prompt: "Which financial statement shows a company’s financial position on a specific date?",
+    prompt: "A small business earned ₱2,000 and spent ₱1,500. What is the net gain?",
     options: {
-      A: "Income statement",
-      B: "Balance sheet",
-      C: "Cash flow statement",
-      D: "Statement of changes in equity only"
+      A: "₱300",
+      B: "₱500",
+      C: "₱1,500",
+      D: "₱3,500"
     },
     correct: "B",
     category: "Accountancy"
   }, {
     id: "acc_5",
-    prompt: "Revenue is generally recognized when it is:",
+    prompt: "A budget is ₱10,000 and rent is 50% of the budget. How much is allocated for rent?",
     options: {
-      A: "Planned",
-      B: "Earned",
-      C: "Promised",
-      D: "Discussed with the customer"
+      A: "₱2,500",
+      B: "₱5,000",
+      C: "₱6,000",
+      D: "₱7,500"
     },
     correct: "B",
     category: "Accountancy"
   }],
   "Arts & Sciences": [{
     id: "arts_1",
-    prompt: "Which branch of science studies human behavior?",
+    prompt: "Which is an example of a testable research question?",
     options: {
-      A: "Biology",
-      B: "Sociology",
-      C: "Psychology",
-      D: "Chemistry"
+      A: "Why is life unfair?",
+      B: "Is music better than silence?",
+      C: "Does fertilizer A increase plant height after two weeks?",
+      D: "What is the best color?"
     },
     correct: "C",
     category: "Arts & Sciences"
   }, {
     id: "arts_2",
-    prompt: "In research, the variable you change/control is the:",
+    prompt: "You change the amount of light a plant receives and you measure its height. What is the independent variable?",
     options: {
-      A: "Dependent variable",
-      B: "Independent variable",
-      C: "Random variable",
-      D: "Confounding variable"
+      A: "Plant height",
+      B: "Amount of light",
+      C: "Type of plant",
+      D: "Time of day"
     },
     correct: "B",
     category: "Arts & Sciences"
   }, {
     id: "arts_3",
-    prompt: "Correlation means two variables:",
+    prompt: "When two variables tend to increase together, this is best described as:",
     options: {
-      A: "Prove cause and effect",
-      B: "Are unrelated",
-      C: "Move together in some pattern",
-      D: "Are always equal"
+      A: "Cause and effect",
+      B: "No relationship",
+      C: "A positive association",
+      D: "Always equal values"
     },
     correct: "C",
     category: "Arts & Sciences"
   }, {
     id: "arts_4",
-    prompt: "A hypothesis is best described as:",
+    prompt: "A good hypothesis should be:",
     options: {
       A: "A final conclusion",
       B: "A testable prediction",
@@ -89486,29 +89676,29 @@ var PART2_BANK = {
   }],
   "Business Administration": [{
     id: "bus_1",
-    prompt: "What does ROI mean in business?",
+    prompt: "You invest ₱1,000 and you receive ₱1,200 back. What is your return (profit as a percent of investment)?",
     options: {
-      A: "Rate of Income",
-      B: "Return on Investment",
-      C: "Revenue of Industry",
-      D: "Risk of Investment"
+      A: "10%",
+      B: "20%",
+      C: "25%",
+      D: "40%"
     },
     correct: "B",
     category: "Business Administration"
   }, {
     id: "bus_2",
-    prompt: "The 4Ps of marketing include Product, Price, Place, and:",
+    prompt: "A company runs ads and offers discounts to attract customers. This is an example of:",
     options: {
-      A: "People",
+      A: "Accounting",
       B: "Promotion",
-      C: "Profit",
-      D: "Process only"
+      C: "Manufacturing",
+      D: "Inventory counting"
     },
     correct: "B",
     category: "Business Administration"
   }, {
     id: "bus_3",
-    prompt: "A SWOT analysis stands for:",
+    prompt: "A business lists its Strengths, Weaknesses, Opportunities, and Threats. This framework is called:",
     options: {
       A: "Sales, Work, Output, Time",
       B: "Strengths, Weaknesses, Opportunities, Threats",
@@ -89519,35 +89709,35 @@ var PART2_BANK = {
     category: "Business Administration"
   }, {
     id: "bus_4",
-    prompt: "Break-even point is when:",
+    prompt: "A shop has fixed costs of ₱2,000. It earns ₱50 profit per item sold. How many items must it sell to break even?",
     options: {
-      A: "Revenue is zero",
-      B: "Profit is maximum",
-      C: "Total revenue equals total costs",
-      D: "Costs stop increasing"
+      A: "20",
+      B: "30",
+      C: "40",
+      D: "60"
     },
     correct: "C",
     category: "Business Administration"
   }, {
     id: "bus_5",
-    prompt: "Supply and demand most directly influences:",
+    prompt: "In a market, when demand goes up but supply stays the same, what usually happens to price?",
     options: {
-      A: "Office layout",
-      B: "Market price",
-      C: "Employee attendance",
-      D: "Product color"
+      A: "It always goes down",
+      B: "It usually goes up",
+      C: "It becomes zero",
+      D: "It becomes random"
     },
     correct: "B",
     category: "Business Administration"
   }],
   "Computer Studies": [{
     id: "cs_1",
-    prompt: "What does CPU stand for in computer systems?",
+    prompt: "Which password is strongest?",
     options: {
-      A: "Central Process Unit",
-      B: "Computer Personal Unit",
-      C: "Central Processing Unit",
-      D: "Control Program Utility"
+      A: "password123",
+      B: "john2005",
+      C: "G7!mQ2#zP9",
+      D: "12345678"
     },
     correct: "C",
     category: "Computer Studies"
@@ -89598,18 +89788,18 @@ var PART2_BANK = {
   }],
   "Criminal Justice Education": [{
     id: "cje_1",
-    prompt: "Which agency is responsible for enforcing laws?",
+    prompt: "When writing an incident report, what is the most important approach?",
     options: {
-      A: "Department of Health",
-      B: "Police Department",
-      C: "Department of Education",
-      D: "Securities Commission"
+      A: "Write only your opinions",
+      B: "Record observable facts in time order",
+      C: "Leave out important details",
+      D: "Guess what happened"
     },
     correct: "B",
     category: "Criminal Justice Education"
   }, {
     id: "cje_2",
-    prompt: "Presumption of innocence means the accused is:",
+    prompt: "Presumption of innocence means a person is:",
     options: {
       A: "Always guilty",
       B: "Considered innocent until proven guilty",
@@ -89620,10 +89810,10 @@ var PART2_BANK = {
     category: "Criminal Justice Education"
   }, {
     id: "cje_3",
-    prompt: "Chain of custody is important to:",
+    prompt: "After collecting evidence, what best helps ensure it stays trustworthy in court?",
     options: {
       A: "Make trials faster",
-      B: "Keep evidence properly tracked and unaltered",
+      B: "Keep evidence sealed, labeled, and documented by handler",
       C: "Increase police budget",
       D: "Replace witnesses"
     },
@@ -89654,40 +89844,40 @@ var PART2_BANK = {
   }],
   "Engineering & Technology": [{
     id: "eng_1",
-    prompt: "Which formula is used to compute speed?",
+    prompt: "A vehicle travels 120 km in 2 hours. What is the average speed?",
     options: {
-      A: "Speed = Distance × Time",
-      B: "Speed = Distance ÷ Time",
-      C: "Speed = Time ÷ Distance",
-      D: "Speed = Mass × Acceleration"
+      A: "40 km/h",
+      B: "60 km/h",
+      C: "80 km/h",
+      D: "100 km/h"
     },
     correct: "B",
     category: "Engineering & Technology"
   }, {
     id: "eng_2",
-    prompt: "Ohm’s Law is:",
+    prompt: "A circuit has 12V and 4Ω resistance. What current flows?",
     options: {
-      A: "P = VI",
-      B: "V = IR",
-      C: "F = ma",
-      D: "E = mc²"
+      A: "1 A",
+      B: "3 A",
+      C: "6 A",
+      D: "16 A"
     },
     correct: "B",
     category: "Engineering & Technology"
   }, {
     id: "eng_3",
-    prompt: "Force is calculated by:",
+    prompt: "An object with mass 2 kg accelerates at 3 m/s². What force is needed?",
     options: {
-      A: "F = m + a",
-      B: "F = ma",
-      C: "F = m/a",
-      D: "F = a/m"
+      A: "1 N",
+      B: "6 N",
+      C: "9 N",
+      D: "12 N"
     },
     correct: "B",
     category: "Engineering & Technology"
   }, {
     id: "eng_4",
-    prompt: "The SI unit of power is:",
+    prompt: "Which unit measures power?",
     options: {
       A: "Newton",
       B: "Watt",
@@ -89710,29 +89900,29 @@ var PART2_BANK = {
   }],
   Nursing: [{
     id: "nurs_1",
-    prompt: "What is the normal body temperature in Celsius?",
+    prompt: "Before touching a patient, what is the best first action to reduce infection risk?",
     options: {
-      A: "35°C",
-      B: "36.5–37.5°C",
-      C: "38–39°C",
-      D: "40°C"
+      A: "Check your phone for messages",
+      B: "Perform hand hygiene",
+      C: "Shake hands with the patient",
+      D: "Eat a snack"
     },
     correct: "B",
     category: "Nursing"
   }, {
     id: "nurs_2",
-    prompt: "A normal adult resting heart rate is typically:",
+    prompt: "Which situation most urgently needs immediate attention in a clinic?",
     options: {
-      A: "20–40 bpm",
-      B: "60–100 bpm",
-      C: "120–160 bpm",
-      D: "180–220 bpm"
+      A: "A patient asks for water",
+      B: "A patient has difficulty breathing",
+      C: "A patient wants to reschedule",
+      D: "A patient requests a blanket"
     },
     correct: "B",
     category: "Nursing"
   }, {
     id: "nurs_3",
-    prompt: "The most effective way to prevent infection spread in healthcare is:",
+    prompt: "The most effective everyday action to reduce infection spread in healthcare is:",
     options: {
       A: "Wearing perfume",
       B: "Hand hygiene",
@@ -89743,7 +89933,7 @@ var PART2_BANK = {
     category: "Nursing"
   }, {
     id: "nurs_4",
-    prompt: "Blood pressure measures the force of blood against:",
+    prompt: "Blood pressure is best described as measuring the force of blood against:",
     options: {
       A: "Bones",
       B: "Artery walls",
@@ -89754,12 +89944,12 @@ var PART2_BANK = {
     category: "Nursing"
   }, {
     id: "nurs_5",
-    prompt: "A fever is commonly considered at or above:",
+    prompt: "A thermometer reads 38.2°C. This is best described as:",
     options: {
-      A: "36.0°C",
-      B: "37.0°C",
-      C: "38.0°C",
-      D: "39.9°C always"
+      A: "Low blood sugar",
+      B: "Normal temperature",
+      C: "Fever",
+      D: "Dehydration only"
     },
     correct: "C",
     category: "Nursing"
@@ -89821,9 +90011,17 @@ var PART2_BANK = {
     category: "Teacher Education"
   }]
 };
-var READINESS_QUESTIONS = [{
+
+// General readiness (15 items) tagged by skill.
+// These are shared across all students, but scored per-skill and weighted per program category.
+var GENERAL_READINESS_15 = [
+// =========================
+// NUMERICAL (5 ITEMS)
+// =========================
+{
   id: "gen_1",
-  prompt: "What number comes next in the sequence: 2, 4, 8, 16, __ ?",
+  skill: "numerical",
+  prompt: "What number comes next: 2, 4, 8, 16, __?",
   options: {
     A: "18",
     B: "20",
@@ -89833,7 +90031,8 @@ var READINESS_QUESTIONS = [{
   correct: "D"
 }, {
   id: "gen_2",
-  prompt: "A student scored 45 out of 60. What percent is this?",
+  skill: "numerical",
+  prompt: "A student scored 45/60. What is the percentage?",
   options: {
     A: "70%",
     B: "75%",
@@ -89843,35 +90042,205 @@ var READINESS_QUESTIONS = [{
   correct: "B"
 }, {
   id: "gen_3",
-  prompt: "Which sentence best states the main purpose of a conclusion in a report?",
+  skill: "numerical",
+  prompt: "If 5 books cost ₱500, how much is 1 book?",
   options: {
-    A: "To introduce new evidence",
-    B: "To summarize findings and state final points clearly",
-    C: "To list all references used",
-    D: "To repeat the title in different words"
+    A: "₱50",
+    B: "₱75",
+    C: "₱100",
+    D: "₱125"
+  },
+  correct: "C"
+}, {
+  id: "gen_4",
+  skill: "numerical",
+  prompt: "What is 20% of 250?",
+  options: {
+    A: "40",
+    B: "50",
+    C: "60",
+    D: "70"
   },
   correct: "B"
 }, {
-  id: "gen_4",
-  prompt: "Enrollment increased from 200 to 260 students. What is the increase?",
+  id: "gen_5",
+  skill: "numerical",
+  prompt: "A number is doubled and becomes 36. What is the original number?",
   options: {
-    A: "30",
-    B: "50",
-    C: "60",
-    D: "80"
+    A: "16",
+    B: "18",
+    C: "20",
+    D: "22"
+  },
+  correct: "B"
+},
+// =========================
+// LOGICAL (5 ITEMS)
+// =========================
+{
+  id: "gen_6",
+  skill: "logical",
+  prompt: "If all dogs are animals and some animals are brown, which is true?",
+  options: {
+    A: "All dogs are brown",
+    B: "Some dogs may be brown",
+    C: "No dogs are brown",
+    D: "All animals are dogs"
+  },
+  correct: "B"
+}, {
+  id: "gen_7",
+  skill: "logical",
+  prompt: "Find the odd one out: 2, 4, 6, 9, 8",
+  options: {
+    A: "2",
+    B: "4",
+    C: "6",
+    D: "9"
+  },
+  correct: "D"
+}, {
+  id: "gen_8",
+  skill: "logical",
+  prompt: "If today is Friday, what day is it after 3 days?",
+  options: {
+    A: "Sunday",
+    B: "Monday",
+    C: "Tuesday",
+    D: "Wednesday"
+  },
+  correct: "B"
+}, {
+  id: "gen_9",
+  skill: "logical",
+  prompt: "A is taller than B. B is taller than C. Who is tallest?",
+  options: {
+    A: "A",
+    B: "B",
+    C: "C",
+    D: "Cannot determine"
+  },
+  correct: "A"
+}, {
+  id: "gen_10",
+  skill: "logical",
+  prompt: "Which comes next: A, C, E, G, __?",
+  options: {
+    A: "H",
+    B: "I",
+    C: "J",
+    D: "K"
+  },
+  correct: "B"
+},
+// =========================
+// VERBAL (5 ITEMS)
+// =========================
+{
+  id: "gen_11",
+  skill: "verbal",
+  prompt: "Which word is closest in meaning to 'analyze'?",
+  options: {
+    A: "Ignore",
+    B: "Examine",
+    C: "Guess",
+    D: "Forget"
+  },
+  correct: "B"
+}, {
+  id: "gen_12",
+  skill: "verbal",
+  prompt: "Choose the correctly spelled word:",
+  options: {
+    A: "Recieve",
+    B: "Receive",
+    C: "Receeve",
+    D: "Receve"
+  },
+  correct: "B"
+}, {
+  id: "gen_13",
+  skill: "verbal",
+  prompt: "Which sentence is correct?",
+  options: {
+    A: "She go to school yesterday",
+    B: "She goes to school yesterday",
+    C: "She went to school yesterday",
+    D: "She going to school yesterday"
   },
   correct: "C"
 }, {
-  id: "gen_5",
-  prompt: "If it takes 3 hours to travel 150 km, what is the average speed?",
+  id: "gen_14",
+  skill: "verbal",
+  prompt: "What is the main idea of a paragraph?",
   options: {
-    A: "40 km/h",
-    B: "45 km/h",
-    C: "50 km/h",
-    D: "55 km/h"
+    A: "A small detail",
+    B: "The central point",
+    C: "The last sentence",
+    D: "A random word"
+  },
+  correct: "B"
+}, {
+  id: "gen_15",
+  skill: "verbal",
+  prompt: "Which word is an antonym of 'increase'?",
+  options: {
+    A: "Grow",
+    B: "Rise",
+    C: "Decrease",
+    D: "Add"
   },
   correct: "C"
 }];
+var GENERAL_READINESS_INDEX = GENERAL_READINESS_15.reduce(function (acc, q) {
+  acc[String(q.id)] = q;
+  return acc;
+}, {});
+var READINESS_POINT_PER_CORRECT = 0.4;
+
+// Program/category skill weights (must stay aligned with backend AssessmentController)
+var CATEGORY_SKILL_WEIGHTS = {
+  Accountancy: {
+    numerical: 0.6,
+    logical: 0.3,
+    verbal: 0.1
+  },
+  "Arts & Sciences": {
+    numerical: 0.2,
+    logical: 0.4,
+    verbal: 0.4
+  },
+  "Business Administration": {
+    numerical: 0.35,
+    logical: 0.35,
+    verbal: 0.3
+  },
+  "Computer Studies": {
+    numerical: 0.35,
+    logical: 0.5,
+    verbal: 0.15
+  },
+  "Criminal Justice Education": {
+    numerical: 0.15,
+    logical: 0.25,
+    verbal: 0.6
+  },
+  "Engineering & Technology": {
+    numerical: 0.5,
+    logical: 0.4,
+    verbal: 0.1
+  },
+  Nursing: {
+    numerical: 0.4,
+    logical: 0.2,
+    verbal: 0.4
+  },
+  "Teacher Education": {
+    numerical: 0.1,
+    logical: 0.2,
+    verbal: 0.7
+  }
+};
 var PART1_CATEGORY_MAP = {
   Accountancy: [1, 9],
   "Arts & Sciences": [2, 10],
@@ -89887,6 +90256,56 @@ var CATEGORY_WEIGHTS = {
   part2: 2
 };
 var CATEGORY_ORDER = Object.keys(PART1_CATEGORY_MAP);
+function mapProgramToCategory(program) {
+  var p = String(program || "").trim().toLowerCase();
+  if (!p) return null;
+
+  // Keep this consistent with backend AssessmentController::mapProgramToCategory
+  if (p === "arts and sciences") return "Arts & Sciences";
+  if (p === "teachers education" || p === "teacher education") return "Teacher Education";
+  if (p === "engineering and technology" || p === "engineering & technology") return "Engineering & Technology";
+  if (p === "criminal justice education") return "Criminal Justice Education";
+  if (p === "business administration") return "Business Administration";
+  if (p === "computer studies") return "Computer Studies";
+  if (p === "accountancy") return "Accountancy";
+  if (p === "nursing") return "Nursing";
+  return null;
+}
+function deriveTopCategoriesFromInterestRatings(interestRatings) {
+  var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
+  var ratings = interestRatings && _typeof(interestRatings) === "object" ? interestRatings : null;
+  if (!ratings) return [];
+
+  // Collapse to per-category rating (max), because multiple programs could map to one category.
+  var byCategory = {};
+  Object.entries(ratings).forEach(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+      program = _ref2[0],
+      rating = _ref2[1];
+    var r = Number(rating);
+    if (!Number.isFinite(r) || r <= 0) return; // 0 means "not set"
+
+    var category = mapProgramToCategory(program);
+    if (!category) return;
+    byCategory[category] = Math.max(byCategory[category] || 0, r);
+  });
+  var rows = Object.entries(byCategory).map(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+      category = _ref4[0],
+      rating = _ref4[1];
+    return {
+      category: category,
+      rating: rating
+    };
+  });
+  rows.sort(function (a, b) {
+    if (b.rating !== a.rating) return b.rating - a.rating;
+    return CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
+  });
+  return rows.slice(0, n).map(function (r) {
+    return r.category;
+  });
+}
 function buildPart2QuestionIndex() {
   var idx = {};
   Object.values(PART2_BANK).forEach(function (list) {
@@ -89901,10 +90320,10 @@ var PART2_INDEX = buildPart2QuestionIndex();
 function deriveTopCategoriesFromPart1(part1Selected) {
   var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
   var selected = Array.isArray(part1Selected) ? part1Selected : [];
-  var raw = Object.entries(PART1_CATEGORY_MAP).map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-      category = _ref2[0],
-      nums = _ref2[1];
+  var raw = Object.entries(PART1_CATEGORY_MAP).map(function (_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 2),
+      category = _ref6[0],
+      nums = _ref6[1];
     var count = (Array.isArray(nums) ? nums : []).reduce(function (c, num) {
       return c + (selected.includes(num) ? 1 : 0);
     }, 0);
@@ -89921,6 +90340,72 @@ function deriveTopCategoriesFromPart1(part1Selected) {
   return raw.slice(0, n).map(function (x) {
     return x.category;
   });
+}
+function hashToUint32(str) {
+  // Simple deterministic hash for stable pseudo-random selection (not crypto).
+  var s = String(str || "");
+  var h = 2166136261;
+  for (var i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+function stablePickOne(list, seedStr) {
+  var arr = Array.isArray(list) ? list.filter(Boolean) : [];
+  if (!arr.length) return null;
+  var seed = hashToUint32(seedStr);
+  var idx = seed % arr.length;
+  return arr[idx];
+}
+function computePart1Scores(part1Selected) {
+  var selected = Array.isArray(part1Selected) ? part1Selected : [];
+  var byCategory = {};
+  Object.entries(PART1_CATEGORY_MAP).forEach(function (_ref7) {
+    var _ref8 = _slicedToArray(_ref7, 2),
+      category = _ref8[0],
+      nums = _ref8[1];
+    var score = (Array.isArray(nums) ? nums : []).reduce(function (c, num) {
+      return c + (selected.includes(num) ? 1 : 0);
+    }, 0);
+    byCategory[category] = score;
+  });
+  return byCategory;
+}
+function derivePart2CategoriesPolicy(interestRatings, part1Selected, seedStr) {
+  var n = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 3;
+  // New policy:
+  // - 2 categories from Top Interest (if available)
+  // - 1 exploration category: stable-random from the student's lowest Part I categories (excluding the first 2)
+  // - Fill remaining slots from Part I top to keep length consistent
+
+  var part1RankAll = deriveTopCategoriesFromPart1(part1Selected, CATEGORY_ORDER.length);
+  var interestTop2 = deriveTopCategoriesFromInterestRatings(interestRatings, 2);
+  var firstTwo = fillToNPrimaryThenFallback(interestTop2, part1RankAll, Math.min(2, n));
+  var exclude = new Set(firstTwo);
+  var scores = computePart1Scores(part1Selected);
+  var lowRankAll = Object.keys(PART1_CATEGORY_MAP).map(function (category) {
+    return {
+      category: category,
+      score: Number(scores[category] || 0)
+    };
+  }).sort(function (a, b) {
+    if (a.score !== b.score) return a.score - b.score;
+    return CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
+  }).map(function (x) {
+    return x.category;
+  });
+  var lowCandidates = lowRankAll.filter(function (c) {
+    return !exclude.has(c);
+  }).slice(0, 3);
+  var remainingCandidates = CATEGORY_ORDER.filter(function (c) {
+    return !exclude.has(c);
+  });
+  var exploration = stablePickOne(lowCandidates.length ? lowCandidates : remainingCandidates, seedStr);
+  var combined = exploration ? firstTwo.concat([exploration]) : firstTwo;
+
+  // Ensure exactly N categories (backend validation expects 3 categories × 5 questions each)
+  return fillToNPrimaryThenFallback(combined, part1RankAll, n);
 }
 function categoriesFromPart2Answers(part2Answers) {
   var ans = part2Answers && _typeof(part2Answers) === "object" ? part2Answers : {};
@@ -89942,20 +90427,25 @@ function buildPart2Questions(categories) {
     var list = PART2_BANK[cat];
     if (Array.isArray(list) && list.length) out.push.apply(out, _toConsumableArray(list));
   });
-  // Always include general readiness questions (affect all categories equally)
-  return out.concat(READINESS_QUESTIONS);
+  // Always include general readiness questions (skill-tagged; weighted per category)
+  return out.concat(GENERAL_READINESS_15);
 }
 function computeScores(part1Selected, part2Answers) {
   var scores = Object.keys(PART1_CATEGORY_MAP).reduce(function (acc, k) {
     acc[k] = 0;
     return acc;
   }, {});
+  var skillCorrect = {
+    numerical: 0,
+    logical: 0,
+    verbal: 0
+  };
 
   // Part 1 scoring: count checks mapped to each category
-  Object.entries(PART1_CATEGORY_MAP).forEach(function (_ref3) {
-    var _ref4 = _slicedToArray(_ref3, 2),
-      category = _ref4[0],
-      numbers = _ref4[1];
+  Object.entries(PART1_CATEGORY_MAP).forEach(function (_ref9) {
+    var _ref0 = _slicedToArray(_ref9, 2),
+      category = _ref0[0],
+      numbers = _ref0[1];
     var count = numbers.reduce(function (c, n) {
       return c + (part1Selected.includes(n) ? 1 : 0);
     }, 0);
@@ -89964,20 +90454,19 @@ function computeScores(part1Selected, part2Answers) {
 
   // Part 2 scoring: +2 for each correct answer, applied to that question's category
   var answers = part2Answers && _typeof(part2Answers) === "object" ? part2Answers : {};
-  Object.entries(answers).forEach(function (_ref5) {
-    var _ref6 = _slicedToArray(_ref5, 2),
-      qid = _ref6[0],
-      ans = _ref6[1];
-    // General readiness: +1 to ALL categories when correct
-    var rq = READINESS_QUESTIONS.find(function (x) {
-      return String(x.id) === String(qid);
-    });
+  Object.entries(answers).forEach(function (_ref1) {
+    var _ref10 = _slicedToArray(_ref1, 2),
+      qid = _ref10[0],
+      ans = _ref10[1];
+    // General readiness: track per-skill correctness (later weighted per category)
+    var rq = GENERAL_READINESS_INDEX[String(qid)];
     if (rq) {
       var _user = String(ans || "").toUpperCase();
-      if (_user && _user === rq.correct) {
-        Object.keys(scores).forEach(function (cat) {
-          scores[cat] += 1;
-        });
+      if (_user && _user === String(rq.correct || "").toUpperCase()) {
+        var sk = String(rq.skill || "").toLowerCase();
+        if (sk === "numerical" || sk === "logical" || sk === "verbal") {
+          skillCorrect[sk] += 1;
+        }
       }
       return;
     }
@@ -89988,22 +90477,46 @@ function computeScores(part1Selected, part2Answers) {
       scores[q.category] += 1 * CATEGORY_WEIGHTS.part2;
     }
   });
+
+  // Apply weighted readiness contribution per category using the student's per-skill performance.
+  Object.keys(scores).forEach(function (cat) {
+    var w = CATEGORY_SKILL_WEIGHTS[cat] || null;
+    if (!w) return;
+    var add = (skillCorrect.numerical || 0) * READINESS_POINT_PER_CORRECT * (w.numerical || 0) + (skillCorrect.logical || 0) * READINESS_POINT_PER_CORRECT * (w.logical || 0) + (skillCorrect.verbal || 0) * READINESS_POINT_PER_CORRECT * (w.verbal || 0);
+    scores[cat] += add;
+  });
   return scores;
 }
 function topN(scores) {
   var n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
   return Object.entries(scores).sort(function (a, b) {
     return b[1] - a[1];
-  }).slice(0, n).map(function (_ref7, idx) {
-    var _ref8 = _slicedToArray(_ref7, 2),
-      category = _ref8[0],
-      score = _ref8[1];
+  }).slice(0, n).map(function (_ref11, idx) {
+    var _ref12 = _slicedToArray(_ref11, 2),
+      category = _ref12[0],
+      score = _ref12[1];
     return {
       rank: idx + 1,
       category: category,
       score: score
     };
   });
+}
+function fillToNPrimaryThenFallback(primary, fallback) {
+  var n = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3;
+  var out = [];
+  var pushUnique = function pushUnique(x) {
+    var v = String(x || "").trim();
+    if (!v) return;
+    if (out.includes(v)) return;
+    out.push(v);
+  };
+  (Array.isArray(primary) ? primary : []).forEach(pushUnique);
+  (Array.isArray(fallback) ? fallback : []).forEach(function (x) {
+    if (out.length >= n) return;
+    pushUnique(x);
+  });
+  return out.slice(0, n);
 }
 function StudentAssessmentQuiz() {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
@@ -90022,40 +90535,60 @@ function StudentAssessmentQuiz() {
     _useState6 = _slicedToArray(_useState5, 2),
     part2Categories = _useState6[0],
     setPart2Categories = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    interestRatings = _useState8[0],
+    setInterestRatings = _useState8[1];
   var effectivePart2Categories = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var stored = Array.isArray(part2Categories) ? part2Categories.filter(Boolean) : [];
-    if (stored.length) return stored.slice(0, 3);
-    return deriveTopCategoriesFromPart1(part1Selected, 3);
-  }, [part1Selected, part2Categories]);
+    var fromPart1 = deriveTopCategoriesFromPart1(part1Selected, 3);
+
+    // If we already have locked Part II categories, use them.
+    // But ensure we still have exactly 3 categories for a consistent Part II length.
+    if (stored.length) return fillToNPrimaryThenFallback(stored, fromPart1, 3);
+
+    // Policy: 2 from Top Interest + 1 exploration category (stable-random among lowest Part I categories).
+    // Use a stable seed so the exploration category doesn't change across renders.
+    var seedStr = "assessment-exploration";
+    try {
+      var u = JSON.parse(localStorage.getItem("user") || "null");
+      seedStr = String((u === null || u === void 0 ? void 0 : u.id) || (u === null || u === void 0 ? void 0 : u.email) || seedStr);
+    } catch (_unused) {
+      // ignore
+    }
+    var policyCats = derivePart2CategoriesPolicy(interestRatings, part1Selected, seedStr, 3);
+    if (policyCats.length) return policyCats;
+    return fromPart1;
+  }, [interestRatings, part1Selected, part2Categories]);
   var part2Questions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return buildPart2Questions(effectivePart2Categories);
   }, [effectivePart2Categories]);
   var stepsTotal = 1 + part2Questions.length + 1;
   var reviewStepIndex = stepsTotal - 1;
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
-    _useState8 = _slicedToArray(_useState7, 2),
-    loading = _useState8[0],
-    setLoading = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
     _useState0 = _slicedToArray(_useState9, 2),
-    saving = _useState0[0],
-    setSaving = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    loading = _useState0[0],
+    setLoading = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState10 = _slicedToArray(_useState1, 2),
-    error = _useState10[0],
-    setError = _useState10[1];
+    saving = _useState10[0],
+    setSaving = _useState10[1];
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    success = _useState12[0],
-    setSuccess = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    error = _useState12[0],
+    setError = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState14 = _slicedToArray(_useState13, 2),
-    assessmentSaved = _useState14[0],
-    setAssessmentSaved = _useState14[1];
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    success = _useState14[0],
+    setSuccess = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    step = _useState16[0],
-    setStep = _useState16[1]; // 0 = Part I, 1..N = Part II Q index, Review = last
+    assessmentSaved = _useState16[0],
+    setAssessmentSaved = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState18 = _slicedToArray(_useState17, 2),
+    step = _useState18[0],
+    setStep = _useState18[1]; // 0 = Part I, 1..N = Part II Q index, Review = last
 
   var isLockedToReview = assessmentSaved;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -90064,16 +90597,58 @@ function StudentAssessmentQuiz() {
       navigate("/login");
       return;
     }
-    var fetchAssessment = /*#__PURE__*/function () {
-      var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _res$data, res, assessment, catsFromAnswers, hasSavedRecommendation, _t;
+    var bootstrapRatingsFromCache = function bootstrapRatingsFromCache() {
+      try {
+        var cached = JSON.parse(localStorage.getItem("profile") || "null");
+        var r = cached === null || cached === void 0 ? void 0 : cached.program_interest_ratings;
+        if (r && _typeof(r) === "object") setInterestRatings(r);
+      } catch (_unused2) {
+        // ignore
+      }
+    };
+    var fetchProfile = /*#__PURE__*/function () {
+      var _ref13 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var _res$data, res, ratings, _t;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
-              setLoading(true);
-              setError(null);
-              _context.p = 1;
-              _context.n = 2;
+              _context.p = 0;
+              _context.n = 1;
+              return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
+                headers: {
+                  Authorization: "Bearer ".concat(token),
+                  Accept: "application/json"
+                },
+                withCredentials: true
+              });
+            case 1:
+              res = _context.v;
+              ratings = (_res$data = res.data) === null || _res$data === void 0 || (_res$data = _res$data.profile) === null || _res$data === void 0 ? void 0 : _res$data.program_interest_ratings;
+              if (ratings && _typeof(ratings) === "object") {
+                setInterestRatings(ratings);
+              }
+              _context.n = 3;
+              break;
+            case 2:
+              _context.p = 2;
+              _t = _context.v;
+            case 3:
+              return _context.a(2);
+          }
+        }, _callee, null, [[0, 2]]);
+      }));
+      return function fetchProfile() {
+        return _ref13.apply(this, arguments);
+      };
+    }();
+    var fetchAssessment = /*#__PURE__*/function () {
+      var _ref14 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+        var _res$data2, res, assessment, catsFromAnswers, hasSavedRecommendation, _t2;
+        return _regenerator().w(function (_context2) {
+          while (1) switch (_context2.p = _context2.n) {
+            case 0:
+              _context2.p = 0;
+              _context2.n = 1;
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/assessment", {
                 headers: {
                   Authorization: "Bearer ".concat(token),
@@ -90081,9 +90656,9 @@ function StudentAssessmentQuiz() {
                 },
                 withCredentials: true
               });
-            case 2:
-              res = _context.v;
-              assessment = (_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.assessment;
+            case 1:
+              res = _context2.v;
+              assessment = (_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.assessment;
               if (assessment) {
                 setPart1Selected(Array.isArray(assessment.part1_selected) ? assessment.part1_selected : []);
                 setPart2Answers(assessment.part2_answers && _typeof(assessment.part2_answers) === "object" ? assessment.part2_answers : {});
@@ -90100,30 +90675,47 @@ function StudentAssessmentQuiz() {
                   setStep(reviewStepIndex);
                 }
               }
-              _context.n = 4;
+              _context2.n = 3;
               break;
+            case 2:
+              _context2.p = 2;
+              _t2 = _context2.v;
             case 3:
-              _context.p = 3;
-              _t = _context.v;
-            case 4:
-              _context.p = 4;
-              setLoading(false);
-              return _context.f(4);
-            case 5:
-              return _context.a(2);
+              return _context2.a(2);
           }
-        }, _callee, null, [[1, 3, 4, 5]]);
+        }, _callee2, null, [[0, 2]]);
       }));
       return function fetchAssessment() {
-        return _ref9.apply(this, arguments);
+        return _ref14.apply(this, arguments);
       };
     }();
-    fetchAssessment();
+    var fetchAll = /*#__PURE__*/function () {
+      var _ref15 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
+        return _regenerator().w(function (_context3) {
+          while (1) switch (_context3.n) {
+            case 0:
+              setLoading(true);
+              setError(null);
+              bootstrapRatingsFromCache();
+              _context3.n = 1;
+              return Promise.allSettled([fetchProfile(), fetchAssessment()]);
+            case 1:
+              setLoading(false);
+            case 2:
+              return _context3.a(2);
+          }
+        }, _callee3);
+      }));
+      return function fetchAll() {
+        return _ref15.apply(this, arguments);
+      };
+    }();
+    fetchAll();
   }, [navigate, token]);
   var currentLabel = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     if (step === 0) return "Part I – Personal Interest & Skills";
     if (step >= 1 && step <= part2Questions.length) {
-      return "Part II \u2013 General Knowledge (Question ".concat(step, " of ").concat(part2Questions.length, ")");
+      return "Part II \u2013 Readiness & Aptitude (Question ".concat(step, " of ").concat(part2Questions.length, ")");
     }
     return "Review";
   }, [part2Questions.length, step]);
@@ -90168,22 +90760,22 @@ function StudentAssessmentQuiz() {
     return true;
   }, [step, part1Selected, part2Answers, part2Questions]);
   var handleSave = /*#__PURE__*/function () {
-    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-      var payload, _e$response, msg, _t2;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
+    var _ref16 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var _res$data3, _res$data4, payload, res, serverScores, serverTop3, _e$response, msg, _t3;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
           case 0:
             setSaving(true);
             setError(null);
             setSuccess(null);
-            _context2.p = 1;
+            _context4.p = 1;
             payload = {
               part1_selected: part1Selected.slice().sort(function (a, b) {
                 return a - b;
               }),
               part2_answers: part2Answers
             };
-            _context2.n = 2;
+            _context4.n = 2;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/assessment", payload, {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -90192,46 +90784,49 @@ function StudentAssessmentQuiz() {
               withCredentials: true
             });
           case 2:
+            res = _context4.v;
             setSuccess("Saved! Your assessment is complete.");
             setAssessmentSaved(true);
             setStep(reviewStepIndex);
             // Also store computed results so recommendation page can use it instantly.
+            serverScores = (_res$data3 = res.data) === null || _res$data3 === void 0 || (_res$data3 = _res$data3.assessment) === null || _res$data3 === void 0 ? void 0 : _res$data3.scores;
+            serverTop3 = (_res$data4 = res.data) === null || _res$data4 === void 0 || (_res$data4 = _res$data4.assessment) === null || _res$data4 === void 0 ? void 0 : _res$data4.recommended_top3;
             localStorage.setItem("assessmentResult", JSON.stringify({
-              scores: scores,
-              top3: top3,
+              scores: serverScores && _typeof(serverScores) === "object" ? serverScores : scores,
+              top3: Array.isArray(serverTop3) ? serverTop3 : top3,
               savedAt: new Date().toISOString()
             }));
-            _context2.n = 4;
+            _context4.n = 4;
             break;
           case 3:
-            _context2.p = 3;
-            _t2 = _context2.v;
-            msg = (_t2 === null || _t2 === void 0 || (_e$response = _t2.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Failed to save assessment.";
+            _context4.p = 3;
+            _t3 = _context4.v;
+            msg = (_t3 === null || _t3 === void 0 || (_e$response = _t3.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Failed to save assessment.";
             setError(msg);
           case 4:
-            _context2.p = 4;
+            _context4.p = 4;
             setSaving(false);
-            return _context2.f(4);
+            return _context4.f(4);
           case 5:
-            return _context2.a(2);
+            return _context4.a(2);
         }
-      }, _callee2, null, [[1, 3, 4, 5]]);
+      }, _callee4, null, [[1, 3, 4, 5]]);
     }));
     return function handleSave() {
-      return _ref0.apply(this, arguments);
+      return _ref16.apply(this, arguments);
     };
   }();
   var handleRetakeQuiz = function handleRetakeQuiz() {
     var confirmed = window.confirm("This will clear your current quiz answers on this page. Continue?");
     if (!confirmed) return;
     var clearServer = /*#__PURE__*/function () {
-      var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-        var _e$response2, msg, _t3;
-        return _regenerator().w(function (_context3) {
-          while (1) switch (_context3.p = _context3.n) {
+      var _ref17 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+        var _e$response2, msg, _t4;
+        return _regenerator().w(function (_context5) {
+          while (1) switch (_context5.p = _context5.n) {
             case 0:
-              _context3.p = 0;
-              _context3.n = 1;
+              _context5.p = 0;
+              _context5.n = 1;
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/api/assessment", {
                 headers: {
                   Authorization: "Bearer ".concat(token),
@@ -90240,14 +90835,14 @@ function StudentAssessmentQuiz() {
                 withCredentials: true
               });
             case 1:
-              _context3.n = 3;
+              _context5.n = 3;
               break;
             case 2:
-              _context3.p = 2;
-              _t3 = _context3.v;
-              msg = (_t3 === null || _t3 === void 0 || (_e$response2 = _t3.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Couldn’t reset your assessment. Please try again.";
+              _context5.p = 2;
+              _t4 = _context5.v;
+              msg = (_t4 === null || _t4 === void 0 || (_e$response2 = _t4.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Couldn’t reset your assessment. Please try again.";
               setError(msg);
-              return _context3.a(2);
+              return _context5.a(2);
             case 3:
               setPart1Selected([]);
               setPart2Answers({});
@@ -90258,16 +90853,16 @@ function StudentAssessmentQuiz() {
               setStep(0);
               try {
                 localStorage.removeItem("assessmentResult");
-              } catch (_unused) {
+              } catch (_unused5) {
                 // ignore
               }
             case 4:
-              return _context3.a(2);
+              return _context5.a(2);
           }
-        }, _callee3, null, [[0, 2]]);
+        }, _callee5, null, [[0, 2]]);
       }));
       return function clearServer() {
-        return _ref1.apply(this, arguments);
+        return _ref17.apply(this, arguments);
       };
     }();
     clearServer();
@@ -90277,35 +90872,111 @@ function StudentAssessmentQuiz() {
       return Math.max(0, s - 1);
     });
   };
-  var gotoNext = function gotoNext() {
-    // When transitioning out of Part I, lock in the Part II categories
-    // so the question set stays consistent unless the user goes back.
-    if (step === 0) {
-      var nextCats = deriveTopCategoriesFromPart1(part1Selected, 3);
-      setPart2Categories(nextCats);
+  var loadInterestRatingsIfNeeded = /*#__PURE__*/function () {
+    var _ref18 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+      var _res$data5, res, ratings, _t5;
+      return _regenerator().w(function (_context6) {
+        while (1) switch (_context6.p = _context6.n) {
+          case 0:
+            if (!(interestRatings && _typeof(interestRatings) === "object")) {
+              _context6.n = 1;
+              break;
+            }
+            return _context6.a(2, interestRatings);
+          case 1:
+            if (token) {
+              _context6.n = 2;
+              break;
+            }
+            return _context6.a(2, null);
+          case 2:
+            _context6.p = 2;
+            _context6.n = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
+              headers: {
+                Authorization: "Bearer ".concat(token),
+                Accept: "application/json"
+              },
+              withCredentials: true
+            });
+          case 3:
+            res = _context6.v;
+            ratings = (_res$data5 = res.data) === null || _res$data5 === void 0 || (_res$data5 = _res$data5.profile) === null || _res$data5 === void 0 ? void 0 : _res$data5.program_interest_ratings;
+            if (!(ratings && _typeof(ratings) === "object")) {
+              _context6.n = 4;
+              break;
+            }
+            setInterestRatings(ratings);
+            return _context6.a(2, ratings);
+          case 4:
+            _context6.n = 6;
+            break;
+          case 5:
+            _context6.p = 5;
+            _t5 = _context6.v;
+          case 6:
+            return _context6.a(2, null);
+        }
+      }, _callee6, null, [[2, 5]]);
+    }));
+    return function loadInterestRatingsIfNeeded() {
+      return _ref18.apply(this, arguments);
+    };
+  }();
+  var gotoNext = /*#__PURE__*/function () {
+    var _ref19 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+      var ratings, seedStr, u, nextCats, nextIds;
+      return _regenerator().w(function (_context7) {
+        while (1) switch (_context7.n) {
+          case 0:
+            if (!(step === 0)) {
+              _context7.n = 2;
+              break;
+            }
+            _context7.n = 1;
+            return loadInterestRatingsIfNeeded();
+          case 1:
+            ratings = _context7.v;
+            seedStr = "assessment-exploration";
+            try {
+              u = JSON.parse(localStorage.getItem("user") || "null");
+              seedStr = String((u === null || u === void 0 ? void 0 : u.id) || (u === null || u === void 0 ? void 0 : u.email) || seedStr);
+            } catch (_unused7) {
+              // ignore
+            }
+            nextCats = derivePart2CategoriesPolicy(ratings, part1Selected, seedStr, 3);
+            setPart2Categories(nextCats);
 
-      // Prune any old answers that no longer belong to the new question set
-      var nextIds = new Set(buildPart2Questions(nextCats).map(function (q) {
-        return String(q.id);
-      }));
-      setPart2Answers(function (prev) {
-        var cur = prev && _typeof(prev) === "object" ? prev : {};
-        var next = {};
-        Object.entries(cur).forEach(function (_ref10) {
-          var _ref11 = _slicedToArray(_ref10, 2),
-            qid = _ref11[0],
-            ans = _ref11[1];
-          if (nextIds.has(String(qid))) next[qid] = ans;
-        });
-        return next;
-      });
-      setStep(1);
-      return;
-    }
-    setStep(function (s) {
-      return Math.min(stepsTotal - 1, s + 1);
-    });
-  };
+            // Prune any old answers that no longer belong to the new question set
+            nextIds = new Set(buildPart2Questions(nextCats).map(function (q) {
+              return String(q.id);
+            }));
+            setPart2Answers(function (prev) {
+              var cur = prev && _typeof(prev) === "object" ? prev : {};
+              var next = {};
+              Object.entries(cur).forEach(function (_ref20) {
+                var _ref21 = _slicedToArray(_ref20, 2),
+                  qid = _ref21[0],
+                  ans = _ref21[1];
+                if (nextIds.has(String(qid))) next[qid] = ans;
+              });
+              return next;
+            });
+            setStep(1);
+            return _context7.a(2);
+          case 2:
+            setStep(function (s) {
+              return Math.min(stepsTotal - 1, s + 1);
+            });
+          case 3:
+            return _context7.a(2);
+        }
+      }, _callee7);
+    }));
+    return function gotoNext() {
+      return _ref19.apply(this, arguments);
+    };
+  }();
   var safeGotoPrev = function safeGotoPrev() {
     if (isLockedToReview) return;
     gotoPrev();
@@ -90334,7 +91005,7 @@ function StudentAssessmentQuiz() {
                 children: t.category
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                 className: "aq-top-score",
-                children: ["Score: ", t.score]
+                children: ["Score: ", Number(t.score).toFixed(2).replace(/\.00$/, "")]
               })]
             }, t.category);
           })
@@ -90406,10 +91077,10 @@ function StudentAssessmentQuiz() {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "aq-options",
-          children: Object.entries(q.options).map(function (_ref12) {
-            var _ref13 = _slicedToArray(_ref12, 2),
-              letter = _ref13[0],
-              text = _ref13[1];
+          children: Object.entries(q.options).map(function (_ref22) {
+            var _ref23 = _slicedToArray(_ref22, 2),
+              letter = _ref23[0],
+              text = _ref23[1];
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
               className: "aq-option ".concat(chosen === letter ? "aq-option--on" : ""),
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
@@ -90932,7 +91603,10 @@ function hasAcademicCredentials(profile) {
   });
   var hasSkills = Array.isArray(profile === null || profile === void 0 ? void 0 : profile.skills) ? profile.skills.filter(Boolean).length > 0 : false;
   var ratings = profile === null || profile === void 0 ? void 0 : profile.program_interest_ratings;
-  var hasRatings = ratings && _typeof(ratings) === "object" && Object.keys(ratings).length > 0;
+  var hasRatings = ratings && _typeof(ratings) === "object" && Object.values(ratings).some(function (v) {
+    var n = Number(v);
+    return Number.isFinite(n) && n > 0;
+  });
   return Boolean(String((profile === null || profile === void 0 ? void 0 : profile.shs_strand) || "").trim() && (profile === null || profile === void 0 ? void 0 : profile.shs_general_average) != null && String((profile === null || profile === void 0 ? void 0 : profile.career_goals) || "").trim() && hasAtLeastOneSubject && hasSkills && hasRatings);
 }
 function hasAssessmentCompleted(profile, assessment) {
@@ -90941,7 +91615,7 @@ function hasAssessmentCompleted(profile, assessment) {
   return Boolean(profileCompleted || assessmentCompleted);
 }
 function StudentCourseRecommendation() {
-  var _profile$shs_general_;
+  var _studentSummary$part, _profile$shs_general_;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
   var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     return localStorage.getItem("authToken");
@@ -91053,6 +91727,26 @@ function StudentCourseRecommendation() {
     fetchAll();
   }, [navigate, token]);
   var top3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    // Prefer advisor's edited recommendation if present
+    var advisorDegrees = profile === null || profile === void 0 ? void 0 : profile.advisor_recommended_degrees;
+    if (Array.isArray(advisorDegrees) && advisorDegrees.length) {
+      return advisorDegrees.slice(0, 3).map(function (d, idx) {
+        return {
+          rank: idx + 1,
+          code: (d === null || d === void 0 ? void 0 : d.code) || "",
+          name: (d === null || d === void 0 ? void 0 : d.name) || "",
+          category: (d === null || d === void 0 ? void 0 : d.track) || (d === null || d === void 0 ? void 0 : d.category) || ""
+        };
+      }).filter(function (d) {
+        return d.code || d.name;
+      });
+    }
+
+    // Next: system recommendation saved on the profile
+    var systemDegrees = profile === null || profile === void 0 ? void 0 : profile.recommended_degrees;
+    if (Array.isArray(systemDegrees) && systemDegrees.length) {
+      return systemDegrees;
+    }
     var degrees = assessment === null || assessment === void 0 ? void 0 : assessment.recommended_degrees;
     if (Array.isArray(degrees) && degrees.length) return degrees;
     var maybe = assessment === null || assessment === void 0 ? void 0 : assessment.top3;
@@ -91077,7 +91771,55 @@ function StudentCourseRecommendation() {
     var serverTop = assessment === null || assessment === void 0 ? void 0 : assessment.recommended_top3;
     if (Array.isArray(serverTop) && serverTop.length) return serverTop;
     return [];
+  }, [assessment, profile]);
+  var breakdown = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    return (assessment === null || assessment === void 0 ? void 0 : assessment.breakdown) || null;
   }, [assessment]);
+  var studentSummary = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    if (!breakdown) return null;
+    var readiness = breakdown.readiness || {};
+    var readinessBySkill = readiness.by_skill || {};
+    var readinessCorrect = readinessBySkill.correct || {};
+    var readinessTotal = readinessBySkill.total || {};
+    var part2 = breakdown.part2_categories || {};
+    var byCategory = part2.by_category || {};
+    var catCorrect = byCategory.correct || {};
+    var catTotal = byCategory.total || {};
+    var skillOrder = ["numerical_reasoning", "logical_reasoning", "verbal_reasoning"];
+    var skillLabel = {
+      numerical_reasoning: "Numerical Reasoning",
+      logical_reasoning: "Logical Reasoning",
+      verbal_reasoning: "Verbal Reasoning"
+    };
+    var readinessRows = skillOrder.map(function (k) {
+      return {
+        key: k,
+        label: skillLabel[k] || k,
+        correct: Number(readinessCorrect[k] || 0),
+        total: Number(readinessTotal[k] || 0)
+      };
+    });
+    var categories = Array.isArray(part2.selected_categories) ? part2.selected_categories : Object.keys(catTotal || {});
+    var categoryRows = categories.slice().sort().map(function (c) {
+      return {
+        category: c,
+        correct: Number(catCorrect[c] || 0),
+        total: Number(catTotal[c] || 0)
+      };
+    });
+    return {
+      readiness: {
+        correctTotal: Number(readiness.correct_total || 0),
+        total: Number(readiness.total || 0),
+        rows: readinessRows
+      },
+      part2: {
+        correctTotal: Number(part2.correct_total || 0),
+        total: Number(part2.total || 0),
+        rows: categoryRows
+      }
+    };
+  }, [breakdown]);
   var isDegreeList = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var first = Array.isArray(top3) ? top3[0] : null;
     return Boolean(first && (first.code || first.name));
@@ -91210,7 +91952,82 @@ function StudentCourseRecommendation() {
                 }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                   className: "aq-muted",
                   children: "No assessment result found yet. Please complete the Assessment Quiz first."
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                }), studentSummary ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "cr-section",
+                  style: {
+                    marginTop: 14
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "cr-section-title",
+                    children: "Assessment Summary"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "cr-par",
+                    style: {
+                      marginTop: 6
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                      children: "Part II (Category Questions):"
+                    }), " ", studentSummary.part2.correctTotal, "/", studentSummary.part2.total]
+                  }), (_studentSummary$part = studentSummary.part2.rows) !== null && _studentSummary$part !== void 0 && _studentSummary$part.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "cr-table",
+                    style: {
+                      marginTop: 8
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      className: "cr-tr cr-th",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        children: "Category"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        children: "Correct"
+                      })]
+                    }), studentSummary.part2.rows.map(function (r) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                        className: "cr-tr",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                          children: r.category
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                          children: [r.correct, "/", r.total]
+                        })]
+                      }, r.category);
+                    })]
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "aq-muted",
+                    style: {
+                      marginTop: 6
+                    },
+                    children: "No Part II category breakdown available."
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "cr-par",
+                    style: {
+                      marginTop: 12
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                      children: "Readiness (Skill-Based):"
+                    }), " ", studentSummary.readiness.correctTotal, "/", studentSummary.readiness.total]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "cr-table",
+                    style: {
+                      marginTop: 8
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      className: "cr-tr cr-th",
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        children: "Skill"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        children: "Correct"
+                      })]
+                    }), studentSummary.readiness.rows.map(function (r) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                        className: "cr-tr",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                          children: r.label
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                          children: [r.correct, "/", r.total]
+                        })]
+                      }, r.key);
+                    })]
+                  })]
+                }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                   className: "cr-actions",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                     type: "button",
@@ -91707,78 +92524,147 @@ function StudentPortal() {
       // ignore
     }
   }, [darkMode]);
+  var fetchProfile = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var _ref3,
+        showLoading,
+        token,
+        _res$data,
+        _res$data2,
+        res,
+        serverUser,
+        avatarUrl,
+        cacheBusted,
+        nextUser,
+        _args = arguments,
+        _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            _ref3 = _args.length > 0 && _args[0] !== undefined ? _args[0] : {
+              showLoading: false
+            }, showLoading = _ref3.showLoading;
+            token = localStorage.getItem("authToken");
+            if (token) {
+              _context.n = 1;
+              break;
+            }
+            if (showLoading) setLoading(false);
+            return _context.a(2);
+          case 1:
+            if (showLoading) setLoading(true);
+            _context.p = 2;
+            _context.n = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
+              headers: {
+                Authorization: "Bearer ".concat(token),
+                Accept: "application/json"
+              },
+              withCredentials: true
+            });
+          case 3:
+            res = _context.v;
+            serverUser = ((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.user) || null;
+            avatarUrl = serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url;
+            cacheBusted = avatarUrl ? "".concat(avatarUrl).concat(avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now()) : null;
+            if (serverUser) {
+              nextUser = cacheBusted ? _objectSpread(_objectSpread({}, serverUser), {}, {
+                avatar_url: cacheBusted
+              }) : serverUser;
+              setUser(nextUser);
+              try {
+                localStorage.setItem("user", JSON.stringify(nextUser));
+              } catch (_unused8) {
+                // ignore
+              }
+            }
+            setProfile(((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.profile) || null);
+            _context.n = 5;
+            break;
+          case 4:
+            _context.p = 4;
+            _t = _context.v;
+            // If token is stale, portal will still render from localStorage user.
+            setProfile(null);
+          case 5:
+            _context.p = 5;
+            if (showLoading) setLoading(false);
+            return _context.f(5);
+          case 6:
+            return _context.a(2);
+        }
+      }, _callee, null, [[2, 4, 5, 6]]);
+    }));
+    return function fetchProfile() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // initial load
+    fetchProfile({
+      showLoading: true
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
+
+  // Keep dashboard progress (advisor status) updated automatically.
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var token = localStorage.getItem("authToken");
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-    var fetchProfile = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var _res$data, _res$data2, res, serverUser, avatarUrl, cacheBusted, nextUser, _t;
-        return _regenerator().w(function (_context) {
-          while (1) switch (_context.p = _context.n) {
+    if (!token) return;
+    var stopped = false;
+    var tick = /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+        return _regenerator().w(function (_context2) {
+          while (1) switch (_context2.n) {
             case 0:
-              setLoading(true);
-              _context.p = 1;
-              _context.n = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
-                headers: {
-                  Authorization: "Bearer ".concat(token),
-                  Accept: "application/json"
-                },
-                withCredentials: true
-              });
-            case 2:
-              res = _context.v;
-              serverUser = ((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.user) || null;
-              avatarUrl = serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url;
-              cacheBusted = avatarUrl ? "".concat(avatarUrl).concat(avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now()) : null;
-              if (serverUser) {
-                nextUser = cacheBusted ? _objectSpread(_objectSpread({}, serverUser), {}, {
-                  avatar_url: cacheBusted
-                }) : serverUser;
-                setUser(nextUser);
-                try {
-                  localStorage.setItem("user", JSON.stringify(nextUser));
-                } catch (_unused8) {
-                  // ignore
-                }
+              if (!stopped) {
+                _context2.n = 1;
+                break;
               }
-              setProfile(((_res$data2 = res.data) === null || _res$data2 === void 0 ? void 0 : _res$data2.profile) || null);
-              _context.n = 4;
-              break;
+              return _context2.a(2);
+            case 1:
+              if (!(typeof document !== "undefined" && document.hidden)) {
+                _context2.n = 2;
+                break;
+              }
+              return _context2.a(2);
+            case 2:
+              _context2.n = 3;
+              return fetchProfile({
+                showLoading: false
+              });
             case 3:
-              _context.p = 3;
-              _t = _context.v;
-              // If token is stale, portal will still render from localStorage user.
-              setProfile(null);
-            case 4:
-              _context.p = 4;
-              setLoading(false);
-              return _context.f(4);
-            case 5:
-              return _context.a(2);
+              return _context2.a(2);
           }
-        }, _callee, null, [[1, 3, 4, 5]]);
+        }, _callee2);
       }));
-      return function fetchProfile() {
-        return _ref2.apply(this, arguments);
+      return function tick() {
+        return _ref4.apply(this, arguments);
       };
     }();
-    fetchProfile();
-  }, [navigate]);
+    var id = setInterval(tick, 30000);
+    var onVis = function onVis() {
+      if (!document.hidden) tick();
+    };
+    document.addEventListener("visibilitychange", onVis);
+    return function () {
+      stopped = true;
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", onVis);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var token = localStorage.getItem("authToken");
     if (!token) return;
     var fetchUpcoming = /*#__PURE__*/function () {
-      var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var _ref5 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
         var _res$data3, res, _t2;
-        return _regenerator().w(function (_context2) {
-          while (1) switch (_context2.p = _context2.n) {
+        return _regenerator().w(function (_context3) {
+          while (1) switch (_context3.p = _context3.n) {
             case 0:
-              _context2.p = 0;
-              _context2.n = 1;
+              _context3.p = 0;
+              _context3.n = 1;
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/appointments?scope=upcoming&limit=3", {
                 headers: {
                   Authorization: "Bearer ".concat(token),
@@ -91787,21 +92673,21 @@ function StudentPortal() {
                 withCredentials: true
               });
             case 1:
-              res = _context2.v;
+              res = _context3.v;
               setUpcoming(((_res$data3 = res.data) === null || _res$data3 === void 0 ? void 0 : _res$data3.appointments) || []);
-              _context2.n = 3;
+              _context3.n = 3;
               break;
             case 2:
-              _context2.p = 2;
-              _t2 = _context2.v;
+              _context3.p = 2;
+              _t2 = _context3.v;
               setUpcoming([]);
             case 3:
-              return _context2.a(2);
+              return _context3.a(2);
           }
-        }, _callee2, null, [[0, 2]]);
+        }, _callee3, null, [[0, 2]]);
       }));
       return function fetchUpcoming() {
-        return _ref3.apply(this, arguments);
+        return _ref5.apply(this, arguments);
       };
     }();
     fetchUpcoming();
@@ -91839,30 +92725,30 @@ function StudentPortal() {
     return "Next appointment: ".concat(when);
   }, [nextUpcoming]);
   var fetchNotifications = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-      var _ref5,
+    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
+      var _ref7,
         showLoading,
         token,
         _res$data4,
         res,
-        _args3 = arguments,
+        _args4 = arguments,
         _t3;
-      return _regenerator().w(function (_context3) {
-        while (1) switch (_context3.p = _context3.n) {
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
           case 0:
-            _ref5 = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {
+            _ref7 = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : {
               showLoading: false
-            }, showLoading = _ref5.showLoading;
+            }, showLoading = _ref7.showLoading;
             token = localStorage.getItem("authToken");
             if (token) {
-              _context3.n = 1;
+              _context4.n = 1;
               break;
             }
-            return _context3.a(2);
+            return _context4.a(2);
           case 1:
             if (showLoading) setNotifLoading(true);
-            _context3.p = 2;
-            _context3.n = 3;
+            _context4.p = 2;
+            _context4.n = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/notifications?limit=10", {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -91871,40 +92757,40 @@ function StudentPortal() {
               withCredentials: true
             });
           case 3:
-            res = _context3.v;
+            res = _context4.v;
             setNotifs(((_res$data4 = res.data) === null || _res$data4 === void 0 ? void 0 : _res$data4.notifications) || []);
-            _context3.n = 5;
+            _context4.n = 5;
             break;
           case 4:
-            _context3.p = 4;
-            _t3 = _context3.v;
+            _context4.p = 4;
+            _t3 = _context4.v;
             setNotifs([]);
           case 5:
-            _context3.p = 5;
+            _context4.p = 5;
             if (showLoading) setNotifLoading(false);
-            return _context3.f(5);
+            return _context4.f(5);
           case 6:
-            return _context3.a(2);
+            return _context4.a(2);
         }
-      }, _callee3, null, [[2, 4, 5, 6]]);
+      }, _callee4, null, [[2, 4, 5, 6]]);
     }));
     return function fetchNotifications() {
-      return _ref4.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }();
   var loadNotifications = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
-      return _regenerator().w(function (_context4) {
-        while (1) switch (_context4.n) {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
+      return _regenerator().w(function (_context5) {
+        while (1) switch (_context5.n) {
           case 0:
-            return _context4.a(2, fetchNotifications({
+            return _context5.a(2, fetchNotifications({
               showLoading: true
             }));
         }
-      }, _callee4);
+      }, _callee5);
     }));
     return function loadNotifications() {
-      return _ref6.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }();
 
@@ -91914,33 +92800,33 @@ function StudentPortal() {
     if (!token) return;
     var stopped = false;
     var tick = /*#__PURE__*/function () {
-      var _ref7 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee5() {
-        return _regenerator().w(function (_context5) {
-          while (1) switch (_context5.n) {
+      var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+        return _regenerator().w(function (_context6) {
+          while (1) switch (_context6.n) {
             case 0:
               if (!stopped) {
-                _context5.n = 1;
+                _context6.n = 1;
                 break;
               }
-              return _context5.a(2);
+              return _context6.a(2);
             case 1:
               if (!(typeof document !== "undefined" && document.hidden)) {
-                _context5.n = 2;
+                _context6.n = 2;
                 break;
               }
-              return _context5.a(2);
+              return _context6.a(2);
             case 2:
-              _context5.n = 3;
+              _context6.n = 3;
               return fetchNotifications({
                 showLoading: false
               });
             case 3:
-              return _context5.a(2);
+              return _context6.a(2);
           }
-        }, _callee5);
+        }, _callee6);
       }));
       return function tick() {
-        return _ref7.apply(this, arguments);
+        return _ref9.apply(this, arguments);
       };
     }();
 
@@ -92019,7 +92905,10 @@ function StudentPortal() {
     });
     var hasSkills = Array.isArray(p === null || p === void 0 ? void 0 : p.skills) ? p.skills.filter(Boolean).length > 0 : false;
     var ratings = p === null || p === void 0 ? void 0 : p.program_interest_ratings;
-    var hasRatings = ratings && _typeof(ratings) === "object" && Object.keys(ratings).length > 0;
+    var hasRatings = ratings && _typeof(ratings) === "object" && Object.values(ratings).some(function (v) {
+      var n = Number(v);
+      return Number.isFinite(n) && n > 0;
+    });
     var step2 = Boolean(String((p === null || p === void 0 ? void 0 : p.shs_strand) || "").trim() && (p === null || p === void 0 ? void 0 : p.shs_general_average) != null && String((p === null || p === void 0 ? void 0 : p.career_goals) || "").trim() && hasAtLeastOneSubject && hasSkills && hasRatings);
     var step3 = Boolean(Array.isArray(p === null || p === void 0 ? void 0 : p.assessment_part1_selected) && p.assessment_part1_selected.length);
     var step4 = Boolean(Array.isArray(p === null || p === void 0 ? void 0 : p.recommended_top3) && p.recommended_top3.length);
@@ -92133,18 +93022,18 @@ function StudentPortal() {
     };
   }, [completion.advisorStatus, completion.step4, completion.step5, isCourseRecommendationUnlocked]);
   var handleLogout = /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee6() {
+    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
       var token;
-      return _regenerator().w(function (_context6) {
-        while (1) switch (_context6.p = _context6.n) {
+      return _regenerator().w(function (_context7) {
+        while (1) switch (_context7.p = _context7.n) {
           case 0:
             token = localStorage.getItem("authToken");
-            _context6.p = 1;
+            _context7.p = 1;
             if (!token) {
-              _context6.n = 2;
+              _context7.n = 2;
               break;
             }
-            _context6.n = 2;
+            _context7.n = 2;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/logout", {}, {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -92153,19 +93042,19 @@ function StudentPortal() {
               withCredentials: true
             });
           case 2:
-            _context6.p = 2;
+            _context7.p = 2;
             localStorage.removeItem("authToken");
             localStorage.removeItem("user");
             localStorage.removeItem("userRole");
             navigate("/login");
-            return _context6.f(2);
+            return _context7.f(2);
           case 3:
-            return _context6.a(2);
+            return _context7.a(2);
         }
-      }, _callee6, null, [[1,, 2, 3]]);
+      }, _callee7, null, [[1,, 2, 3]]);
     }));
     return function handleLogout() {
-      return _ref8.apply(this, arguments);
+      return _ref0.apply(this, arguments);
     };
   }();
   var roleLabel = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
@@ -92296,32 +93185,32 @@ function StudentPortal() {
     };
   }, [avatarPreview]);
   var saveAvatar = /*#__PURE__*/function () {
-    var _ref9 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee7() {
+    var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
       var token, _res$data7, form, res, _me$data, _res$data5, me, serverUser, avatarUrl, cacheBusted, _me$data2, next, _res$data6, _avatarUrl, _cacheBusted, _e$response, msg, _t4, _t5;
-      return _regenerator().w(function (_context7) {
-        while (1) switch (_context7.p = _context7.n) {
+      return _regenerator().w(function (_context8) {
+        while (1) switch (_context8.p = _context8.n) {
           case 0:
             token = localStorage.getItem("authToken");
             if (token) {
-              _context7.n = 1;
+              _context8.n = 1;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Your session expired. Please log in again.");
             navigate("/login");
-            return _context7.a(2);
+            return _context8.a(2);
           case 1:
             if (avatarFile) {
-              _context7.n = 2;
+              _context8.n = 2;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.info("Please choose an image first.");
-            return _context7.a(2);
+            return _context8.a(2);
           case 2:
-            _context7.p = 2;
+            _context8.p = 2;
             setAvatarSaving(true);
             form = new FormData();
             form.append("avatar", avatarFile);
-            _context7.n = 3;
+            _context8.n = 3;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/profile/avatar", form, {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -92330,9 +93219,9 @@ function StudentPortal() {
               withCredentials: true
             });
           case 3:
-            res = _context7.v;
-            _context7.p = 4;
-            _context7.n = 5;
+            res = _context8.v;
+            _context8.p = 4;
+            _context8.n = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/profile", {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -92341,7 +93230,7 @@ function StudentPortal() {
               withCredentials: true
             });
           case 5:
-            me = _context7.v;
+            me = _context8.v;
             serverUser = (_me$data = me.data) === null || _me$data === void 0 ? void 0 : _me$data.user;
             avatarUrl = (serverUser === null || serverUser === void 0 ? void 0 : serverUser.avatar_url) || ((_res$data5 = res.data) === null || _res$data5 === void 0 ? void 0 : _res$data5.avatar_url);
             cacheBusted = avatarUrl ? "".concat(avatarUrl).concat(avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now()) : null;
@@ -92369,11 +93258,11 @@ function StudentPortal() {
                 return next;
               });
             }
-            _context7.n = 7;
+            _context8.n = 7;
             break;
           case 6:
-            _context7.p = 6;
-            _t4 = _context7.v;
+            _context8.p = 6;
+            _t4 = _context8.v;
             _avatarUrl = (_res$data6 = res.data) === null || _res$data6 === void 0 ? void 0 : _res$data6.avatar_url;
             if (_avatarUrl) {
               _cacheBusted = "".concat(_avatarUrl).concat(_avatarUrl.includes("?") ? "&" : "?", "t=").concat(Date.now());
@@ -92392,71 +93281,71 @@ function StudentPortal() {
           case 7:
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data7 = res.data) === null || _res$data7 === void 0 ? void 0 : _res$data7.message) || "Profile photo updated.");
             // Avatar upload now lives inside the Profile Settings modal.
-            _context7.n = 9;
+            _context8.n = 9;
             break;
           case 8:
-            _context7.p = 8;
-            _t5 = _context7.v;
+            _context8.p = 8;
+            _t5 = _context8.v;
             msg = (_t5 === null || _t5 === void 0 || (_e$response = _t5.response) === null || _e$response === void 0 || (_e$response = _e$response.data) === null || _e$response === void 0 ? void 0 : _e$response.message) || "Couldn’t upload profile photo.";
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
           case 9:
-            _context7.p = 9;
+            _context8.p = 9;
             setAvatarSaving(false);
-            return _context7.f(9);
+            return _context8.f(9);
           case 10:
-            return _context7.a(2);
+            return _context8.a(2);
         }
-      }, _callee7, null, [[4, 6], [2, 8, 9, 10]]);
+      }, _callee8, null, [[4, 6], [2, 8, 9, 10]]);
     }));
     return function saveAvatar() {
-      return _ref9.apply(this, arguments);
+      return _ref1.apply(this, arguments);
     };
   }();
   var changePassword = /*#__PURE__*/function () {
-    var _ref0 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee8() {
+    var _ref10 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9() {
       var token, _res$data8, res, _e$response2, msg, _t6;
-      return _regenerator().w(function (_context8) {
-        while (1) switch (_context8.p = _context8.n) {
+      return _regenerator().w(function (_context9) {
+        while (1) switch (_context9.p = _context9.n) {
           case 0:
             token = localStorage.getItem("authToken");
             if (token) {
-              _context8.n = 1;
+              _context9.n = 1;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Your session expired. Please log in again.");
             navigate("/login");
-            return _context8.a(2);
+            return _context9.a(2);
           case 1:
             if (!pwSaving) {
-              _context8.n = 2;
+              _context9.n = 2;
               break;
             }
-            return _context8.a(2);
+            return _context9.a(2);
           case 2:
             if (String(pwForm.current_password || "").trim()) {
-              _context8.n = 3;
+              _context9.n = 3;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Please enter your current password.");
-            return _context8.a(2);
+            return _context9.a(2);
           case 3:
             if (!(String(pwForm.password || "").length < 8)) {
-              _context8.n = 4;
+              _context9.n = 4;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("New password must be at least 8 characters.");
-            return _context8.a(2);
+            return _context9.a(2);
           case 4:
             if (!(pwForm.password !== pwForm.password_confirmation)) {
-              _context8.n = 5;
+              _context9.n = 5;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("New password confirmation does not match.");
-            return _context8.a(2);
+            return _context9.a(2);
           case 5:
-            _context8.p = 5;
+            _context9.p = 5;
             setPwSaving(true);
-            _context8.n = 6;
+            _context9.n = 6;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/account/password", {
               current_password: pwForm.current_password,
               password: pwForm.password,
@@ -92469,93 +93358,32 @@ function StudentPortal() {
               withCredentials: true
             });
           case 6:
-            res = _context8.v;
+            res = _context9.v;
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data8 = res.data) === null || _res$data8 === void 0 ? void 0 : _res$data8.message) || "Password updated.");
             setAccountOpen(false);
-            _context8.n = 8;
+            _context9.n = 8;
             break;
           case 7:
-            _context8.p = 7;
-            _t6 = _context8.v;
+            _context9.p = 7;
+            _t6 = _context9.v;
             msg = (_t6 === null || _t6 === void 0 || (_e$response2 = _t6.response) === null || _e$response2 === void 0 || (_e$response2 = _e$response2.data) === null || _e$response2 === void 0 ? void 0 : _e$response2.message) || "Couldn’t change password.";
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
           case 8:
-            _context8.p = 8;
+            _context9.p = 8;
             setPwSaving(false);
-            return _context8.f(8);
+            return _context9.f(8);
           case 9:
-            return _context8.a(2);
+            return _context9.a(2);
         }
-      }, _callee8, null, [[5, 7, 8, 9]]);
+      }, _callee9, null, [[5, 7, 8, 9]]);
     }));
     return function changePassword() {
-      return _ref0.apply(this, arguments);
+      return _ref10.apply(this, arguments);
     };
   }();
   var saveProfile = /*#__PURE__*/function () {
-    var _ref1 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9() {
+    var _ref11 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
       var token, _res$data9, _res$data0, _res$data1, payload, res, newUser, newProfile, _e$response3, msg, _t7;
-      return _regenerator().w(function (_context9) {
-        while (1) switch (_context9.p = _context9.n) {
-          case 0:
-            token = localStorage.getItem("authToken");
-            if (token) {
-              _context9.n = 1;
-              break;
-            }
-            return _context9.a(2);
-          case 1:
-            setSaving(true);
-            _context9.p = 2;
-            payload = {
-              name: String(editForm.name || "").trim(),
-              email: String(editForm.email || "").trim(),
-              age: Number(editForm.age),
-              gender: String(editForm.gender || "").trim(),
-              high_school: String(editForm.high_school || "").trim(),
-              contact_number: String(editForm.contact_number || "").trim()
-            };
-            _context9.n = 3;
-            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/profile/basic-info", payload, {
-              headers: {
-                Authorization: "Bearer ".concat(token),
-                Accept: "application/json"
-              },
-              withCredentials: true
-            });
-          case 3:
-            res = _context9.v;
-            // reflect immediately
-            newUser = ((_res$data9 = res.data) === null || _res$data9 === void 0 ? void 0 : _res$data9.user) || user;
-            newProfile = ((_res$data0 = res.data) === null || _res$data0 === void 0 ? void 0 : _res$data0.profile) || profile;
-            setUser(newUser);
-            setProfile(newProfile);
-            localStorage.setItem("user", JSON.stringify(newUser));
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data1 = res.data) === null || _res$data1 === void 0 ? void 0 : _res$data1.message) || "Profile updated.");
-            setEditOpen(false);
-            _context9.n = 5;
-            break;
-          case 4:
-            _context9.p = 4;
-            _t7 = _context9.v;
-            msg = (_t7 === null || _t7 === void 0 || (_e$response3 = _t7.response) === null || _e$response3 === void 0 || (_e$response3 = _e$response3.data) === null || _e$response3 === void 0 ? void 0 : _e$response3.message) || "Couldn’t save profile.";
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
-          case 5:
-            _context9.p = 5;
-            setSaving(false);
-            return _context9.f(5);
-          case 6:
-            return _context9.a(2);
-        }
-      }, _callee9, null, [[2, 4, 5, 6]]);
-    }));
-    return function saveProfile() {
-      return _ref1.apply(this, arguments);
-    };
-  }();
-  var submitRequest = /*#__PURE__*/function () {
-    var _ref10 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0() {
-      var token, date, time, preferredAt, _res$data10, _list$data, res, list, _e$response4, msg, _t8;
       return _regenerator().w(function (_context0) {
         while (1) switch (_context0.p = _context0.n) {
           case 0:
@@ -92564,29 +93392,90 @@ function StudentPortal() {
               _context0.n = 1;
               break;
             }
-            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Your session expired. Please log in again.");
-            navigate("/login");
             return _context0.a(2);
           case 1:
-            if (!bookSubmitting) {
-              _context0.n = 2;
+            setSaving(true);
+            _context0.p = 2;
+            payload = {
+              name: String(editForm.name || "").trim(),
+              email: String(editForm.email || "").trim(),
+              age: Number(editForm.age),
+              gender: String(editForm.gender || "").trim(),
+              high_school: String(editForm.high_school || "").trim(),
+              contact_number: String(editForm.contact_number || "").trim()
+            };
+            _context0.n = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/profile/basic-info", payload, {
+              headers: {
+                Authorization: "Bearer ".concat(token),
+                Accept: "application/json"
+              },
+              withCredentials: true
+            });
+          case 3:
+            res = _context0.v;
+            // reflect immediately
+            newUser = ((_res$data9 = res.data) === null || _res$data9 === void 0 ? void 0 : _res$data9.user) || user;
+            newProfile = ((_res$data0 = res.data) === null || _res$data0 === void 0 ? void 0 : _res$data0.profile) || profile;
+            setUser(newUser);
+            setProfile(newProfile);
+            localStorage.setItem("user", JSON.stringify(newUser));
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data1 = res.data) === null || _res$data1 === void 0 ? void 0 : _res$data1.message) || "Profile updated.");
+            setEditOpen(false);
+            _context0.n = 5;
+            break;
+          case 4:
+            _context0.p = 4;
+            _t7 = _context0.v;
+            msg = (_t7 === null || _t7 === void 0 || (_e$response3 = _t7.response) === null || _e$response3 === void 0 || (_e$response3 = _e$response3.data) === null || _e$response3 === void 0 ? void 0 : _e$response3.message) || "Couldn’t save profile.";
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
+          case 5:
+            _context0.p = 5;
+            setSaving(false);
+            return _context0.f(5);
+          case 6:
+            return _context0.a(2);
+        }
+      }, _callee0, null, [[2, 4, 5, 6]]);
+    }));
+    return function saveProfile() {
+      return _ref11.apply(this, arguments);
+    };
+  }();
+  var submitRequest = /*#__PURE__*/function () {
+    var _ref12 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1() {
+      var token, date, time, preferredAt, _res$data10, _list$data, res, list, _e$response4, msg, _t8;
+      return _regenerator().w(function (_context1) {
+        while (1) switch (_context1.p = _context1.n) {
+          case 0:
+            token = localStorage.getItem("authToken");
+            if (token) {
+              _context1.n = 1;
               break;
             }
-            return _context0.a(2);
+            _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Your session expired. Please log in again.");
+            navigate("/login");
+            return _context1.a(2);
+          case 1:
+            if (!bookSubmitting) {
+              _context1.n = 2;
+              break;
+            }
+            return _context1.a(2);
           case 2:
             date = String(bookForm.date || "").trim();
             time = String(bookForm.time || "").trim();
             if (!(!date || !time)) {
-              _context0.n = 3;
+              _context1.n = 3;
               break;
             }
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error("Please select a date and time.");
-            return _context0.a(2);
+            return _context1.a(2);
           case 3:
             preferredAt = "".concat(date, "T").concat(time, ":00");
-            _context0.p = 4;
+            _context1.p = 4;
             setBookSubmitting(true);
-            _context0.n = 5;
+            _context1.n = 5;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/appointments", {
               session_type: String(bookForm.session_type || "Initial Consultation"),
               preferred_at: preferredAt,
@@ -92599,7 +93488,7 @@ function StudentPortal() {
               withCredentials: true
             });
           case 5:
-            res = _context0.v;
+            res = _context1.v;
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.success(((_res$data10 = res.data) === null || _res$data10 === void 0 ? void 0 : _res$data10.message) || "Appointment request sent.");
             setBookOpen(false);
             setBookForm(function (p) {
@@ -92609,7 +93498,7 @@ function StudentPortal() {
                 notes: ""
               });
             });
-            _context0.n = 6;
+            _context1.n = 6;
             return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/appointments?scope=upcoming&limit=3", {
               headers: {
                 Authorization: "Bearer ".concat(token),
@@ -92618,26 +93507,26 @@ function StudentPortal() {
               withCredentials: true
             });
           case 6:
-            list = _context0.v;
+            list = _context1.v;
             setUpcoming(((_list$data = list.data) === null || _list$data === void 0 ? void 0 : _list$data.appointments) || []);
-            _context0.n = 8;
+            _context1.n = 8;
             break;
           case 7:
-            _context0.p = 7;
-            _t8 = _context0.v;
+            _context1.p = 7;
+            _t8 = _context1.v;
             msg = (_t8 === null || _t8 === void 0 || (_e$response4 = _t8.response) === null || _e$response4 === void 0 || (_e$response4 = _e$response4.data) === null || _e$response4 === void 0 ? void 0 : _e$response4.message) || "Couldn’t send request.";
             _ui_toast__WEBPACK_IMPORTED_MODULE_3__.toast.error(msg);
           case 8:
-            _context0.p = 8;
+            _context1.p = 8;
             setBookSubmitting(false);
-            return _context0.f(8);
+            return _context1.f(8);
           case 9:
-            return _context0.a(2);
+            return _context1.a(2);
         }
-      }, _callee0, null, [[4, 7, 8, 9]]);
+      }, _callee1, null, [[4, 7, 8, 9]]);
     }));
     return function submitRequest() {
-      return _ref10.apply(this, arguments);
+      return _ref12.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -92659,37 +93548,6 @@ function StudentPortal() {
             children: "Student Portal"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("nav", {
-        className: "sp-nav",
-        "aria-label": "Student portal navigation",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-          type: "button",
-          className: "sp-navlink ".concat(activeNav === "dashboards" ? "is-active" : ""),
-          onClick: function onClick() {
-            setActiveNav("dashboards");
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            });
-          },
-          children: "Home"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-          type: "button",
-          className: "sp-navlink ".concat(activeNav === "resources" ? "is-active" : ""),
-          onClick: function onClick() {
-            setActiveNav("resources");
-            scrollToRef(journeySectionRef);
-          },
-          children: "Resources"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-          type: "button",
-          className: "sp-navlink ".concat(activeNav === "appointments" ? "is-active" : ""),
-          onClick: function onClick() {
-            setActiveNav("appointments");
-            scrollToRef(apptSectionRef);
-          },
-          children: "Appointments"
-        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "sp-actions",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -92702,25 +93560,25 @@ function StudentPortal() {
             type: "button",
             title: "Notifications",
             "aria-label": "Notifications",
-            onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1() {
+            onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee10() {
               var next;
-              return _regenerator().w(function (_context1) {
-                while (1) switch (_context1.n) {
+              return _regenerator().w(function (_context10) {
+                while (1) switch (_context10.n) {
                   case 0:
                     next = !notifOpen;
                     setNotifOpen(next);
                     if (!next) {
-                      _context1.n = 2;
+                      _context10.n = 2;
                       break;
                     }
-                    _context1.n = 1;
+                    _context10.n = 1;
                     return loadNotifications();
                   case 1:
                     markNotificationsSeenNow();
                   case 2:
-                    return _context1.a(2);
+                    return _context10.a(2);
                 }
-              }, _callee1);
+              }, _callee10);
             })),
             children: ["\uD83D\uDD14", unreadNotifCount ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
               className: "sp-badge-dot",
@@ -92771,8 +93629,11 @@ function StudentPortal() {
                 var isCancelled = st === "cancelled";
                 var isRejected = st === "rejected";
                 var isCompleted = st === "completed";
-                var title = isScheduled ? "Appointment confirmed" : isInterview ? "Interview scheduled" : isCancelled ? "Appointment cancelled" : isRejected ? "Appointment rejected" : isCompleted ? "Appointment completed" : "Appointment request sent";
-                var when = isScheduled ? formatApptFull(n.scheduled_at) : isInterview ? function () {
+                var isRecoApproved = st === "recommendation_approved";
+                var isRecoRejected = st === "recommendation_rejected";
+                var isClickable = isRecoApproved || isRecoRejected;
+                var title = isScheduled ? "Appointment confirmed" : isInterview ? "Interview scheduled" : isRecoApproved ? "Recommendation approved" : isRecoRejected ? "Recommendation rejected" : isCancelled ? "Appointment cancelled" : isRejected ? "Appointment rejected" : isCompleted ? "Appointment completed" : "Appointment request sent";
+                var when = isRecoApproved || isRecoRejected ? n.updated_at || n.created_at ? formatApptFull(n.updated_at || n.created_at) : "—" : isScheduled ? formatApptFull(n.scheduled_at) : isInterview ? function () {
                   var txt = formatInterviewWhen(n);
                   if (txt !== "—") return txt.replace(" • ", " ");
                   // Fallback to datetime parsing if raw fields aren't available.
@@ -92782,7 +93643,12 @@ function StudentPortal() {
                   className: "sp-menu-item",
                   role: "menuitem",
                   style: {
-                    cursor: "default"
+                    cursor: isClickable ? "pointer" : "default"
+                  },
+                  onClick: function onClick() {
+                    if (!isClickable) return;
+                    setNotifOpen(false);
+                    navigate("/student/course-recommendation");
                   },
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                     style: {
@@ -92824,7 +93690,7 @@ function StudentPortal() {
                       style: {
                         color: "#0f172a"
                       },
-                      children: "When:"
+                      children: isRecoApproved || isRecoRejected ? "Updated:" : "When:"
                     }), " ", when]
                   }), (isInterview || isScheduled || isCancelled || isCompleted) && n.location ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                     className: "sp-muted",
@@ -92837,7 +93703,7 @@ function StudentPortal() {
                       },
                       children: "Where:"
                     }), " ", n.location]
-                  }) : null, (isInterview || isScheduled || isCancelled || isRejected || isCompleted) && (_n$advisor = n.advisor) !== null && _n$advisor !== void 0 && _n$advisor.name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                  }) : null, (isInterview || isScheduled || isCancelled || isRejected || isCompleted || isRecoApproved || isRecoRejected) && (_n$advisor = n.advisor) !== null && _n$advisor !== void 0 && _n$advisor.name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                     className: "sp-muted",
                     style: {
                       marginTop: 4
@@ -92848,7 +93714,7 @@ function StudentPortal() {
                       },
                       children: "Advisor:"
                     }), " ", n.advisor.name]
-                  }) : null, (isInterview || isScheduled || isCancelled || isRejected || isCompleted) && n.advisor_comment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                  }) : null, (isInterview || isScheduled || isCancelled || isRejected || isCompleted || isRecoApproved || isRecoRejected) && n.advisor_comment ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                     className: "sp-muted",
                     style: {
                       marginTop: 8,

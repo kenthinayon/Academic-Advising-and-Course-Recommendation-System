@@ -46,6 +46,9 @@ export default function AdvisorStudentDetail() {
     const [profile, setProfile] = useState(null);
     const [attachments, setAttachments] = useState({ report_card_url: null, skill_attachment_urls: [] });
 
+    const [assessment, setAssessment] = useState(null);
+    const [breakdownSkillFilter, setBreakdownSkillFilter] = useState("all");
+
     const [status, setStatus] = useState("pending");
     const [comment, setComment] = useState("");
     const [degrees, setDegrees] = useState([]);
@@ -83,6 +86,7 @@ export default function AdvisorStudentDetail() {
 
                 setStudent(res.data?.student || null);
                 setProfile(res.data?.profile || null);
+                setAssessment(res.data?.assessment || null);
                 setAttachments(res.data?.attachments || { report_card_url: null, skill_attachment_urls: [] });
 
                 const p = res.data?.profile;
@@ -114,6 +118,67 @@ export default function AdvisorStudentDetail() {
 
         load();
     }, [headers, userId]);
+
+    const breakdown = useMemo(() => assessment?.breakdown || null, [assessment]);
+
+    const breakdownSummary = useMemo(() => {
+        if (!breakdown) return null;
+
+        const readiness = breakdown.readiness || {};
+        const part2 = breakdown.part2_categories || {};
+
+        const skillLabels = {
+            numerical_reasoning: "Numerical Reasoning",
+            logical_reasoning: "Logical Reasoning",
+            verbal_reasoning: "Verbal Reasoning",
+        };
+
+        const readinessCorrect = readiness?.by_skill?.correct || {};
+        const readinessTotal = readiness?.by_skill?.total || {};
+        const readinessRows = Object.keys(skillLabels).map((k) => ({
+            key: k,
+            label: skillLabels[k],
+            correct: Number(readinessCorrect[k] || 0),
+            total: Number(readinessTotal[k] || 0),
+        }));
+
+        const catCorrect = part2?.by_category?.correct || {};
+        const catTotal = part2?.by_category?.total || {};
+        const categories = Array.isArray(part2.selected_categories)
+            ? part2.selected_categories
+            : Object.keys(catTotal);
+        const categoryRows = categories
+            .slice()
+            .sort()
+            .map((c) => ({
+                category: c,
+                correct: Number(catCorrect[c] || 0),
+                total: Number(catTotal[c] || 0),
+            }));
+
+        return {
+            part2: {
+                correctTotal: Number(part2.correct_total || 0),
+                total: Number(part2.total || 0),
+                rows: categoryRows,
+            },
+            readiness: {
+                correctTotal: Number(readiness.correct_total || 0),
+                total: Number(readiness.total || 0),
+                rows: readinessRows,
+            },
+        };
+    }, [breakdown]);
+
+    const filteredBreakdownItems = useMemo(() => {
+        const items = Array.isArray(breakdown?.items) ? breakdown.items : [];
+        if (breakdownSkillFilter === "all") return items;
+
+        return items.filter((it) => {
+            if (it?.type !== "readiness") return true; // only filter readiness questions
+            return String(it?.skill || "") === breakdownSkillFilter;
+        });
+    }, [breakdown, breakdownSkillFilter]);
 
     const addDegree = () => {
         setDegrees((d) => [...d, { code: "", name: "", track: "" }]);
@@ -500,6 +565,84 @@ export default function AdvisorStudentDetail() {
                                         </div>
                                     </div>
                                 </div>
+
+                                {breakdownSummary ? (
+                                    <div style={{ marginTop: 18 }}>
+                                        <h3 style={{ marginTop: 0 }}>Part II Breakdown (Advisor)</h3>
+
+                                        <div className="ad-kv" style={{ marginBottom: 14 }}>
+                                            <div>
+                                                <div className="ad-k">Category questions</div>
+                                                <div className="ad-v">
+                                                    {breakdownSummary.part2.correctTotal}/{breakdownSummary.part2.total}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="ad-k">Readiness (skill-based)</div>
+                                                <div className="ad-v">
+                                                    {breakdownSummary.readiness.correctTotal}/{breakdownSummary.readiness.total}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="ad-review-row" style={{ gridTemplateColumns: "1fr", marginBottom: 10 }}>
+                                            <label className="ad-field" style={{ maxWidth: 360 }}>
+                                                <span>Filter readiness skill</span>
+                                                <select value={breakdownSkillFilter} onChange={(e) => setBreakdownSkillFilter(e.target.value)}>
+                                                    <option value="all">All</option>
+                                                    <option value="numerical_reasoning">numerical_reasoning</option>
+                                                    <option value="logical_reasoning">logical_reasoning</option>
+                                                    <option value="verbal_reasoning">verbal_reasoning</option>
+                                                </select>
+                                            </label>
+                                        </div>
+
+                                        <div className="ad-table" style={{ marginTop: 8 }}>
+                                            <div className="ad-table-head" style={{ gridTemplateColumns: "140px 150px 1fr 120px 120px 120px" }}>
+                                                <span>Question</span>
+                                                <span>Type</span>
+                                                <span>Category / Skill</span>
+                                                <span>Student</span>
+                                                <span>Correct</span>
+                                                <span>Result</span>
+                                            </div>
+
+                                            {filteredBreakdownItems.map((it) => {
+                                                const qid = String(it?.qid || "");
+                                                const type = String(it?.type || "");
+                                                const label = type === "readiness" ? String(it?.skill || "") : String(it?.category || "");
+                                                const userAns = String(it?.user_answer || "—");
+                                                const correctAns = String(it?.correct_answer || "—");
+                                                const ok = Boolean(it?.is_correct);
+
+                                                return (
+                                                    <div
+                                                        key={`${qid}-${type}`}
+                                                        className="ad-table-row"
+                                                        style={{ gridTemplateColumns: "140px 150px 1fr 120px 120px 120px" }}
+                                                    >
+                                                        <span>{qid}</span>
+                                                        <span>{type}</span>
+                                                        <span>{label || "—"}</span>
+                                                        <span>{userAns}</span>
+                                                        <span>{correctAns}</span>
+                                                        <span>{ok ? "Correct" : "Wrong"}</span>
+                                                    </div>
+                                                );
+                                            })}
+
+                                            {!filteredBreakdownItems.length ? (
+                                                <div className="ad-muted" style={{ marginTop: 8 }}>
+                                                    No breakdown items available.
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="ad-muted" style={{ marginTop: 14 }}>
+                                        No assessment breakdown available yet.
+                                    </div>
+                                )}
                             </section>
                         </div>
                     </>

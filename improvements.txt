@@ -1,0 +1,132 @@
+ACADEMIC ADVISING SYSTEM — ANALYSIS & IMPROVEMENTS (FLOW + SCORING)
+
+This file focuses on the Student flow: Basic Info → Academic Credentials → Assessment → Course Recommendation.
+It also highlights scoring/logic issues that may affect correctness or user trust.
+
+
+1) Flow / UX Observations (Student steps)
+
+1.1 Step completion can be satisfied without real user intent
+- Current Step 2 completion checks only whether program_interest_ratings exists and has keys.
+- Because the UI initializes ratings for ALL programs (now default 0), Step 2 can look “complete” even if the student never moved any slider.
+
+Suggested improvement
+- Require at least one rating > 0 to consider ratings “filled”.
+- In StudentPortal + StudentCourseRecommendation gating, replace:
+  hasRatings = Object.keys(ratings).length > 0
+  with something like:
+  hasRatings = Object.values(ratings).some(v => Number(v) > 0)
+
+Optional stricter alternative
+- Force the student to rate at least N programs (e.g., N=3) before proceeding.
+
+
+1.2 Skills placeholder “N/A” makes Step 2 pass even when blank
+- StudentAcademicCredentials forces skills = ["N/A"] if student leaves skills empty.
+- This makes Step 2 completion pass, but it lowers data quality.
+
+Suggested improvement
+- Remove the placeholder and require at least one real skill.
+- If you want to keep it optional, then update Step 2 completion to not require skills.
+  (Pick one: strict data vs easy completion.)
+
+
+2) Scoring / Recommendation Observations
+
+2.1 Degree selection can be biased toward the top category
+- degreesFromTop() flattens category-to-degrees and stops after 3 degrees total.
+- If the #1 category has 3 degrees (e.g., Engineering & Technology), the result can be:
+  #1 BSCE, #2 BSEE, #3 BSME
+  and it never shows the top degrees for #2 and #3 categories.
+
+Why it matters
+- Students may expect “Top 3 recommendations” to represent 3 different categories (or at least include the #2/#3 category).
+
+Suggested improvement (recommended)
+- Return 1 best degree per top category (3 categories → 3 degrees), like:
+  - categoryRank 1 => first degree of that category
+  - categoryRank 2 => first degree of that category
+  - categoryRank 3 => first degree of that category
+
+Alternative improvement
+- Compute degree-level scores rather than category-level only, then pick top 3 degrees globally.
+
+
+2.2 Program interest ratings are a strong signal; confirm you want negative impact
+- The rating delta uses rating 3 as neutral and 1/2 as negative.
+- Weight is 2.5, so rating=1 applies -5, rating=5 applies +5 to the mapped category.
+
+Considerations
+- If a student accidentally sets something low, it can meaningfully reduce that category’s final score.
+
+Suggested improvement
+- Consider treating ratings as only positive signals (e.g., 0..5 maps to 0..+something) instead of negative.
+- Or reduce weight to soften impact.
+
+
+2.3 Threshold penalties are large and can dominate
+- GWA below min_gwa causes -3.0 penalty.
+- Missing strong math/science adds -1.5 each.
+
+Potential issue
+- If subject names are typed inconsistently (e.g., “Gen Math”, “EarthSci”), the string matching might miss them and apply penalties incorrectly.
+
+Suggested improvement
+- Standardize subject inputs:
+  - Use dropdown choices for subject type (Math / Science / English / etc.)
+  - Or a controlled vocabulary list
+  - Or ask explicitly for Math grade and Science grade separately
+
+
+2.4 Duplicate question bank and answer key (front + back)
+- Backend has PART2_BANK and READINESS_QUESTIONS answers.
+- Frontend also contains PART2_BANK and readiness questions.
+
+Risk
+- If you change one side and forget the other, the UI “preview” and server result can diverge.
+
+Suggested improvement
+- Make backend the single source of truth:
+  - Add endpoint GET /api/assessment/questions that returns the bank.
+  - Frontend renders from server data.
+- Or generate a shared JSON config consumed by both.
+
+
+2.5 Transparency improvements (trust + debugging)
+Currently stored:
+- recommended_top3 and recommended_degrees
+Not stored:
+- per-signal breakdown (quiz vs strand vs ratings vs grade boosts vs threshold penalties)
+
+Suggested improvement
+- Store or return a debug breakdown object in assessment response:
+  - baseScores
+  - boostsApplied
+  - penaltiesApplied
+  - finalScores
+This helps explain “why” a course was recommended.
+
+
+3) Data / Security / Reliability Notes (optional but important)
+
+3.1 Token storage in localStorage
+- Storing auth tokens in localStorage is vulnerable to XSS token theft.
+
+Suggested improvement
+- Prefer HttpOnly cookies (Sanctum SPA cookie-based auth) or other safer token storage patterns.
+
+3.2 File upload lifecycle
+- Uploaded attachments are appended forever unless cleaned up.
+
+Suggested improvement
+- Add endpoint/UI to remove an uploaded report card/certificate.
+- Consider per-file delete and storage cleanup.
+
+
+4) Concrete Next Changes (small, high value)
+If you want quick, safe improvements without redesigning:
+1) Update Step 2 completion to require at least one rating > 0.
+2) Change degreesFromTop() to pick one degree per top category.
+3) Make subject entry more structured OR explicitly ask for Math/Science grade.
+
+If you want, I can implement items (1) and (2) quickly since they are localized and low risk.

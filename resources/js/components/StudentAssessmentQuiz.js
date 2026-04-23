@@ -24,60 +24,60 @@ const PART2_BANK = {
     Accountancy: [
         {
             id: "acc_1",
-            prompt: "What is the basic accounting equation?",
+            prompt: "You have ₱1,200 and you spend ₱450. How much money is left?",
             options: {
-                A: "Assets = Liabilities – Capital",
-                B: "Assets = Liabilities + Owner’s Equity",
-                C: "Income = Expenses + Assets",
-                D: "Profit = Assets – Liabilities",
+                A: "₱650",
+                B: "₱750",
+                C: "₱850",
+                D: "₱950",
             },
             correct: "B",
             category: "Accountancy",
         },
         {
             id: "acc_2",
-            prompt: "In double-entry bookkeeping, every transaction affects:",
+            prompt: "A student lists expenses of ₱120, ₱80, and ₱50. What is the total expense?",
             options: {
-                A: "Only one account",
-                B: "At least two accounts",
-                C: "Only revenue accounts",
-                D: "Only cash accounts",
+                A: "₱200",
+                B: "₱250",
+                C: "₱260",
+                D: "₱280",
             },
             correct: "B",
             category: "Accountancy",
         },
         {
             id: "acc_3",
-            prompt: "A trial balance is used mainly to:",
+            prompt: "A store gives a 20% discount on an item that costs ₱500. What is the discounted price?",
             options: {
-                A: "Determine company profit automatically",
-                B: "Check if total debits equal total credits",
-                C: "Record daily transactions",
-                D: "Create marketing plans",
+                A: "₱350",
+                B: "₱400",
+                C: "₱450",
+                D: "₱480",
             },
             correct: "B",
             category: "Accountancy",
         },
         {
             id: "acc_4",
-            prompt: "Which financial statement shows a company’s financial position on a specific date?",
+            prompt: "A small business earned ₱2,000 and spent ₱1,500. What is the net gain?",
             options: {
-                A: "Income statement",
-                B: "Balance sheet",
-                C: "Cash flow statement",
-                D: "Statement of changes in equity only",
+                A: "₱300",
+                B: "₱500",
+                C: "₱1,500",
+                D: "₱3,500",
             },
             correct: "B",
             category: "Accountancy",
         },
         {
             id: "acc_5",
-            prompt: "Revenue is generally recognized when it is:",
+            prompt: "A budget is ₱10,000 and rent is 50% of the budget. How much is allocated for rent?",
             options: {
-                A: "Planned",
-                B: "Earned",
-                C: "Promised",
-                D: "Discussed with the customer",
+                A: "₱2,500",
+                B: "₱5,000",
+                C: "₱6,000",
+                D: "₱7,500",
             },
             correct: "B",
             category: "Accountancy",
@@ -86,43 +86,43 @@ const PART2_BANK = {
     "Arts & Sciences": [
         {
             id: "arts_1",
-            prompt: "Which branch of science studies human behavior?",
+            prompt: "Which is an example of a testable research question?",
             options: {
-                A: "Biology",
-                B: "Sociology",
-                C: "Psychology",
-                D: "Chemistry",
+                A: "Why is life unfair?",
+                B: "Is music better than silence?",
+                C: "Does fertilizer A increase plant height after two weeks?",
+                D: "What is the best color?",
             },
             correct: "C",
             category: "Arts & Sciences",
         },
         {
             id: "arts_2",
-            prompt: "In research, the variable you change/control is the:",
+            prompt: "You change the amount of light a plant receives and you measure its height. What is the independent variable?",
             options: {
-                A: "Dependent variable",
-                B: "Independent variable",
-                C: "Random variable",
-                D: "Confounding variable",
+                A: "Plant height",
+                B: "Amount of light",
+                C: "Type of plant",
+                D: "Time of day",
             },
             correct: "B",
             category: "Arts & Sciences",
         },
         {
             id: "arts_3",
-            prompt: "Correlation means two variables:",
+            prompt: "When two variables tend to increase together, this is best described as:",
             options: {
-                A: "Prove cause and effect",
-                B: "Are unrelated",
-                C: "Move together in some pattern",
-                D: "Are always equal",
+                A: "Cause and effect",
+                B: "No relationship",
+                C: "A positive association",
+                D: "Always equal values",
             },
             correct: "C",
             category: "Arts & Sciences",
         },
         {
             id: "arts_4",
-            prompt: "A hypothesis is best described as:",
+            prompt: "A good hypothesis should be:",
             options: {
                 A: "A final conclusion",
                 B: "A testable prediction",
@@ -148,31 +148,31 @@ const PART2_BANK = {
     "Business Administration": [
         {
             id: "bus_1",
-            prompt: "What does ROI mean in business?",
+            prompt: "You invest ₱1,000 and you receive ₱1,200 back. What is your return (profit as a percent of investment)?",
             options: {
-                A: "Rate of Income",
-                B: "Return on Investment",
-                C: "Revenue of Industry",
-                D: "Risk of Investment",
+                A: "10%",
+                B: "20%",
+                C: "25%",
+                D: "40%",
             },
             correct: "B",
             category: "Business Administration",
         },
         {
             id: "bus_2",
-            prompt: "The 4Ps of marketing include Product, Price, Place, and:",
+            prompt: "A company runs ads and offers discounts to attract customers. This is an example of:",
             options: {
-                A: "People",
+                A: "Accounting",
                 B: "Promotion",
-                C: "Profit",
-                D: "Process only",
+                C: "Manufacturing",
+                D: "Inventory counting",
             },
             correct: "B",
             category: "Business Administration",
         },
         {
             id: "bus_3",
-            prompt: "A SWOT analysis stands for:",
+            prompt: "A business lists its Strengths, Weaknesses, Opportunities, and Threats. This framework is called:",
             options: {
                 A: "Sales, Work, Output, Time",
                 B: "Strengths, Weaknesses, Opportunities, Threats",
@@ -184,24 +184,24 @@ const PART2_BANK = {
         },
         {
             id: "bus_4",
-            prompt: "Break-even point is when:",
+            prompt: "A shop has fixed costs of ₱2,000. It earns ₱50 profit per item sold. How many items must it sell to break even?",
             options: {
-                A: "Revenue is zero",
-                B: "Profit is maximum",
-                C: "Total revenue equals total costs",
-                D: "Costs stop increasing",
+                A: "20",
+                B: "30",
+                C: "40",
+                D: "60",
             },
             correct: "C",
             category: "Business Administration",
         },
         {
             id: "bus_5",
-            prompt: "Supply and demand most directly influences:",
+            prompt: "In a market, when demand goes up but supply stays the same, what usually happens to price?",
             options: {
-                A: "Office layout",
-                B: "Market price",
-                C: "Employee attendance",
-                D: "Product color",
+                A: "It always goes down",
+                B: "It usually goes up",
+                C: "It becomes zero",
+                D: "It becomes random",
             },
             correct: "B",
             category: "Business Administration",
@@ -210,12 +210,12 @@ const PART2_BANK = {
     "Computer Studies": [
         {
             id: "cs_1",
-            prompt: "What does CPU stand for in computer systems?",
+            prompt: "Which password is strongest?",
             options: {
-                A: "Central Process Unit",
-                B: "Computer Personal Unit",
-                C: "Central Processing Unit",
-                D: "Control Program Utility",
+                A: "password123",
+                B: "john2005",
+                C: "G7!mQ2#zP9",
+                D: "12345678",
             },
             correct: "C",
             category: "Computer Studies",
@@ -272,19 +272,19 @@ const PART2_BANK = {
     "Criminal Justice Education": [
         {
             id: "cje_1",
-            prompt: "Which agency is responsible for enforcing laws?",
+            prompt: "When writing an incident report, what is the most important approach?",
             options: {
-                A: "Department of Health",
-                B: "Police Department",
-                C: "Department of Education",
-                D: "Securities Commission",
+                A: "Write only your opinions",
+                B: "Record observable facts in time order",
+                C: "Leave out important details",
+                D: "Guess what happened",
             },
             correct: "B",
             category: "Criminal Justice Education",
         },
         {
             id: "cje_2",
-            prompt: "Presumption of innocence means the accused is:",
+            prompt: "Presumption of innocence means a person is:",
             options: {
                 A: "Always guilty",
                 B: "Considered innocent until proven guilty",
@@ -296,10 +296,10 @@ const PART2_BANK = {
         },
         {
             id: "cje_3",
-            prompt: "Chain of custody is important to:",
+            prompt: "After collecting evidence, what best helps ensure it stays trustworthy in court?",
             options: {
                 A: "Make trials faster",
-                B: "Keep evidence properly tracked and unaltered",
+                B: "Keep evidence sealed, labeled, and documented by handler",
                 C: "Increase police budget",
                 D: "Replace witnesses",
             },
@@ -334,43 +334,43 @@ const PART2_BANK = {
     "Engineering & Technology": [
         {
             id: "eng_1",
-            prompt: "Which formula is used to compute speed?",
+            prompt: "A vehicle travels 120 km in 2 hours. What is the average speed?",
             options: {
-                A: "Speed = Distance × Time",
-                B: "Speed = Distance ÷ Time",
-                C: "Speed = Time ÷ Distance",
-                D: "Speed = Mass × Acceleration",
+                A: "40 km/h",
+                B: "60 km/h",
+                C: "80 km/h",
+                D: "100 km/h",
             },
             correct: "B",
             category: "Engineering & Technology",
         },
         {
             id: "eng_2",
-            prompt: "Ohm’s Law is:",
+            prompt: "A circuit has 12V and 4Ω resistance. What current flows?",
             options: {
-                A: "P = VI",
-                B: "V = IR",
-                C: "F = ma",
-                D: "E = mc²",
+                A: "1 A",
+                B: "3 A",
+                C: "6 A",
+                D: "16 A",
             },
             correct: "B",
             category: "Engineering & Technology",
         },
         {
             id: "eng_3",
-            prompt: "Force is calculated by:",
+            prompt: "An object with mass 2 kg accelerates at 3 m/s². What force is needed?",
             options: {
-                A: "F = m + a",
-                B: "F = ma",
-                C: "F = m/a",
-                D: "F = a/m",
+                A: "1 N",
+                B: "6 N",
+                C: "9 N",
+                D: "12 N",
             },
             correct: "B",
             category: "Engineering & Technology",
         },
         {
             id: "eng_4",
-            prompt: "The SI unit of power is:",
+            prompt: "Which unit measures power?",
             options: {
                 A: "Newton",
                 B: "Watt",
@@ -396,31 +396,31 @@ const PART2_BANK = {
     Nursing: [
         {
             id: "nurs_1",
-            prompt: "What is the normal body temperature in Celsius?",
+            prompt: "Before touching a patient, what is the best first action to reduce infection risk?",
             options: {
-                A: "35°C",
-                B: "36.5–37.5°C",
-                C: "38–39°C",
-                D: "40°C",
+                A: "Check your phone for messages",
+                B: "Perform hand hygiene",
+                C: "Shake hands with the patient",
+                D: "Eat a snack",
             },
             correct: "B",
             category: "Nursing",
         },
         {
             id: "nurs_2",
-            prompt: "A normal adult resting heart rate is typically:",
+            prompt: "Which situation most urgently needs immediate attention in a clinic?",
             options: {
-                A: "20–40 bpm",
-                B: "60–100 bpm",
-                C: "120–160 bpm",
-                D: "180–220 bpm",
+                A: "A patient asks for water",
+                B: "A patient has difficulty breathing",
+                C: "A patient wants to reschedule",
+                D: "A patient requests a blanket",
             },
             correct: "B",
             category: "Nursing",
         },
         {
             id: "nurs_3",
-            prompt: "The most effective way to prevent infection spread in healthcare is:",
+            prompt: "The most effective everyday action to reduce infection spread in healthcare is:",
             options: {
                 A: "Wearing perfume",
                 B: "Hand hygiene",
@@ -432,7 +432,7 @@ const PART2_BANK = {
         },
         {
             id: "nurs_4",
-            prompt: "Blood pressure measures the force of blood against:",
+            prompt: "Blood pressure is best described as measuring the force of blood against:",
             options: {
                 A: "Bones",
                 B: "Artery walls",
@@ -444,12 +444,12 @@ const PART2_BANK = {
         },
         {
             id: "nurs_5",
-            prompt: "A fever is commonly considered at or above:",
+            prompt: "A thermometer reads 38.2°C. This is best described as:",
             options: {
-                A: "36.0°C",
-                B: "37.0°C",
-                C: "38.0°C",
-                D: "39.9°C always",
+                A: "Low blood sugar",
+                B: "Normal temperature",
+                C: "Fever",
+                D: "Dehydration only",
             },
             correct: "C",
             category: "Nursing",
@@ -519,63 +519,160 @@ const PART2_BANK = {
     ],
 };
 
-const READINESS_QUESTIONS = [
+// General readiness (15 items) tagged by skill.
+// These are shared across all students, but scored per-skill and weighted per program category.
+const GENERAL_READINESS_15 = [
+    // =========================
+    // NUMERICAL (5 ITEMS)
+    // =========================
     {
         id: "gen_1",
-        prompt: "What number comes next in the sequence: 2, 4, 8, 16, __ ?",
-        options: {
-            A: "18",
-            B: "20",
-            C: "24",
-            D: "32",
-        },
+        skill: "numerical",
+        prompt: "What number comes next: 2, 4, 8, 16, __?",
+        options: { A: "18", B: "20", C: "24", D: "32" },
         correct: "D",
     },
     {
         id: "gen_2",
-        prompt: "A student scored 45 out of 60. What percent is this?",
-        options: {
-            A: "70%",
-            B: "75%",
-            C: "80%",
-            D: "85%",
-        },
+        skill: "numerical",
+        prompt: "A student scored 45/60. What is the percentage?",
+        options: { A: "70%", B: "75%", C: "80%", D: "85%" },
         correct: "B",
     },
     {
         id: "gen_3",
-        prompt: "Which sentence best states the main purpose of a conclusion in a report?",
+        skill: "numerical",
+        prompt: "If 5 books cost ₱500, how much is 1 book?",
+        options: { A: "₱50", B: "₱75", C: "₱100", D: "₱125" },
+        correct: "C",
+    },
+    {
+        id: "gen_4",
+        skill: "numerical",
+        prompt: "What is 20% of 250?",
+        options: { A: "40", B: "50", C: "60", D: "70" },
+        correct: "B",
+    },
+    {
+        id: "gen_5",
+        skill: "numerical",
+        prompt: "A number is doubled and becomes 36. What is the original number?",
+        options: { A: "16", B: "18", C: "20", D: "22" },
+        correct: "B",
+    },
+
+    // =========================
+    // LOGICAL (5 ITEMS)
+    // =========================
+    {
+        id: "gen_6",
+        skill: "logical",
+        prompt: "If all dogs are animals and some animals are brown, which is true?",
         options: {
-            A: "To introduce new evidence",
-            B: "To summarize findings and state final points clearly",
-            C: "To list all references used",
-            D: "To repeat the title in different words",
+            A: "All dogs are brown",
+            B: "Some dogs may be brown",
+            C: "No dogs are brown",
+            D: "All animals are dogs",
         },
         correct: "B",
     },
     {
-        id: "gen_4",
-        prompt: "Enrollment increased from 200 to 260 students. What is the increase?",
+        id: "gen_7",
+        skill: "logical",
+        prompt: "Find the odd one out: 2, 4, 6, 9, 8",
+        options: { A: "2", B: "4", C: "6", D: "9" },
+        correct: "D",
+    },
+    {
+        id: "gen_8",
+        skill: "logical",
+        prompt: "If today is Friday, what day is it after 3 days?",
+        options: { A: "Sunday", B: "Monday", C: "Tuesday", D: "Wednesday" },
+        correct: "B",
+    },
+    {
+        id: "gen_9",
+        skill: "logical",
+        prompt: "A is taller than B. B is taller than C. Who is tallest?",
+        options: { A: "A", B: "B", C: "C", D: "Cannot determine" },
+        correct: "A",
+    },
+    {
+        id: "gen_10",
+        skill: "logical",
+        prompt: "Which comes next: A, C, E, G, __?",
+        options: { A: "H", B: "I", C: "J", D: "K" },
+        correct: "B",
+    },
+
+    // =========================
+    // VERBAL (5 ITEMS)
+    // =========================
+    {
+        id: "gen_11",
+        skill: "verbal",
+        prompt: "Which word is closest in meaning to 'analyze'?",
+        options: { A: "Ignore", B: "Examine", C: "Guess", D: "Forget" },
+        correct: "B",
+    },
+    {
+        id: "gen_12",
+        skill: "verbal",
+        prompt: "Choose the correctly spelled word:",
+        options: { A: "Recieve", B: "Receive", C: "Receeve", D: "Receve" },
+        correct: "B",
+    },
+    {
+        id: "gen_13",
+        skill: "verbal",
+        prompt: "Which sentence is correct?",
         options: {
-            A: "30",
-            B: "50",
-            C: "60",
-            D: "80",
+            A: "She go to school yesterday",
+            B: "She goes to school yesterday",
+            C: "She went to school yesterday",
+            D: "She going to school yesterday",
         },
         correct: "C",
     },
     {
-        id: "gen_5",
-        prompt: "If it takes 3 hours to travel 150 km, what is the average speed?",
+        id: "gen_14",
+        skill: "verbal",
+        prompt: "What is the main idea of a paragraph?",
         options: {
-            A: "40 km/h",
-            B: "45 km/h",
-            C: "50 km/h",
-            D: "55 km/h",
+            A: "A small detail",
+            B: "The central point",
+            C: "The last sentence",
+            D: "A random word",
         },
+        correct: "B",
+    },
+    {
+        id: "gen_15",
+        skill: "verbal",
+        prompt: "Which word is an antonym of 'increase'?",
+        options: { A: "Grow", B: "Rise", C: "Decrease", D: "Add" },
         correct: "C",
     },
 ];
+
+const GENERAL_READINESS_INDEX = GENERAL_READINESS_15.reduce((acc, q) => {
+    acc[String(q.id)] = q;
+    return acc;
+}, {});
+
+const READINESS_POINT_PER_CORRECT = 0.4;
+
+// Program/category skill weights (must stay aligned with backend AssessmentController)
+const CATEGORY_SKILL_WEIGHTS = {
+    Accountancy: { numerical: 0.6, logical: 0.3, verbal: 0.1 },
+    "Arts & Sciences": { numerical: 0.2, logical: 0.4, verbal: 0.4 },
+    "Business Administration": { numerical: 0.35, logical: 0.35, verbal: 0.3 },
+    "Computer Studies": { numerical: 0.35, logical: 0.5, verbal: 0.15 },
+    "Criminal Justice Education": { numerical: 0.15, logical: 0.25, verbal: 0.6 },
+    "Engineering & Technology": { numerical: 0.5, logical: 0.4, verbal: 0.1 },
+    Nursing: { numerical: 0.4, logical: 0.2, verbal: 0.4 },
+    "Teacher Education": { numerical: 0.1, logical: 0.2, verbal: 0.7 },
+};
 
 const PART1_CATEGORY_MAP = {
     Accountancy: [1, 9],
@@ -594,6 +691,48 @@ const CATEGORY_WEIGHTS = {
 };
 
 const CATEGORY_ORDER = Object.keys(PART1_CATEGORY_MAP);
+
+function mapProgramToCategory(program) {
+    const p = String(program || "").trim().toLowerCase();
+    if (!p) return null;
+
+    // Keep this consistent with backend AssessmentController::mapProgramToCategory
+    if (p === "arts and sciences") return "Arts & Sciences";
+    if (p === "teachers education" || p === "teacher education") return "Teacher Education";
+    if (p === "engineering and technology" || p === "engineering & technology") return "Engineering & Technology";
+    if (p === "criminal justice education") return "Criminal Justice Education";
+    if (p === "business administration") return "Business Administration";
+    if (p === "computer studies") return "Computer Studies";
+    if (p === "accountancy") return "Accountancy";
+    if (p === "nursing") return "Nursing";
+
+    return null;
+}
+
+function deriveTopCategoriesFromInterestRatings(interestRatings, n = 3) {
+    const ratings = interestRatings && typeof interestRatings === "object" ? interestRatings : null;
+    if (!ratings) return [];
+
+    // Collapse to per-category rating (max), because multiple programs could map to one category.
+    const byCategory = {};
+    Object.entries(ratings).forEach(([program, rating]) => {
+        const r = Number(rating);
+        if (!Number.isFinite(r) || r <= 0) return; // 0 means "not set"
+
+        const category = mapProgramToCategory(program);
+        if (!category) return;
+
+        byCategory[category] = Math.max(byCategory[category] || 0, r);
+    });
+
+    const rows = Object.entries(byCategory).map(([category, rating]) => ({ category, rating }));
+    rows.sort((a, b) => {
+        if (b.rating !== a.rating) return b.rating - a.rating;
+        return CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
+    });
+
+    return rows.slice(0, n).map((r) => r.category);
+}
 
 function buildPart2QuestionIndex() {
     const idx = {};
@@ -624,6 +763,66 @@ function deriveTopCategoriesFromPart1(part1Selected, n = 3) {
     return raw.slice(0, n).map((x) => x.category);
 }
 
+function hashToUint32(str) {
+    // Simple deterministic hash for stable pseudo-random selection (not crypto).
+    const s = String(str || "");
+    let h = 2166136261;
+    for (let i = 0; i < s.length; i++) {
+        h ^= s.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+}
+
+function stablePickOne(list, seedStr) {
+    const arr = Array.isArray(list) ? list.filter(Boolean) : [];
+    if (!arr.length) return null;
+    const seed = hashToUint32(seedStr);
+    const idx = seed % arr.length;
+    return arr[idx];
+}
+
+function computePart1Scores(part1Selected) {
+    const selected = Array.isArray(part1Selected) ? part1Selected : [];
+    const byCategory = {};
+    Object.entries(PART1_CATEGORY_MAP).forEach(([category, nums]) => {
+        const score = (Array.isArray(nums) ? nums : []).reduce((c, num) => c + (selected.includes(num) ? 1 : 0), 0);
+        byCategory[category] = score;
+    });
+    return byCategory;
+}
+
+function derivePart2CategoriesPolicy(interestRatings, part1Selected, seedStr, n = 3) {
+    // New policy:
+    // - 2 categories from Top Interest (if available)
+    // - 1 exploration category: stable-random from the student's lowest Part I categories (excluding the first 2)
+    // - Fill remaining slots from Part I top to keep length consistent
+
+    const part1RankAll = deriveTopCategoriesFromPart1(part1Selected, CATEGORY_ORDER.length);
+    const interestTop2 = deriveTopCategoriesFromInterestRatings(interestRatings, 2);
+
+    const firstTwo = fillToNPrimaryThenFallback(interestTop2, part1RankAll, Math.min(2, n));
+    const exclude = new Set(firstTwo);
+
+    const scores = computePart1Scores(part1Selected);
+    const lowRankAll = Object.keys(PART1_CATEGORY_MAP)
+        .map((category) => ({ category, score: Number(scores[category] || 0) }))
+        .sort((a, b) => {
+            if (a.score !== b.score) return a.score - b.score;
+            return CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category);
+        })
+        .map((x) => x.category);
+
+    const lowCandidates = lowRankAll.filter((c) => !exclude.has(c)).slice(0, 3);
+    const remainingCandidates = CATEGORY_ORDER.filter((c) => !exclude.has(c));
+
+    const exploration = stablePickOne(lowCandidates.length ? lowCandidates : remainingCandidates, seedStr);
+    const combined = exploration ? firstTwo.concat([exploration]) : firstTwo;
+
+    // Ensure exactly N categories (backend validation expects 3 categories × 5 questions each)
+    return fillToNPrimaryThenFallback(combined, part1RankAll, n);
+}
+
 function categoriesFromPart2Answers(part2Answers) {
     const ans = part2Answers && typeof part2Answers === "object" ? part2Answers : {};
     const seen = new Set();
@@ -645,8 +844,8 @@ function buildPart2Questions(categories) {
         const list = PART2_BANK[cat];
         if (Array.isArray(list) && list.length) out.push(...list);
     });
-    // Always include general readiness questions (affect all categories equally)
-    return out.concat(READINESS_QUESTIONS);
+    // Always include general readiness questions (skill-tagged; weighted per category)
+    return out.concat(GENERAL_READINESS_15);
 }
 
 function computeScores(part1Selected, part2Answers) {
@@ -654,6 +853,8 @@ function computeScores(part1Selected, part2Answers) {
         acc[k] = 0;
         return acc;
     }, {});
+
+    const skillCorrect = { numerical: 0, logical: 0, verbal: 0 };
 
     // Part 1 scoring: count checks mapped to each category
     Object.entries(PART1_CATEGORY_MAP).forEach(([category, numbers]) => {
@@ -664,14 +865,15 @@ function computeScores(part1Selected, part2Answers) {
     // Part 2 scoring: +2 for each correct answer, applied to that question's category
     const answers = part2Answers && typeof part2Answers === "object" ? part2Answers : {};
     Object.entries(answers).forEach(([qid, ans]) => {
-        // General readiness: +1 to ALL categories when correct
-        const rq = READINESS_QUESTIONS.find((x) => String(x.id) === String(qid));
+        // General readiness: track per-skill correctness (later weighted per category)
+        const rq = GENERAL_READINESS_INDEX[String(qid)];
         if (rq) {
             const user = String(ans || "").toUpperCase();
-            if (user && user === rq.correct) {
-                Object.keys(scores).forEach((cat) => {
-                    scores[cat] += 1;
-                });
+            if (user && user === String(rq.correct || "").toUpperCase()) {
+                const sk = String(rq.skill || "").toLowerCase();
+                if (sk === "numerical" || sk === "logical" || sk === "verbal") {
+                    skillCorrect[sk] += 1;
+                }
             }
             return;
         }
@@ -682,6 +884,17 @@ function computeScores(part1Selected, part2Answers) {
         if (user && user === q.correct) {
             scores[q.category] += 1 * CATEGORY_WEIGHTS.part2;
         }
+    });
+
+    // Apply weighted readiness contribution per category using the student's per-skill performance.
+    Object.keys(scores).forEach((cat) => {
+        const w = CATEGORY_SKILL_WEIGHTS[cat] || null;
+        if (!w) return;
+        const add =
+            (skillCorrect.numerical || 0) * READINESS_POINT_PER_CORRECT * (w.numerical || 0) +
+            (skillCorrect.logical || 0) * READINESS_POINT_PER_CORRECT * (w.logical || 0) +
+            (skillCorrect.verbal || 0) * READINESS_POINT_PER_CORRECT * (w.verbal || 0);
+        scores[cat] += add;
     });
 
     return scores;
@@ -698,6 +911,24 @@ function topN(scores, n = 3) {
         }));
 }
 
+function fillToNPrimaryThenFallback(primary, fallback, n = 3) {
+    const out = [];
+    const pushUnique = (x) => {
+        const v = String(x || "").trim();
+        if (!v) return;
+        if (out.includes(v)) return;
+        out.push(v);
+    };
+
+    (Array.isArray(primary) ? primary : []).forEach(pushUnique);
+    (Array.isArray(fallback) ? fallback : []).forEach((x) => {
+        if (out.length >= n) return;
+        pushUnique(x);
+    });
+
+    return out.slice(0, n);
+}
+
 export default function StudentAssessmentQuiz() {
     const navigate = useNavigate();
     const token = useMemo(() => localStorage.getItem("authToken"), []);
@@ -705,12 +936,31 @@ export default function StudentAssessmentQuiz() {
     const [part1Selected, setPart1Selected] = useState([]); // array of statement numbers (1-based)
     const [part2Answers, setPart2Answers] = useState({}); // { [questionId]: 'A'|'B'|'C'|'D' }
     const [part2Categories, setPart2Categories] = useState([]);
+    const [interestRatings, setInterestRatings] = useState(null);
 
     const effectivePart2Categories = useMemo(() => {
         const stored = Array.isArray(part2Categories) ? part2Categories.filter(Boolean) : [];
-        if (stored.length) return stored.slice(0, 3);
-        return deriveTopCategoriesFromPart1(part1Selected, 3);
-    }, [part1Selected, part2Categories]);
+        const fromPart1 = deriveTopCategoriesFromPart1(part1Selected, 3);
+
+        // If we already have locked Part II categories, use them.
+        // But ensure we still have exactly 3 categories for a consistent Part II length.
+        if (stored.length) return fillToNPrimaryThenFallback(stored, fromPart1, 3);
+
+        // Policy: 2 from Top Interest + 1 exploration category (stable-random among lowest Part I categories).
+        // Use a stable seed so the exploration category doesn't change across renders.
+        let seedStr = "assessment-exploration";
+        try {
+            const u = JSON.parse(localStorage.getItem("user") || "null");
+            seedStr = String(u?.id || u?.email || seedStr);
+        } catch {
+            // ignore
+        }
+
+        const policyCats = derivePart2CategoriesPolicy(interestRatings, part1Selected, seedStr, 3);
+        if (policyCats.length) return policyCats;
+
+        return fromPart1;
+    }, [interestRatings, part1Selected, part2Categories]);
 
     const part2Questions = useMemo(() => buildPart2Questions(effectivePart2Categories), [effectivePart2Categories]);
 
@@ -734,9 +984,33 @@ export default function StudentAssessmentQuiz() {
             return;
         }
 
+        const bootstrapRatingsFromCache = () => {
+            try {
+                const cached = JSON.parse(localStorage.getItem("profile") || "null");
+                const r = cached?.program_interest_ratings;
+                if (r && typeof r === "object") setInterestRatings(r);
+            } catch {
+                // ignore
+            }
+        };
+
+        const fetchProfile = async () => {
+            try {
+                const res = await axios.get("/api/profile", {
+                    headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
+                    withCredentials: true,
+                });
+
+                const ratings = res.data?.profile?.program_interest_ratings;
+                if (ratings && typeof ratings === "object") {
+                    setInterestRatings(ratings);
+                }
+            } catch {
+                // Ignore profile fetch issues; we can still use Part I fallback.
+            }
+        };
+
         const fetchAssessment = async () => {
-            setLoading(true);
-            setError(null);
             try {
                 const res = await axios.get("/api/assessment", {
                     headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
@@ -746,7 +1020,9 @@ export default function StudentAssessmentQuiz() {
                 const assessment = res.data?.assessment;
                 if (assessment) {
                     setPart1Selected(Array.isArray(assessment.part1_selected) ? assessment.part1_selected : []);
-                    setPart2Answers(assessment.part2_answers && typeof assessment.part2_answers === "object" ? assessment.part2_answers : {});
+                    setPart2Answers(
+                        assessment.part2_answers && typeof assessment.part2_answers === "object" ? assessment.part2_answers : {}
+                    );
 
                     // Try to reconstruct which categories were used for Part II.
                     // Prefer the categories implied by the stored question IDs.
@@ -755,27 +1031,34 @@ export default function StudentAssessmentQuiz() {
                         setPart2Categories(catsFromAnswers.slice(0, 3));
                     }
 
-                    const hasSavedRecommendation = Array.isArray(assessment.recommended_top3) && assessment.recommended_top3.length > 0;
+                    const hasSavedRecommendation =
+                        Array.isArray(assessment.recommended_top3) && assessment.recommended_top3.length > 0;
                     setAssessmentSaved(hasSavedRecommendation);
 
                     if (hasSavedRecommendation) {
                         setStep(reviewStepIndex);
                     }
                 }
-            } catch (e) {
+            } catch {
                 // If endpoint isn't ready yet, don't hard-fail; the page can still be used.
-            } finally {
-                setLoading(false);
             }
         };
 
-        fetchAssessment();
+        const fetchAll = async () => {
+            setLoading(true);
+            setError(null);
+            bootstrapRatingsFromCache();
+            await Promise.allSettled([fetchProfile(), fetchAssessment()]);
+            setLoading(false);
+        };
+
+        fetchAll();
     }, [navigate, token]);
 
     const currentLabel = useMemo(() => {
         if (step === 0) return "Part I – Personal Interest & Skills";
         if (step >= 1 && step <= part2Questions.length) {
-            return `Part II – General Knowledge (Question ${step} of ${part2Questions.length})`;
+            return `Part II – Readiness & Aptitude (Question ${step} of ${part2Questions.length})`;
         }
         return "Review";
     }, [part2Questions.length, step]);
@@ -827,7 +1110,7 @@ export default function StudentAssessmentQuiz() {
                 part2_answers: part2Answers,
             };
 
-            await axios.put("/api/assessment", payload, {
+            const res = await axios.put("/api/assessment", payload, {
                 headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
                 withCredentials: true,
             });
@@ -836,9 +1119,15 @@ export default function StudentAssessmentQuiz() {
             setAssessmentSaved(true);
             setStep(reviewStepIndex);
             // Also store computed results so recommendation page can use it instantly.
+            const serverScores = res.data?.assessment?.scores;
+            const serverTop3 = res.data?.assessment?.recommended_top3;
             localStorage.setItem(
                 "assessmentResult",
-                JSON.stringify({ scores, top3, savedAt: new Date().toISOString() })
+                JSON.stringify({
+                    scores: serverScores && typeof serverScores === "object" ? serverScores : scores,
+                    top3: Array.isArray(serverTop3) ? serverTop3 : top3,
+                    savedAt: new Date().toISOString(),
+                })
             );
         } catch (e) {
             const msg = e?.response?.data?.message || "Failed to save assessment.";
@@ -884,11 +1173,45 @@ export default function StudentAssessmentQuiz() {
 
     const gotoPrev = () => setStep((s) => Math.max(0, s - 1));
 
-    const gotoNext = () => {
+    const loadInterestRatingsIfNeeded = async () => {
+        if (interestRatings && typeof interestRatings === "object") return interestRatings;
+        if (!token) return null;
+
+        try {
+            const res = await axios.get("/api/profile", {
+                headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
+                withCredentials: true,
+            });
+
+            const ratings = res.data?.profile?.program_interest_ratings;
+            if (ratings && typeof ratings === "object") {
+                setInterestRatings(ratings);
+                return ratings;
+            }
+        } catch {
+            // ignore
+        }
+
+        return null;
+    };
+
+    const gotoNext = async () => {
         // When transitioning out of Part I, lock in the Part II categories
         // so the question set stays consistent unless the user goes back.
         if (step === 0) {
-            const nextCats = deriveTopCategoriesFromPart1(part1Selected, 3);
+            // Lock in Part II categories so the question set stays consistent unless the user goes back.
+            // Policy: 2 from Top Interest + 1 exploration category.
+            const ratings = await loadInterestRatingsIfNeeded();
+
+            let seedStr = "assessment-exploration";
+            try {
+                const u = JSON.parse(localStorage.getItem("user") || "null");
+                seedStr = String(u?.id || u?.email || seedStr);
+            } catch {
+                // ignore
+            }
+
+            const nextCats = derivePart2CategoriesPolicy(ratings, part1Selected, seedStr, 3);
             setPart2Categories(nextCats);
 
             // Prune any old answers that no longer belong to the new question set
@@ -929,7 +1252,9 @@ export default function StudentAssessmentQuiz() {
                             <div key={t.category} className="aq-top-card">
                                 <div className="aq-top-rank">#{t.rank}</div>
                                 <div className="aq-top-name">{t.category}</div>
-                                <div className="aq-top-score">Score: {t.score}</div>
+                                    <div className="aq-top-score">
+                                        Score: {Number(t.score).toFixed(2).replace(/\.00$/, "")}
+                                    </div>
                             </div>
                         ))}
                     </div>

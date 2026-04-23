@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AssessmentController;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -91,6 +92,11 @@ class AdvisorController extends Controller
         $student = User::where('role', 'student')->with('profile')->findOrFail($userId);
         $p = $student->profile;
 
+        $part2 = [];
+        if ($p && is_array($p->assessment_part2_answers)) {
+            $part2 = $p->assessment_part2_answers;
+        }
+
         return response()->json([
             'student' => [
                 'id' => $student->id,
@@ -98,6 +104,9 @@ class AdvisorController extends Controller
                 'email' => $student->email,
             ],
             'profile' => $p,
+            'assessment' => $p ? [
+                'breakdown' => AssessmentController::buildBreakdown($part2),
+            ] : null,
             'attachments' => [
                 'report_card_url' => $p?->report_card_path ? asset('storage/' . ltrim($p->report_card_path, '/')) : null,
                 'skill_attachment_urls' => is_array($p?->skill_attachments)

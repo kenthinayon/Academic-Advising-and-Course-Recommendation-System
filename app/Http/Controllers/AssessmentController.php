@@ -32,6 +32,7 @@ class AssessmentController extends Controller
         'HUMSS' => [
             'Arts & Sciences' => 2.0,
             'Teacher Education' => 1.25,
+            'Criminal Justice Education' => 1.25,
         ],
         'TVL' => [
             'Engineering & Technology' => 1.5,
@@ -108,7 +109,7 @@ class AssessmentController extends Controller
         ],
     ];
 
-    // Part II question bank: 5 foundational general-knowledge questions per category.
+    // Part II question bank: 5 readiness/aptitude questions per category (not degree-specific memorization).
     // Keys must match the frontend question IDs.
     private const PART2_BANK = [
         // Accountancy
@@ -168,13 +169,41 @@ class AssessmentController extends Controller
         'teach_5' => ['correct' => 'B', 'category' => 'Teacher Education'],
     ];
 
-    // General readiness questions: each correct answer adds +1 to ALL categories equally.
+    // General readiness questions: skill-tagged and weighted per category/program.
+    private const READINESS_POINT_PER_CORRECT = 0.4;
+
+    private const CATEGORY_SKILL_WEIGHTS = [
+        'Accountancy' => ['numerical' => 0.6, 'logical' => 0.3, 'verbal' => 0.1],
+        'Arts & Sciences' => ['numerical' => 0.2, 'logical' => 0.4, 'verbal' => 0.4],
+        'Business Administration' => ['numerical' => 0.35, 'logical' => 0.35, 'verbal' => 0.3],
+        'Computer Studies' => ['numerical' => 0.35, 'logical' => 0.5, 'verbal' => 0.15],
+        'Criminal Justice Education' => ['numerical' => 0.15, 'logical' => 0.25, 'verbal' => 0.6],
+        'Engineering & Technology' => ['numerical' => 0.5, 'logical' => 0.4, 'verbal' => 0.1],
+        'Nursing' => ['numerical' => 0.4, 'logical' => 0.2, 'verbal' => 0.4],
+        'Teacher Education' => ['numerical' => 0.1, 'logical' => 0.2, 'verbal' => 0.7],
+    ];
+
     private const READINESS_QUESTIONS = [
-        'gen_1' => ['correct' => 'D'],
-        'gen_2' => ['correct' => 'B'],
-        'gen_3' => ['correct' => 'B'],
-        'gen_4' => ['correct' => 'C'],
-        'gen_5' => ['correct' => 'C'],
+        // NUMERICAL (1–5)
+        'gen_1' => ['correct' => 'D', 'skill' => 'numerical'],
+        'gen_2' => ['correct' => 'B', 'skill' => 'numerical'],
+        'gen_3' => ['correct' => 'C', 'skill' => 'numerical'],
+        'gen_4' => ['correct' => 'B', 'skill' => 'numerical'],
+        'gen_5' => ['correct' => 'B', 'skill' => 'numerical'],
+
+        // LOGICAL (6–10)
+        'gen_6' => ['correct' => 'B', 'skill' => 'logical'],
+        'gen_7' => ['correct' => 'D', 'skill' => 'logical'],
+        'gen_8' => ['correct' => 'B', 'skill' => 'logical'],
+        'gen_9' => ['correct' => 'A', 'skill' => 'logical'],
+        'gen_10' => ['correct' => 'B', 'skill' => 'logical'],
+
+        // VERBAL (11–15)
+        'gen_11' => ['correct' => 'B', 'skill' => 'verbal'],
+        'gen_12' => ['correct' => 'B', 'skill' => 'verbal'],
+        'gen_13' => ['correct' => 'C', 'skill' => 'verbal'],
+        'gen_14' => ['correct' => 'B', 'skill' => 'verbal'],
+        'gen_15' => ['correct' => 'C', 'skill' => 'verbal'],
     ];
 
     /**
@@ -185,13 +214,19 @@ class AssessmentController extends Controller
         $user = $request->user();
         $profile = $user?->profile;
 
+        $part2 = [];
+        if ($profile && is_array($profile->assessment_part2_answers)) {
+            $part2 = $profile->assessment_part2_answers;
+        }
+
         return response()->json([
             'assessment' => $profile ? [
                 'part1_selected' => $profile->assessment_part1_selected ?? [],
                 'part2_answers' => $profile->assessment_part2_answers ?? (object) [],
+                'breakdown' => self::buildBreakdown($part2),
                 'scores' => $this->computeScores(
                     $profile->assessment_part1_selected ?? [],
-                    $profile->assessment_part2_answers ?? []
+                    $part2
                 ),
                 'recommended_top3' => $profile->recommended_top3 ?? [],
                 // New: degree/major suggestions
@@ -211,8 +246,8 @@ class AssessmentController extends Controller
             'part1_selected' => ['required', 'array', 'min:1'],
             'part1_selected.*' => ['integer', 'min:1', 'max:15'],
 
-            // Part II is dynamic (top 3 categories × 5 questions each) + 5 readiness questions
-            'part2_answers' => ['required', 'array', 'min:20'],
+            // Part II is dynamic (top 3 categories × 5 questions each) + 15 skill-based readiness questions
+            'part2_answers' => ['required', 'array', 'min:30'],
             'part2_answers.*' => ['string', 'size:1', 'in:A,B,C,D,a,b,c,d'],
         ]);
 
@@ -231,11 +266,13 @@ class AssessmentController extends Controller
             $part2[$qid] = strtoupper(trim((string) $v));
         }
 
-        if (count($part2) < 20) {
+        if (count($part2) < 30) {
             return response()->json([
                 'message' => 'Please answer all Part II questions before saving.',
             ], 422);
         }
+
+        $breakdown = self::buildBreakdown($part2);
 
         $scores = $this->computeScores($part1, $part2);
 
@@ -251,7 +288,8 @@ class AssessmentController extends Controller
         $top3 = $this->topN($scores, 3);
 
         // Convert category top results to concrete degree programs/majors
-        $degrees = $this->degreesFromTop($top3, $scores);
+        $readinessCorrect = $breakdown['readiness']['by_skill']['correct'] ?? [];
+        $degrees = $this->degreesFromTop($top3, $scores, $readinessCorrect);
 
         $profile = Profile::updateOrCreate(
             ['user_id' => $user->id],
@@ -268,6 +306,7 @@ class AssessmentController extends Controller
             'assessment' => [
                 'part1_selected' => $profile->assessment_part1_selected ?? [],
                 'part2_answers' => $profile->assessment_part2_answers ?? (object) [],
+                'breakdown' => $breakdown,
                 'scores' => $scores,
                 'recommended_top3' => $top3,
                 'recommended_degrees' => $degrees,
@@ -307,11 +346,168 @@ class AssessmentController extends Controller
             'assessment' => [
                 'part1_selected' => [],
                 'part2_answers' => (object) [],
+                'breakdown' => self::buildBreakdown([]),
                 'scores' => $this->computeScores([], []),
                 'recommended_top3' => [],
                 'recommended_degrees' => [],
             ],
         ]);
+    }
+
+    /**
+     * Build a structured, UI-friendly breakdown for Part II.
+     *
+     * This is intentionally separate from final recommendation scoring/boosts;
+     * it only reports quiz/readiness correctness.
+     */
+    public static function buildBreakdown(array $part2Answers): array
+    {
+        $skillKeyToLabel = [
+            'numerical' => 'numerical_reasoning',
+            'logical' => 'logical_reasoning',
+            'verbal' => 'verbal_reasoning',
+        ];
+
+        $readinessTotalBySkill = [
+            'numerical_reasoning' => 0,
+            'logical_reasoning' => 0,
+            'verbal_reasoning' => 0,
+        ];
+
+        foreach (self::READINESS_QUESTIONS as $qid => $meta) {
+            $skillKey = strtolower((string) ($meta['skill'] ?? ''));
+            $label = $skillKeyToLabel[$skillKey] ?? null;
+            if ($label) {
+                $readinessTotalBySkill[$label] += 1;
+            }
+        }
+
+        $readinessCorrectBySkill = [
+            'numerical_reasoning' => 0,
+            'logical_reasoning' => 0,
+            'verbal_reasoning' => 0,
+        ];
+
+        $selectedCategories = [];
+        $categoryTotalByCategory = [];
+        $categoryCorrectByCategory = [];
+
+        $items = [];
+
+        foreach ($part2Answers as $qid => $ansRaw) {
+            $qid = trim((string) $qid);
+            if ($qid === '') {
+                continue;
+            }
+
+            $userAnswer = strtoupper(trim((string) $ansRaw));
+            if ($userAnswer === '') {
+                continue;
+            }
+
+            // Readiness
+            if (isset(self::READINESS_QUESTIONS[$qid])) {
+                $meta = self::READINESS_QUESTIONS[$qid];
+                $correct = strtoupper((string) ($meta['correct'] ?? ''));
+                $skillKey = strtolower((string) ($meta['skill'] ?? ''));
+                $skillLabel = $skillKeyToLabel[$skillKey] ?? $skillKey;
+
+                $isCorrect = ($correct !== '' && $userAnswer === $correct);
+
+                if (isset($readinessCorrectBySkill[$skillLabel]) && $isCorrect) {
+                    $readinessCorrectBySkill[$skillLabel] += 1;
+                }
+
+                $items[] = [
+                    'qid' => $qid,
+                    'type' => 'readiness',
+                    'skill' => $skillLabel,
+                    'user_answer' => $userAnswer,
+                    'correct_answer' => $correct,
+                    'is_correct' => $isCorrect,
+                ];
+                continue;
+            }
+
+            // Category-bank
+            if (isset(self::PART2_BANK[$qid])) {
+                $meta = self::PART2_BANK[$qid];
+                $category = (string) ($meta['category'] ?? '');
+                $correct = strtoupper((string) ($meta['correct'] ?? ''));
+                $isCorrect = ($correct !== '' && $userAnswer === $correct);
+
+                if ($category !== '') {
+                    $selectedCategories[$category] = true;
+                }
+
+                $items[] = [
+                    'qid' => $qid,
+                    'type' => 'category',
+                    'category' => $category,
+                    'user_answer' => $userAnswer,
+                    'correct_answer' => $correct,
+                    'is_correct' => $isCorrect,
+                ];
+
+                if ($category !== '') {
+                    if (!isset($categoryCorrectByCategory[$category])) {
+                        $categoryCorrectByCategory[$category] = 0;
+                    }
+                    if ($isCorrect) {
+                        $categoryCorrectByCategory[$category] += 1;
+                    }
+                }
+            }
+        }
+
+        $selectedCategoriesList = array_keys($selectedCategories);
+        sort($selectedCategoriesList);
+
+        // Totals per category are derived from the bank (expected question count for that category).
+        $bankCountByCategory = [];
+        foreach (self::PART2_BANK as $qid => $meta) {
+            $cat = (string) ($meta['category'] ?? '');
+            if ($cat === '') {
+                continue;
+            }
+            if (!isset($bankCountByCategory[$cat])) {
+                $bankCountByCategory[$cat] = 0;
+            }
+            $bankCountByCategory[$cat] += 1;
+        }
+
+        foreach ($selectedCategoriesList as $cat) {
+            $categoryTotalByCategory[$cat] = (int) ($bankCountByCategory[$cat] ?? 0);
+            if (!isset($categoryCorrectByCategory[$cat])) {
+                $categoryCorrectByCategory[$cat] = 0;
+            }
+        }
+
+        $readinessTotal = array_sum($readinessTotalBySkill);
+        $readinessCorrect = array_sum($readinessCorrectBySkill);
+        $categoryTotal = array_sum($categoryTotalByCategory);
+        $categoryCorrect = array_sum($categoryCorrectByCategory);
+
+        return [
+            'readiness' => [
+                'correct_total' => $readinessCorrect,
+                'total' => $readinessTotal,
+                'by_skill' => [
+                    'correct' => $readinessCorrectBySkill,
+                    'total' => $readinessTotalBySkill,
+                ],
+            ],
+            'part2_categories' => [
+                'selected_categories' => $selectedCategoriesList,
+                'correct_total' => $categoryCorrect,
+                'total' => $categoryTotal,
+                'by_category' => [
+                    'correct' => $categoryCorrectByCategory,
+                    'total' => $categoryTotalByCategory,
+                ],
+            ],
+            'items' => $items,
+        ];
     }
 
     private function computeScores(array $part1Selected, array $part2Answers): array
@@ -332,7 +528,13 @@ class AssessmentController extends Controller
             $scores[$category] += $count;
         }
 
-        // Part 2: course questions (+2 to their category) + readiness questions (+1 to all categories)
+        // Part 2: course questions (+2 to their category) + skill-tagged readiness questions
+        $skillCorrect = [
+            'numerical' => 0,
+            'logical' => 0,
+            'verbal' => 0,
+        ];
+
         if (is_array($part2Answers)) {
             foreach ($part2Answers as $qid => $ans) {
                 $qid = (string) $qid;
@@ -345,10 +547,9 @@ class AssessmentController extends Controller
                 // Readiness questions
                 if (isset(self::READINESS_QUESTIONS[$qid])) {
                     $correct = self::READINESS_QUESTIONS[$qid]['correct'] ?? '';
-                    if ($correct !== '' && $userAnswer === $correct) {
-                        foreach (array_keys($scores) as $cat) {
-                            $scores[$cat] += 1;
-                        }
+                    $skill = strtolower((string) (self::READINESS_QUESTIONS[$qid]['skill'] ?? ''));
+                    if ($correct !== '' && $userAnswer === $correct && isset($skillCorrect[$skill])) {
+                        $skillCorrect[$skill] += 1;
                     }
                     continue;
                 }
@@ -365,6 +566,24 @@ class AssessmentController extends Controller
                     }
                 }
             }
+        }
+
+        // Apply skill-weighted readiness contribution per category.
+        foreach (array_keys($scores) as $category) {
+            $w = self::CATEGORY_SKILL_WEIGHTS[$category] ?? null;
+            if (!is_array($w)) {
+                continue;
+            }
+
+            $add = 0.0;
+            foreach ($skillCorrect as $skill => $count) {
+                $weight = isset($w[$skill]) && is_numeric($w[$skill]) ? (float) $w[$skill] : 0.0;
+                if ($weight <= 0) {
+                    continue;
+                }
+                $add += ((int) $count) * self::READINESS_POINT_PER_CORRECT * $weight;
+            }
+            $scores[$category] += $add;
         }
 
         return $scores;
@@ -529,10 +748,12 @@ class AssessmentController extends Controller
         return $scores;
     }
 
-    private function degreesFromTop(array $categoryTop3, array $scores): array
+    private function degreesFromTop(array $categoryTop3, array $scores, array $readinessCorrectBySkill = []): array
     {
         $out = [];
         $rank = 1;
+
+        $readinessCorrectBySkill = $this->normalizeReadinessCorrectBySkill($readinessCorrectBySkill);
 
         foreach ($categoryTop3 as $item) {
             $category = (string) ($item['category'] ?? '');
@@ -540,26 +761,106 @@ class AssessmentController extends Controller
                 continue;
             }
 
-            foreach (self::DEGREE_PROGRAMS[$category] as $deg) {
-                $code = $deg[0];
-                $name = $deg[1];
-                $out[] = [
-                    'rank' => $rank,
-                    'category' => $category,
-                    'code' => $code,
-                    'name' => $name,
-                    // for transparency/debug
-                    'score' => $scores[$category] ?? 0,
-                ];
-                $rank++;
+            // Pick one representative degree per category.
+            // For categories with multiple degrees, apply a transparent readiness-based tie-breaker.
+            $deg = $this->pickDegreeForCategory($category, $readinessCorrectBySkill)
+                ?? (self::DEGREE_PROGRAMS[$category][0] ?? null);
+            if (!$deg) {
+                continue;
+            }
 
-                if ($rank > 3) {
-                    break 2; // keep top 3 concrete programs total
-                }
+            $out[] = [
+                'rank' => $rank,
+                'category' => $category,
+                'code' => $deg[0],
+                'name' => $deg[1],
+                // for transparency/debug
+                'score' => $scores[$category] ?? 0,
+            ];
+            $rank++;
+
+            if ($rank > 3) {
+                break; // keep top 3 concrete programs total
             }
         }
 
         return $out;
+    }
+
+    private function normalizeReadinessCorrectBySkill(array $readinessCorrectBySkill): array
+    {
+        return [
+            'numerical_reasoning' => (int) ($readinessCorrectBySkill['numerical_reasoning'] ?? 0),
+            'logical_reasoning' => (int) ($readinessCorrectBySkill['logical_reasoning'] ?? 0),
+            'verbal_reasoning' => (int) ($readinessCorrectBySkill['verbal_reasoning'] ?? 0),
+        ];
+    }
+
+    private function pickDegreeForCategory(string $category, array $readinessCorrectBySkill): ?array
+    {
+        $programs = self::DEGREE_PROGRAMS[$category] ?? null;
+        if (!is_array($programs) || count($programs) === 0) {
+            return null;
+        }
+
+        // Default behavior: first program in list.
+        if (count($programs) === 1) {
+            return $programs[0];
+        }
+
+        $numerical = (int) ($readinessCorrectBySkill['numerical_reasoning'] ?? 0);
+        $logical = (int) ($readinessCorrectBySkill['logical_reasoning'] ?? 0);
+        $verbal = (int) ($readinessCorrectBySkill['verbal_reasoning'] ?? 0);
+
+        // Rule 1: use strongest readiness skill as a transparent tie-breaker.
+        // If there's a tie, this intentionally prefers the earlier condition.
+        if ($category === 'Computer Studies') {
+            return ($logical >= $numerical && $logical >= $verbal)
+                ? $this->findDegreeByCode($programs, 'BSCS')
+                : $this->findDegreeByCode($programs, 'BSIT');
+        }
+
+        if ($category === 'Engineering & Technology') {
+            if ($numerical >= $logical && $numerical >= $verbal) {
+                return $this->findDegreeByCode($programs, 'BSCE');
+            }
+            if ($logical >= $numerical && $logical >= $verbal) {
+                return $this->findDegreeByCode($programs, 'BSEE');
+            }
+
+            return $this->findDegreeByCode($programs, 'BSME');
+        }
+
+        if ($category === 'Accountancy') {
+            return ($numerical >= $logical && $numerical >= $verbal)
+                ? $this->findDegreeByCode($programs, 'BSA')
+                : $this->findDegreeByCode($programs, 'BSMA');
+        }
+
+        if ($category === 'Arts & Sciences') {
+            return ($verbal >= $numerical && $verbal >= $logical)
+                ? $this->findDegreeByCode($programs, 'BAComm')
+                : $this->findDegreeByCode($programs, 'BSPSY');
+        }
+
+        if ($category === 'Teacher Education') {
+            return ($verbal >= $numerical && $verbal >= $logical)
+                ? $this->findDegreeByCode($programs, 'BSEd')
+                : $this->findDegreeByCode($programs, 'BEEd');
+        }
+
+        return $programs[0];
+    }
+
+    private function findDegreeByCode(array $programs, string $code): ?array
+    {
+        foreach ($programs as $p) {
+            if (is_array($p) && isset($p[0]) && strtoupper((string) $p[0]) === strtoupper($code)) {
+                return $p;
+            }
+        }
+
+        return $programs[0] ?? null;
     }
 
     private function mapProgramToCategory(string $program): ?string
