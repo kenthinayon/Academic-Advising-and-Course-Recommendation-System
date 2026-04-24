@@ -84205,6 +84205,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -85030,6 +85034,32 @@ function AdvisorDashboard() {
       return st === f;
     });
   }, [students, statusFilter]);
+  var sortedStudents = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var rows = Array.isArray(filteredStudents) ? _toConsumableArray(filteredStudents) : [];
+    var statusRank = function statusRank(s) {
+      var st = String((s === null || s === void 0 ? void 0 : s.advisor_status) || "pending").toLowerCase();
+      // Advisor workflow: pending first, then interview, then rejected, then approved.
+      if (st === "pending") return 0;
+      if (st === "interview") return 1;
+      if (st === "rejected") return 2;
+      if (st === "approved") return 3;
+      return 9;
+    };
+    rows.sort(function (a, b) {
+      var ra = statusRank(a);
+      var rb = statusRank(b);
+      if (ra !== rb) return ra - rb;
+
+      // We don't get timestamps from the API; treat higher id as newer.
+      var ida = Number(a === null || a === void 0 ? void 0 : a.id) || 0;
+      var idb = Number(b === null || b === void 0 ? void 0 : b.id) || 0;
+      if (ida !== idb) return idb - ida;
+      var na = String((a === null || a === void 0 ? void 0 : a.name) || "");
+      var nb = String((b === null || b === void 0 ? void 0 : b.name) || "");
+      return na.localeCompare(nb);
+    });
+    return rows;
+  }, [filteredStudents]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "advisor",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("header", {
@@ -85895,7 +85925,7 @@ function AdvisorDashboard() {
         children: "Loading\u2026"
       }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "ad-list",
-        children: [filteredStudents.map(function (s) {
+        children: [sortedStudents.map(function (s, idx) {
           var _s$advisor_recommende, _rec$, _rec$2, _rec$3;
           var pill = statusPill(s.advisor_status);
           var rec = ((_s$advisor_recommende = s.advisor_recommended_degrees) !== null && _s$advisor_recommende !== void 0 && _s$advisor_recommende.length ? s.advisor_recommended_degrees : s.recommended_degrees) || [];
@@ -85913,9 +85943,15 @@ function AdvisorDashboard() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                 className: "ad-card-head",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    className: "ad-student-name",
-                    children: s.name
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    className: "ad-student-line",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      className: "ad-student-num",
+                      children: ["#", idx + 1]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      className: "ad-student-name",
+                      children: s.name
+                    })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                     className: "ad-student-email",
                     children: s.email

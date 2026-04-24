@@ -493,6 +493,37 @@ export default function AdvisorDashboard() {
         });
     }, [students, statusFilter]);
 
+    const sortedStudents = useMemo(() => {
+        const rows = Array.isArray(filteredStudents) ? [...filteredStudents] : [];
+
+        const statusRank = (s) => {
+            const st = String(s?.advisor_status || "pending").toLowerCase();
+            // Advisor workflow: pending first, then interview, then rejected, then approved.
+            if (st === "pending") return 0;
+            if (st === "interview") return 1;
+            if (st === "rejected") return 2;
+            if (st === "approved") return 3;
+            return 9;
+        };
+
+        rows.sort((a, b) => {
+            const ra = statusRank(a);
+            const rb = statusRank(b);
+            if (ra !== rb) return ra - rb;
+
+            // We don't get timestamps from the API; treat higher id as newer.
+            const ida = Number(a?.id) || 0;
+            const idb = Number(b?.id) || 0;
+            if (ida !== idb) return idb - ida;
+
+            const na = String(a?.name || "");
+            const nb = String(b?.name || "");
+            return na.localeCompare(nb);
+        });
+
+        return rows;
+    }, [filteredStudents]);
+
     return (
         <div className="advisor">
             <header className="ad-topbar">
@@ -1169,7 +1200,7 @@ export default function AdvisorDashboard() {
                 {loading ? <div className="ad-muted">Loading…</div> : null}
 
                 <div className="ad-list">
-                    {filteredStudents.map((s) => {
+                    {sortedStudents.map((s, idx) => {
                         const pill = statusPill(s.advisor_status);
                         const rec = (s.advisor_recommended_degrees?.length
                             ? s.advisor_recommended_degrees
@@ -1188,7 +1219,10 @@ export default function AdvisorDashboard() {
                                 <div className="ad-card-left">
                                     <div className="ad-card-head">
                                         <div>
-                                            <div className="ad-student-name">{s.name}</div>
+                                            <div className="ad-student-line">
+                                                <div className="ad-student-num">#{idx + 1}</div>
+                                                <div className="ad-student-name">{s.name}</div>
+                                            </div>
                                             <div className="ad-student-email">{s.email}</div>
                                             <div className="ad-student-meta">
                                                 {s.strand ? `${s.strand} • ` : ""}
